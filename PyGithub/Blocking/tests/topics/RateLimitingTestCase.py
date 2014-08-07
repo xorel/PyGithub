@@ -7,6 +7,8 @@ import datetime
 import PyGithub.Blocking
 import PyGithub.Blocking.tests.Framework as Framework
 
+# @todoAlpha Add a real integration test that really targets GitHub (to detect things like https://github.com/jacquev6/PyGithub/issues/142) rate limits is a good candidate, because it doesn't consume rate limits
+
 
 @Framework.UsesSpecificData
 class RateLimitingTestCase(Framework.SimpleAnonymousTestCase):

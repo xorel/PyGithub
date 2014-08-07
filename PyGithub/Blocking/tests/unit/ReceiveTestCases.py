@@ -14,7 +14,6 @@ import MockMockMock
 import PyGithub.Blocking
 import PyGithub.Blocking._paginated_list as pgl
 import PyGithub.Blocking._receive as rcv
-import PyGithub.Blocking._base_github_object as bgo
 
 
 stringName = "str" if sys.hexversion >= 0x03000000 else "basestring"
@@ -25,30 +24,8 @@ class AttributeTestCase(unittest.TestCase):
         self.mocks = MockMockMock.Engine()
         self.conv = self.mocks.create("conv")
         self.conv.expect.desc.andReturn("desc")
+        self.log = self.mocks.replace("rcv.log")
         self.a = rcv.Attribute("name", self.conv.object, rcv.Absent)
-
-        self.log = logging.getLogger("PyGithub")
-        for handler in self.log.handlers:
-            self.log.removeHandler(handler)
-        self.logHandler = self.mocks.create("log")
-        self.log.addHandler(self.logHandler.object)
-
-    def expectLog(self, level, *messages):
-        def checkLogRecord(args, kwds):
-            (logRecord,) = args
-            if logRecord.levelno == level and str(logRecord.msg) in messages:
-                return True
-            else:
-                print()  # pragma no cover
-                print("checkLogRecord received")  # pragma no cover
-                print(logRecord.levelno)  # pragma no cover
-                print(logRecord.msg)  # pragma no cover
-                print("instead of")  # pragma no cover
-                print(level)  # pragma no cover
-                print("\n".join(messages))  # pragma no cover
-                print()  # pragma no cover
-        self.logHandler.expect.level.andReturn(logging.DEBUG)
-        self.logHandler.expect.handle.withArguments(checkLogRecord)
 
     def tearDown(self):
         self.mocks.tearDown()
@@ -104,7 +81,7 @@ class AttributeTestCase(unittest.TestCase):
     def testUpdateAttributeWithInvalidValue(self):
         e = rcv._ConversionException()
         self.conv.expect(None, 42).andRaise(e)
-        self.expectLog(logging.WARN, "Attribute name is expected to be a desc but GitHub API v3 returned 42")
+        self.log.expect.warn("Attribute name is expected to be a desc but GitHub API v3 returned 42")
 
         self.a.update(42)
 
@@ -127,7 +104,7 @@ class AttributeTestCase(unittest.TestCase):
         v = []
         self.conv.expect(None, 42).andReturn(v)
         self.conv.expect(v, 43).andRaise(rcv._ConversionException())
-        self.expectLog(logging.WARN, "Attribute name is expected to be a desc but GitHub API v3 returned 43")
+        self.log.expect.warn("Attribute name is expected to be a desc but GitHub API v3 returned 43")
         self.conv.expect(v, 44).andReturn(v)
 
         self.a.update(42)
@@ -569,92 +546,3 @@ class FileDirSubmoduleSymLinkUnionConverterTestCase(unittest.TestCase):
         self.assertEqual(self.conv(None, {"type": "file", "git_url": "foo/git/trees/xxx"}), 42)
 
 
-class BaseGithubObjectTestCase(unittest.TestCase):
-    def setUp(self):
-        self.mocks = MockMockMock.Engine()
-        self.session = self.mocks.create("session")
-        self.result = self.mocks.create("result")
-        self.log = logging.getLogger("PyGithub")
-        for handler in self.log.handlers:
-            self.log.removeHandler(handler)
-        self.logHandler = self.mocks.create("log")
-        self.log.addHandler(self.logHandler.object)
-
-    def expectLog(self, level, *messages):
-        def checkLogRecord(args, kwds):
-            (logRecord,) = args
-            if logRecord.levelno == level and str(logRecord.msg) in messages:
-                return True
-            else:
-                print()  # pragma no cover
-                print("checkLogRecord received")  # pragma no cover
-                print(logRecord.levelno)  # pragma no cover
-                print(logRecord.msg)  # pragma no cover
-                print("instead of")  # pragma no cover
-                print(level)  # pragma no cover
-                print("\n".join(messages))  # pragma no cover
-                print()  # pragma no cover
-        self.logHandler.expect.level.andReturn(logging.DEBUG)
-        self.logHandler.expect.handle.withArguments(checkLogRecord)
-
-    def tearDown(self):
-        self.mocks.tearDown()
-
-    def testUrlAttribute(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.assertEqual(o.url, "url")
-
-    def testUrlAttributeAbsent(self):
-        self.expectLog(logging.WARN, "GitHub API v3 did not return a url")
-        o = bgo.UpdatableGithubObject(self.session.object, {}, "etag")
-        self.assertIsNone(o.url)
-        with self.assertRaises(PyGithub.Blocking.BadAttributeException) as cm:
-            o.update()
-        self.assertEqual(cm.exception.args, ("UpdatableGithubObject.url", stringName, None))
-
-    def testUrlAttributeBadlyTyped(self):
-        self.expectLog(logging.WARN, "Attribute UpdatableGithubObject.url is expected to be a " + stringName + " but GitHub API v3 returned 42")
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url=42), "etag")
-        with self.assertRaises(PyGithub.Blocking.BadAttributeException) as cm:
-            o.url
-        self.assertEqual(cm.exception.args[:3], ("UpdatableGithubObject.url", stringName, 42))
-
-    def testUpdateNothing(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.session.expect._request("GET", "url", headers={"If-None-Match": "etag"}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(304)
-        self.assertFalse(o.update())
-
-    def testUpdateSomething(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.session.expect._request("GET", "url", headers={"If-None-Match": "etag"}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(200)
-        self.result.expect.headers.andReturn({"ETag": "new-etag"})
-        self.result.expect.json().andReturn(dict(url="new-url"))
-        self.assertTrue(o.update())
-
-    def testUpdateTwice(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.session.expect._request("GET", "url", headers={"If-None-Match": "etag"}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(200)
-        self.result.expect.headers.andReturn({"ETag": "new-etag"})
-        self.result.expect.json().andReturn(dict(url="new-url"))
-        self.assertTrue(o.update())
-        self.session.expect._request("GET", "new-url", headers={"If-None-Match": "new-etag"}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(304)
-        self.assertFalse(o.update())
-
-    def testUpdateWithoutUrl(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.session.expect._request("GET", "url", headers={"If-None-Match": "etag"}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(200)
-        self.result.expect.headers.andReturn({"ETag": "new-etag"})
-        self.result.expect.json().andReturn(dict())
-        self.expectLog(logging.WARN, "GitHub API v3 did not return a url")
-        self.assertTrue(o.update())
-
-    def testCompleteLazily(self):
-        o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), None)
-        self.session.expect._request("GET", "url", headers={"If-None-Match": None}).andReturn(self.result.object)
-        self.result.expect.status_code.andReturn(304)
-        o._completeLazily(True)

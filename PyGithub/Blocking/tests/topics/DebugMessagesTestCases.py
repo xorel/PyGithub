@@ -7,6 +7,8 @@ import logging
 
 import PyGithub.Blocking.tests.Framework as Framework
 
+# @todoAlpha Test those messages as unit tests in SessionTestCases.py (when we have a SessionTestCases.py...)
+
 
 class DebugMessagesTestCase(Framework.SimpleLoginTestCase):
     def testSimpleRequest(self):
