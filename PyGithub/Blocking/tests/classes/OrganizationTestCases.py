@@ -219,29 +219,29 @@ class OrganizationMembers(TestCase):
 
 
 class OrganizationRepositories(TestCase):
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testGetRepo(self):
-        o = self.g.get_org("ghe-org-1")
-        r = o.get_repo("repo-org-1-1")
-        self.assertEqual(r.full_name, "ghe-org-1/repo-org-1-1")
+        o = self.g.get_org("olympus")
+        r = o.get_repo("immutable")
+        self.assertEqual(r.full_name, "olympus/immutable")
 
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testGetRepos(self):
-        o = self.g.get_org("ghe-org-1")
+        o = self.g.get_org("olympus")
         repos = o.get_repos()
-        self.assertEqual([r.name for r in repos], ["repo-org-1-1", "repo-org-1-2"])
+        self.assertEqual([r.name for r in repos], ["trojan-war", "trojan-war", "trojan-war", "trojan-war", "immutable", "org-repo"])
 
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testGetRepos_allParameters(self):
-        o = self.g.get_org("ghe-org-1")
-        repos = o.get_repos(type="sources", per_page=1)
-        self.assertEqual([r.name for r in repos], ["repo-org-1-1", "repo-org-1-2"])
+        o = self.g.get_org("olympus")
+        repos = o.get_repos(type="all", per_page=1)
+        self.assertEqual([r.name for r in repos], ["trojan-war", "trojan-war", "trojan-war", "trojan-war", "immutable", "org-repo"])
 
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testCreateRepo(self):
-        o = self.g.get_org("ghe-org-1")
-        r = o.create_repo("spawncamping-wallhack")
-        self.assertEqual(r.name, "spawncamping-wallhack")
+        o = self.g.get_org("olympus")
+        r = o.create_repo("ephemeral")
+        self.assertEqual(r.name, "ephemeral")
         self.assertIsNone(r.description)
         self.assertIsNone(r.homepage)
         self.assertEqual(r.private, False)
@@ -249,22 +249,23 @@ class OrganizationRepositories(TestCase):
         self.assertEqual(r.has_wiki, True)
         r.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testCreateRepo_allParameters(self):
-        o = self.g.get_org("ghe-org-1")
-        r = o.create_repo("spawncamping-wallhack", description="Something weird", homepage="http://bar.com", private=True, has_issues=False, has_wiki=False, team_id=2, auto_init=True, gitignore_template="Python", license_template="mit")
-        self.assertEqual(r.name, "spawncamping-wallhack")
-        self.assertEqual(r.description, "Something weird")
+        o = self.g.get_org("olympus")
+        teamId = o.get_teams()[1].id
+        r = o.create_repo("ephemeral", description="Created by PyGithub", homepage="http://bar.com", private=True, has_issues=False, has_wiki=False, team_id=teamId, auto_init=True, gitignore_template="Python", license_template="mit")
+        self.assertEqual(r.name, "ephemeral")
+        self.assertEqual(r.description, "Created by PyGithub")
         self.assertEqual(r.homepage, "http://bar.com")
         self.assertEqual(r.private, True)
         self.assertEqual(r.has_issues, False)
         self.assertEqual(r.has_wiki, False)
-        self.assertTrue(self.g.get_team(2).has_in_repos(("ghe-org-1", "spawncamping-wallhack")))
+        self.assertTrue(self.g.get_team(teamId).has_in_repos(("olympus", "ephemeral")))
         r.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("zeus")
     def testCreateFork(self):
-        o = self.g.get_org("ghe-org-1")
-        r = o.create_fork(("ghe-user-1", "repo-user-1-1"))
-        self.assertEqual(r.full_name, "ghe-org-1/repo-user-1-1")
+        o = self.g.get_org("olympus")
+        r = o.create_fork(("electra", "mutable"))
+        self.assertEqual(r.full_name, "olympus/mutable")
         r.delete()

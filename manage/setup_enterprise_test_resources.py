@@ -221,3 +221,11 @@ penelope.add_to_starred(("electra", "immutable"))
 penelope.add_to_starred(("electra", "mutable"))
 penelope.create_subscription(("electra", "immutable"), subscribed=True, ignored=False)
 penelope.create_subscription(("electra", "mutable"), subscribed=True, ignored=False)
+
+
+try:
+    # gZeus.get_repo(("olympus", "org-repo")).delete()
+    gZeus.get_repo(("olympus", "org-repo"))
+except PyGithub.Blocking.ObjectNotFoundException:
+    time.sleep(5)
+    r = gZeus.get_org("olympus").create_repo("org-repo", auto_init=True)
