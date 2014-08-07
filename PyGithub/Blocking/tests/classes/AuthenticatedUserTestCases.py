@@ -167,48 +167,50 @@ class AuthenticatedUserFollowing(TestCase):
 
 
 class AuthenticatedUserGists(TestCase):
-    @Enterprise.User(1)
+    mutableGistId = "8204fee2d7e3f12bde22"
+
+    @Enterprise("electra")
     def testGetGists(self):
         u = self.g.get_authenticated_user()
         gists = u.get_gists()
-        self.assertEqual([g.description for g in gists], ["gist-user-1-2", "gist-user-1-1"])
+        self.assertEqual([g.description for g in gists], ["Mutable gist 2", "Mutable gist 1", "Immutable gist"])
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetGists_allParameters(self):
         u = self.g.get_authenticated_user()
         gists = u.get_gists(since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
-        self.assertEqual([g.description for g in gists], ["gist-user-1-2", "gist-user-1-1"])
+        self.assertEqual([g.description for g in gists], ["Mutable gist 2", "Mutable gist 1", "Immutable gist"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testGetStarredGists(self):
         u = self.g.get_authenticated_user()
         gists = u.get_starred_gists()
-        self.assertEqual([g.description for g in gists], ["gist-user-1-2", "gist-user-1-1"])
+        self.assertEqual([g.description for g in gists], ["Mutable gist 1", "Immutable gist"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testGetStarredGists_allParameters(self):
         u = self.g.get_authenticated_user()
         gists = u.get_starred_gists(since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
-        self.assertEqual([g.description for g in gists], ["gist-user-1-2", "gist-user-1-1"])
+        self.assertEqual([g.description for g in gists], ["Mutable gist 1", "Immutable gist"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testAddToAndRemoveFromStarredGists(self):
         u = self.g.get_authenticated_user()
-        self.assertTrue(u.has_in_starred_gists("e7f47a1723963f11cc01"))
-        u.remove_from_starred_gists("e7f47a1723963f11cc01")
-        self.assertFalse(u.has_in_starred_gists("e7f47a1723963f11cc01"))
-        u.add_to_starred_gists("e7f47a1723963f11cc01")
-        self.assertTrue(u.has_in_starred_gists("e7f47a1723963f11cc01"))
+        self.assertFalse(u.has_in_starred_gists(self.mutableGistId))
+        u.add_to_starred_gists(self.mutableGistId)
+        self.assertTrue(u.has_in_starred_gists(self.mutableGistId))
+        u.remove_from_starred_gists(self.mutableGistId)
+        self.assertFalse(u.has_in_starred_gists(self.mutableGistId))
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testCreateGistFork(self):
         u = self.g.get_authenticated_user()
-        g = u.create_gist_fork("e7f47a1723963f11cc01")
-        self.assertEqual(g.description, "gist-user-1-2")
-        self.assertEqual(g.owner.login, "ghe-user-3")
+        g = u.create_gist_fork(self.mutableGistId)
+        self.assertEqual(g.description, "Mutable gist 2")
+        self.assertEqual(g.owner.login, "penelope")
         g.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testCreateGist(self):
         # @todoAlpha Create input class for files
         u = self.g.get_authenticated_user()
@@ -217,7 +219,7 @@ class AuthenticatedUserGists(TestCase):
         self.assertEqual(g.public, False)
         g.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testCreateGist_allParameters(self):
         u = self.g.get_authenticated_user()
         g = u.create_gist(files={"foo.txt": {"content": "barbaz"}, "bar.txt": {"content": "tartempion"}}, public=True, description="Gist created by PyGithub")
@@ -227,23 +229,23 @@ class AuthenticatedUserGists(TestCase):
 
 
 class AuthenticatedUserKeys(TestCase):
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetKeys(self):
         u = self.g.get_authenticated_user()
         keys = u.get_keys()
-        self.assertEqual([k.id for k in keys], [1, 3])
+        self.assertEqual([k.title for k in keys], ["electra-1", "electra-2"])
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetKey(self):
         u = self.g.get_authenticated_user()
-        k = u.get_key(3)
-        self.assertEqual(k.title, "key-1-2")
+        k = u.get_key(4)
+        self.assertEqual(k.title, "electra-1")
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testCreateKey(self):
         u = self.g.get_authenticated_user()
-        k = u.create_key("key-1-3", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvxan/6YaX3rIQaQFMAXiyNimJ1tsOwsxQMTBciHN6NbPuFReIELsOdzM+r6IP7cVmKacli03BD/oRQ90SZS91b2YMc0RRvtfwr5P8JnFysDXj9TgnEcJ1DjV0xLYvg4yr3L+xJFS4kEdfIiYnbqVhRqTm7liUvpjrW5uwYJSRWvcL6BZz2GnTakRVL53SckWykeFxoXX7JPTj+QOpRZlnz7/n00LZ6mVw3djga5ybyYol4LVkExQ3Vffstdz983DSOf4iScU1heQtv5sCA5JDtlQFxSY9SIPr8C/eri9vogwGGk65UhPF49ssNh/jidoaehRVVz3C2bUFPm2xtn4p")
-        self.assertEqual(k.title, "key-1-3")
+        k = u.create_key("electra-3", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh/ih0dj35ZIrOSrYIih0ulcIP48H4DMtgLPUfX0BHuknkf9sCtAM+lURjHVsiZNn4mJDQwH0gHZ+NbisN7yKexArffuemvjFVSALlnYXW78SagsrEvAlVePoZGHLjGuPpAbHJ6OfDPHH/lGrywK4XfW//H2wd4imSTV0qAf3jtrqU2t5ATEUPgTpxrYj85s+BJcDFWquzCkb6aiPQ2RgGfnbaKpPF4ackbMtrES3z6iPcrcupE8L96Srvz1OS6iKpjcZmn1b5MWaZ6Wu2+zMApCgG74q4V1kITZifPMnGtlqE9uAlTwNSO9QC1KbKiytt9bT0y7G+IHHxeZsf4nhJ")
+        self.assertEqual(k.title, "electra-3")
         k.delete()
 
 
@@ -274,50 +276,50 @@ class AuthenticatedUserOrganizations(TestCase):
 
 
 class AuthenticatedUserRepositories(TestCase):
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetRepo(self):
         u = self.g.get_authenticated_user()
-        r = u.get_repo("repo-user-1-1")
-        self.assertEqual(r.full_name, "ghe-user-1/repo-user-1-1")
+        r = u.get_repo("immutable")
+        self.assertEqual(r.full_name, "electra/immutable")
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetRepos(self):
         u = self.g.get_authenticated_user()
         repos = u.get_repos()
-        self.assertEqual([r.name for r in repos], ["repo-user-1-1", "repo-user-1-2", "repo-user-1-3"])
+        self.assertEqual([r.name for r in repos], ["contributors", "git-objects", "immutable", "issues", "issues", "mutable", "pulls"])
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetRepos_allParameters(self):
         u = self.g.get_authenticated_user()
         repos = u.get_repos(type="public", sort="pushed", direction="asc", per_page=1)
-        self.assertEqual([r.name for r in repos], ["repo-user-1-2", "repo-user-1-1"])
+        self.assertEqual([r.name for r in repos], ["pulls", "immutable", "contributors", "mutable", "issues", "git-objects"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testGetStarred(self):
         u = self.g.get_authenticated_user()
         repos = u.get_starred()
-        self.assertEqual([r.full_name for r in repos], ["ghe-user-1/repo-user-1-2", "ghe-user-1/repo-user-1-1"])
+        self.assertEqual([r.full_name for r in repos], ["electra/mutable", "electra/immutable"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testGetStarred_allParameters(self):
         u = self.g.get_authenticated_user()
         repos = u.get_starred(sort="updated", direction="asc", per_page=1)
-        self.assertEqual([r.full_name for r in repos], ["ghe-user-1/repo-user-1-2", "ghe-user-1/repo-user-1-1"])
+        self.assertEqual([r.full_name for r in repos], ["electra/immutable", "electra/mutable"])
 
-    @Enterprise.User(3)
+    @Enterprise("penelope")
     def testAddToAndRemoveFromStarred(self):
         u = self.g.get_authenticated_user()
-        self.assertTrue(u.has_in_starred(("ghe-user-1", "repo-user-1-2")))
-        u.remove_from_starred(("ghe-user-1", "repo-user-1-2"))
-        self.assertFalse(u.has_in_starred(("ghe-user-1", "repo-user-1-2")))
-        u.add_to_starred(("ghe-user-1", "repo-user-1-2"))
-        self.assertTrue(u.has_in_starred(("ghe-user-1", "repo-user-1-2")))
+        self.assertTrue(u.has_in_starred(("electra", "mutable")))
+        u.remove_from_starred(("electra", "mutable"))
+        self.assertFalse(u.has_in_starred(("electra", "mutable")))
+        u.add_to_starred(("electra", "mutable"))
+        self.assertTrue(u.has_in_starred(("electra", "mutable")))
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testCreateRepo(self):
         u = self.g.get_authenticated_user()
-        r = u.create_repo("spawncamping-wallhack")
-        self.assertEqual(r.name, "spawncamping-wallhack")
+        r = u.create_repo("ephemeral")
+        self.assertEqual(r.name, "ephemeral")
         self.assertIsNone(r.description)
         self.assertIsNone(r.homepage)
         self.assertEqual(r.private, False)
@@ -325,63 +327,63 @@ class AuthenticatedUserRepositories(TestCase):
         self.assertEqual(r.has_wiki, True)
         r.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testCreateRepo_allParameters(self):
         u = self.g.get_authenticated_user()
-        r = u.create_repo("spawncamping-wallhack", description="Something weird", homepage="http://bar.com", private=True, has_issues=False, has_wiki=False, auto_init=True, gitignore_template="Python", license_template="mit")
-        self.assertEqual(r.name, "spawncamping-wallhack")
-        self.assertEqual(r.description, "Something weird")
+        r = u.create_repo("ephemeral", description="Created by PyGithub", homepage="http://bar.com", private=True, has_issues=False, has_wiki=False, auto_init=True, gitignore_template="Python", license_template="mit")
+        self.assertEqual(r.name, "ephemeral")
+        self.assertEqual(r.description, "Created by PyGithub")
         self.assertEqual(r.homepage, "http://bar.com")
         self.assertEqual(r.private, True)
         self.assertEqual(r.has_issues, False)
         self.assertEqual(r.has_wiki, False)
         r.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("penelope")
     def testCreateFork(self):
         u = self.g.get_authenticated_user()
-        r = u.create_fork(("ghe-org-1", "repo-org-1-2"))
-        self.assertEqual(r.full_name, "ghe-user-1/repo-org-1-2")
+        r = u.create_fork(("electra", "mutable"))
+        self.assertEqual(r.full_name, "penelope/mutable")
         r.delete()
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetIssues(self):
         u = self.g.get_authenticated_user()
         issues = u.get_issues()
-        self.assertEqual([i.title for i in issues[-3:]], ["Also created by PyGithub", "Also created by PyGithub", "First issue"])
+        self.assertEqual([i.title for i in issues[-3:]], ["Immutable issue"])
 
-    @Enterprise.User(1)
+    @Enterprise("electra")
     def testGetIssues_allParameters(self):
         u = self.g.get_authenticated_user()
         issues = u.get_issues(filter="all", state="all", labels=["question"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
-        self.assertEqual([i.title for i in issues[-3:]], ["Also created by PyGithub", "Also created by PyGithub", "First issue"])
+        self.assertEqual([i.title for i in issues[-3:]], ["Closed issue 2", "Immutable issue", "Also created by PyGithub"])
 
 
 class AuthenticatedUserSubscriptions(TestCase):
-    @Enterprise.User(2)
+    @Enterprise("penelope")
     def testGetSubscriptions(self):
         u = self.g.get_authenticated_user()
         subs = u.get_subscriptions()
-        self.assertEqual([r.name for r in subs], ["repo-user-1-1", "repo-user-1-2"])
+        self.assertEqual([r.full_name for r in subs], ["penelope/pulls", "electra/immutable", "penelope/immutable", "electra/mutable", "electra/issues", "penelope/mutable"])
 
-    @Enterprise.User(2)
+    @Enterprise("penelope")
     def testGetSubscriptions_allParameters(self):
         u = self.g.get_authenticated_user()
         subs = u.get_subscriptions(per_page=1)
-        self.assertEqual([r.name for r in subs], ["repo-user-1-1", "repo-user-1-2"])
+        self.assertEqual([r.full_name for r in subs], ["penelope/pulls", "electra/immutable", "penelope/immutable", "electra/mutable", "electra/issues", "penelope/mutable"])
 
-    @Enterprise.User(2)
+    @Enterprise("penelope")
     def testGetSubscription(self):
         u = self.g.get_authenticated_user()
-        s = u.get_subscription(("ghe-user-1", "repo-user-1-1"))
-        self.assertEqual(s.repository_url, "http://github.home.jacquev6.net/api/v3/repos/ghe-user-1/repo-user-1-1")
+        s = u.get_subscription(("electra", "immutable"))
+        self.assertEqual(s.repository_url, "http://github.home.jacquev6.net/api/v3/repos/electra/immutable")
 
-    @Enterprise.User(2)
+    @Enterprise("penelope")
     def testCreateSubscription(self):
         u = self.g.get_authenticated_user()
-        s = u.create_subscription(("ghe-user-1", "repo-user-1-1"), subscribed=False, ignored=True)
+        s = u.create_subscription(("electra", "mutable"), subscribed=False, ignored=True)
         self.assertEqual(s.subscribed, False)
         self.assertEqual(s.ignored, True)
-        s = u.create_subscription(("ghe-user-1", "repo-user-1-1"), subscribed=False, ignored=False)
+        s = u.create_subscription(("electra", "mutable"), subscribed=False, ignored=False)
         self.assertEqual(s.subscribed, True)
         self.assertEqual(s.ignored, False)

@@ -30,26 +30,28 @@ gPenelope = b.Login("penelope", "password1-penelope").Build()
 
 # There is no API to create users, so we need to create them manually
 zeus = gZeus.get_authenticated_user()
+poseidon = gPoseidon.get_authenticated_user()
+antigone = gAntigone.get_authenticated_user()
+electra = gElectra.get_authenticated_user()
+penelope = gPenelope.get_authenticated_user()
+
+
 verify(zeus, site_admin=True, suspended_at=None)
 ensure(zeus, name="Zeus, god of the sky", email="ghe-zeus@jacquev6.net", location="High in the sky", blog="http://jacquev6.net/zeus", hireable=False, company="Zeus Software")
 
-poseidon = gPoseidon.get_authenticated_user()
 verify(poseidon, site_admin=True, suspended_at=None)
 ensure(poseidon, name="Poseidon, god of the sea", email="ghe-poseidon@jacquev6.net", location="Deep in the sea", blog="http://jacquev6.net/poseidon", hireable=False, company="Poseidon Software")
 
 assert b.Build().get_user("morpheus").suspended_at
 
 # Do not modify: antigone.updated_at is tested
-antigone = gAntigone.get_authenticated_user()
 verify(antigone, site_admin=False, suspended_at=None)
 ensure(antigone, name="Antigone", email="ghe-antigone@jacquev6.net", location="Greece", blog="http://jacquev6.net/antigone", hireable=False, company="Antigone Software")
 
-electra = gElectra.get_authenticated_user()
 verify(electra, site_admin=False, suspended_at=None)
 ensure(electra, name="Electra", email="ghe-electra@jacquev6.net", location="Greece", blog="http://jacquev6.net/electra", hireable=False, company="Electra Software")
 
 # Modify freely: no test assert anything about this user
-penelope = gPenelope.get_authenticated_user()
 verify(penelope, site_admin=False, suspended_at=None)
 ensure(penelope, name=None, email=None, location=None, blog=None, hireable=False, company=None)
 
@@ -87,7 +89,7 @@ try:
     gElectra.get_repo(("electra", "issues"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    r = gElectra.get_authenticated_user().create_repo("issues", auto_init=True)
+    r = electra.create_repo("issues", auto_init=True)
     time.sleep(5)
     r.create_milestone("Immutable milestone")
     r.create_milestone("Closed milestone", state="closed")
@@ -108,10 +110,10 @@ try:
     gPenelope.get_repo(("penelope", "pulls"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    source = gElectra.get_authenticated_user().create_repo("pulls", auto_init=True)
+    source = electra.create_repo("pulls", auto_init=True)
     time.sleep(5)
     source.create_milestone("First milestone")
-    fork = gPenelope.get_authenticated_user().create_fork(("electra", "pulls"))
+    fork = penelope.create_fork(("electra", "pulls"))
     time.sleep(5)
     source.create_file("conflict.md", "Create conflict.md", "Zm9v")
     master = fork.get_git_ref("refs/heads/master").object.sha
@@ -138,11 +140,11 @@ try:
     gElectra.get_repo(("electra", "immutable"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    gElectra.get_authenticated_user().create_repo("immutable", auto_init=True)
+    electra.create_repo("immutable", auto_init=True)
     time.sleep(5)
     gZeus.get_org("olympus").create_fork(("electra", "immutable"))
     time.sleep(5)
-    gPenelope.get_authenticated_user().create_fork(("olympus", "immutable"))
+    penelope.create_fork(("olympus", "immutable"))
     time.sleep(5)
 
 try:
@@ -150,7 +152,7 @@ try:
     gElectra.get_repo(("electra", "mutable"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    r = gElectra.get_authenticated_user().create_repo("mutable", auto_init=True)
+    r = electra.create_repo("mutable", auto_init=True)
     time.sleep(5)
     r.add_to_collaborators("penelope")
     r.add_to_collaborators("zeus")
@@ -162,18 +164,18 @@ try:
     gElectra.get_repo(("electra", "contributors"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    r = gElectra.get_authenticated_user().create_repo("contributors", auto_init=True)
+    r = electra.create_repo("contributors", auto_init=True)
     time.sleep(5)
     r.create_file("zeus.md", "Create zeus.md", "YmFy", author=dict(name="Zeus", email="ghe-zeus@jacquev6.net"))
     r.create_file("penelope.md", "Create penelope.md", "YmFy", author=dict(name="Penelope", email="ghe-penelope@jacquev6.net"))
     r.create_file("oedipus.md", "Create oedipus.md", "YmFy", author=dict(name="Oedipus", email="ghe-oedipus@jacquev6.net"))
 
 try:
-    gElectra.get_repo(("electra", "git-objects")).delete()
+    # gElectra.get_repo(("electra", "git-objects")).delete()
     gElectra.get_repo(("electra", "git-objects"))
 except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
-    r = gElectra.get_authenticated_user().create_repo("git-objects", auto_init=True)
+    r = electra.create_repo("git-objects", auto_init=True)
     time.sleep(5)
     r.create_file("foo.md", "Create foo.md", "bWVyZ2U=")
     r.get_readme().edit("Modify README.md", "TmV3IHJlYWRtZQ0K")
@@ -199,3 +201,23 @@ except PyGithub.Blocking.ObjectNotFoundException:
     # tree: 634dab7d85ae09ce816910b45ed19cd362148c21
     r.get_repo("git-objects").create_git_commit(tree="634dab7d85ae09ce816910b45ed19cd362148c21", message="second commit", parents=["f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"], author={"name": "John Doe", "email": "john@doe.com", "date": "2000-12-31T23:59:59Z"}, committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2001-01-01T00:00:00Z"})
     # commit: dd641d6c97b24778945a43a768b36c997610a8b6
+
+if len(list(electra.get_gists())) != 3:
+    for g in electra.get_gists():
+        g.delete()
+    for g in penelope.get_gists():
+        g.delete()
+    penelope.add_to_starred_gists(electra.create_gist(files={"foo.txt": {"content": "barbaz"}, "bar.txt": {"content": "tartempion"}, "baz.txt": {"content": "tartempion"}}, public=True, description="Immutable gist").id)
+    penelope.add_to_starred_gists(electra.create_gist(files={"toto.txt": {"content": "barbaz"}}, public=True, description="Mutable gist 1").id)
+    print "mutableGistId:", electra.create_gist(files={"xxx.txt": {"content": "barbaz"}}, public=True, description="Mutable gist 2").id
+
+if len(electra.get_keys()) != 2:
+    for k in electra.get_keys():
+        k.delete()
+    print "keyId:", electra.create_key("electra-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2VoFfVsb+kUWU8Q/Ktife9AX9Au3fWJd81JO4dexVF8j9TdQv+ZGHZ+HM8WW1ZADDGOIerGmBV8TO6CqyTDG2X7k0Uf8SSSRqIiDDFK4i4tcQ0EOWFMVnJFntYxVaP7/HT8RsTyw3VNG7QhhsxvPxImJED56uvuzT6TK+rquTQyj/QnonW0tBSMecKift/PuowW7qzDuGYl8pgyMYfnmW4at53e/ZYRKtioeRgqSoWZJXajJlARrCxsEWyW3bp6iOOK9tN/7JgJTYugXphVBIcUly1nFdvILGL+cNwKnQEUhK3p6XPjsdWmD1ELUmDinESj+1NzZfdUVuJcSJI5oV").id
+    electra.create_key("electra-2", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbzdq+na/uti2Ijbrj6QDolop9y+eROwxoi4hVGzl/q90JnJQd/EeL/6GRnAu5+rcVI+4q5Rv5e8g2yeGSJ03fMeOmIDDYsUrkbROkppIgUTTeOr189w7WG/GZWTWLVrxn9pLOzRV1bj6IDdNEOcIpttUb0uo7WkRNHlFkH//ZRXrvhJwRaFIg1yy2sEX20HVG7xmSzosVKEa4e/RLeGLa9tXTUMvGJI8pZslp6YooJ7LdX0kppkgrjtmsyBWCo3KNyCcL/mDTF9O+uPCdYXWY2e8PECWFVqfLC4ZCuDRW2jKsBOXrArCBpbraWV0OAqWc031W/R0Dsdv7KPh/zxQb")
+
+penelope.add_to_starred(("electra", "immutable"))
+penelope.add_to_starred(("electra", "mutable"))
+penelope.create_subscription(("electra", "immutable"), subscribed=True, ignored=False)
+penelope.create_subscription(("electra", "mutable"), subscribed=True, ignored=False)

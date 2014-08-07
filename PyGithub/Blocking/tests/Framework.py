@@ -472,10 +472,6 @@ class BasicSanitizer(object):
 
 class Enterprise(object):
     @staticmethod
-    def Admin(n):
-        return Enterprise("ghe-admin-{}".format(n), "password-admin-{}".format(n))
-
-    @staticmethod
     def User(n):
         return Enterprise("ghe-user-{}".format(n), "password-user-{}".format(n))
 
