@@ -87,7 +87,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def assignee(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__assignee.needsLazyCompletion)
         return self.__assignee.value
@@ -127,7 +127,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def closed_by(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__closed_by.needsLazyCompletion)
         return self.__closed_by.value
@@ -183,7 +183,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def labels(self):
         """
-        :type: :class:`list` of :class:`.Label`
+        :type: :class:`list` of :class:`~.Label.Label`
         """
         self._completeLazily(self.__labels.needsLazyCompletion)
         return self.__labels.value
@@ -199,7 +199,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def milestone(self):
         """
-        :type: :class:`.Milestone`
+        :type: :class:`~.Milestone.Milestone`
         """
         self._completeLazily(self.__milestone.needsLazyCompletion)
         return self.__milestone.value
@@ -215,7 +215,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def pull_request(self):
         """
-        :type: :class:`.PullRequest`
+        :type: :class:`~.PullRequest.PullRequest`
         """
         self._completeLazily(self.__pull_request.needsLazyCompletion)
         return self.__pull_request.value
@@ -223,7 +223,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def repository(self):
         """
-        :type: :class:`.Repository`
+        :type: :class:`~.Repository.Repository`
         """
         self._completeLazily(self.__repository.needsLazyCompletion)
         return self.__repository.value
@@ -255,7 +255,7 @@ class Issue(_bgo.UpdatableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
@@ -285,7 +285,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         :param head: mandatory :class:`string`
         :param base: mandatory :class:`string`
-        :rtype: :class:`.PullRequest`
+        :rtype: :class:`~.PullRequest.PullRequest`
         """
         import PyGithub.Blocking.PullRequest
 
@@ -336,7 +336,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`list` of :class:`.Label`
+        :rtype: :class:`list` of :class:`~.Label.Label`
         """
         import PyGithub.Blocking.Label
 

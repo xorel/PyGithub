@@ -60,7 +60,7 @@ class GitTag(_bgo.UpdatableGithubObject):
     @property
     def object(self):
         """
-        :type: :class:`.GitBlob` or :class:`.GitTree` or :class:`.GitCommit` or :class:`.GitTag`
+        :type: :class:`~.GitBlob.GitBlob` or :class:`~.GitTree.GitTree` or :class:`~.GitCommit.GitCommit` or :class:`~.GitTag.GitTag`
         """
         self._completeLazily(self.__object.needsLazyCompletion)
         return self.__object.value

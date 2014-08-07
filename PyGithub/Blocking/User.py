@@ -515,7 +515,7 @@ class User(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
 
         if per_page is None:
@@ -535,7 +535,7 @@ class User(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
 
         if per_page is None:
@@ -556,7 +556,7 @@ class User(_bgo.UpdatableGithubObject):
 
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Gist`
+        :rtype: :class:`.PaginatedList` of :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -592,7 +592,7 @@ class User(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Organization`
+        :rtype: :class:`.PaginatedList` of :class:`~.Organization.Organization`
         """
         import PyGithub.Blocking.Organization
 
@@ -616,7 +616,7 @@ class User(_bgo.UpdatableGithubObject):
           * :meth:`.Organization.get_repo`
 
         :param repo: mandatory :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -636,7 +636,7 @@ class User(_bgo.UpdatableGithubObject):
         :param sort: optional "created" or "full_name" or "pushed" or "updated"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -665,7 +665,7 @@ class User(_bgo.UpdatableGithubObject):
         :param sort: optional "created" or "updated"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -690,7 +690,7 @@ class User(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 

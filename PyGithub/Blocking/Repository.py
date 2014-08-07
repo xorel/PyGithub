@@ -140,7 +140,7 @@ class Repository(_bgo.UpdatableGithubObject):
         @property
         def commit(self):
             """
-            :type: :class:`.GitCommit`
+            :type: :class:`~.GitCommit.GitCommit`
             """
             return self.__commit.value
 
@@ -731,7 +731,7 @@ class Repository(_bgo.UpdatableGithubObject):
     @property
     def owner(self):
         """
-        :type: :class:`.User` or :class:`.Organization`
+        :type: :class:`~.User.User` or :class:`~.Organization.Organization`
         """
         self._completeLazily(self.__owner.needsLazyCompletion)
         return self.__owner.value
@@ -739,7 +739,7 @@ class Repository(_bgo.UpdatableGithubObject):
     @property
     def parent(self):
         """
-        :type: :class:`.Repository`
+        :type: :class:`~.Repository.Repository`
         """
         self._completeLazily(self.__parent.needsLazyCompletion)
         return self.__parent.value
@@ -795,7 +795,7 @@ class Repository(_bgo.UpdatableGithubObject):
     @property
     def source(self):
         """
-        :type: :class:`.Repository`
+        :type: :class:`~.Repository.Repository`
         """
         self._completeLazily(self.__source.needsLazyCompletion)
         return self.__source.value
@@ -958,7 +958,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param content: mandatory :class:`string`
         :param encoding: mandatory :class:`string`
-        :rtype: :class:`.GitBlob`
+        :rtype: :class:`~.GitBlob.GitBlob`
         """
         import PyGithub.Blocking.GitBlob
 
@@ -981,7 +981,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param parents: mandatory :class:`list` of :class:`.GitCommit` or :class:`string` (its :attr:`.GitCommit.sha`)
         :param committer: optional :class:`GitAuthor`
         :param author: optional :class:`GitAuthor`
-        :rtype: :class:`.GitCommit`
+        :rtype: :class:`~.GitCommit.GitCommit`
         """
         import PyGithub.Blocking.GitCommit
 
@@ -1006,7 +1006,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param ref: mandatory :class:`string`
         :param sha: mandatory :class:`string`
-        :rtype: :class:`.GitRef`
+        :rtype: :class:`~.GitRef.GitRef`
         """
         import PyGithub.Blocking.GitRef
 
@@ -1029,7 +1029,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param object: mandatory :class:`string`
         :param type: mandatory :class:`string`
         :param tagger: optional :class:`GitAuthor`
-        :rtype: :class:`.GitTag`
+        :rtype: :class:`~.GitTag.GitTag`
         """
         import PyGithub.Blocking.GitTag
 
@@ -1053,7 +1053,7 @@ class Repository(_bgo.UpdatableGithubObject):
           * :meth:`.GitTree.create_modified_copy`
 
         :param tree: mandatory :class:`list` of :class:`dict`
-        :rtype: :class:`.GitTree`
+        :rtype: :class:`~.GitTree.GitTree`
         """
         import PyGithub.Blocking.GitTree
 
@@ -1075,7 +1075,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param assignee: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
         :param milestone: optional :class:`.Milestone` or :class:`int` (its :attr:`.Milestone.number`)
         :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
-        :rtype: :class:`.Issue`
+        :rtype: :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
 
@@ -1102,7 +1102,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param title: mandatory :class:`string`
         :param key: mandatory :class:`string`
-        :rtype: :class:`.PublicKey`
+        :rtype: :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -1122,7 +1122,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param name: mandatory :class:`string`
         :param color: mandatory :class:`string`
-        :rtype: :class:`.Label`
+        :rtype: :class:`~.Label.Label`
         """
         import PyGithub.Blocking.Label
 
@@ -1144,7 +1144,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param state: optional "closed" or "open"
         :param description: optional :class:`string`
         :param due_on: optional :class:`datetime`
-        :rtype: :class:`.Milestone`
+        :rtype: :class:`~.Milestone.Milestone`
         """
         import PyGithub.Blocking.Milestone
 
@@ -1172,7 +1172,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param head: mandatory :class:`string`
         :param base: mandatory :class:`string`
         :param body: optional :class:`string`
-        :rtype: :class:`.PullRequest`
+        :rtype: :class:`~.PullRequest.PullRequest`
         """
         import PyGithub.Blocking.PullRequest
 
@@ -1245,7 +1245,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -1302,7 +1302,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -1378,7 +1378,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param path: mandatory :class:`string`
         :param ref: optional :class:`string`
-        :rtype: :class:`~.File.File` or :class:`.Submodule` or :class:`.SymLink` or :class:`list` of :class:`~.File.File` or :class:`.Dir` or :class:`.Submodule` or :class:`.SymLink`
+        :rtype: :class:`~.File.File` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink` or :class:`list` of :class:`~.File.File` or :class:`~.Dir.Dir` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink`
         """
         import PyGithub.Blocking.Dir
         import PyGithub.Blocking.File
@@ -1402,7 +1402,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param anon: optional :class:`bool`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Contributor` or :class:`.Repository.AnonymousContributor`
+        :rtype: :class:`.PaginatedList` of :class:`~.Contributor.Contributor` or :class:`.Repository.AnonymousContributor`
         """
         import PyGithub.Blocking.Contributor
 
@@ -1426,7 +1426,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param sort: optional "newest" or "oldest" or "stargazers"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
 
         if sort is not None:
@@ -1448,7 +1448,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param sha: mandatory :class:`string`
-        :rtype: :class:`.GitBlob`
+        :rtype: :class:`~.GitBlob.GitBlob`
         """
         import PyGithub.Blocking.GitBlob
 
@@ -1465,7 +1465,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param sha: mandatory :class:`string`
-        :rtype: :class:`.GitCommit`
+        :rtype: :class:`~.GitCommit.GitCommit`
         """
         import PyGithub.Blocking.GitCommit
 
@@ -1482,7 +1482,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param ref: mandatory :class:`string`
-        :rtype: :class:`.GitRef`
+        :rtype: :class:`~.GitRef.GitRef`
         """
         import PyGithub.Blocking.GitRef
 
@@ -1500,7 +1500,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.GitRef`
+        :rtype: :class:`.PaginatedList` of :class:`~.GitRef.GitRef`
         """
         import PyGithub.Blocking.GitRef
 
@@ -1521,7 +1521,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param sha: mandatory :class:`string`
-        :rtype: :class:`.GitTag`
+        :rtype: :class:`~.GitTag.GitTag`
         """
         import PyGithub.Blocking.GitTag
 
@@ -1538,7 +1538,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param sha: mandatory :class:`string`
-        :rtype: :class:`.GitTree`
+        :rtype: :class:`~.GitTree.GitTree`
         """
         import PyGithub.Blocking.GitTree
 
@@ -1556,7 +1556,7 @@ class Repository(_bgo.UpdatableGithubObject):
           * :meth:`.PullRequest.get_issue`
 
         :param number: mandatory :class:`int`
-        :rtype: :class:`.Issue`
+        :rtype: :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
 
@@ -1582,7 +1582,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param direction: optional "asc" or "desc"
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Issue`
+        :rtype: :class:`.PaginatedList` of :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
 
@@ -1621,7 +1621,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param id: mandatory :class:`int`
-        :rtype: :class:`.PublicKey`
+        :rtype: :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -1637,7 +1637,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`list` of :class:`.PublicKey`
+        :rtype: :class:`list` of :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -1652,7 +1652,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param name: mandatory :class:`string`
-        :rtype: :class:`.Label`
+        :rtype: :class:`~.Label.Label`
         """
         import PyGithub.Blocking.Label
 
@@ -1668,7 +1668,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`list` of :class:`.Label`
+        :rtype: :class:`list` of :class:`~.Label.Label`
         """
         import PyGithub.Blocking.Label
 
@@ -1683,7 +1683,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param number: mandatory :class:`int`
-        :rtype: :class:`.Milestone`
+        :rtype: :class:`~.Milestone.Milestone`
         """
         import PyGithub.Blocking.Milestone
 
@@ -1703,7 +1703,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param sort: optional "completion" or "due_date"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Milestone`
+        :rtype: :class:`.PaginatedList` of :class:`~.Milestone.Milestone`
         """
         import PyGithub.Blocking.Milestone
 
@@ -1730,7 +1730,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param number: mandatory :class:`int`
-        :rtype: :class:`.PullRequest`
+        :rtype: :class:`~.PullRequest.PullRequest`
         """
         import PyGithub.Blocking.PullRequest
 
@@ -1752,7 +1752,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param sort: optional "created" or "long-running" or "popularity" or "updated"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.PullRequest`
+        :rtype: :class:`.PaginatedList` of :class:`~.PullRequest.PullRequest`
         """
         import PyGithub.Blocking.PullRequest
 
@@ -1802,7 +1802,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -1823,7 +1823,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -1864,7 +1864,7 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Team`
+        :rtype: :class:`.PaginatedList` of :class:`~.Team.Team`
         """
         import PyGithub.Blocking.Team
 

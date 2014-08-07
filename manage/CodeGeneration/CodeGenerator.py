@@ -412,7 +412,10 @@ class CodeGenerator:
         return ":class:`{}`".format(type.qualifiedName)
 
     def generateDocForClass(self, type):
-        return ":class:`.{}`".format(type.qualifiedName)
+        if type.qualifiedName == "PaginatedList":
+            return ":class:`.PaginatedList`"
+        else:
+            return ":class:`~.{0}.{0}`".format(type.qualifiedName)
 
     def generateDocForAttributeType(self, type):
         if type.attribute.qualifiedName == "Repository.full_name":

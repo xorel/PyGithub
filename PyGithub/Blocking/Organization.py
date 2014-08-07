@@ -309,7 +309,7 @@ class Organization(_bgo.UpdatableGithubObject):
           * :meth:`.AuthenticatedUser.create_fork`
 
         :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -336,7 +336,7 @@ class Organization(_bgo.UpdatableGithubObject):
         :param auto_init: optional :class:`bool`
         :param gitignore_template: optional :class:`.Github.GitIgnoreTemplate` or :class:`string` (its :attr:`.Github.GitIgnoreTemplate.name`)
         :param license_template: optional :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -374,7 +374,7 @@ class Organization(_bgo.UpdatableGithubObject):
         :param name: mandatory :class:`string`
         :param repo_names: optional :class:`list` of :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
         :param permission: optional "admin" or "pull" or "push"
-        :rtype: :class:`.Team`
+        :rtype: :class:`~.Team.Team`
         """
         import PyGithub.Blocking.Team
 
@@ -430,7 +430,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         :param filter: optional "2fa_disabled" or "all"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -453,7 +453,7 @@ class Organization(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -477,7 +477,7 @@ class Organization(_bgo.UpdatableGithubObject):
           * :meth:`.User.get_repo`
 
         :param repo: mandatory :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -495,7 +495,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         :param type: optional "all" or "forks" or "member" or "private" or "public" or "sources"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -518,7 +518,7 @@ class Organization(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Team`
+        :rtype: :class:`.PaginatedList` of :class:`~.Team.Team`
         """
         import PyGithub.Blocking.Team
 

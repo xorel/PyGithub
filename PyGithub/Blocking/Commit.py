@@ -204,7 +204,7 @@ class Commit(_bgo.UpdatableGithubObject):
     @property
     def author(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__author.needsLazyCompletion)
         return self.__author.value
@@ -220,7 +220,7 @@ class Commit(_bgo.UpdatableGithubObject):
     @property
     def commit(self):
         """
-        :type: :class:`.GitCommit`
+        :type: :class:`~.GitCommit.GitCommit`
         """
         self._completeLazily(self.__commit.needsLazyCompletion)
         return self.__commit.value
@@ -228,7 +228,7 @@ class Commit(_bgo.UpdatableGithubObject):
     @property
     def committer(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__committer.needsLazyCompletion)
         return self.__committer.value
@@ -252,7 +252,7 @@ class Commit(_bgo.UpdatableGithubObject):
     @property
     def parents(self):
         """
-        :type: :class:`list` of :class:`.Commit`
+        :type: :class:`list` of :class:`~.Commit.Commit`
         """
         self._completeLazily(self.__parents.needsLazyCompletion)
         return self.__parents.value

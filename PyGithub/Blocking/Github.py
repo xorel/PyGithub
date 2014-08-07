@@ -188,7 +188,7 @@ class Github(_bgo.SessionedGithubObject):
         :param files: mandatory :class:`bool`
         :param description: optional :class:`string`
         :param public: optional :class:`bool`
-        :rtype: :class:`.Gist`
+        :rtype: :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -208,7 +208,7 @@ class Github(_bgo.SessionedGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`.AuthenticatedUser`
+        :rtype: :class:`~.AuthenticatedUser.AuthenticatedUser`
         """
         import PyGithub.Blocking.AuthenticatedUser
 
@@ -236,7 +236,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param id: mandatory :class:`string`
-        :rtype: :class:`.Gist`
+        :rtype: :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -295,7 +295,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param org: mandatory :class:`string`
-        :rtype: :class:`.Organization`
+        :rtype: :class:`~.Organization.Organization`
         """
         import PyGithub.Blocking.Organization
 
@@ -313,7 +313,7 @@ class Github(_bgo.SessionedGithubObject):
 
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Gist`
+        :rtype: :class:`.PaginatedList` of :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -352,7 +352,7 @@ class Github(_bgo.SessionedGithubObject):
           * :meth:`.User.get_repo`
 
         :param repo: mandatory :class:`(string, string)` or :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -369,7 +369,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param since: optional :class:`.Repository` or :class:`int` (its :attr:`.Repository.id`)
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -388,7 +388,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param id: mandatory :class:`int`
-        :rtype: :class:`.Team`
+        :rtype: :class:`~.Team.Team`
         """
         import PyGithub.Blocking.Team
 
@@ -405,7 +405,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param username: mandatory :class:`string`
-        :rtype: :class:`.User`
+        :rtype: :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -422,7 +422,7 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param since: optional :class:`.User` or :class:`int` (its :attr:`.User.id`)
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 

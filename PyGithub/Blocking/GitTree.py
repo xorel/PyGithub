@@ -126,7 +126,7 @@ class GitTree(_bgo.UpdatableGithubObject):
     @property
     def tree(self):
         """
-        :type: :class:`list` of :class:`.GitTree` or :class:`.GitBlob` or :class:`.GitTree.GitSubmodule`
+        :type: :class:`list` of :class:`~.GitTree.GitTree` or :class:`~.GitBlob.GitBlob` or :class:`.GitTree.GitSubmodule`
         """
         self._completeLazily(self.__tree.needsLazyCompletion)
         return self.__tree.value
@@ -147,7 +147,7 @@ class GitTree(_bgo.UpdatableGithubObject):
           * :meth:`.Repository.create_git_tree`
 
         :param tree: mandatory :class:`list` of :class:`dict`
-        :rtype: :class:`.GitTree`
+        :rtype: :class:`~.GitTree.GitTree`
         """
 
         tree = _snd.normalizeList(_snd.normalizeDict, tree)

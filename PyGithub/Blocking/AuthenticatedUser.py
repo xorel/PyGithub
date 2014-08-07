@@ -502,7 +502,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
           * :meth:`.Organization.create_fork`
 
         :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -522,7 +522,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param files: mandatory :class:`bool`
         :param description: optional :class:`string`
         :param public: optional :class:`bool`
-        :rtype: :class:`.Gist`
+        :rtype: :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -543,7 +543,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param gist: mandatory :class:`.Gist` or :class:`string` (its :attr:`.Gist.id`)
-        :rtype: :class:`.Gist`
+        :rtype: :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -561,7 +561,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         :param title: mandatory :class:`string`
         :param key: mandatory :class:`string`
-        :rtype: :class:`.PublicKey`
+        :rtype: :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -588,7 +588,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param auto_init: optional :class:`bool`
         :param gitignore_template: optional :class:`.Github.GitIgnoreTemplate` or :class:`string` (its :attr:`.Github.GitIgnoreTemplate.name`)
         :param license_template: optional :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -625,7 +625,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
         :param subscribed: mandatory :class:`bool`
         :param ignored: mandatory :class:`bool`
-        :rtype: :class:`.Subscription`
+        :rtype: :class:`~.Subscription.Subscription`
         """
         import PyGithub.Blocking.Subscription
 
@@ -691,7 +691,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -712,7 +712,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -734,7 +734,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Gist`
+        :rtype: :class:`.PaginatedList` of :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -763,7 +763,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param direction: optional "asc" or "desc"
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Issue`
+        :rtype: :class:`.PaginatedList` of :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
 
@@ -796,7 +796,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param id: mandatory :class:`int`
-        :rtype: :class:`.PublicKey`
+        :rtype: :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -812,7 +812,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`list` of :class:`.PublicKey`
+        :rtype: :class:`list` of :class:`~.PublicKey.PublicKey`
         """
         import PyGithub.Blocking.PublicKey
 
@@ -827,7 +827,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Organization`
+        :rtype: :class:`.PaginatedList` of :class:`~.Organization.Organization`
         """
         import PyGithub.Blocking.Organization
 
@@ -851,7 +851,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
           * :meth:`.User.get_repo`
 
         :param repo: mandatory :class:`string`
-        :rtype: :class:`.Repository`
+        :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -871,7 +871,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param sort: optional "created" or "full_name" or "pushed" or "updated"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -900,7 +900,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         :param sort: optional "created" or "updated"
         :param direction: optional "asc" or "desc"
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -926,7 +926,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         :param since: optional :class:`datetime`
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Gist`
+        :rtype: :class:`.PaginatedList` of :class:`~.Gist.Gist`
         """
         import PyGithub.Blocking.Gist
 
@@ -949,7 +949,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
-        :rtype: :class:`.Subscription`
+        :rtype: :class:`~.Subscription.Subscription`
         """
         import PyGithub.Blocking.Subscription
 
@@ -966,7 +966,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
@@ -987,7 +987,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Team`
+        :rtype: :class:`.PaginatedList` of :class:`~.Team.Team`
         """
         import PyGithub.Blocking.Team
 

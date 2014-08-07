@@ -82,7 +82,7 @@ class Milestone(_bgo.UpdatableGithubObject):
     @property
     def creator(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__creator.needsLazyCompletion)
         return self.__creator.value
@@ -204,7 +204,7 @@ class Milestone(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :rtype: :class:`list` of :class:`.Label`
+        :rtype: :class:`list` of :class:`~.Label.Label`
         """
         import PyGithub.Blocking.Label
 

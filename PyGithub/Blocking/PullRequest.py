@@ -73,7 +73,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         @property
         def repo(self):
             """
-            :type: :class:`.Repository`
+            :type: :class:`~.Repository.Repository`
             """
             return self.__repo.value
 
@@ -87,7 +87,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         @property
         def user(self):
             """
-            :type: :class:`.User`
+            :type: :class:`~.User.User`
             """
             return self.__user.value
 
@@ -308,7 +308,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
     @property
     def assignee(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__assignee.needsLazyCompletion)
         return self.__assignee.value
@@ -492,7 +492,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
     @property
     def merged_by(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__merged_by.needsLazyCompletion)
         return self.__merged_by.value
@@ -500,7 +500,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
     @property
     def milestone(self):
         """
-        :type: :class:`.Milestone`
+        :type: :class:`~.Milestone.Milestone`
         """
         self._completeLazily(self.__milestone.needsLazyCompletion)
         return self.__milestone.value
@@ -580,7 +580,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
@@ -656,7 +656,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         The following methods also call this end point:
           * :meth:`.Repository.get_issue`
 
-        :rtype: :class:`.Issue`
+        :rtype: :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
 

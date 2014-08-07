@@ -145,7 +145,7 @@ class GitCommit(_bgo.UpdatableGithubObject):
     @property
     def parents(self):
         """
-        :type: :class:`list` of :class:`.GitCommit`
+        :type: :class:`list` of :class:`~.GitCommit.GitCommit`
         """
         self._completeLazily(self.__parents.needsLazyCompletion)
         return self.__parents.value
@@ -161,7 +161,7 @@ class GitCommit(_bgo.UpdatableGithubObject):
     @property
     def tree(self):
         """
-        :type: :class:`.GitTree`
+        :type: :class:`~.GitTree.GitTree`
         """
         self._completeLazily(self.__tree.needsLazyCompletion)
         return self.__tree.value

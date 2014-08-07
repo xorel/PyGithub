@@ -133,7 +133,7 @@ class File(_bgo.UpdatableGithubObject):
         :param message: mandatory :class:`string`
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
-        :rtype: :class:`.GitCommit`
+        :rtype: :class:`~.GitCommit.GitCommit`
         """
         import PyGithub.Blocking.GitCommit
 
@@ -159,7 +159,7 @@ class File(_bgo.UpdatableGithubObject):
         :param content: mandatory :class:`string`
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
-        :rtype: :class:`.GitCommit`
+        :rtype: :class:`~.GitCommit.GitCommit`
         """
         import PyGithub.Blocking.GitCommit
 

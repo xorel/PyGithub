@@ -130,7 +130,7 @@ class Gist(_bgo.UpdatableGithubObject):
         @property
         def user(self):
             """
-            :type: :class:`.User`
+            :type: :class:`~.User.User`
             """
             return self.__user.value
 
@@ -267,7 +267,7 @@ class Gist(_bgo.UpdatableGithubObject):
         @property
         def user(self):
             """
-            :type: :class:`.User`
+            :type: :class:`~.User.User`
             """
             return self.__user.value
 
@@ -372,7 +372,7 @@ class Gist(_bgo.UpdatableGithubObject):
     @property
     def fork_of(self):
         """
-        :type: :class:`.Gist`
+        :type: :class:`~.Gist.Gist`
         """
         self._completeLazily(self.__fork_of.needsLazyCompletion)
         return self.__fork_of.value
@@ -380,7 +380,7 @@ class Gist(_bgo.UpdatableGithubObject):
     @property
     def forks(self):
         """
-        :type: :class:`list` of :class:`.Gist`
+        :type: :class:`list` of :class:`~.Gist.Gist`
         """
         self._completeLazily(self.__forks.needsLazyCompletion)
         return self.__forks.value
@@ -436,7 +436,7 @@ class Gist(_bgo.UpdatableGithubObject):
     @property
     def owner(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__owner.needsLazyCompletion)
         return self.__owner.value
@@ -460,7 +460,7 @@ class Gist(_bgo.UpdatableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`.User`
+        :type: :class:`~.User.User`
         """
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
@@ -523,7 +523,7 @@ class Gist(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Gist`
+        :rtype: :class:`.PaginatedList` of :class:`~.Gist.Gist`
         """
 
         if per_page is None:

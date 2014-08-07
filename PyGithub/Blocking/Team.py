@@ -90,7 +90,7 @@ class Team(_bgo.UpdatableGithubObject):
     @property
     def organization(self):
         """
-        :type: :class:`.Organization`
+        :type: :class:`~.Organization.Organization`
         """
         self._completeLazily(self.__organization.needsLazyCompletion)
         return self.__organization.value
@@ -197,7 +197,7 @@ class Team(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
         """
         import PyGithub.Blocking.User
 
@@ -218,7 +218,7 @@ class Team(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`.Repository`
+        :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
