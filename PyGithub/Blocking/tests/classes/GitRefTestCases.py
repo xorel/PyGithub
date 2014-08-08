@@ -21,18 +21,18 @@ class GitRefEdit(TestCase):
     @Enterprise("electra")
     def testEdit(self):
         r = self.g.get_repo(("electra", "git-objects")).create_git_ref("refs/heads/ephemeral", "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
-        r.edit("dd641d6c97b24778945a43a768b36c997610a8b6")
+        r.edit("5fee4dd9e5a3b56dac752c191799fcda69ca8b8a")
         r.delete()
 
     @Enterprise("electra")
     def testEdit_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects")).create_git_ref("refs/heads/ephemeral", "dd641d6c97b24778945a43a768b36c997610a8b6")
+        r = self.g.get_repo(("electra", "git-objects")).create_git_ref("refs/heads/ephemeral", "5fee4dd9e5a3b56dac752c191799fcda69ca8b8a")
         r.edit("f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", force=True)
         r.delete()
 
     @Enterprise("electra")
     def testEdit_backward(self):
-        r = self.g.get_repo(("electra", "git-objects")).create_git_ref("refs/heads/ephemeral", "dd641d6c97b24778945a43a768b36c997610a8b6")
+        r = self.g.get_repo(("electra", "git-objects")).create_git_ref("refs/heads/ephemeral", "5fee4dd9e5a3b56dac752c191799fcda69ca8b8a")
         with self.assertRaises(PyGithub.Blocking.UnprocessableEntityException):
             r.edit("f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         r.delete()

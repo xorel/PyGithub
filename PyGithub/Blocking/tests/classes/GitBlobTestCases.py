@@ -18,9 +18,9 @@ class GitBlobAttributes(TestCase):
 
     @Enterprise("electra")
     def testInTree(self):
-        b = self.g.get_repo(("electra", "git-objects")).get_git_tree("634dab7d85ae09ce816910b45ed19cd362148c21").tree[0]
+        b = self.g.get_repo(("electra", "git-objects")).get_git_tree("a3c1d7475466e7d87f8ac38a0001b5548014ba62").tree[0]
         self.assertEqual(b.mode, "100644")
-        self.assertEqual(b.path, "blob")
+        self.assertEqual(b.path, "a_blob")
         self.assertEqual(b.type, "blob")
 
 

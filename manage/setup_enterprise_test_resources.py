@@ -189,23 +189,37 @@ except PyGithub.Blocking.ObjectNotFoundException:
     r.create_file("bar.md", "Create bar.md", "bWVyZ2U=", branch="develop")
     r.create_git_ref("refs/tags/light-tag-2", r.get_git_ref("refs/heads/develop").object.sha)
 
-    r.create_git_blob("This is some content", "utf8")
-    # blob: 3daf0da6bca38181ab52610dd6af6e92f1a5469d
-    r.create_git_tree(tree=[{"path": "test.txt", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"}])
-    # tree: 65208a85edf4a0d2c2f757ab655fb3ba2cd63bad
-    r.create_git_commit(tree="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad", message="first commit", parents=[], author={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"}, committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2000-01-01T00:00:00Z"})
-    # commit: f739e7ae2fd0e7b2bce99c073bcc7b57d713877e
-    r.create_git_tag(tag="heavy-tag", message="This is a tag", object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", type="commit", tagger={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"})
-    # tag: b55a47efb4f8c891b6719a3d85a80c7f875e33ec
-    r.create_git_tree(tree=[
-        {"path": "blob", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"},
-        {"path": "tree", "mode": "040000", "type": "tree", "sha": "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad"},
-        {"path": "submodule", "mode": "160000", "type": "commit", "sha": "5e7d45a2f8c09757a0ce6d0bf37a8eec31791578"},
-        {"path": "symlink", "mode": "120000", "type": "blob", "content": "blob"},
-    ])
-    # tree: 634dab7d85ae09ce816910b45ed19cd362148c21
-    r.get_repo("git-objects").create_git_commit(tree="634dab7d85ae09ce816910b45ed19cd362148c21", message="second commit", parents=["f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"], author={"name": "John Doe", "email": "john@doe.com", "date": "2000-12-31T23:59:59Z"}, committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2001-01-01T00:00:00Z"})
-    # commit: dd641d6c97b24778945a43a768b36c997610a8b6
+    assert r.create_git_blob("This is some content", "utf8").sha == "3daf0da6bca38181ab52610dd6af6e92f1a5469d"
+    assert r.create_git_tree(
+        tree=[{"path": "test.txt", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"}]
+    ).sha == "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad"
+    assert r.create_git_commit(
+        tree="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad",
+        message="first commit",
+        parents=[],
+        author={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"},
+        committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2000-01-01T00:00:00Z"}
+    ).sha == "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"
+    assert r.create_git_tag(
+        tag="heavy-tag",
+        message="This is a tag",
+        object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e",
+        type="commit",
+        tagger={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"}
+    ).sha == "b55a47efb4f8c891b6719a3d85a80c7f875e33ec"
+    assert r.create_git_tree(tree=[
+        {"path": "a_blob", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"},
+        {"path": "a_tree", "mode": "040000", "type": "tree", "sha": "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad"},
+        {"path": "a_submodule", "mode": "160000", "type": "commit", "sha": "5e7d45a2f8c09757a0ce6d0bf37a8eec31791578"},
+        {"path": "a_symlink", "mode": "120000", "type": "blob", "sha": r.create_git_blob("a_blob", "utf8").sha},
+    ]).sha == "a3c1d7475466e7d87f8ac38a0001b5548014ba62"
+    assert r.create_git_commit(
+        tree="a3c1d7475466e7d87f8ac38a0001b5548014ba62",
+        message="second commit",
+        parents=["f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"],
+        author={"name": "John Doe", "email": "john@doe.com", "date": "2000-12-31T23:59:59Z"},
+        committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2001-01-01T00:00:00Z"}
+    ).sha == "5fee4dd9e5a3b56dac752c191799fcda69ca8b8a"
 
 if len(list(electra.get_gists())) != 3:
     for g in electra.get_gists():
