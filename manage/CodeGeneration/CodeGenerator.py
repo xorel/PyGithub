@@ -291,13 +291,16 @@ class CodeGenerator:
                     yield "    per_page = _snd.normalizeInt(per_page)"
                 elif method.qualifiedName == "Github.get_repo" and p.name == "repo":
                     yield "repo = _snd.normalizeTwoStringsString(repo)"
-                elif p.optional:
+                elif p.name == "labels" and method.qualifiedName in ["Repository.get_issues", "AuthenticatedUser.get_issues", "AuthenticatedUser.get_user_issues", "Organization.get_issues"]:
                     yield "if {} is not None:".format(p.name)
-                    yield from PS.indent(self.generateCodeToNormalizeParameter(p))
+                    yield '    labels = ",".join(_snd.normalizeList(_snd.normalizeLabelName, labels))'
                 elif p.variable and p.name == "email":
                     yield "email = _snd.normalizeList(_snd.normalizeString, email)"
                 elif p.variable and p.name == "label":
                     yield "label = _snd.normalizeList(_snd.normalizeLabelName, label)"
+                elif p.optional:
+                    yield "if {} is not None:".format(p.name)
+                    yield from PS.indent(self.generateCodeToNormalizeParameter(p))
                 else:
                     yield from self.generateCodeToNormalizeParameter(p)
             yield ""
