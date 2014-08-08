@@ -75,6 +75,8 @@ class ReferenceDocumentation:
         "/legacy/repos/search/:keyword",  # Legacy
         "/legacy/user/email/:email",  # Legacy
         "/legacy/user/search/:keyword",  # Legacy
+        "/repos/:owner/:repo/downloads",  # Deprecated http://developer.github.com/v3/repos/downloads
+        "/repos/:owner/:repo/downloads/:id",  # Deprecated http://developer.github.com/v3/repos/downloads
     ]
 
     def __init__(self, rootDirectory):

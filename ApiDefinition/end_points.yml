@@ -303,14 +303,6 @@
   - verb: POST
     parameters: [state, target_url, description]
     doc: http://developer.github.com/v3/repos/deployments#create-a-deployment-status
-/repos/:owner/:repo/downloads:
-  - verb: GET
-    doc: http://developer.github.com/v3/repos/downloads#list-downloads-for-a-repository
-/repos/:owner/:repo/downloads/:id:
-  - verb: DELETE
-    doc: http://developer.github.com/v3/repos/downloads#delete-a-download
-  - verb: GET
-    doc: http://developer.github.com/v3/repos/downloads#get-a-single-download
 /repos/:owner/:repo/events:
   - verb: GET
     doc: http://developer.github.com/v3/activity/events#list-repository-events

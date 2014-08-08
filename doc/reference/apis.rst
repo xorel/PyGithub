@@ -769,27 +769,6 @@ POST /repos/:owner/:repo/deployments/:id/statuses
 
 Not yet implemented in PyGithub.
 
-GET /repos/:owner/:repo/downloads
----------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#list-downloads-for-a-repository>`__)
-
-Not yet implemented in PyGithub.
-
-DELETE /repos/:owner/:repo/downloads/:id
-----------------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#delete-a-download>`__)
-
-Not yet implemented in PyGithub.
-
-GET /repos/:owner/:repo/downloads/:id
--------------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#get-a-single-download>`__)
-
-Not yet implemented in PyGithub.
-
 GET /repos/:owner/:repo/events
 ------------------------------
 

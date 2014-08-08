@@ -14,11 +14,6 @@
 /repos/:owner/:repo/deployments/:id/statuses:
   - GET
   - POST
-/repos/:owner/:repo/downloads:
-  - GET
-/repos/:owner/:repo/downloads/:id:
-  - DELETE
-  - GET
 /repos/:owner/:repo/hooks:
   - GET
   - POST
