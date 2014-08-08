@@ -1,0 +1,8 @@
+/search/code:
+  - GET
+/search/issues:
+  - GET
+/search/repositories:
+  - GET
+/search/users:
+  - GET

@@ -700,13 +700,6 @@ GET /repos/:owner/:repo/compare/:base...:head
 
 Not yet implemented in PyGithub.
 
-GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
--------------------------------------------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/commits#compare-two-commits>`__)
-
-Not yet implemented in PyGithub.
-
 DELETE /repos/:owner/:repo/contents/:path
 -----------------------------------------
 

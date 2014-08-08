@@ -1,0 +1,13 @@
+/repos/:owner/:repo/releases:
+  - GET
+  - POST
+/repos/:owner/:repo/releases/:id:
+  - DELETE
+  - GET
+  - PATCH
+/repos/:owner/:repo/releases/:id/assets:
+  - GET
+/repos/:owner/:repo/releases/assets/:id:
+  - DELETE
+  - GET
+  - PATCH

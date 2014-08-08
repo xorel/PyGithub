@@ -1,0 +1,9 @@
+/repos/:owner/:repo/commits/:ref/status:
+  - GET
+/repos/:owner/:repo/commits/:ref/statuses:
+  - GET
+/repos/:owner/:repo/deployments/:id/statuses:
+  - GET
+  - POST
+/repos/:owner/:repo/statuses/:sha:
+  - POST

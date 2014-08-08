@@ -24,6 +24,9 @@
   - GET
 /repos/:owner/:repo/issues/events/:id:
   - GET
+/repos/:owner/:repo/notifications:
+  - GET
+  - PUT
 /users/:username/events:
   - GET
 /users/:username/events/orgs/:org:

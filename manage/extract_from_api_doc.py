@@ -77,6 +77,7 @@ class ReferenceDocumentation:
         "/legacy/user/search/:keyword",  # Legacy
         "/repos/:owner/:repo/downloads",  # Deprecated http://developer.github.com/v3/repos/downloads
         "/repos/:owner/:repo/downloads/:id",  # Deprecated http://developer.github.com/v3/repos/downloads
+        "/repos/:owner/:repo/compare/user1:branchname...user2:branchname",  # Like /repos/:owner/:repo/compare/base...head
     ]
 
     def __init__(self, rootDirectory):

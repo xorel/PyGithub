@@ -273,9 +273,6 @@
 /repos/:owner/:repo/compare/:base...:head:
   - verb: GET
     doc: http://developer.github.com/v3/repos/commits#compare-two-commits
-/repos/:owner/:repo/compare/user1:branchname...user2:branchname:
-  - verb: GET
-    doc: http://developer.github.com/v3/repos/commits#compare-two-commits
 /repos/:owner/:repo/contents/:path:
   - verb: DELETE
     parameters: [path, message, sha, branch, name, email]

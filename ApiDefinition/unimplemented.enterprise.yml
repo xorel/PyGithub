@@ -1,0 +1,24 @@
+/api/v3/enterprise/settings/license:
+  - GET
+/api/v3/enterprise/stats/:type:
+  - GET
+/api/v3/staff/indexing_jobs:
+  - POST
+/setup/api/configcheck:
+  - GET
+/setup/api/configure:
+  - POST
+/setup/api/maintenance:
+  - GET
+  - POST
+/setup/api/settings:
+  - GET
+  - PUT
+/setup/api/settings/authorized-keys:
+  - DELETE
+  - GET
+  - POST
+/setup/api/start:
+  - POST
+/setup/api/upgrade:
+  - POST
