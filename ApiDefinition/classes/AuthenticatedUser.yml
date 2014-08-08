@@ -353,7 +353,7 @@ methods:
       container: PaginatedList
       content: Gist
   - name: get_issues
-    end_point: GET /user/issues
+    end_point: GET /issues
     optional_parameters:
       - name: filter
         type:
@@ -539,6 +539,50 @@ methods:
     return_type:
       container: PaginatedList
       content: Team
+  - name: get_user_issues
+    end_point: GET /user/issues
+    optional_parameters:
+      - name: filter
+        type:
+          enum: [all, assigned, created, mentioned, subscribed]
+      - name: state
+        type:
+          enum: [all, closed, open]
+      - name: labels
+        type:
+          container: list
+          content:
+            class: Label
+            attribute: name
+      - name: sort
+        type:
+          enum: [comments, created, updated]
+      - name: direction
+        type:
+          enum: [asc, desc]
+      - name: since
+        type: datetime
+      - name: per_page
+        type: int
+    url_template: end_point
+    url_arguments:
+      - name: direction
+        value: parameter direction
+      - name: filter
+        value: parameter filter
+      - name: labels
+        value: parameter labels
+      - name: per_page
+        value: parameter per_page
+      - name: since
+        value: parameter since
+      - name: sort
+        value: parameter sort
+      - name: state
+        value: parameter state
+    return_type:
+      container: PaginatedList
+      content: Issue
   - name: has_in_following
     end_point: GET /user/following/:username
     parameters:

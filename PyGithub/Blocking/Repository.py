@@ -1597,7 +1597,7 @@ class Repository(_bgo.UpdatableGithubObject):
         if mentioned is not None:
             mentioned = _snd.normalizeUserLoginAuthenticatedUserLogin(mentioned)
         if labels is not None:
-            labels = _snd.normalizeList(_snd.normalizeLabelName, labels)
+            labels = ",".join(_snd.normalizeList(_snd.normalizeLabelName, labels))
         if sort is not None:
             sort = _snd.normalizeEnum(sort, "comments", "created", "updated")
         if direction is not None:

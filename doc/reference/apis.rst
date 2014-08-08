@@ -324,7 +324,8 @@ GET /issues
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues#list-issues>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.AuthenticatedUser.get_issues`
 
 POST /markdown
 --------------
@@ -425,7 +426,8 @@ GET /orgs/:org/issues
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues#list-issues>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Organization.get_issues`
 
 GET /orgs/:org/members
 ----------------------
@@ -1809,7 +1811,7 @@ GET /user/issues
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues#list-issues>`__)
 
 Implemented in PyGithub by:
-  * :meth:`.AuthenticatedUser.get_issues`
+  * :meth:`.AuthenticatedUser.get_user_issues`
 
 GET /user/keys
 --------------

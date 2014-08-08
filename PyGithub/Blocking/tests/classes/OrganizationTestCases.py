@@ -269,3 +269,15 @@ class OrganizationRepositories(TestCase):
         r = o.create_fork(("electra", "mutable"))
         self.assertEqual(r.full_name, "olympus/mutable")
         r.delete()
+
+    @Enterprise("zeus")
+    def testGetIssues(self):
+        o = self.g.get_org("olympus")
+        issues = o.get_issues()
+        self.assertEqual([i.title for i in issues], ["Immutable issue 2", "Immutable issue 1"])
+
+    @Enterprise("zeus")
+    def testGetIssues_allParameters(self):
+        o = self.g.get_org("olympus")
+        issues = o.get_issues(filter="all", state="all", labels=["question", "enhancement"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
+        self.assertEqual([i.title for i in issues], ["Immutable issue 2", "Immutable issue 1"])

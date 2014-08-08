@@ -347,6 +347,18 @@ class AuthenticatedUserRepositories(TestCase):
         r.delete()
 
     @Enterprise("electra")
+    def testGetUserIssues(self):
+        u = self.g.get_authenticated_user()
+        issues = u.get_user_issues()
+        self.assertEqual([i.title for i in issues[-3:]], ["Immutable issue"])
+
+    @Enterprise("electra")
+    def testGetUserIssues_allParameters(self):
+        u = self.g.get_authenticated_user()
+        issues = u.get_user_issues(filter="all", state="all", labels=["question", "enhancement"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
+        self.assertEqual([i.title for i in issues[-3:]], ["Closed issue 1", "Closed issue 2", "Immutable issue"])
+
+    @Enterprise("electra")
     def testGetIssues(self):
         u = self.g.get_authenticated_user()
         issues = u.get_issues()
@@ -355,8 +367,8 @@ class AuthenticatedUserRepositories(TestCase):
     @Enterprise("electra")
     def testGetIssues_allParameters(self):
         u = self.g.get_authenticated_user()
-        issues = u.get_issues(filter="all", state="all", labels=["question"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
-        self.assertEqual([i.title for i in issues[-3:]], ["Closed issue 2", "Immutable issue", "Also created by PyGithub"])
+        issues = u.get_issues(filter="all", state="all", labels=["question", "enhancement"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
+        self.assertEqual([i.title for i in issues[-3:]], ["Closed issue 1", "Closed issue 2", "Immutable issue"])
 
 
 class AuthenticatedUserSubscriptions(TestCase):

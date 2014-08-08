@@ -64,7 +64,7 @@
                 "content-length": "1509",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Fri, 08 Aug 2014 01:37:02 GMT",
+                "date": "Thu, 07 Aug 2014 01:46:06 GMT",
                 "etag": "\"793cd2ec98d2c5326f0775f450a34ef1\"",
                 "last-modified": "Thu, 07 Aug 2014 01:43:29 GMT",
                 "server": "GitHub.com",
@@ -73,7 +73,7 @@
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "48aa9df8-6e26-4b42-aa6f-cea2628bca79",
+                "x-github-request-id": "b7ba739a-964e-40fa-ab08-c2a2b29cc786",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -90,7 +90,7 @@
             },
             "url": {
                 "netloc": "github.home.jacquev6.net",
-                "path": "/api/v3/issues",
+                "path": "/api/v3/user/issues",
                 "query": {},
                 "scheme": "http"
             },
@@ -263,7 +263,7 @@
                 "content-length": "8316",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Fri, 08 Aug 2014 01:37:02 GMT",
+                "date": "Thu, 07 Aug 2014 01:46:06 GMT",
                 "etag": "\"f89773721ccc8e39cade0057a0108711\"",
                 "server": "GitHub.com",
                 "status": "200 OK",
@@ -271,7 +271,7 @@
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "0f862c1b-19a1-4396-95e2-ffeb44348e98",
+                "x-github-request-id": "eaa92957-c920-471a-bf12-9c80f0ab3e72",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200

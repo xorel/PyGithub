@@ -36,13 +36,13 @@ class IssueAttributes(TestCase):
     @Enterprise("electra")
     def testWithRepository(self):
         u = self.g.get_authenticated_user()
-        i = u.get_issues()[0]
+        i = u.get_user_issues()[0]
         self.assertEqual(i.repository.full_name, "electra/issues")
 
     @Enterprise("electra")
     def testClosedWithMilestone(self):
         u = self.g.get_authenticated_user()
-        i = u.get_issues(state="closed")[0]
+        i = u.get_user_issues(state="closed")[0]
         self.assertEqual(i.closed_at, datetime.datetime(2014, 8, 3, 23, 19, 7))
         self.assertEqual(i.closed_by.login, "electra")
         self.assertEqual(i.state, "closed")

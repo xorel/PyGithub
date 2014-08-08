@@ -25,9 +25,5 @@
   - GET
 /hub:
   - POST
-/issues:
-  - GET
 /markdown:
   - POST
-/orgs/:org/issues:
-  - GET

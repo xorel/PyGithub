@@ -21,6 +21,8 @@ class Issue(_bgo.UpdatableGithubObject):
 
     Methods and attributes returning instances of this class:
       * :meth:`.AuthenticatedUser.get_issues`
+      * :meth:`.AuthenticatedUser.get_user_issues`
+      * :meth:`.Organization.get_issues`
       * :meth:`.PullRequest.get_issue`
       * :meth:`.Repository.create_issue`
       * :meth:`.Repository.get_issue`

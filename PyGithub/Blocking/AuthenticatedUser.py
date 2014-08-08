@@ -752,7 +752,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
     def get_issues(self, filter=None, state=None, labels=None, sort=None, direction=None, since=None, per_page=None):
         """
-        Calls the `GET /user/issues <http://developer.github.com/v3/issues#list-issues>`__ end point.
+        Calls the `GET /issues <http://developer.github.com/v3/issues#list-issues>`__ end point.
 
         This is the only method calling this end point.
 
@@ -772,7 +772,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         if state is not None:
             state = _snd.normalizeEnum(state, "all", "closed", "open")
         if labels is not None:
-            labels = _snd.normalizeList(_snd.normalizeLabelName, labels)
+            labels = ",".join(_snd.normalizeList(_snd.normalizeLabelName, labels))
         if sort is not None:
             sort = _snd.normalizeEnum(sort, "comments", "created", "updated")
         if direction is not None:
@@ -784,7 +784,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         else:
             per_page = _snd.normalizeInt(per_page)
 
-        url = uritemplate.expand("https://api.github.com/user/issues")
+        url = uritemplate.expand("https://api.github.com/issues")
         urlArguments = _snd.dictionary(direction=direction, filter=filter, labels=labels, per_page=per_page, since=since, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Issue.Issue))(None, r)
@@ -1000,6 +1000,45 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Team.Team))(None, r)
+
+    def get_user_issues(self, filter=None, state=None, labels=None, sort=None, direction=None, since=None, per_page=None):
+        """
+        Calls the `GET /user/issues <http://developer.github.com/v3/issues#list-issues>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param filter: optional "all" or "assigned" or "created" or "mentioned" or "subscribed"
+        :param state: optional "all" or "closed" or "open"
+        :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param sort: optional "comments" or "created" or "updated"
+        :param direction: optional "asc" or "desc"
+        :param since: optional :class:`datetime`
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.Issue.Issue`
+        """
+        import PyGithub.Blocking.Issue
+
+        if filter is not None:
+            filter = _snd.normalizeEnum(filter, "all", "assigned", "created", "mentioned", "subscribed")
+        if state is not None:
+            state = _snd.normalizeEnum(state, "all", "closed", "open")
+        if labels is not None:
+            labels = ",".join(_snd.normalizeList(_snd.normalizeLabelName, labels))
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "comments", "created", "updated")
+        if direction is not None:
+            direction = _snd.normalizeEnum(direction, "asc", "desc")
+        if since is not None:
+            since = _snd.normalizeDatetime(since)
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/user/issues")
+        urlArguments = _snd.dictionary(direction=direction, filter=filter, labels=labels, per_page=per_page, since=since, sort=sort, state=state)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Issue.Issue))(None, r)
 
     def has_in_following(self, username):
         """
