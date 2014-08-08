@@ -54,6 +54,58 @@ class Github(_bgo.SessionedGithubObject):
             """
             return self.__source.value
 
+    class HookDescription(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Github.get_hook`
+          * :meth:`.Github.get_hooks`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, events=None, name=None, schema=None, supported_events=None, title=None, **kwds):
+            super(Github.HookDescription, self)._initAttributes(**kwds)
+            self.__events = _rcv.Attribute("Github.HookDescription.events", _rcv.ListConverter(_rcv.StringConverter), events)
+            self.__name = _rcv.Attribute("Github.HookDescription.name", _rcv.StringConverter, name)
+            self.__schema = _rcv.Attribute("Github.HookDescription.schema", _rcv.ListConverter(_rcv.ListConverter(_rcv.StringConverter)), schema)
+            self.__supported_events = _rcv.Attribute("Github.HookDescription.supported_events", _rcv.ListConverter(_rcv.StringConverter), supported_events)
+            self.__title = _rcv.Attribute("Github.HookDescription.title", _rcv.StringConverter, title)
+
+        @property
+        def events(self):
+            """
+            :type: :class:`list` of :class:`string`
+            """
+            return self.__events.value
+
+        @property
+        def name(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__name.value
+
+        @property
+        def schema(self):
+            """
+            :type: :class:`list` of :class:`list` of :class:`string`
+            """
+            return self.__schema.value
+
+        @property
+        def supported_events(self):
+            """
+            :type: :class:`list` of :class:`string`
+            """
+            return self.__supported_events.value
+
+        @property
+        def title(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__title.value
+
     class Meta(_bgo.SessionedGithubObject):
         """
         Methods and attributes returning instances of this class:
@@ -274,6 +326,35 @@ class Github(_bgo.SessionedGithubObject):
         url = uritemplate.expand("https://api.github.com/gitignore/templates")
         r = self.Session._request("GET", url)
         return _rcv.ListConverter(_rcv.StringConverter)(None, r.json())
+
+    def get_hook(self, name):
+        """
+        Calls the `GET /hooks/:name <https://github.com/jacquev6/PyGithub/issues/196>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param name: mandatory :class:`string`
+        :rtype: :class:`.Github.HookDescription`
+        """
+
+        name = _snd.normalizeString(name)
+
+        url = uritemplate.expand("https://api.github.com/hooks/{name}", name=name)
+        r = self.Session._request("GET", url)
+        return _rcv.StructureConverter(self.Session, Github.HookDescription)(None, r.json())
+
+    def get_hooks(self):
+        """
+        Calls the `GET /hooks <http://developer.github.com/v3/repos/hooks>`__ end point.
+
+        This is the only method calling this end point.
+
+        :rtype: :class:`list` of :class:`.Github.HookDescription`
+        """
+
+        url = uritemplate.expand("https://api.github.com/hooks")
+        r = self.Session._request("GET", url)
+        return _rcv.ListConverter(_rcv.StructureConverter(self.Session, Github.HookDescription))(None, r.json())
 
     def get_meta(self):
         """

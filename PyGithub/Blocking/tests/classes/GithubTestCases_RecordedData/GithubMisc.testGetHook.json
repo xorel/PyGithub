@@ -1,0 +1,90 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/hooks/campfire",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "events": [
+                    "push",
+                    "pull_request",
+                    "issues"
+                ],
+                "name": "campfire",
+                "schema": [
+                    [
+                        "string",
+                        "subdomain"
+                    ],
+                    [
+                        "string",
+                        "room"
+                    ],
+                    [
+                        "string",
+                        "token"
+                    ],
+                    [
+                        "string",
+                        "sound"
+                    ],
+                    [
+                        "boolean",
+                        "master_only"
+                    ],
+                    [
+                        "boolean",
+                        "play_sound"
+                    ],
+                    [
+                        "boolean",
+                        "long_url"
+                    ]
+                ],
+                "supported_events": [
+                    "gollum",
+                    "issues",
+                    "public",
+                    "pull_request",
+                    "push"
+                ],
+                "title": "Campfire"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "314",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Fri, 08 Aug 2014 02:32:20 GMT",
+                "etag": "\"fba2532cb7b347493482043088a05f74\"",
+                "last-modified": "Wed, 14 May 2014 20:51:20 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "63d9e054-fc3e-49d9-94c1-f0db1c370bd8",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

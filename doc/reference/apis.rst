@@ -303,14 +303,16 @@ GET /hooks
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.get_hooks`
 
 GET /hooks/:name
 ----------------
 
 (`Reference documentation of Github API v3 <https://github.com/jacquev6/PyGithub/issues/196>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.get_hook`
 
 POST /hub
 ---------

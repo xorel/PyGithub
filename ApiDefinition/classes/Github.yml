@@ -6,6 +6,27 @@ structures:
         type: string
       - name: source
         type: string
+  - name: HookDescription
+    updatable: false
+    attributes:
+      - name: events
+        type:
+          container: list
+          content: string
+      - name: name
+        type: string
+      - name: schema
+        type:
+          container: list
+          content:
+            container: list
+            content: string
+      - name: supported_events
+        type:
+          container: list
+          content: string
+      - name: title
+        type: string
   - name: Meta
     updatable: false
     attributes:
@@ -99,6 +120,22 @@ methods:
     return_type:
       container: list
       content: string
+  - name: get_hook
+    end_point: GET /hooks/:name
+    parameters:
+      - name: name
+        type: string
+    url_template: end_point
+    url_template_arguments:
+      - name: name
+        value: parameter name
+    return_type: Github.HookDescription
+  - name: get_hooks
+    end_point: GET /hooks
+    url_template: end_point
+    return_type:
+      container: list
+      content: Github.HookDescription
   - name: get_meta
     end_point: GET /meta
     url_template: end_point

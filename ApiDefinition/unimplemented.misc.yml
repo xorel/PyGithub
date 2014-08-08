@@ -19,10 +19,6 @@
   - PATCH
 /authorizations/clients/:client_id:
   - PUT
-/hooks:
-  - GET
-/hooks/:name:
-  - GET
 /hub:
   - POST
 /markdown:

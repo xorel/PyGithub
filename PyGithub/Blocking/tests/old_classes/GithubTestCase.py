@@ -112,30 +112,6 @@ class GithubTestCase(Framework.SimpleLoginTestCase):
             ]
         )
 
-    def testGetEmojis(self):
-        emojis = self.g.get_emojis()
-        self.assertEqual(len(emojis), 887)
-        for k, v in {
-            "+1": "https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5",
-            "-1": "https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5",
-            "100": "https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5",
-            "1234": "https://github.global.ssl.fastly.net/images/icons/emoji/1234.png?v5",
-            "8ball": "https://github.global.ssl.fastly.net/images/icons/emoji/8ball.png?v5",
-            "yen": "https://github.global.ssl.fastly.net/images/icons/emoji/yen.png?v5",
-            "yum": "https://github.global.ssl.fastly.net/images/icons/emoji/yum.png?v5",
-            "zap": "https://github.global.ssl.fastly.net/images/icons/emoji/zap.png?v5",
-            "zero": "https://github.global.ssl.fastly.net/images/icons/emoji/zero.png?v5",
-            "zzz": "https://github.global.ssl.fastly.net/images/icons/emoji/zzz.png?v5",
-        }.iteritems():
-            self.assertEqual(emojis[k], v)
-
-    def testGetMeta(self):
-        # @todoAlpha Consider making Meta updatable, with a constant url "/meta"
-        meta = self.g.get_meta()
-        self.assertEqual(meta.git, ["192.30.252.0/22"])
-        self.assertEqual(meta.hooks, ["192.30.252.0/22"])
-        self.assertEqual(meta.verifiable_password_authentication, True)
-
     def testGetPublicGists(self):
         gists = self.g.get_public_gists()
         self.assertEqual(gists[0].created_at, datetime.datetime(2014, 7, 12, 2, 35, 47))
