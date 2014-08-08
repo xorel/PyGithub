@@ -544,3 +544,8 @@ class FileDirSubmoduleSymLinkUnionConverterTestCase(unittest.TestCase):
         self.submodule.expect(None, {"type": "file", "git_url": "foo/git/trees/xxx"}).andReturn(42)
 
         self.assertEqual(self.conv(None, {"type": "file", "git_url": "foo/git/trees/xxx"}), 42)
+
+    def testSubmoduleWithoutDotGitmodules(self):
+        self.submodule.expect(None, {"type": "file", "git_url": None}).andReturn(42)
+
+        self.assertEqual(self.conv(None, {"type": "file", "git_url": None}), 42)

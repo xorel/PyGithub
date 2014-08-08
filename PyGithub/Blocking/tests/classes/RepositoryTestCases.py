@@ -123,6 +123,38 @@ class RepositoryCollaborators(TestCase):
         self.assertTrue(r.has_in_collaborators("penelope"))
 
 
+class RepositoryContents(TestCase):
+    # @todoAlpha Allow methods in inner structs: Repository.Dir needs get_contents
+    #   methods:
+    # - name: get_contents
+    #   end_point: GET /repos/:owner/:repo/contents/:path
+    #   url_template: attribute url
+    #   return_type:
+    #     container: list
+    #     content:
+    #       union: [File, Dir, Submodule, SymLink]
+    # @todoAlpha We could also have a Dir.create_file method
+
+    @Enterprise("electra")
+    def testGetRootContents_allParameters(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("", ref="5fee4dd9e5a3b56dac752c191799fcda69ca8b8a")
+        self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
+        self.assertEqual(c[0].path, "a_blob")
+        self.assertIsInstance(c[1], PyGithub.Blocking.Submodule.Submodule)
+        self.assertEqual(c[1].path, "a_submodule")
+        self.assertIsInstance(c[2], PyGithub.Blocking.File.File)  # @todoAlpha Understand why GitHub returns type=file. This was type=symlink in RepositoryTestCase.testGetRootDirContents.json
+        self.assertEqual(c[2].path, "a_symlink")
+        self.assertIsInstance(c[3], PyGithub.Blocking.Repository.Repository.Dir)
+        self.assertEqual(c[3].git_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/trees/65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
+        self.assertEqual(c[3].html_url, "http://github.home.jacquev6.net/electra/git-objects/tree/5fee4dd9e5a3b56dac752c191799fcda69ca8b8a/a_tree")
+        self.assertEqual(c[3].name, "a_tree")
+        self.assertEqual(c[3].path, "a_tree")
+        self.assertEqual(c[3].sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
+        self.assertEqual(c[3].size, 0)
+        self.assertEqual(c[3].type, "dir")
+        self.assertEqual(c[3].url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_tree?ref=5fee4dd9e5a3b56dac752c191799fcda69ca8b8a")  # Dir is not updatable because its url points to a list of its contents, not its hash representation
+
+
 class RepositoryContributors(TestCase):
     @Enterprise("electra")
     def testGetContributors(self):

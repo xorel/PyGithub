@@ -113,7 +113,7 @@ class RepositoryTestCase(Framework.SimpleLoginTestCase):
         self.assertIsInstance(contents[1], PyGithub.Blocking.Submodule.Submodule)
         self.assertIsInstance(contents[2], PyGithub.Blocking.File.File)
         self.assertIsInstance(contents[3], PyGithub.Blocking.SymLink.SymLink)
-        self.assertIsInstance(contents[4], PyGithub.Blocking.Dir.Dir)
+        self.assertIsInstance(contents[4], PyGithub.Blocking.Repository.Repository.Dir)
         self.assertEqual(contents[0].type, "file")
         self.assertEqual(contents[1].type, "file")  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
         self.assertEqual(contents[2].type, "file")

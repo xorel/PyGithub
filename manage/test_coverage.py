@@ -51,7 +51,6 @@ def main():
     import PyGithub.Blocking.AuthenticatedUser
     import PyGithub.Blocking.Commit
     import PyGithub.Blocking.Contributor
-    import PyGithub.Blocking.Dir
     import PyGithub.Blocking.File
     import PyGithub.Blocking.Gist
     import PyGithub.Blocking.GitBlob

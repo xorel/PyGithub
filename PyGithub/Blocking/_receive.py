@@ -256,7 +256,7 @@ class FileDirSubmoduleSymLinkUnionConverter(object):
         if isinstance(value, dict):
             type = value.get("type")
             gitUrl = value.get("git_url", "")
-            if type == "file" and "/git/trees/" in gitUrl:  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
+            if type == "file" and (gitUrl is None or "/git/trees/" in gitUrl):  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
                 return self.__submodule(previousValue, value)
             elif type == "file":
                 return self.__file(previousValue, value)

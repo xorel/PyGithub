@@ -151,6 +151,81 @@ class Repository(_bgo.UpdatableGithubObject):
             """
             return self.__content.value
 
+    class Dir(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_contents`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, git_url=None, html_url=None, name=None, path=None, sha=None, size=None, type=None, url=None, _links=None, **kwds):
+            super(Repository.Dir, self)._initAttributes(**kwds)
+            self.__git_url = _rcv.Attribute("Repository.Dir.git_url", _rcv.StringConverter, git_url)
+            self.__html_url = _rcv.Attribute("Repository.Dir.html_url", _rcv.StringConverter, html_url)
+            self.__name = _rcv.Attribute("Repository.Dir.name", _rcv.StringConverter, name)
+            self.__path = _rcv.Attribute("Repository.Dir.path", _rcv.StringConverter, path)
+            self.__sha = _rcv.Attribute("Repository.Dir.sha", _rcv.StringConverter, sha)
+            self.__size = _rcv.Attribute("Repository.Dir.size", _rcv.IntConverter, size)
+            self.__type = _rcv.Attribute("Repository.Dir.type", _rcv.StringConverter, type)
+            self.__url = _rcv.Attribute("Repository.Dir.url", _rcv.StringConverter, url)
+
+        @property
+        def git_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__git_url.value
+
+        @property
+        def html_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__html_url.value
+
+        @property
+        def name(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__name.value
+
+        @property
+        def path(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__path.value
+
+        @property
+        def sha(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__sha.value
+
+        @property
+        def size(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__size.value
+
+        @property
+        def type(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__type.value
+
+        @property
+        def url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__url.value
+
     class Permissions(_bgo.SessionedGithubObject):
         """
         Methods and attributes returning instances of this class:
@@ -1373,14 +1448,12 @@ class Repository(_bgo.UpdatableGithubObject):
         """
         Calls the `GET /repos/:owner/:repo/contents/:path <http://developer.github.com/v3/repos/contents#get-contents>`__ end point.
 
-        The following methods also call this end point:
-          * :meth:`.Dir.get_contents`
+        This is the only method calling this end point.
 
         :param path: mandatory :class:`string`
         :param ref: optional :class:`string`
-        :rtype: :class:`~.File.File` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink` or :class:`list` of :class:`~.File.File` or :class:`~.Dir.Dir` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink`
+        :rtype: :class:`~.File.File` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink` or :class:`list` of :class:`~.File.File` or :class:`.Repository.Dir` or :class:`~.Submodule.Submodule` or :class:`~.SymLink.SymLink`
         """
-        import PyGithub.Blocking.Dir
         import PyGithub.Blocking.File
         import PyGithub.Blocking.Submodule
         import PyGithub.Blocking.SymLink
@@ -1392,7 +1465,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/contents/{path}", owner=self.owner.login, path=path, repo=self.name)
         urlArguments = _snd.dictionary(ref=ref)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.FirstMatchUnionConverter(_rcv.KeyedStructureUnionConverter("type", dict(file=_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), submodule=_rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), symlink=_rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))), _rcv.ListConverter(_rcv.FileDirSubmoduleSymLinkUnionConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), _rcv.ClassConverter(self.Session, PyGithub.Blocking.Dir.Dir), _rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), _rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))))(None, r.json())
+        return _rcv.FirstMatchUnionConverter(_rcv.KeyedStructureUnionConverter("type", dict(file=_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), submodule=_rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), symlink=_rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))), _rcv.ListConverter(_rcv.FileDirSubmoduleSymLinkUnionConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), _rcv.StructureConverter(self.Session, Repository.Dir), _rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), _rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))))(None, r.json())
 
     def get_contributors(self, anon=None, per_page=None):
         """

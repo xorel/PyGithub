@@ -25,6 +25,28 @@ structures:
         type: GitCommit
       - name: content
         type: File
+  - name: Dir
+    updatable: false
+    attributes:
+      - name: git_url
+        type: string
+      - name: html_url
+        type: string
+      - name: name
+        type: string
+      - name: path
+        type: string
+      - name: sha
+        type: string
+      - name: size
+        type: int
+      - name: type
+        type: string
+      - name: url
+        type: string
+    deprecated_attributes:
+      - name: _links
+        reason: todoAlpha What should we do with _links?
   - name: Permissions
     attributes:
       - name: admin
@@ -679,7 +701,7 @@ methods:
           keys: [file, submodule, symlink]
         - container: list
           content:
-            union: [File, Dir, Submodule, SymLink]
+            union: [File, Repository.Dir, Submodule, SymLink]
       converter: FirstMatch
   - name: get_contributors
     end_point: GET /repos/:owner/:repo/contributors

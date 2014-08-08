@@ -20,7 +20,6 @@ class Submodule(_bgo.UpdatableGithubObject):
     Derived classes: none.
 
     Methods and attributes returning instances of this class:
-      * :meth:`.Dir.get_contents`
       * :meth:`.Repository.get_contents`
 
     Methods accepting instances of this class as parameter: none.
