@@ -187,6 +187,37 @@ class RepositoryContents(TestCase):
         c = self.g.get_repo(("electra", "git-objects")).get_contents("a_symlink", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c, PyGithub.Blocking.SymLink.SymLink)
 
+    @Enterprise("electra")
+    def testGetReadme(self):
+        c = self.g.get_repo(("electra", "immutable")).get_readme()
+        self.assertIsInstance(c, PyGithub.Blocking.File.File)
+        self.assertEqual(c.path, "README.md")
+
+    @Enterprise("electra")
+    def testGetReadme_allParameters(self):
+        # @todoAlpha ref can also be a GitObject?
+        c = self.g.get_repo(("electra", "immutable")).get_readme(ref="master")
+        self.assertIsInstance(c, PyGithub.Blocking.File.File)
+        self.assertEqual(c.path, "README.md")
+
+    @Enterprise("electra")
+    def testCreateFile(self):
+        repo = self.g.get_repo(("electra", "git-objects"))
+        cc = repo.create_file("foo.txt", "Add foo.txt", "Q3JlYXRlZCBieSBQeUdpdGh1Yg==")
+        self.assertEqual(cc.commit.message, "Add foo.txt")
+        self.assertEqual(cc.content.path, "foo.txt")
+        repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
+
+    @Enterprise("electra")
+    def testCreateFile_allParameters(self):
+        repo = self.g.get_repo(("electra", "git-objects"))
+        ref = repo.create_git_ref("refs/heads/ephemeral", "627777afd4859d16e30880f4d8d0a178d99d395c")
+        cc = repo.create_file("foo.txt", "Add foo.txt", "Q3JlYXRlZCBieSBQeUdpdGh1Yg==", branch="ephemeral", author={"name": "John Doe", "email": "john@doe.com"}, committer={"name": "Jane Doe", "email": "jane@doe.com"})
+        self.assertEqual(cc.commit.author.name, "John Doe")
+        self.assertEqual(cc.commit.committer.name, "Jane Doe")
+        self.assertEqual(cc.content.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/foo.txt?ref=ephemeral")
+        ref.delete()
+
 
 class RepositoryContributors(TestCase):
     @Enterprise("electra")
@@ -343,6 +374,9 @@ class RepositoryGitStuff(TestCase):
         r = self.g.get_repo(("electra", "git-objects"))
         tags = r.get_tags()
         self.assertEqual([t.name for t in tags], ["light-tag-2", "light-tag-1"])
+        self.assertEqual(tags[0].commit.sha, "d9343bbb63ef53a264dee9ccbd75c6b5ebae0bef")
+        self.assertEqual(tags[0].tarball_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/tarball/light-tag-2")
+        self.assertEqual(tags[0].zipball_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/zipball/light-tag-2")
 
     @Enterprise("electra")
     def testGetTags_allParameters(self):
