@@ -8,5 +8,4 @@ from PyGithub.Blocking.tests.old_classes.GithubTestCase import *
 from PyGithub.Blocking.tests.old_classes.PublicKeyTestCase import *
 from PyGithub.Blocking.tests.old_classes.RepositoryTestCase import *
 from PyGithub.Blocking.tests.old_classes.SubmoduleTestCase import *
-from PyGithub.Blocking.tests.old_classes.SymLinkTestCase import *
 from PyGithub.Blocking.tests.old_classes.TeamTestCase import *
