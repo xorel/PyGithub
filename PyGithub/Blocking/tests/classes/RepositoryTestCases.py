@@ -136,6 +136,14 @@ class RepositoryContents(TestCase):
     # @todoAlpha We could also have a Dir.create_file method
 
     @Enterprise("electra")
+    def testGetRootContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("")
+        self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
+        self.assertEqual(c[0].path, "README.md")
+        self.assertIsInstance(c[1], PyGithub.Blocking.File.File)
+        self.assertEqual(c[1].path, "foo.md")
+
+    @Enterprise("electra")
     def testGetRootContents_allParameters(self):
         c = self.g.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
@@ -153,6 +161,31 @@ class RepositoryContents(TestCase):
         self.assertEqual(c[3].size, 0)
         self.assertEqual(c[3].type, "dir")
         self.assertEqual(c[3].url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_tree?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")  # Dir is not updatable because its url points to a list of its contents, not its hash representation
+
+    @Enterprise("electra")
+    def testGetDirContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_tree", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
+
+    @Enterprise("electra")
+    def testGetFileContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_blob", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertIsInstance(c, PyGithub.Blocking.File.File)
+
+    @Enterprise("electra")
+    def testGetFileInDirContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_tree/test.txt", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertIsInstance(c, PyGithub.Blocking.File.File)
+
+    @Enterprise("electra")
+    def testGetSubmoduleContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_submodule", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertIsInstance(c, PyGithub.Blocking.Submodule.Submodule)
+
+    @Enterprise("electra")
+    def testGetSymlinkContents(self):
+        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_symlink", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertIsInstance(c, PyGithub.Blocking.SymLink.SymLink)
 
 
 class RepositoryContributors(TestCase):
