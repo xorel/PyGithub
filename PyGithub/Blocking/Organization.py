@@ -309,7 +309,7 @@ class Organization(_bgo.UpdatableGithubObject):
         The following methods also call this end point:
           * :meth:`.AuthenticatedUser.create_fork`
 
-        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
+        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
         :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
@@ -373,7 +373,7 @@ class Organization(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param name: mandatory :class:`string`
-        :param repo_names: optional :class:`list` of :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)
+        :param repo_names: optional :class:`list` of :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
         :param permission: optional "admin" or "pull" or "push"
         :rtype: :class:`~.Team.Team`
         """

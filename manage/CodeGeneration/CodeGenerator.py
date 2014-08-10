@@ -422,7 +422,7 @@ class CodeGenerator:
 
     def generateDocForAttributeType(self, type):
         if type.attribute.qualifiedName == "Repository.full_name":
-            return ":class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.Entity.login` and :attr:`.Repository.name`)"
+            return ":class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)"
         else:
             return ":class:`.{}` or :class:`{}` (its :attr:`.{}`)".format(type.type.qualifiedName, type.attribute.type.qualifiedName, type.attribute.qualifiedName)
 
