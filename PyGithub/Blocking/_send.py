@@ -69,13 +69,6 @@ def normalizeUserLogin(user):
         raise TypeError()
 
 
-def normalizeUserLoginReset(user):
-    if user is Reset:
-        return user
-    else:
-        return normalizeUserLogin(user)
-
-
 def normalizeAuthenticatedUserLogin(user):
     import PyGithub.Blocking.AuthenticatedUser
     if isinstance(user, PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser):
@@ -84,13 +77,6 @@ def normalizeAuthenticatedUserLogin(user):
         return user
     else:
         raise TypeError()
-
-
-def normalizeAuthenticatedUserLoginReset(user):
-    if user is Reset:
-        return user
-    else:
-        return normalizeAuthenticatedUserLogin(user)
 
 
 def normalizeUserLoginAuthenticatedUserLogin(user):
@@ -171,29 +157,24 @@ def normalizeInt(b):
 
 
 def normalizeStringReset(s):
-    if isinstance(s, basestring):
-        return s
-    elif s is Reset:
+    if s is Reset:
         return s
     else:
-        raise TypeError()
+        return normalizeString(s)
 
 
 def normalizeBoolReset(b):
-    if isinstance(b, bool):
-        return b
-    elif b is Reset:
+    if b is Reset:
         return b
     else:
-        raise TypeError()
+        return normalizeBool(b)
 
 
 def normalizeTwoStringsString(repo):
     if isinstance(repo, basestring):
         s = repo.split("/")
         if len(s) == 2:
-            l, n = s
-            return (l, n)
+            return tuple(s)
         else:
             raise TypeError()
     elif isinstance(repo, tuple) and len(repo) == 2 and isinstance(repo[0], basestring) and isinstance(repo[0], basestring) and "/" not in repo[0] and "/" not in repo[1]:

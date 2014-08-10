@@ -210,7 +210,7 @@ class OrganizationMembers(TestCase):
     def testCreateTeam_allParameters(self):
         o = self.g.get_org("olympus")
         repo = o.create_repo("trojan-war")
-        t = o.create_team("Titans", repo_names=[repo], permission="push")
+        t = o.create_team("Titans", repo_names=[("olympus", "trojan-war")], permission="push")
         self.assertEqual(t.name, "Titans")
         self.assertEqual(t.permission, "push")
         self.assertEqual(t.repos_count, 1)

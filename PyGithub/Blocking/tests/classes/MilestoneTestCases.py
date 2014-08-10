@@ -56,8 +56,8 @@ class MilestoneEdit(TestCase):
     def testDueOn(self):
         m = self.g.get_repo(("electra", "issues")).get_milestone(3)
         self.assertEqual(m.due_on, None)
-        m.edit(due_on="2014-07-26T00:00:00Z")
-        self.assertEqual(m.due_on, datetime.datetime(2014, 7, 26, 0, 0))
+        m.edit(due_on=datetime.datetime(2014, 7, 26, 0, 0, 0))
+        self.assertEqual(m.due_on, datetime.datetime(2014, 7, 26, 0, 0, 0))
         m.edit(due_on=PyGithub.Blocking.Reset)
         self.assertEqual(m.due_on, None)
 

@@ -601,7 +601,7 @@ class RepositoryIssues(TestCase):
     @Enterprise("electra")
     def testCreateMilestone_allParameters(self):
         r = self.g.get_repo(("electra", "mutable"))
-        milestone = r.create_milestone("Created by PyGithub", state="closed", description="Body", due_on="2014-08-01T00:00:00Z")
+        milestone = r.create_milestone("Created by PyGithub", state="closed", description="Body", due_on=datetime.datetime(2014, 8, 1, 0, 0, 0))
         self.assertEqual(milestone.title, "Created by PyGithub")
         self.assertEqual(milestone.state, "closed")
         self.assertEqual(milestone.description, "Body")
