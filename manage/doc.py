@@ -32,6 +32,7 @@ def main():
     ])
 
     os.chdir("gh-pages")
+    shutil.rmtree("v2")
 
     for f in glob.glob(os.path.join("..", "doc", "*.dot")):
         subprocess.check_call([
