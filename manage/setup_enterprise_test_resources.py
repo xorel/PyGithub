@@ -150,7 +150,10 @@ except PyGithub.Blocking.ObjectNotFoundException:
     r.get_issue(2).edit(labels=["enhancement", "question"], assignee="zeus")
     time.sleep(5)
     penelope.create_fork(("olympus", "immutable"))
+    zeus.create_fork(("electra", "immutable"))
     time.sleep(5)
+    lectra.get_repo("immutable").create_key("immutable-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDzbleYb9W3hBtT7guAUV1WC0pBQYy3s0QZARd1suHtZ4crhj4g+VfzWHtSV70Ee9iQfoNsd5fPZb895B3Lf3tivnBoilR67FrFsX8GXiXS54moWIkchFE4yK5WDmrdQzzDzS8VbJMJOtGcn160umuXBZEtcL1ibsx3zBGxGQb1AjUirA0LYf7Q1D5W7kmA8tj4NHnbl/3iHhKoJRVHkRXx0OjK+998lwrAxNbW4RLcsmsNX8jWbH6jVkw3rwtYgDcBEYfgeXq/Njt/a8EyFWnGtjI4r0mVJ9LHm585z7spDX7bmEipzn3LZrCjtat5p+jt0ypPdC+z/HcoTzqG2Jzd")
+    electra.get_repo("immutable").create_key("immutable-2", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9NhzTG3fEx6f9//bNiy+TfRAY9RpdcBnJo9Vm2TiJIq9q/sH22qwahUQIU2hpDSqPHxYayEQyGeFY2tAC9COTzUn8x2wu7sXvHqgiQy0mq64pWJXtrMRVof4+08Sqq07gqCGAlknLoE3F4+WJezmhCNHtiSQ9DnwK3o4NI8TayRc0tEGv0TW+/geReWN6c9ql25/a9Wx5+NLQgwbyueJVnsoxoY1spVps+SMkzxDTGOJRE9Yc+6xQs1Tjqp38h0VLbGVzmh8rECV2hI0WNo7MuoyF22yS+bCyktP7ujv9KLH+LeOyZWeu0r+Kpva/8Bo2KDnbAuj1lTrtRS3jwpUp")
 
 try:
     # gElectra.get_repo(("electra", "mutable")).delete()
@@ -237,9 +240,12 @@ if len(electra.get_keys()) != 2:
     electra.create_key("electra-2", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbzdq+na/uti2Ijbrj6QDolop9y+eROwxoi4hVGzl/q90JnJQd/EeL/6GRnAu5+rcVI+4q5Rv5e8g2yeGSJ03fMeOmIDDYsUrkbROkppIgUTTeOr189w7WG/GZWTWLVrxn9pLOzRV1bj6IDdNEOcIpttUb0uo7WkRNHlFkH//ZRXrvhJwRaFIg1yy2sEX20HVG7xmSzosVKEa4e/RLeGLa9tXTUMvGJI8pZslp6YooJ7LdX0kppkgrjtmsyBWCo3KNyCcL/mDTF9O+uPCdYXWY2e8PECWFVqfLC4ZCuDRW2jKsBOXrArCBpbraWV0OAqWc031W/R0Dsdv7KPh/zxQb")
 
 penelope.add_to_starred(("electra", "immutable"))
+zeus.add_to_starred(("electra", "immutable"))
 penelope.add_to_starred(("electra", "mutable"))
 penelope.create_subscription(("electra", "immutable"), subscribed=True, ignored=False)
 penelope.create_subscription(("electra", "mutable"), subscribed=True, ignored=False)
+gods.add_to_repos(("olympus", "immutable"))
+humans.add_to_repos(("olympus", "immutable"))
 
 
 try:

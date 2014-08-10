@@ -100,29 +100,6 @@ class RepositoryAttributes(TestCase):
         self.assertIsInstance(r.source.owner, PyGithub.Blocking.User.User)
 
 
-class RepositoryCollaborators(TestCase):
-    @Enterprise("electra")
-    def testGetCollaborators(self):
-        r = self.g.get_repo(("electra", "mutable"))
-        collaborators = r.get_collaborators()
-        self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
-
-    @Enterprise("electra")
-    def testGetCollaborators_allParameters(self):
-        r = self.g.get_repo(("electra", "mutable"))
-        collaborators = r.get_collaborators(per_page=1)
-        self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
-
-    @Enterprise("electra")
-    def testAddToAndRemoveFromCollaborators(self):
-        r = self.g.get_repo(("electra", "mutable"))
-        self.assertTrue(r.has_in_collaborators("penelope"))
-        r.remove_from_collaborators("penelope")
-        self.assertFalse(r.has_in_collaborators("penelope"))
-        r.add_to_collaborators("penelope")
-        self.assertTrue(r.has_in_collaborators("penelope"))
-
-
 class RepositoryContents(TestCase):
     # @todoAlpha Allow methods in inner structs: Repository.Dir needs get_contents
     #   methods:
@@ -217,30 +194,6 @@ class RepositoryContents(TestCase):
         self.assertEqual(cc.commit.committer.name, "Jane Doe")
         self.assertEqual(cc.content.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/foo.txt?ref=ephemeral")
         ref.delete()
-
-
-class RepositoryContributors(TestCase):
-    @Enterprise("electra")
-    def testGetContributors(self):
-        r = self.g.get_repo(("electra", "contributors"))
-        contributors = r.get_contributors()
-        self.assertEqual([c.login for c in contributors], ["electra", "penelope", "zeus"])
-
-    @Enterprise("electra")
-    def testGetContributors_allParameters(self):
-        r = self.g.get_repo(("electra", "contributors"))
-        contributors = r.get_contributors(anon=True, per_page=1)
-        self.assertEqual(len(list(contributors)), 4)
-        self.assertIsInstance(contributors[0], PyGithub.Blocking.User.User)
-        self.assertEqual(contributors[0].login, "electra")
-        self.assertIsInstance(contributors[1], PyGithub.Blocking.Repository.Repository.AnonymousContributor)
-        self.assertEqual(contributors[1].contributions, 1)
-        self.assertEqual(contributors[1].name, "Oedipus")
-        self.assertEqual(contributors[1].type, "Anonymous")
-        self.assertIsInstance(contributors[2], PyGithub.Blocking.User.User)
-        self.assertEqual(contributors[2].login, "penelope")
-        self.assertIsInstance(contributors[3], PyGithub.Blocking.User.User)
-        self.assertEqual(contributors[3].login, "zeus")
 
 
 class RepositoryDelete(TestCase):
@@ -716,3 +669,107 @@ class RepositoryIssues(TestCase):
         r = self.g.get_repo(("electra", "pulls"))
         pull = r.get_pull(1)
         self.assertEqual(pull.title, "Merged pull")
+
+
+class RepositoryKeys(TestCase):
+    @Enterprise("electra")
+    def testGetKeys(self):
+        keys = self.g.get_repo(("electra", "immutable")).get_keys()
+        self.assertEqual([k.title for k in keys], ["immutable-1", "immutable-2"])
+
+    @Enterprise("electra")
+    def testGetKey(self):
+        k = self.g.get_repo(("electra", "immutable")).get_key(6)
+        self.assertEqual(k.title, "immutable-1")
+
+    @Enterprise("electra")
+    def testCreateKey(self):
+        k = self.g.get_repo(("electra", "mutable")).create_key("mutable-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkQih2DtSwBzLUtSNYEKULlI5M1qa6vnq42xt9qZpkLav3G9eD/GqJRST+zZMsyfpP62PtiYKXJdLJX2MQIzUgI2PzNy+iMy+ldiTEABYEOCa+BH9+x2R5xXGlmmCPblpamx3kstGtCTa3LSkyIvxbt5vjbXCyThhJaSKyh+42Uedcz7l0y/TODhnkpid/5eiBz6k0VEbFfhM6h71eBdCFpeMJIhGaPTjbKsEjXIK0SRe0v0UQnpXJQkhAINbm+q/2yjt7zwBF74u6tQjRqJK7vQO2k47ZmFMAGeIxS6GheI+JPmwtHkxvfaJjy2lIGX+rt3lkW8xEUxiMTlxeh+0R")
+        self.assertEqual(k.title, "mutable-1")
+        # k.delete() @todoAlpha Open ticket to GitHub because k.delete fails because of k.url
+        self.assertTrue(k.url.startswith("http://github.home.jacquev6.net/api/v3/user/keys/"))
+
+
+class RepositoryPeople(TestCase):
+    @Enterprise("electra")
+    def testGetCollaborators(self):
+        r = self.g.get_repo(("electra", "mutable"))
+        collaborators = r.get_collaborators()
+        self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
+
+    @Enterprise("electra")
+    def testGetCollaborators_allParameters(self):
+        r = self.g.get_repo(("electra", "mutable"))
+        collaborators = r.get_collaborators(per_page=1)
+        self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
+
+    @Enterprise("electra")
+    def testAddToAndRemoveFromCollaborators(self):
+        r = self.g.get_repo(("electra", "mutable"))
+        self.assertTrue(r.has_in_collaborators("penelope"))
+        r.remove_from_collaborators("penelope")
+        self.assertFalse(r.has_in_collaborators("penelope"))
+        r.add_to_collaborators("penelope")
+        self.assertTrue(r.has_in_collaborators("penelope"))
+
+    @Enterprise("electra")
+    def testGetContributors(self):
+        r = self.g.get_repo(("electra", "contributors"))
+        contributors = r.get_contributors()
+        self.assertEqual([c.login for c in contributors], ["electra", "penelope", "zeus"])
+
+    @Enterprise("electra")
+    def testGetContributors_allParameters(self):
+        r = self.g.get_repo(("electra", "contributors"))
+        contributors = r.get_contributors(anon=True, per_page=1)
+        self.assertEqual(len(list(contributors)), 4)
+        self.assertIsInstance(contributors[0], PyGithub.Blocking.User.User)
+        self.assertEqual(contributors[0].login, "electra")
+        self.assertIsInstance(contributors[1], PyGithub.Blocking.Repository.Repository.AnonymousContributor)
+        self.assertEqual(contributors[1].contributions, 1)
+        self.assertEqual(contributors[1].name, "Oedipus")
+        self.assertEqual(contributors[1].type, "Anonymous")
+        self.assertIsInstance(contributors[2], PyGithub.Blocking.User.User)
+        self.assertEqual(contributors[2].login, "penelope")
+        self.assertIsInstance(contributors[3], PyGithub.Blocking.User.User)
+        self.assertEqual(contributors[3].login, "zeus")
+
+    @Enterprise("electra")
+    def testGetForks(self):
+        forks = self.g.get_repo(("electra", "immutable")).get_forks()
+        self.assertEqual([f.full_name for f in forks], ["zeus/immutable", "olympus/immutable"])
+
+    @Enterprise("electra")
+    def testGetForks_allParameters(self):
+        forks = self.g.get_repo(("electra", "immutable")).get_forks(sort="oldest", per_page=1)
+        self.assertEqual([f.full_name for f in forks], ["olympus/immutable", "zeus/immutable"])
+
+    @Enterprise("electra")
+    def testGetStargazers(self):
+        stargazers = self.g.get_repo(("electra", "immutable")).get_stargazers()
+        self.assertEqual([s.login for s in stargazers], ["penelope", "zeus"])
+
+    @Enterprise("electra")
+    def testGetStargazers_allParameters(self):
+        stargazers = self.g.get_repo(("electra", "immutable")).get_stargazers(per_page=1)
+        self.assertEqual([s.login for s in stargazers], ["penelope", "zeus"])
+
+    @Enterprise("electra")
+    def testGetSubscribers(self):
+        subscribers = self.g.get_repo(("electra", "immutable")).get_subscribers()
+        self.assertEqual([s.login for s in subscribers], ["electra", "penelope"])
+
+    @Enterprise("electra")
+    def testGetSubscribers_allParameters(self):
+        subscribers = self.g.get_repo(("electra", "immutable")).get_subscribers(per_page=1)
+        self.assertEqual([s.login for s in subscribers], ["electra", "penelope"])
+
+    @Enterprise("zeus")
+    def testGetTeams(self):
+        teams = self.g.get_repo(("olympus", "immutable")).get_teams()
+        self.assertEqual([t.name for t in teams], ["Gods", "Humans"])
+
+    @Enterprise("zeus")
+    def testGetTeams_allParameters(self):
+        teams = self.g.get_repo(("olympus", "immutable")).get_teams(per_page=1)
+        self.assertEqual([t.name for t in teams], ["Gods", "Humans"])

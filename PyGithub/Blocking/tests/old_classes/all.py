@@ -6,5 +6,4 @@ from PyGithub.Blocking.tests.old_classes.FileTestCase import *
 from PyGithub.Blocking.tests.old_classes.GistTestCase import *
 from PyGithub.Blocking.tests.old_classes.GithubTestCase import *
 from PyGithub.Blocking.tests.old_classes.PublicKeyTestCase import *
-from PyGithub.Blocking.tests.old_classes.RepositoryTestCase import *
 from PyGithub.Blocking.tests.old_classes.TeamTestCase import *
