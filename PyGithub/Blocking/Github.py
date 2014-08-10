@@ -503,8 +503,9 @@ class Github(_bgo.SessionedGithubObject):
         This is the only method calling this end point.
 
         :param since: optional :class:`.User` or :class:`int` (its :attr:`.User.id`)
-        :rtype: :class:`.PaginatedList` of :class:`~.User.User`
+        :rtype: :class:`.PaginatedList` of :class:`~.User.User` or :class:`~.Organization.Organization`
         """
+        import PyGithub.Blocking.Organization
         import PyGithub.Blocking.User
 
         if since is not None:
@@ -513,4 +514,4 @@ class Github(_bgo.SessionedGithubObject):
         url = uritemplate.expand("https://api.github.com/users")
         urlArguments = _snd.dictionary(since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User))(None, r)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.KeyedStructureUnionConverter("type", dict(Organization=_rcv.ClassConverter(self.Session, PyGithub.Blocking.Organization.Organization), User=_rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User))))(None, r)

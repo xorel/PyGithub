@@ -230,4 +230,7 @@ methods:
         value: parameter since
     return_type:
       container: PaginatedList
-      content: User
+      content:
+        union: [User, Organization]
+        key: type
+        keys: [User, Organization]

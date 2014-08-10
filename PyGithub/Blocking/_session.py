@@ -157,6 +157,7 @@ class Session(object):
                     requestHeaders["Authorization"] = "token not_logged"
                 else:
                     requestHeaders["Authorization"] = "Unknown not_logged"  # pragma no cover (defensive programming)
+            # @todoAlpha Understand what happens if response.text contains non-ascii characters (@DotCom Github.get_repositories crashed)
             elements = [request.method, request.url, sorted(requestHeaders.iteritems()), request.body, "=>", response.status_code, sorted(response.headers.iteritems()), response.text]
             log.debug(" ".join(str(e) for e in elements))
 

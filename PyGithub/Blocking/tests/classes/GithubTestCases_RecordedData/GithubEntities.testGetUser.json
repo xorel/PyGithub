@@ -1,0 +1,77 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/users/zeus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/c20ad4d76fe97759aa27a0c99bff6710.png",
+                "bio": null,
+                "blog": "http://jacquev6.net/zeus",
+                "company": "Zeus Software",
+                "created_at": "2014-08-02T16:07:22Z",
+                "email": "ghe-zeus@jacquev6.net",
+                "events_url": "http://github.home.jacquev6.net/api/v3/users/zeus/events{/privacy}",
+                "followers": 2,
+                "followers_url": "http://github.home.jacquev6.net/api/v3/users/zeus/followers",
+                "following": 0,
+                "following_url": "http://github.home.jacquev6.net/api/v3/users/zeus/following{/other_user}",
+                "gists_url": "http://github.home.jacquev6.net/api/v3/users/zeus/gists{/gist_id}",
+                "gravatar_id": "9ae23b5cc04fce1410c5b0a3ae191775",
+                "hireable": false,
+                "html_url": "http://github.home.jacquev6.net/zeus",
+                "id": 12,
+                "location": "High in the sky",
+                "login": "zeus",
+                "name": "Zeus, god of the sky",
+                "organizations_url": "http://github.home.jacquev6.net/api/v3/users/zeus/orgs",
+                "public_gists": 0,
+                "public_repos": 1,
+                "received_events_url": "http://github.home.jacquev6.net/api/v3/users/zeus/received_events",
+                "repos_url": "http://github.home.jacquev6.net/api/v3/users/zeus/repos",
+                "site_admin": true,
+                "starred_url": "http://github.home.jacquev6.net/api/v3/users/zeus/starred{/owner}{/repo}",
+                "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/zeus/subscriptions",
+                "suspended_at": null,
+                "type": "User",
+                "updated_at": "2014-08-10T18:22:41Z",
+                "url": "http://github.home.jacquev6.net/api/v3/users/zeus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1384",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 10 Aug 2014 21:07:50 GMT",
+                "etag": "\"88c3a1aece3f309f6fbc8a4cae730ed3\"",
+                "last-modified": "Sun, 10 Aug 2014 18:22:41 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "7547e4a5-fcef-4fb9-a956-369e4d34c28b",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

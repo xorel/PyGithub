@@ -1,0 +1,315 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/gists/public",
+                "query": {
+                    "per_page": "2",
+                    "since": "2014-01-01T00:00:00Z"
+                },
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": [
+                {
+                    "comments": 0,
+                    "comments_url": "http://github.home.jacquev6.net/api/v3/gists/09bed01c3ebdca9ca6ea/comments",
+                    "commits_url": "http://github.home.jacquev6.net/api/v3/gists/09bed01c3ebdca9ca6ea/commits",
+                    "created_at": "2014-08-10T21:36:10Z",
+                    "description": "Created by PyGithub",
+                    "files": {
+                        "foo.txt": {
+                            "filename": "foo.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/anonymous/09bed01c3ebdca9ca6ea/raw/4b498a6ddbe47a306db2b75e79c19d4228c6f1bf/foo.txt",
+                            "size": 6,
+                            "type": "text/plain"
+                        }
+                    },
+                    "forks_url": "http://github.home.jacquev6.net/api/v3/gists/09bed01c3ebdca9ca6ea/forks",
+                    "git_pull_url": "http://github.home.jacquev6.net/gist/09bed01c3ebdca9ca6ea.git",
+                    "git_push_url": "http://github.home.jacquev6.net/gist/09bed01c3ebdca9ca6ea.git",
+                    "html_url": "http://github.home.jacquev6.net/gist/09bed01c3ebdca9ca6ea",
+                    "id": "09bed01c3ebdca9ca6ea",
+                    "public": true,
+                    "updated_at": "2014-08-10T21:36:10Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/gists/09bed01c3ebdca9ca6ea",
+                    "user": null
+                },
+                {
+                    "comments": 0,
+                    "comments_url": "http://github.home.jacquev6.net/api/v3/gists/8204fee2d7e3f12bde22/comments",
+                    "commits_url": "http://github.home.jacquev6.net/api/v3/gists/8204fee2d7e3f12bde22/commits",
+                    "created_at": "2014-08-07T00:57:46Z",
+                    "description": "Mutable gist 2",
+                    "files": {
+                        "xxx.txt": {
+                            "filename": "xxx.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/electra/8204fee2d7e3f12bde22/raw/4b498a6ddbe47a306db2b75e79c19d4228c6f1bf/xxx.txt",
+                            "size": 6,
+                            "type": "text/plain"
+                        }
+                    },
+                    "forks_url": "http://github.home.jacquev6.net/api/v3/gists/8204fee2d7e3f12bde22/forks",
+                    "git_pull_url": "http://github.home.jacquev6.net/gist/8204fee2d7e3f12bde22.git",
+                    "git_push_url": "http://github.home.jacquev6.net/gist/8204fee2d7e3f12bde22.git",
+                    "html_url": "http://github.home.jacquev6.net/gist/8204fee2d7e3f12bde22",
+                    "id": "8204fee2d7e3f12bde22",
+                    "owner": {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                        "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                        "html_url": "http://github.home.jacquev6.net/electra",
+                        "id": 16,
+                        "login": "electra",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                        "site_admin": false,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                    },
+                    "public": true,
+                    "updated_at": "2014-08-07T00:58:21Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/gists/8204fee2d7e3f12bde22",
+                    "user": null
+                }
+            ],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "3029",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 10 Aug 2014 21:39:19 GMT",
+                "etag": "\"6c8f05c86068872c5cb5aea9193d3bb8\"",
+                "link": "<http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=2>; rel=\"next\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1500>; rel=\"last\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "ad78211f-d6e3-47ec-a417-23bc4b877a6c",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/gists/public",
+                "query": {
+                    "page": "2",
+                    "per_page": "2",
+                    "since": "2014-01-01T00:00:00Z"
+                },
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": [
+                {
+                    "comments": 0,
+                    "comments_url": "http://github.home.jacquev6.net/api/v3/gists/f147041ac4d3c5386933/comments",
+                    "commits_url": "http://github.home.jacquev6.net/api/v3/gists/f147041ac4d3c5386933/commits",
+                    "created_at": "2014-08-07T00:57:46Z",
+                    "description": "Mutable gist 1",
+                    "files": {
+                        "toto.txt": {
+                            "filename": "toto.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/electra/f147041ac4d3c5386933/raw/4b498a6ddbe47a306db2b75e79c19d4228c6f1bf/toto.txt",
+                            "size": 6,
+                            "type": "text/plain"
+                        }
+                    },
+                    "forks_url": "http://github.home.jacquev6.net/api/v3/gists/f147041ac4d3c5386933/forks",
+                    "git_pull_url": "http://github.home.jacquev6.net/gist/f147041ac4d3c5386933.git",
+                    "git_push_url": "http://github.home.jacquev6.net/gist/f147041ac4d3c5386933.git",
+                    "html_url": "http://github.home.jacquev6.net/gist/f147041ac4d3c5386933",
+                    "id": "f147041ac4d3c5386933",
+                    "owner": {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                        "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                        "html_url": "http://github.home.jacquev6.net/electra",
+                        "id": 16,
+                        "login": "electra",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                        "site_admin": false,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                    },
+                    "public": true,
+                    "updated_at": "2014-08-07T00:57:46Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/gists/f147041ac4d3c5386933",
+                    "user": null
+                },
+                {
+                    "comments": 0,
+                    "comments_url": "http://github.home.jacquev6.net/api/v3/gists/3f784a17f0b5851efeee/comments",
+                    "commits_url": "http://github.home.jacquev6.net/api/v3/gists/3f784a17f0b5851efeee/commits",
+                    "created_at": "2014-08-07T00:57:46Z",
+                    "description": "Immutable gist",
+                    "files": {
+                        "bar.txt": {
+                            "filename": "bar.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/electra/3f784a17f0b5851efeee/raw/62f2cc42c5ee489678075be3816dcdf175f5cef3/bar.txt",
+                            "size": 10,
+                            "type": "text/plain"
+                        },
+                        "baz.txt": {
+                            "filename": "baz.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/electra/3f784a17f0b5851efeee/raw/62f2cc42c5ee489678075be3816dcdf175f5cef3/baz.txt",
+                            "size": 10,
+                            "type": "text/plain"
+                        },
+                        "foo.txt": {
+                            "filename": "foo.txt",
+                            "language": null,
+                            "raw_url": "http://github.home.jacquev6.net/gist/electra/3f784a17f0b5851efeee/raw/4b498a6ddbe47a306db2b75e79c19d4228c6f1bf/foo.txt",
+                            "size": 6,
+                            "type": "text/plain"
+                        }
+                    },
+                    "forks_url": "http://github.home.jacquev6.net/api/v3/gists/3f784a17f0b5851efeee/forks",
+                    "git_pull_url": "http://github.home.jacquev6.net/gist/3f784a17f0b5851efeee.git",
+                    "git_push_url": "http://github.home.jacquev6.net/gist/3f784a17f0b5851efeee.git",
+                    "html_url": "http://github.home.jacquev6.net/gist/3f784a17f0b5851efeee",
+                    "id": "3f784a17f0b5851efeee",
+                    "owner": {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                        "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                        "html_url": "http://github.home.jacquev6.net/electra",
+                        "id": 16,
+                        "login": "electra",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                        "site_admin": false,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                    },
+                    "public": true,
+                    "updated_at": "2014-08-07T00:57:46Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/gists/3f784a17f0b5851efeee",
+                    "user": null
+                }
+            ],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "4542",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 10 Aug 2014 21:39:19 GMT",
+                "etag": "\"45ef9c0f7fec88e15b8af349c56c5605\"",
+                "link": "<http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=3>; rel=\"next\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1500>; rel=\"last\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1>; rel=\"first\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1>; rel=\"prev\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "8c339a92-3040-4c58-9d4a-9c525eabc0cd",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/gists/public",
+                "query": {
+                    "page": "3",
+                    "per_page": "2",
+                    "since": "2014-01-01T00:00:00Z"
+                },
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": [],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "2",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 10 Aug 2014 21:39:20 GMT",
+                "etag": "\"c3bbb066b46b1fe4e9614a5d615edb66\"",
+                "link": "<http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=4>; rel=\"next\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1500>; rel=\"last\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=1>; rel=\"first\", <http://github.home.jacquev6.net/api/v3/gists/public?per_page=2&since=2014-01-01T00%3A00%3A00Z&page=2>; rel=\"prev\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "456eb64c-2439-44f7-aaf6-bbfaa64b8fa3",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

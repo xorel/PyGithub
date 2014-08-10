@@ -22,6 +22,7 @@ class Organization(_bgo.UpdatableGithubObject):
     Methods and attributes returning instances of this class:
       * :meth:`.AuthenticatedUser.get_orgs`
       * :meth:`.Github.get_org`
+      * :meth:`.Github.get_users`
       * :attr:`.Repository.owner`
       * :attr:`.Team.organization`
       * :meth:`.User.get_orgs`
