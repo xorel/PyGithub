@@ -102,6 +102,7 @@ class Repository(_bgo.UpdatableGithubObject):
         Methods accepting instances of this class as parameter:
           * :meth:`.File.delete`
           * :meth:`.File.edit`
+          * :meth:`.Repository.edit`
         """
 
         def _initAttributes(self, commit=None, name=None, _links=None, **kwds):
@@ -1288,7 +1289,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param private: optional :class:`bool`
         :param has_issues: optional :class:`bool`
         :param has_wiki: optional :class:`bool`
-        :param default_branch: optional :class:`string`
+        :param default_branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
         :rtype: None
         """
 
@@ -1305,7 +1306,7 @@ class Repository(_bgo.UpdatableGithubObject):
         if has_wiki is not None:
             has_wiki = _snd.normalizeBool(has_wiki)
         if default_branch is not None:
-            default_branch = _snd.normalizeString(default_branch)
+            default_branch = _snd.normalizeBranchName(default_branch)
 
         if name is None:
             name = self.name

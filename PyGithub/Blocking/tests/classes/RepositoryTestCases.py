@@ -172,7 +172,6 @@ class RepositoryContents(TestCase):
 
     @Enterprise("electra")
     def testGetReadme_allParameters(self):
-        # @todoAlpha ref can also be a GitObject?
         c = self.g.get_repo(("electra", "immutable")).get_readme(ref="master")
         self.assertIsInstance(c, PyGithub.Blocking.File.File)
         self.assertEqual(c.path, "README.md")
@@ -262,7 +261,6 @@ class RepositoryEdit(TestCase):
     def testDefaultBranch(self):
         r = self.g.get_repo(("electra", "mutable"))
         self.assertEqual(r.default_branch, "master")
-        # @todoAlpha test with a Branch instance
         r.edit(default_branch="develop")
         self.assertEqual(r.default_branch, "develop")
         r.edit(default_branch="master")
@@ -686,7 +684,9 @@ class RepositoryKeys(TestCase):
     def testCreateKey(self):
         k = self.g.get_repo(("electra", "mutable")).create_key("mutable-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkQih2DtSwBzLUtSNYEKULlI5M1qa6vnq42xt9qZpkLav3G9eD/GqJRST+zZMsyfpP62PtiYKXJdLJX2MQIzUgI2PzNy+iMy+ldiTEABYEOCa+BH9+x2R5xXGlmmCPblpamx3kstGtCTa3LSkyIvxbt5vjbXCyThhJaSKyh+42Uedcz7l0y/TODhnkpid/5eiBz6k0VEbFfhM6h71eBdCFpeMJIhGaPTjbKsEjXIK0SRe0v0UQnpXJQkhAINbm+q/2yjt7zwBF74u6tQjRqJK7vQO2k47ZmFMAGeIxS6GheI+JPmwtHkxvfaJjy2lIGX+rt3lkW8xEUxiMTlxeh+0R")
         self.assertEqual(k.title, "mutable-1")
-        # k.delete() @todoAlpha Open ticket to GitHub because k.delete fails because of k.url
+        # @todoAlpha Open ticket to GitHub because k.delete fails because of k.url
+        # We would need url=https://api.github.com/repos/electra/mutable/keys/9 to be able to delete it
+        # k.delete()
         self.assertTrue(k.url.startswith("http://github.home.jacquev6.net/api/v3/user/keys/"))
 
 

@@ -37,6 +37,7 @@ class FileDelete(TestCase):
         c = f.delete(
             "Deleted by PyGithub",
             branch="ephemeral",
+            # @todoAlpha Normalize structured input. Note that the API does NOT accept an undocumented date
             author={"name": "John Doe", "email": "john@doe.com"},
             committer={"name": "Jane Doe", "email": "jane@doe.com"},
         )

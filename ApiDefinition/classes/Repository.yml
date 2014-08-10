@@ -249,6 +249,8 @@ methods:
         reason: In author and committer
       - name: name
         reason: In author and committer
+      - name: sha
+        reason: Implemented in File.edit
     url_template: end_point
     url_template_arguments:
       - name: owner
@@ -560,7 +562,9 @@ methods:
       - name: has_wiki
         type: bool
       - name: default_branch
-        type: string
+        type:
+          class: Repository.Branch
+          attribute: name
     unimplemented_parameters:
       - name: has_downloads
         reason: https://github.com/blog/1302-goodbye-uploads
