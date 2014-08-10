@@ -8,10 +8,10 @@ from PyGithub.Blocking.tests.Framework import *
 class GitTreeAttributes(TestCase):
     @Enterprise("electra")
     def test(self):
-        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("a3c1d7475466e7d87f8ac38a0001b5548014ba62")
+        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521")
         self.assertEqual(t.mode, None)
         self.assertEqual(t.path, None)
-        self.assertEqual(t.sha, "a3c1d7475466e7d87f8ac38a0001b5548014ba62")
+        self.assertEqual(t.sha, "f2b2248a59b245891a16e7d7eecfd7bd499e4521")
         self.assertEqual(len(t.tree), 4)
         self.assertEqual(t.tree[0].path, "a_blob")
         self.assertIsInstance(t.tree[0], PyGithub.Blocking.GitBlob.GitBlob)
@@ -28,7 +28,7 @@ class GitTreeAttributes(TestCase):
 
     @Enterprise("electra")
     def testInTree(self):
-        b = self.g.get_repo(("electra", "git-objects")).get_git_tree("a3c1d7475466e7d87f8ac38a0001b5548014ba62").tree[3]
+        b = self.g.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521").tree[3]
         self.assertEqual(b.mode, "040000")
         self.assertEqual(b.path, "a_tree")
         self.assertEqual(b.type, "tree")
@@ -45,7 +45,7 @@ class GitTreeMisc(TestCase):
 class GitTreeUpdate(TestCase):
     @Enterprise("electra")
     def testThroughLazyCompletion(self):
-        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("a3c1d7475466e7d87f8ac38a0001b5548014ba62").tree[3]
+        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521").tree[3]
         self.assertEqual(t.path, "a_tree")
         self.assertEqual(t.sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
         self.assertEqual(len(t.tree), 1)
@@ -54,5 +54,5 @@ class GitTreeUpdate(TestCase):
     @Enterprise("electra")
     def testArtifical(self):
         # GitSubmodule are always returned completely so there is no other way to cover _updateAttributes
-        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("a3c1d7475466e7d87f8ac38a0001b5548014ba62")
+        t = self.g.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521")
         t.tree[1]._updateAttributes()

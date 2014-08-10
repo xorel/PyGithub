@@ -211,15 +211,15 @@ except PyGithub.Blocking.ObjectNotFoundException:
         {"path": "a_blob", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"},
         {"path": "a_tree", "mode": "040000", "type": "tree", "sha": "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad"},
         {"path": "a_submodule", "mode": "160000", "type": "commit", "sha": "5e7d45a2f8c09757a0ce6d0bf37a8eec31791578"},
-        {"path": "a_symlink", "mode": "120000", "type": "blob", "sha": r.create_git_blob("a_blob", "utf8").sha},
-    ]).sha == "a3c1d7475466e7d87f8ac38a0001b5548014ba62"
+        {"path": "a_symlink", "mode": "120000", "type": "blob", "sha": r.create_git_blob("a_blob\n", "utf8").sha},
+    ]).sha == "f2b2248a59b245891a16e7d7eecfd7bd499e4521"
     assert r.create_git_commit(
-        tree="a3c1d7475466e7d87f8ac38a0001b5548014ba62",
+        tree="f2b2248a59b245891a16e7d7eecfd7bd499e4521",
         message="second commit",
         parents=["f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"],
         author={"name": "John Doe", "email": "john@doe.com", "date": "2000-12-31T23:59:59Z"},
         committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2001-01-01T00:00:00Z"}
-    ).sha == "5fee4dd9e5a3b56dac752c191799fcda69ca8b8a"
+    ).sha == "db09e03a13f7910b9cae93ca91cd35800e15c695"
 
 if len(list(electra.get_gists())) != 3:
     for g in electra.get_gists():

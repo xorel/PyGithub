@@ -5,7 +5,6 @@
 import datetime
 
 import PyGithub.Blocking
-import PyGithub.Blocking.Dir
 import PyGithub.Blocking.File
 import PyGithub.Blocking.User
 
