@@ -185,6 +185,14 @@ class NormalizationTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             snd.normalizeGitIgnoreTemplateName(PyGithub.Blocking.Reset)
 
+    def testNormalizeBranchName(self):
+        self.assertEqual(snd.normalizeBranchName("foo"), "foo")
+        self.assertEqual(snd.normalizeBranchName(PyGithub.Blocking.Repository.Repository.Branch(None, dict(name="foo"))), "foo")
+        with self.assertRaises(TypeError):
+            snd.normalizeBranchName(42)
+        with self.assertRaises(TypeError):
+            snd.normalizeBranchName(PyGithub.Blocking.Reset)
+
     def testNormalizeEnum(self):
         self.assertEqual(snd.normalizeEnum("foo", "foo", "bar"), "foo")
         with self.assertRaises(TypeError):

@@ -27,6 +27,10 @@ methods:
       - name: message
         type: string
     optional_parameters:
+      - name: branch
+        type:
+          class: Repository.Branch
+          attribute: name
       - name: author
         type: GitAuthor
       - name: committer
@@ -44,6 +48,8 @@ methods:
     post_arguments:
       - name: author
         value: parameter author
+      - name: branch
+        value: parameter branch
       - name: committer
         value: parameter committer
       - name: message
@@ -60,6 +66,10 @@ methods:
       - name: content
         type: string
     optional_parameters:
+      - name: branch
+        type:
+          class: Repository.Branch
+          attribute: name
       - name: author
         type: GitAuthor
       - name: committer
@@ -77,6 +87,8 @@ methods:
     post_arguments:
       - name: author
         value: parameter author
+      - name: branch
+        value: parameter branch
       - name: committer
         value: parameter committer
       - name: content

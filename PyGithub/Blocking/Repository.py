@@ -99,7 +99,9 @@ class Repository(_bgo.UpdatableGithubObject):
           * :meth:`.Repository.get_branch`
           * :meth:`.Repository.get_branches`
 
-        Methods accepting instances of this class as parameter: none.
+        Methods accepting instances of this class as parameter:
+          * :meth:`.File.delete`
+          * :meth:`.File.edit`
         """
 
         def _initAttributes(self, commit=None, name=None, _links=None, **kwds):

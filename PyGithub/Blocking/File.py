@@ -123,13 +123,14 @@ class File(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__type.needsLazyCompletion)
         return self.__type.value
 
-    def delete(self, message, author=None, committer=None):
+    def delete(self, message, branch=None, author=None, committer=None):
         """
         Calls the `DELETE /repos/:owner/:repo/contents/:path <http://developer.github.com/v3/repos/contents#delete-a-file>`__ end point.
 
         This is the only method calling this end point.
 
         :param message: mandatory :class:`string`
+        :param branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
         :rtype: :class:`~.GitCommit.GitCommit`
@@ -137,17 +138,19 @@ class File(_bgo.UpdatableGithubObject):
         import PyGithub.Blocking.GitCommit
 
         message = _snd.normalizeString(message)
+        if branch is not None:
+            branch = _snd.normalizeBranchName(branch)
         if author is not None:
             author = _snd.normalizeGitAuthor(author)
         if committer is not None:
             committer = _snd.normalizeGitAuthor(committer)
 
         url = uritemplate.expand(self.url)
-        postArguments = _snd.dictionary(author=author, committer=committer, message=message, sha=self.sha)
+        postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, message=message, sha=self.sha)
         r = self.Session._request("DELETE", url, postArguments=postArguments)
         return _rcv.ClassConverter(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(None, r.json()["commit"])
 
-    def edit(self, message, content, author=None, committer=None):
+    def edit(self, message, content, branch=None, author=None, committer=None):
         """
         Calls the `PUT /repos/:owner/:repo/contents/:path <http://developer.github.com/v3/repos/contents#update-a-file>`__ end point.
 
@@ -156,6 +159,7 @@ class File(_bgo.UpdatableGithubObject):
 
         :param message: mandatory :class:`string`
         :param content: mandatory :class:`string`
+        :param branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
         :rtype: :class:`~.GitCommit.GitCommit`
@@ -164,13 +168,15 @@ class File(_bgo.UpdatableGithubObject):
 
         message = _snd.normalizeString(message)
         content = _snd.normalizeString(content)
+        if branch is not None:
+            branch = _snd.normalizeBranchName(branch)
         if author is not None:
             author = _snd.normalizeGitAuthor(author)
         if committer is not None:
             committer = _snd.normalizeGitAuthor(committer)
 
         url = uritemplate.expand(self.url)
-        postArguments = _snd.dictionary(author=author, committer=committer, content=content, message=message, sha=self.sha)
+        postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, content=content, message=message, sha=self.sha)
         r = self.Session._request("PUT", url, postArguments=postArguments)
         self._updateAttributes(None, **(r.json()["content"]))
         self.__content.update(content)

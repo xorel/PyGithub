@@ -228,6 +228,16 @@ def normalizeGitIgnoreTemplateName(tmpl):
         raise TypeError()
 
 
+def normalizeBranchName(b):
+    import PyGithub.Blocking.Repository
+    if isinstance(b, PyGithub.Blocking.Repository.Repository.Branch):
+        return b.name
+    elif isinstance(b, basestring):
+        return b
+    else:
+        raise TypeError()
+
+
 def normalizeGitAuthor(a):
     return a
 

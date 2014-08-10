@@ -46,6 +46,11 @@ class TestFamily(object):
 
 
 def main():
+    shutil.rmtree("coverage")
+    os.mkdir("coverage")
+    with open("coverage/.gitignore", "w") as f:
+        f.write("*\n!.gitignore\n")
+
     cov = coverage.coverage(branch=True, data_file="coverage/data.imports")
     cov.start()
     import PyGithub.Blocking.AuthenticatedUser
