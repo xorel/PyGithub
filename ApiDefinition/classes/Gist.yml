@@ -8,6 +8,7 @@ structures:
       - name: total
         type: int
   - name: Commit
+    updatable: false
     attributes:
       - name: change_status
         type: Gist.ChangeStatus

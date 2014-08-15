@@ -7,12 +7,16 @@ from __future__ import print_function
 
 import coverage
 import glob
+import logging
 import os
 import shutil
 import sys
 import types
 import unittest
 sys.path.append(".")
+
+
+logging.getLogger("PyGithub").addHandler(logging.StreamHandler())
 
 
 class TestFamily(object):
