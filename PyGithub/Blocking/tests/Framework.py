@@ -285,11 +285,9 @@ class TestCase(unittest.TestCase):
         self.builder = self.method.builder
         self.sanitizer = self.method.sanitizer
 
-        self.manualMocks = MockMockMock.Engine()
         self.mocksForRequests = MockMockMock.Engine()
 
         self.__setUpRecordMode()
-        self.__setUpLogging()
 
         method = getattr(self, self._testMethodName)
         self.g = method.builder.UserAgent("jacquev6/PyGithub/2; UnitTests recorder").Build()
@@ -304,26 +302,9 @@ class TestCase(unittest.TestCase):
         self.fileName = os.path.join(directory, self.__class__.__name__ + "." + methodForData.__name__ + ".json")
         self.recordMode = method.alwaysRecord or not os.path.exists(self.fileName)
 
-    def __setUpLogging(self):
-        self.__log = logging.getLogger("PyGithub")
-
-        for handler in self.__log.handlers:
-            self.__log.removeHandler(handler)
-
-        if self.recordMode:
-            self.__log.setLevel(logging.DEBUG)
-            handler = logging.StreamHandler()
-        else:
-            self.__log.setLevel(logging.INFO)
-            self.__logHandlerMock = self.manualMocks.create("log")
-            handler = self.__logHandlerMock.object
-
-        self.__log.addHandler(handler)
-
     def tearDown(self):
         unittest.TestCase.tearDown(self)
 
-        self.manualMocks.tearDown()
         self.mocksForRequests.tearDown()
 
         self.__tearDownRecordMode()
@@ -678,6 +659,7 @@ class TestCase2(unittest.TestCase):
         self.__setUpUsers()
         self.__setUpMocks()
         self.__recordHelper = _RecordModeHelper(self, "setUpEnterprise")
+        self.__class__.data = 0
         self.__class__.data = self.setUpEnterprise()
         self.__recordHelper.finalize()  # Don't finalize if setUpEnterprise raises an exception
 

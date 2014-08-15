@@ -195,71 +195,72 @@ class RepositoryContents(TestCase):
         ref.delete()
 
 
-class RepositoryDelete(TestCase):
-    @Enterprise("electra")
+class RepositoryDelete(TestCase2):
     def test(self):
-        r = self.g.get_authenticated_user().create_repo("ephemeral")
+        r = self.electra.get_authenticated_user().create_repo("ephemeral")
         r.delete()
 
 
-class RepositoryEdit(TestCase):
-    @Enterprise("electra")
-    def testName(self):
-        r = self.g.get_repo(("electra", "mutable"))
-        self.assertEqual(r.name, "mutable")
-        r.edit(name="mutable-bis")
-        self.assertEqual(r.name, "mutable-bis")
-        r.edit(name="mutable")
-        self.assertEqual(r.name, "mutable")
+class RepositoryEdit(TestCase2):
+    def setUpEnterprise(self):
+        electra = self.electra.get_authenticated_user()
+        try:
+            electra.get_repo("edit").delete()
+        except PyGithub.ObjectNotFoundException:  # pragma no cover (setup branch)
+            pass  # pragma no cover (setup branch)
+        r = electra.create_repo("edit", auto_init=True)
+        r.create_git_ref("refs/heads/develop", r.get_git_ref("refs/heads/master").object.sha)
 
-    @Enterprise("electra")
+    def testName(self):
+        r = self.electra.get_repo(("electra", "edit"))
+        self.assertEqual(r.name, "edit")
+        r.edit(name="edit-bis")
+        self.assertEqual(r.name, "edit-bis")
+        r.edit(name="edit")
+        self.assertEqual(r.name, "edit")
+
     def testDescription(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.description, None)
         r.edit(description="Mutable repository")
         self.assertEqual(r.description, "Mutable repository")
         r.edit(description=PyGithub.Blocking.Reset)
         self.assertEqual(r.description, None)
 
-    @Enterprise("electra")
     def testHomepage(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.homepage, None)
-        r.edit(homepage="http://jacquev6.net/mutable")
-        self.assertEqual(r.homepage, "http://jacquev6.net/mutable")
+        r.edit(homepage="http://foo.com")
+        self.assertEqual(r.homepage, "http://foo.com")
         r.edit(homepage=PyGithub.Blocking.Reset)
         self.assertEqual(r.homepage, None)
 
-    @Enterprise("electra")
     def testPrivate(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.private, False)
         r.edit(private=True)
         self.assertEqual(r.private, True)
         r.edit(private=False)
         self.assertEqual(r.private, False)
 
-    @Enterprise("electra")
     def testHasIssues(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.has_issues, True)
         r.edit(has_issues=False)
         self.assertEqual(r.has_issues, False)
         r.edit(has_issues=True)
         self.assertEqual(r.has_issues, True)
 
-    @Enterprise("electra")
     def testHasWiki(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.has_wiki, True)
         r.edit(has_wiki=False)
         self.assertEqual(r.has_wiki, False)
         r.edit(has_wiki=True)
         self.assertEqual(r.has_wiki, True)
 
-    @Enterprise("electra")
     def testDefaultBranch(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "edit"))
         self.assertEqual(r.default_branch, "master")
         r.edit(default_branch="develop")
         self.assertEqual(r.default_branch, "develop")
