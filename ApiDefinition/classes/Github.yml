@@ -155,12 +155,8 @@ methods:
     optional_parameters:
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
     return_type:
@@ -195,7 +191,7 @@ methods:
       - name: since
         value: parameter since
     return_type:
-      container: PaginatedList
+      container: PaginatedListWithoutPerPage
       content: Repository
   - name: get_team
     end_point: GET /teams/:id
@@ -229,7 +225,7 @@ methods:
       - name: since
         value: parameter since
     return_type:
-      container: PaginatedList
+      container: PaginatedListWithoutPerPage
       content:
         union: [User, Organization]
         key: type

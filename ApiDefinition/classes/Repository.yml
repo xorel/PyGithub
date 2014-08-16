@@ -588,13 +588,7 @@ methods:
     return_type: none
   - name: get_assignees
     end_point: GET /repos/:owner/:repo/assignees
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute assignees_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
@@ -610,25 +604,13 @@ methods:
     return_type: Repository.Branch
   - name: get_branches
     end_point: GET /repos/:owner/:repo/branches
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute branches_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Repository.Branch
   - name: get_collaborators
     end_point: GET /repos/:owner/:repo/collaborators
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute collaborators_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
@@ -660,16 +642,12 @@ methods:
         type: datetime
       - name: until
         type: datetime
-      - name: per_page
-        type: int
     url_template: attribute commits_url
     url_arguments:
       - name: author
         value: parameter author
       - name: path
         value: parameter path
-      - name: per_page
-        value: parameter per_page
       - name: sha
         value: parameter sha
       - name: since
@@ -712,14 +690,10 @@ methods:
     optional_parameters:
       - name: anon
         type: bool
-      - name: per_page
-        type: int
     url_template: attribute contributors_url
     url_arguments:
       - name: anon
         value: parameter anon
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content:
@@ -732,12 +706,8 @@ methods:
       - name: sort
         type:
           enum: [newest, oldest, stargazers]
-      - name: per_page
-        type: int
     url_template: attribute forks_url
     url_arguments:
-      - name: per_page
-        value: parameter per_page
       - name: sort
         value: parameter sort
     return_type:
@@ -783,13 +753,7 @@ methods:
     return_type: GitRef
   - name: get_git_refs
     end_point: GET /repos/:owner/:repo/git/refs
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute git_refs_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: GitRef
@@ -872,8 +836,6 @@ methods:
           enum: [asc, desc]
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: attribute issues_url
     url_arguments:
       - name: assignee
@@ -888,8 +850,6 @@ methods:
         value: parameter mentioned
       - name: milestone
         value: parameter milestone
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
       - name: sort
@@ -953,14 +913,10 @@ methods:
       - name: direction
         type:
           enum: [asc, desc]
-      - name: per_page
-        type: int
     url_template: attribute milestones_url
     url_arguments:
       - name: direction
         value: parameter direction
-      - name: per_page
-        value: parameter per_page
       - name: sort
         value: parameter sort
       - name: state
@@ -994,8 +950,6 @@ methods:
       - name: direction
         type:
           enum: [asc, desc]
-      - name: per_page
-        type: int
     url_template: attribute pulls_url
     url_arguments:
       - name: base
@@ -1004,8 +958,6 @@ methods:
         value: parameter direction
       - name: head
         value: parameter head
-      - name: per_page
-        value: parameter per_page
       - name: sort
         value: parameter sort
       - name: state
@@ -1030,49 +982,25 @@ methods:
     return_type: File
   - name: get_stargazers
     end_point: GET /repos/:owner/:repo/stargazers
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute stargazers_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
   - name: get_subscribers
     end_point: GET /repos/:owner/:repo/subscribers
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute subscribers_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
   - name: get_tags
     end_point: GET /repos/:owner/:repo/tags
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute tags_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Repository.Tag
   - name: get_teams
     end_point: GET /repos/:owner/:repo/teams
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute teams_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Team

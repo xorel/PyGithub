@@ -119,25 +119,13 @@ methods:
     return_type: none
   - name: get_commits
     end_point: GET /gists/:id/commits
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute commits_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Gist.Commit
   - name: get_forks
     end_point: GET /gists/:id/forks
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute forks_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Gist

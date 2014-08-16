@@ -71,25 +71,13 @@ methods:
     return_type: none
   - name: get_members
     end_point: GET /teams/:id/members
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute members_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
   - name: get_repos
     end_point: GET /teams/:id/repos
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute repositories_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Repository

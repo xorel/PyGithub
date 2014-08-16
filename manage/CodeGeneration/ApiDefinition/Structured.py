@@ -203,12 +203,16 @@ class _DefinitionLoader:
             parameters=tuple(itertools.chain(
                 (self.buildParameter(optional=False, variable=False, **p) for p in parameters),  # Do not sort
                 (self.buildParameter(optional=True, variable=False, **p) for p in optional_parameters),  # Do not sort
+                [Parameter("per_page", ScalarType("int"), True, False)] if isinstance(return_type, dict) and return_type.get("container") == "PaginatedList" else [],
                 () if variable_parameter is None else (self.buildParameter(optional=False, variable=True, **variable_parameter),)
             )),
             unimplementedParameters=tuple(sorted((self.buildUnimplementedStuff(**a) for a in unimplemented_parameters), key=lambda a: a.name)),
             urlTemplate=self.buildValue(url_template),
             urlTemplateArguments=self.buildArguments(url_template_arguments),
-            urlArguments=self.buildArguments(url_arguments),
+            urlArguments=self.buildArguments(itertools.chain(
+                url_arguments,
+                [dict(name="per_page", value="parameter per_page")] if isinstance(return_type, dict) and return_type.get("container") == "PaginatedList" else []
+            )),
             postArguments=self.buildArguments(post_arguments),
             effects=tuple(self.buildEffect(e) for e in effects),
             returnFrom=return_from,
@@ -275,7 +279,10 @@ class _DefinitionLoader:
             return AttributeType(self.buildType(description["class"]), description["attribute"])
         elif "container" in description:
             if "content" in description:
-                return LinearCollectionType(self.buildType(description["container"]), self.buildType(description["content"]))
+                container = description["container"]
+                if container == "PaginatedListWithoutPerPage":
+                    container = "PaginatedList"
+                return LinearCollectionType(self.buildType(container), self.buildType(description["content"]))
             elif "key" in description and "value" in description:
                 return MappingCollectionType(self.buildType(description["container"]), self.buildType(description["key"]), self.buildType(description["value"]))
             else:
@@ -357,12 +364,14 @@ class _DefinitionDumper:
             data["end_points"] = list(method.endPoints)
         if not all(p.optional or p.variable for p in method.parameters):
             data["parameters"] = []
-        if any(p.optional for p in method.parameters):
+        if any(p.optional and p.name != "per_page" for p in method.parameters):
             data["optional_parameters"] = []
         if len(method.unimplementedParameters) != 0:
             data["unimplemented_parameters"] = [self.createDataForUnimplementedStuff(a) for a in method.unimplementedParameters]
         for parameter in method.parameters:
             p = self.createDataForParameter(parameter)
+            if parameter.name == "per_page":
+                continue
             if parameter.optional:
                 data["optional_parameters"].append(p)
             elif parameter.variable:
@@ -372,7 +381,7 @@ class _DefinitionDumper:
         data["url_template"] = self.createDataForValue(method.urlTemplate)
         if len(method.urlTemplateArguments) != 0:
             data["url_template_arguments"] = self.createDataForArguments(method.urlTemplateArguments)
-        if len(method.urlArguments) != 0:
+        if any(a.name != "per_page" for a in method.urlArguments):
             data["url_arguments"] = self.createDataForArguments(method.urlArguments)
         if len(method.postArguments) != 0:
             data["post_arguments"] = self.createDataForArguments(method.postArguments)
@@ -382,7 +391,10 @@ class _DefinitionDumper:
             data["effects"] = list(method.effects)
         if method.returnFrom is not None:
             data["return_from"] = method.returnFrom
-        data["return_type"] = self.createDataForType(method.returnType)
+        returnType = self.createDataForType(method.returnType)
+        if isinstance(returnType, dict) and returnType.get("container") == "PaginatedList" and all(p.name != "per_page" for p in method.parameters):
+            returnType["container"] = "PaginatedListWithoutPerPage"
+        data["return_type"] = returnType
         return data
 
     def createDataForAttribute(self, attribute):
@@ -404,7 +416,7 @@ class _DefinitionDumper:
         return data
 
     def createDataForArguments(self, arguments):
-        return [self.createDataForArgument(argument) for argument in arguments]
+        return [self.createDataForArgument(argument) for argument in arguments if argument.name != "per_page"]
 
     def createDataForArgument(self, argument):
         data = collections.OrderedDict()

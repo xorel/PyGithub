@@ -245,8 +245,6 @@ methods:
           enum: [asc, desc]
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_template_arguments:
       - name: org
@@ -258,8 +256,6 @@ methods:
         value: parameter filter
       - name: labels
         value: parameter labels
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
       - name: sort
@@ -275,26 +271,16 @@ methods:
       - name: filter
         type:
           enum: [2fa_disabled, all]
-      - name: per_page
-        type: int
     url_template: attribute members_url
     url_arguments:
       - name: filter
         value: parameter filter
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
   - name: get_public_members
     end_point: GET /orgs/:org/public_members
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: attribute public_members_url
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
@@ -316,12 +302,8 @@ methods:
       - name: type
         type:
           enum: [all, forks, member, private, public, sources]
-      - name: per_page
-        type: int
     url_template: attribute repos_url
     url_arguments:
-      - name: per_page
-        value: parameter per_page
       - name: type
         value: parameter type
     return_type:
@@ -329,16 +311,10 @@ methods:
       content: Repository
   - name: get_teams
     end_point: GET /orgs/:org/teams
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
     url_template_arguments:
       - name: org
         value: attribute login
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Team

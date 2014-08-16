@@ -347,13 +347,7 @@ methods:
     return_type: Authorization
   - name: get_authorizations
     end_point: GET /authorizations
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Authorization
@@ -365,25 +359,13 @@ methods:
       content: AuthenticatedUser.Email
   - name: get_followers
     end_point: GET /user/followers
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
   - name: get_following
     end_point: GET /user/following
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: User
@@ -392,12 +374,8 @@ methods:
     optional_parameters:
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
     return_type:
@@ -426,8 +404,6 @@ methods:
           enum: [asc, desc]
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
       - name: direction
@@ -436,8 +412,6 @@ methods:
         value: parameter filter
       - name: labels
         value: parameter labels
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
       - name: sort
@@ -495,13 +469,7 @@ methods:
     return_type: Authorization
   - name: get_orgs
     end_point: GET /user/orgs
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Organization
@@ -529,14 +497,10 @@ methods:
       - name: direction
         type:
           enum: [asc, desc]
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
       - name: direction
         value: parameter direction
-      - name: per_page
-        value: parameter per_page
       - name: sort
         value: parameter sort
       - name: type
@@ -553,14 +517,10 @@ methods:
       - name: direction
         type:
           enum: [asc, desc]
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
       - name: direction
         value: parameter direction
-      - name: per_page
-        value: parameter per_page
       - name: sort
         value: parameter sort
     return_type:
@@ -571,12 +531,8 @@ methods:
     optional_parameters:
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
     return_type:
@@ -598,25 +554,13 @@ methods:
     return_type: Subscription
   - name: get_subscriptions
     end_point: GET /user/subscriptions
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Repository
   - name: get_teams
     end_point: GET /user/teams
-    optional_parameters:
-      - name: per_page
-        type: int
     url_template: end_point
-    url_arguments:
-      - name: per_page
-        value: parameter per_page
     return_type:
       container: PaginatedList
       content: Team
@@ -643,8 +587,6 @@ methods:
           enum: [asc, desc]
       - name: since
         type: datetime
-      - name: per_page
-        type: int
     url_template: end_point
     url_arguments:
       - name: direction
@@ -653,8 +595,6 @@ methods:
         value: parameter filter
       - name: labels
         value: parameter labels
-      - name: per_page
-        value: parameter per_page
       - name: since
         value: parameter since
       - name: sort
