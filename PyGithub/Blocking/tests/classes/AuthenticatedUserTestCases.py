@@ -89,6 +89,26 @@ class AuthenticatedUserAuthorizations(TestCase):
         self.assertEqual(a.app.name, "authorizations")
         a.delete()
 
+    def testGetOrCreateAuthorization(self):
+        u = self.electra.get_authenticated_user()
+        a = u.get_or_create_authorization("dfb1584c2c0674284875", "16a529070ec817d87e5b186d966fa935bfad1575")  # Create application manually as electra
+        self.assertEqual(a.note, None)
+        self.assertEqual(a.scopes, [])
+        self.assertEqual(a.note_url, None)
+        self.assertEqual(a.app.client_id, "dfb1584c2c0674284875")
+        self.assertEqual(a.app.name, "authorizations")
+        a.delete()
+
+    def testGetOrCreateAuthorization_allParameters(self):
+        u = self.electra.get_authenticated_user()
+        a = u.get_or_create_authorization("dfb1584c2c0674284875", "16a529070ec817d87e5b186d966fa935bfad1575", scopes=["repo", "user"], note="e", note_url="http://foo.com")  # Create application manually as electra
+        self.assertEqual(a.note, "e")
+        self.assertEqual(a.scopes, ["repo", "user"])
+        self.assertEqual(a.note_url, "http://foo.com")
+        self.assertEqual(a.app.client_id, "dfb1584c2c0674284875")
+        self.assertEqual(a.app.name, "authorizations")
+        a.delete()
+
 
 class AuthenticatedUserEdit(TestCase):
     def testName(self):

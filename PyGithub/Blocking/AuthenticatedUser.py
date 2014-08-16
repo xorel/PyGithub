@@ -888,6 +888,35 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.PublicKey.PublicKey))(None, r.json())
 
+    def get_or_create_authorization(self, client_id, client_secret, scopes=None, note=None, note_url=None):
+        """
+        Calls the `PUT /authorizations/clients/:client_id <http://developer.github.com/v3/oauth_authorizations#get-or-create-an-authorization-for-a-specific-app>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param client_id: mandatory :class:`string`
+        :param client_secret: mandatory :class:`string`
+        :param scopes: optional :class:`list` of :class:`string`
+        :param note: optional :class:`string`
+        :param note_url: optional :class:`string`
+        :rtype: :class:`~.Authorization.Authorization`
+        """
+        import PyGithub.Blocking.Authorization
+
+        client_id = _snd.normalizeString(client_id)
+        client_secret = _snd.normalizeString(client_secret)
+        if scopes is not None:
+            scopes = _snd.normalizeList(_snd.normalizeString, scopes)
+        if note is not None:
+            note = _snd.normalizeString(note)
+        if note_url is not None:
+            note_url = _snd.normalizeString(note_url)
+
+        url = uritemplate.expand("https://api.github.com/authorizations/clients/{client_id}", client_id=client_id)
+        postArguments = _snd.dictionary(client_secret=client_secret, note=note, note_url=note_url, scopes=scopes)
+        r = self.Session._request("PUT", url, postArguments=postArguments)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Authorization.Authorization)(None, r.json(), r.headers.get("ETag"))
+
     def get_orgs(self, per_page=None):
         """
         Calls the `GET /user/orgs <http://developer.github.com/v3/orgs#list-user-organizations>`__ end point.

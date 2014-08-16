@@ -463,6 +463,36 @@ methods:
     return_type:
       container: list
       content: PublicKey
+  - name: get_or_create_authorization
+    end_point: PUT /authorizations/clients/:client_id
+    parameters:
+      - name: client_id
+        type: string
+      - name: client_secret
+        type: string
+    optional_parameters:
+      - name: scopes
+        type:
+          container: list
+          content: string
+      - name: note
+        type: string
+      - name: note_url
+        type: string
+    url_template: end_point
+    url_template_arguments:
+      - name: client_id
+        value: parameter client_id
+    post_arguments:
+      - name: client_secret
+        value: parameter client_secret
+      - name: note
+        value: parameter note
+      - name: note_url
+        value: parameter note_url
+      - name: scopes
+        value: parameter scopes
+    return_type: Authorization
   - name: get_orgs
     end_point: GET /user/orgs
     optional_parameters:

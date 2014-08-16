@@ -143,7 +143,7 @@ class EndPoint:
     def __init__(self, verb, url, parameters, doc):
         self.__verb = verb
         self.__url = url
-        self.__urlTemplate = re.sub(":([a-z]+)", "{\\1}", url)
+        self.__urlTemplate = re.sub(":([a-z_]+)", "{\\1}", url)
         self.__parameters = parameters
         self.__doc = doc
 

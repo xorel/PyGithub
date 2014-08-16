@@ -23,6 +23,7 @@ class Authorization(_bgo.UpdatableGithubObject):
       * :meth:`.AuthenticatedUser.create_authorization`
       * :meth:`.AuthenticatedUser.get_authorization`
       * :meth:`.AuthenticatedUser.get_authorizations`
+      * :meth:`.AuthenticatedUser.get_or_create_authorization`
 
     Methods accepting instances of this class as parameter: none.
     """

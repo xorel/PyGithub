@@ -123,7 +123,8 @@ PUT /authorizations/clients/:client_id
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#get-or-create-an-authorization-for-a-specific-app>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.AuthenticatedUser.get_or_create_authorization`
 
 GET /emojis
 -----------

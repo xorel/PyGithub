@@ -10,8 +10,6 @@
   - DELETE
   - GET
   - POST
-/authorizations/clients/:client_id:
-  - PUT
 /hub:
   - POST
 /markdown:
