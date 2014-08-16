@@ -5,7 +5,6 @@
 import unittest
 
 from PyGithub.Blocking.tests.unit.all import *
-from PyGithub.Blocking.tests.old_classes.all import *
 from PyGithub.Blocking.tests.classes.all import *
 from PyGithub.Blocking.tests.topics.all import *
 

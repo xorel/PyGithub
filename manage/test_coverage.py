@@ -91,9 +91,6 @@ def main():
     if len(sys.argv) == 1 or "--topics" in sys.argv or "--all" in sys.argv:
         families.append(TestFamily("PyGithub.Blocking.tests.topics.all", "Topics tests", None))
 
-    if len(sys.argv) == 1 or "--old-classes" in sys.argv or "--all" in sys.argv:
-        families.append(TestFamily("PyGithub.Blocking.tests.old_classes.all", "Old classes tests", None))
-
     for f in glob.glob("PyGithub/Blocking/tests/classes/*TestCases.py"):
         n = f[32:-12]
         if len(sys.argv) == 1 or "--classes" in sys.argv or "--all" in sys.argv or "--class={}".format(n) in sys.argv:

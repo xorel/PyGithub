@@ -28,7 +28,6 @@ if __name__ == "__main__":
             "PyGithub.Blocking",
             "PyGithub.Blocking.tests",
             "PyGithub.Blocking.tests.classes",
-            "PyGithub.Blocking.tests.old_classes",
             "PyGithub.Blocking.tests.topics",
             "PyGithub.Blocking.tests.unit",
         ],
