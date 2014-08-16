@@ -123,11 +123,10 @@ class _RecordModeHelper(object):
                     return False
 
             def check(self, request):
-                requestBody = request.body
                 try:
-                    requestBody = json.loads(requestBody)
+                    requestBody = json.loads(request.body)
                 except:
-                    pass
+                    requestBody = request.body
                 return (
                     request.method == self.__verb
                     and _RecordModeHelper.parseUrl(request.url) == self.__url

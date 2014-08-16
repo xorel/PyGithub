@@ -28,29 +28,7 @@ For reference, see :class:`.Builder`.
 
 import PyGithub
 import PyGithub.Blocking.Github
-import PyGithub.Blocking._session as _session
-
-
-class _AnonymousAuthenticator:
-    def prepareSession(self, session):
-        pass
-
-
-class _LoginAuthenticator:
-    def __init__(self, login, password):
-        self.__login = login
-        self.__password = password
-
-    def prepareSession(self, session):
-        session.auth = (self.__login, self.__password)
-
-
-class _OauthAuthenticator:
-    def __init__(self, token):
-        self.__token = token
-
-    def prepareSession(self, session):
-        session.headers["Authorization"] = "token " + self.__token
+import PyGithub.Blocking._session as _ses
 
 
 class Builder(object):
@@ -61,7 +39,7 @@ class Builder(object):
     defaultUserAgent = "jacquev6/PyGithub/" + PyGithub.Version
 
     def __init__(self):
-        self.__authenticator = _AnonymousAuthenticator()
+        self.__authenticator = _ses._AnonymousAuthenticator()
         self.__perPage = None
         self.__userAgent = Builder.defaultUserAgent
         self.__netloc = None
@@ -70,14 +48,14 @@ class Builder(object):
         """
         Use `basic authentication via username and password <http://developer.github.com/v3/auth/#via-username-and-password>`_.
         """
-        self.__authenticator = _LoginAuthenticator(login, password)
+        self.__authenticator = _ses._LoginAuthenticator(login, password)
         return self
 
     def OAuth(self, token):
         """
         Use `OAuth authentication <http://developer.github.com/v3/oauth/>`_.
         """
-        self.__authenticator = _OauthAuthenticator(token)
+        self.__authenticator = _ses._OauthAuthenticator(token)
         return self
 
     def Enterprise(self, netloc):
@@ -107,6 +85,6 @@ class Builder(object):
         Build and return a new instance of :class:`.Github`.
         """
         return PyGithub.Blocking.Github.Github(
-            _session.Session(self.__authenticator, self.__netloc, self.__perPage, self.__userAgent),
+            _ses.Session(self.__authenticator, self.__netloc, self.__perPage, self.__userAgent),
             {}
         )

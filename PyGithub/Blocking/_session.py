@@ -13,6 +13,28 @@ import PyGithub.Blocking._receive as rcv
 import PyGithub.Blocking._exceptions as exn
 
 
+class _AnonymousAuthenticator:
+    def prepareSession(self, session):
+        pass
+
+
+class _LoginAuthenticator:
+    def __init__(self, login, password):
+        self.__login = login
+        self.__password = password
+
+    def prepareSession(self, session):
+        session.auth = (self.__login, self.__password)
+
+
+class _OauthAuthenticator:
+    def __init__(self, token):
+        self.__token = token
+
+    def prepareSession(self, session):
+        session.headers["Authorization"] = "token " + self.__token
+
+
 class Session(object):
     """
     Class representing a GitHub API v3 session.
@@ -156,7 +178,7 @@ class Session(object):
                 elif auth.startswith("token "):
                     requestHeaders["Authorization"] = "token not_logged"
                 else:
-                    requestHeaders["Authorization"] = "Unknown not_logged"  # pragma no cover (defensive programming)
+                    requestHeaders["Authorization"] = "Unknown not_logged"
             # @todoAlpha Understand what happens if response.text contains non-ascii characters (@DotCom Github.get_repositories crashed)
             elements = [request.method, request.url, sorted(requestHeaders.iteritems()), request.body, "=>", response.status_code, sorted(response.headers.iteritems()), response.text]
             log.debug(" ".join(str(e) for e in elements))
