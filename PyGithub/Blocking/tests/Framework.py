@@ -106,7 +106,7 @@ class _RecordModeHelper(object):
                 json.dump(interractions, f, sort_keys=True, indent=4, separators=(',', ': '))
 
     class ReplayMode(object):
-        class RequestMatcher:
+        class RequestMatcher(object):
             def __init__(self, verb, url, headers, body):
                 self.__verb = verb
                 self.__url = url

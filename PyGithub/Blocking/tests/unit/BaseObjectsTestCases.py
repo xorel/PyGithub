@@ -2,10 +2,6 @@
 
 # Copyright 2013-2014 Vincent Jacques <vincent@vincent-jacques.net>
 
-from __future__ import print_function
-
-import datetime
-import logging
 import sys
 import unittest
 

@@ -8,11 +8,15 @@ import subprocess
 
 def main():
     subprocess.check_call([
-        "pep8",
-        "--ignore=E501",
-        ".",
+        "pep8", "--ignore=E501", ".",
     ])
 
+    for line in subprocess.check_output([
+        "git", "grep", "-n", "^ *class ", "--", "PyGithub/**.py"
+
+    ], universal_newlines=True).split("\n"):
+        if "(" not in line and line != "":
+            print("Should this class inherit from object?", line)
 
 if __name__ == "__main__":
     main()

@@ -13,12 +13,12 @@ import PyGithub.Blocking._receive as rcv
 import PyGithub.Blocking._exceptions as exn
 
 
-class _AnonymousAuthenticator:
+class _AnonymousAuthenticator(object):
     def prepareSession(self, session):
         pass
 
 
-class _LoginAuthenticator:
+class _LoginAuthenticator(object):
     def __init__(self, login, password):
         self.__login = login
         self.__password = password
@@ -27,7 +27,7 @@ class _LoginAuthenticator:
         session.auth = (self.__login, self.__password)
 
 
-class _OauthAuthenticator:
+class _OauthAuthenticator(object):
     def __init__(self, token):
         self.__token = token
 

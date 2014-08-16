@@ -7,9 +7,7 @@ import datetime
 # @todoAlpha Put some information in the TypeErrors
 
 
-class _Reset:
-    pass
-Reset = _Reset()
+Reset = object()
 
 
 def dictionary(**args):

@@ -4,23 +4,17 @@
 
 from __future__ import print_function
 
-import datetime
 import io
-import json
-import logging
 import sys
 import unittest
-import urlparse
-import zlib
 
 import requests
 import MockMockMock
 
-import PyGithub.Blocking
 import PyGithub.Blocking._builder as bld
 
 
-class RequestMatcher:
+class RequestMatcher(object):
     def __init__(self, verb, url, headers, body):
         self.__verb = verb
         self.__url = url
