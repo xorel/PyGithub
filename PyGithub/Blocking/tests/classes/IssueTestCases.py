@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class IssueAttributes(TestCase):
-    @Enterprise("electra")
     def test(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(1)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(1)
         self.assertEqual(i.assignee.login, "electra")
         self.assertEqual(i.body, None)
         self.assertEqual(i.body_html, None)
@@ -33,40 +32,35 @@ class IssueAttributes(TestCase):
         self.assertEqual(i.url, "http://github.home.jacquev6.net/api/v3/repos/electra/issues/issues/1")
         self.assertEqual(i.user.login, "penelope")
 
-    @Enterprise("electra")
     def testWithRepository(self):
-        u = self.g.get_authenticated_user()
+        u = self.electra.get_authenticated_user()
         i = u.get_user_issues()[0]
         self.assertEqual(i.repository.full_name, "electra/issues")
 
-    @Enterprise("electra")
     def testClosedWithMilestone(self):
-        u = self.g.get_authenticated_user()
+        u = self.electra.get_authenticated_user()
         i = u.get_user_issues(state="closed")[0]
         self.assertEqual(i.closed_at, datetime.datetime(2014, 8, 3, 23, 19, 7))
         self.assertEqual(i.closed_by.login, "electra")
         self.assertEqual(i.state, "closed")
         self.assertEqual(i.milestone.number, 1)
 
-    @Enterprise("electra")
     def testPullRequest(self):
-        i = self.g.get_repo(("electra", "pulls")).get_issue(1)
+        i = self.electra.get_repo(("electra", "pulls")).get_issue(1)
         self.assertEqual(i.pull_request.url, "http://github.home.jacquev6.net/api/v3/repos/electra/pulls/pulls/1")
 
 
 class IssueEdit(TestCase):
-    @Enterprise("electra")
     def testTitle(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual(i.title, "Mutable issue")
         i.edit(title="Mutable issue!")
         self.assertEqual(i.title, "Mutable issue!")
         i.edit(title="Mutable issue")
         self.assertEqual(i.title, "Mutable issue")
 
-    @Enterprise("electra")
     def testBody(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual(i.body, None)
         i.edit(body="Body of first issue")
         self.assertEqual(i.body, "Body of first issue")
@@ -75,36 +69,32 @@ class IssueEdit(TestCase):
         i.edit(body=PyGithub.Blocking.Reset)
         self.assertEqual(i.body, None)
 
-    @Enterprise("electra")
     def testAssignee(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual(i.assignee, None)
         i.edit(assignee="electra")
         self.assertEqual(i.assignee.login, "electra")
         i.edit(assignee=PyGithub.Blocking.Reset)
         self.assertEqual(i.assignee, None)
 
-    @Enterprise("electra")
     def testState(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual(i.state, "open")
         i.edit(state="closed")
         self.assertEqual(i.state, "closed")
         i.edit(state="open")
         self.assertEqual(i.state, "open")
 
-    @Enterprise("electra")
     def testMilestone(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual(i.milestone, None)
         i.edit(milestone=3)
         self.assertEqual(i.milestone.number, 3)
         i.edit(milestone=PyGithub.Blocking.Reset)
         self.assertEqual(i.milestone, None)
 
-    @Enterprise("electra")
     def testLabels(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual([l.name for l in i.labels], ["enhancement", "question"])
         i.edit(labels=["bug"])
         self.assertEqual([l.name for l in i.labels], ["bug"])
@@ -113,24 +103,21 @@ class IssueEdit(TestCase):
 
 
 class IssueLabels(TestCase):
-    @Enterprise("electra")
     def testGetLabels(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(1)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(1)
         labels = i.get_labels()
         self.assertEqual([l.name for l in labels], ["enhancement", "question"])
 
-    @Enterprise("electra")
     def testAddOneToAndRemoveFromLabels(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual([l.name for l in i.get_labels()], ["enhancement", "question"])
         i.add_to_labels("bug")
         self.assertEqual([l.name for l in i.get_labels()], ["bug", "enhancement", "question"])
         i.remove_from_labels("bug")
         self.assertEqual([l.name for l in i.get_labels()], ["enhancement", "question"])
 
-    @Enterprise("electra")
     def testAddSeveralToAndRemoveFromLabels(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual([l.name for l in i.get_labels()], ["enhancement", "question"])
         i.add_to_labels("bug", "wontfix")
         self.assertEqual([l.name for l in i.get_labels()], ["bug", "enhancement", "question", "wontfix"])
@@ -138,9 +125,8 @@ class IssueLabels(TestCase):
         i.remove_from_labels("wontfix")
         self.assertEqual([l.name for l in i.get_labels()], ["enhancement", "question"])
 
-    @Enterprise("electra")
     def testRemoveAllAndSetLabels(self):
-        i = self.g.get_repo(("electra", "issues")).get_issue(3)
+        i = self.electra.get_repo(("electra", "issues")).get_issue(3)
         self.assertEqual([l.name for l in i.get_labels()], ["enhancement", "question"])
         i.remove_all_labels()
         self.assertEqual([l.name for l in i.get_labels()], [])
@@ -149,9 +135,8 @@ class IssueLabels(TestCase):
 
 
 class IssuePullRequests(TestCase):
-    @Enterprise("electra")
     def testCreatePullRequest(self):
-        i = self.g.get_repo(("electra", "pulls")).create_issue("This will be a pull")
+        i = self.electra.get_repo(("electra", "pulls")).create_issue("This will be a pull")
         p = i.create_pull("penelope:issue_to_pull", "master")
         self.assertEqual(p.number, i.number)
         i.edit(state="closed")

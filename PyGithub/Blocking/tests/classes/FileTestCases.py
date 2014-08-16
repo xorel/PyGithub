@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class FileAttributes(TestCase):
-    @Enterprise("electra")
     def test(self):
-        f = self.g.get_repo(("electra", "git-objects")).get_contents("a_blob", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        f = self.electra.get_repo(("electra", "git-objects")).get_contents("a_blob", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertEqual(f.content, "VGhpcyBpcyBzb21lIGNvbnRlbnQ=\n")
         self.assertEqual(f.encoding, "base64")
         self.assertEqual(f.git_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/blobs/3daf0da6bca38181ab52610dd6af6e92f1a5469d")
@@ -21,17 +20,15 @@ class FileAttributes(TestCase):
 
 
 class FileDelete(TestCase):
-    @Enterprise("electra")
     def test(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         f = repo.get_contents("foo.md")
         c = f.delete("Deleted by PyGithub")
         self.assertEqual(c.message, "Deleted by PyGithub")
         repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
-    @Enterprise("electra")
     def test_allParameters(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         ref = repo.create_git_ref("refs/heads/ephemeral", "627777afd4859d16e30880f4d8d0a178d99d395c")
         f = repo.get_contents("foo.md", ref="ephemeral")
         c = f.delete(
@@ -48,9 +45,8 @@ class FileDelete(TestCase):
 
 
 class FileEdit(TestCase):
-    @Enterprise("electra")
     def testContent(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         f = repo.get_contents("foo.md")
         c = f.edit("Modified by PyGithub", "TmV3IGNvbnRlbnQNCg==")
         self.assertEqual(f.content, "TmV3IGNvbnRlbnQNCg==")
@@ -58,9 +54,8 @@ class FileEdit(TestCase):
         self.assertEqual(c.message, "Modified by PyGithub")
         repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
-    @Enterprise("electra")
     def testContent_allParameters(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         ref = repo.create_git_ref("refs/heads/ephemeral", "627777afd4859d16e30880f4d8d0a178d99d395c")
         f = repo.get_contents("foo.md", ref="ephemeral")
         c = f.edit(

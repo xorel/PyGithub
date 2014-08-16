@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class MilestoneAttributes(TestCase):
-    @Enterprise("electra")
     def test(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(1)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(1)
         self.assertEqual(m.closed_issues, 2)
         self.assertEqual(m.created_at, datetime.datetime(2014, 8, 4, 3, 9, 47))
         self.assertEqual(m.creator.login, "electra")
@@ -25,36 +24,32 @@ class MilestoneAttributes(TestCase):
 
 
 class MilestoneEdit(TestCase):
-    @Enterprise("electra")
     def testTitle(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(3)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(3)
         self.assertEqual(m.title, "Mutable milestone")
         m.edit(title="Mutable milestone!")
         self.assertEqual(m.title, "Mutable milestone!")
         m.edit(title="Mutable milestone")
         self.assertEqual(m.title, "Mutable milestone")
 
-    @Enterprise("electra")
     def testState(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(3)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(3)
         self.assertEqual(m.state, "open")
         m.edit(state="closed")
         self.assertEqual(m.state, "closed")
         m.edit(state="open")
         self.assertEqual(m.state, "open")
 
-    @Enterprise("electra")
     def testDescription(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(3)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(3)
         self.assertEqual(m.description, None)
         m.edit(description="Body of first milestone")
         self.assertEqual(m.description, "Body of first milestone")
         m.edit(description=PyGithub.Blocking.Reset)
         self.assertEqual(m.description, None)
 
-    @Enterprise("electra")
     def testDueOn(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(3)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(3)
         self.assertEqual(m.due_on, None)
         m.edit(due_on=datetime.datetime(2014, 7, 26, 0, 0, 0))
         self.assertEqual(m.due_on, datetime.datetime(2014, 7, 26, 0, 0, 0))
@@ -63,15 +58,13 @@ class MilestoneEdit(TestCase):
 
 
 class MilestoneLabels(TestCase):
-    @Enterprise("electra")
     def testGetLabels(self):
-        m = self.g.get_repo(("electra", "issues")).get_milestone(1)
+        m = self.electra.get_repo(("electra", "issues")).get_milestone(1)
         labels = m.get_labels()
         self.assertEqual([l.name for l in labels], ["enhancement", "question"])
 
 
 class MilestoneDelete(TestCase):
-    @Enterprise("electra")
     def test(self):
-        m = self.g.get_repo(("electra", "issues")).create_milestone("Created by PyGithub")
+        m = self.electra.get_repo(("electra", "issues")).create_milestone("Created by PyGithub")
         m.delete()

@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class SubmoduleAttributes(TestCase):
-    @Enterprise("electra")
     def testWithoutDotGitmodules(self):
-        s = self.g.get_repo(("electra", "git-objects")).get_contents("a_submodule", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        s = self.electra.get_repo(("electra", "git-objects")).get_contents("a_submodule", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertEqual(s.git_url, None)
         self.assertEqual(s.html_url, None)
         self.assertEqual(s.name, "a_submodule")
@@ -20,14 +19,12 @@ class SubmoduleAttributes(TestCase):
 
 
 class SubmoduleUpdate(TestCase):
-    @Enterprise("electra")
     def testLazyCompletion(self):
-        s = self.g.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")[1]
+        s = self.electra.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")[1]
         self.assertEqual(s.submodule_git_url, None)
 
-    @Enterprise("electra")
     def testAddDotGitmodules(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         ref = repo.create_git_ref("refs/heads/ephemeral", "db09e03a13f7910b9cae93ca91cd35800e15c695")
         s = repo.get_contents("a_submodule", ref="ephemeral")
         repo.create_file(".gitmodules", "Add .gitmodules", "W3N1Ym1vZHVsZSAiYV9zdWJtb2R1bGUiXQ0KICAgIHBhdGggPSBhX3N1Ym1vZHVsZQ0KICAgIHVybCA9IGh0dHA6Ly9naXRodWIuaG9tZS5qYWNxdWV2Ni5uZXQvZWxlY3RyYS9pbW11dGFibGUuZ2l0DQo=", branch="ephemeral")

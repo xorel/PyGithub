@@ -10,7 +10,7 @@ import PyGithub.Blocking.tests.Framework as Framework
 # @todoAlpha Test this with unit tests in PaginationTestCases.py (when we have a PaginationTestCases.py...)
 
 
-class PaginationTestCase(Framework.createTestCase(PyGithub.BlockingBuilder().Login(Framework.login, Framework.password))):
+class PaginationTestCase(Framework.createTestCase(PyGithub.BlockingBuilder().Login(Framework.DotComLogin, Framework.DotComPassword))):
     def testIterationOnMultiplePages(self):
         repo = self.g.get_repo("jacquev6/PyGithub")
         stargazers = repo.get_stargazers()
@@ -82,7 +82,7 @@ class PaginationTestCase(Framework.createTestCase(PyGithub.BlockingBuilder().Log
         self.assertEqual(len(gists[:]), 32)
 
 
-class PaginationWithGlobalPerPageTestCase(Framework.createTestCase(PyGithub.BlockingBuilder().Login(Framework.login, Framework.password).PerPage(100))):
+class PaginationWithGlobalPerPageTestCase(Framework.createTestCase(PyGithub.BlockingBuilder().Login(Framework.DotComLogin, Framework.DotComPassword).PerPage(100))):
     def testIterationOnMultiplePages(self):
         repo = self.g.get_repo("jacquev6/PyGithub")
         stargazers = repo.get_stargazers()

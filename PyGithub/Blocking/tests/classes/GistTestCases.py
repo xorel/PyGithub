@@ -5,7 +5,7 @@
 from PyGithub.Blocking.tests.Framework import *
 
 
-class GistAttributes(TestCase2):
+class GistAttributes(TestCase):
     def setUpEnterprise(self):
         source = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}, "bar.txt": {"content": "tartempion"}}, public=True, description="attributes")
         fork = self.penelope.get_authenticated_user().create_gist_fork(source.id)
@@ -78,7 +78,7 @@ class GistAttributes(TestCase2):
         self.assertEqual([f.owner.login for f in forks], ["penelope", "zeus"])
 
 
-class GistEdit(TestCase2):
+class GistEdit(TestCase):
     def setUpEnterprise(self):
         g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="edit")
         return Data(id=g.id)
@@ -134,7 +134,7 @@ class GistEdit(TestCase2):
 # @todoAlpha Newly created objects should be candidate for lazy completion: create_gist_fork doesn't return fork_of!
 
 
-class GistDelete(TestCase2):
+class GistDelete(TestCase):
     def test(self):
         g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="ephemeral")
         g.delete()

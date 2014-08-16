@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class OrganizationAttributes(TestCase):
-    @Enterprise("zeus")
     def testOwnedOrganization(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.avatar_url, "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png")
         self.assertEqual(o.billing_email, "ghe-olympus@jacquev6.net")
         self.assertEqual(o.blog, None)
@@ -40,54 +39,48 @@ class OrganizationAttributes(TestCase):
 
 
 class OrganizationEdit(TestCase):
-    @Enterprise("zeus")
     def testBillingEmail(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.billing_email, "ghe-olympus@jacquev6.net")
         o.edit(billing_email="foo@bar.com")
         self.assertEqual(o.billing_email, "foo@bar.com")
         o.edit(billing_email="ghe-olympus@jacquev6.net")
         self.assertEqual(o.billing_email, "ghe-olympus@jacquev6.net")
 
-    @Enterprise("zeus")
     def testBlog(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.blog, None)
         o.edit(blog="http://jacquev6.net/olympus")
         self.assertEqual(o.blog, "http://jacquev6.net/olympus")
         o.edit(blog=PyGithub.Blocking.Reset)
         self.assertEqual(o.blog, None)
 
-    @Enterprise("zeus")
     def testCompany(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.company, None)
         o.edit(company="Olympus Software Inc.")
         self.assertEqual(o.company, "Olympus Software Inc.")
         o.edit(company=PyGithub.Blocking.Reset)
         self.assertEqual(o.company, None)
 
-    @Enterprise("zeus")
     def testEmail(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.email, None)
         o.edit(email="foo@bar.com")
         self.assertEqual(o.email, "foo@bar.com")
         o.edit(email=PyGithub.Blocking.Reset)
         self.assertEqual(o.email, None)
 
-    @Enterprise("zeus")
     def testLocation(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.location, None)
         o.edit(location="Mount Olympus")
         self.assertEqual(o.location, "Mount Olympus")
         o.edit(location=PyGithub.Blocking.Reset)
         self.assertEqual(o.location, None)
 
-    @Enterprise("zeus")
     def testName(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertEqual(o.name, None)
         o.edit(name="Olympus Software")
         self.assertEqual(o.name, "Olympus Software")
@@ -96,21 +89,18 @@ class OrganizationEdit(TestCase):
 
 
 class OrganizationMembers(TestCase):
-    @Enterprise("zeus")
     def testGetPublicMembers(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         public_members = o.get_public_members()
         self.assertEqual([m.login for m in public_members], ["antigone", "poseidon", "zeus"])
 
-    @Enterprise("zeus")
     def testGetPublicMembers_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         public_members = o.get_public_members(per_page=1)
         self.assertEqual([m.login for m in public_members], ["antigone", "poseidon", "zeus"])
 
-    @Enterprise("zeus")
     def testHasInMembersAndPublicMembersFromOwner(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         # Not member
         self.assertFalse(o.has_in_public_members("penelope"))
         self.assertFalse(o.has_in_members("penelope"))
@@ -121,9 +111,8 @@ class OrganizationMembers(TestCase):
         self.assertTrue(o.has_in_public_members("antigone"))
         self.assertTrue(o.has_in_members("antigone"))
 
-    @Enterprise("antigone")
     def testHasInMembersAndPublicMembersFromMember(self):
-        o = self.g.get_org("olympus")
+        o = self.antigone.get_org("olympus")
         # Not member
         self.assertFalse(o.has_in_public_members("penelope"))
         self.assertFalse(o.has_in_members("penelope"))
@@ -134,9 +123,8 @@ class OrganizationMembers(TestCase):
         self.assertTrue(o.has_in_public_members("antigone"))
         self.assertTrue(o.has_in_members("antigone"))
 
-    @Enterprise("penelope")
     def testHasInMembersAndPublicMembersFromExternal(self):
-        o = self.g.get_org("olympus")
+        o = self.penelope.get_org("olympus")
         # Not member
         self.assertFalse(o.has_in_public_members("penelope"))
         self.assertFalse(o.has_in_members("penelope"))
@@ -154,21 +142,18 @@ class OrganizationMembers(TestCase):
         # so we get a 404 and return False
         self.assertFalse(o.has_in_members("antigone"))
 
-    @Enterprise("zeus")
     def testGetMembers(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         members = o.get_members()
         self.assertEqual([m.login for m in members], ["antigone", "electra", "poseidon", "zeus"])
 
-    @Enterprise("zeus")
     def testGetMembers_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         members = o.get_members(filter="all", per_page=1)
         self.assertEqual([m.login for m in members], ["antigone", "electra", "poseidon", "zeus"])
 
-    @Enterprise("electra")
     def testAddToAndRemoveSelfFromPublicMembers(self):
-        o = self.g.get_org("olympus")
+        o = self.electra.get_org("olympus")
         self.assertFalse(o.has_in_public_members("electra"))
         o.add_to_public_members("electra")
         self.assertTrue(o.has_in_public_members("electra"))
@@ -176,39 +161,34 @@ class OrganizationMembers(TestCase):
         self.assertFalse(o.has_in_public_members("electra"))
         # @todoAlpha Test if owners can remove_from_public_members someone else (They can in the GUI.)
 
-    @Enterprise("zeus")
     def testRemoveFromMembers(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         self.assertFalse(o.has_in_members("penelope"))
         o.get_teams()[0].add_to_members("penelope")
         self.assertTrue(o.has_in_members("penelope"))
         o.remove_from_members("penelope")
         self.assertFalse(o.has_in_members("penelope"))
 
-    @Enterprise("zeus")
     def testGetTeams(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         teams = o.get_teams()
         self.assertEqual([t.name for t in teams], ["Owners", "Gods", "Humans"])
 
-    @Enterprise("zeus")
     def testGetTeams_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         teams = o.get_teams(per_page=1)
         self.assertEqual([t.name for t in teams], ["Owners", "Gods", "Humans"])
 
-    @Enterprise("zeus")
     def testCreateTeam(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         t = o.create_team("Titans")
         self.assertEqual(t.name, "Titans")
         self.assertEqual(t.permission, "pull")
         self.assertEqual(t.repos_count, 0)
         t.delete()
 
-    @Enterprise("zeus")
     def testCreateTeam_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         repo = o.create_repo("trojan-war")
         t = o.create_team("Titans", repo_names=[("olympus", "trojan-war")], permission="push")
         self.assertEqual(t.name, "Titans")
@@ -219,27 +199,23 @@ class OrganizationMembers(TestCase):
 
 
 class OrganizationRepositories(TestCase):
-    @Enterprise("zeus")
     def testGetRepo(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         r = o.get_repo("immutable")
         self.assertEqual(r.full_name, "olympus/immutable")
 
-    @Enterprise("zeus")
     def testGetRepos(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         repos = o.get_repos()
         self.assertEqual([r.name for r in repos], ["trojan-war", "trojan-war", "trojan-war", "trojan-war", "immutable", "org-repo"])
 
-    @Enterprise("zeus")
     def testGetRepos_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         repos = o.get_repos(type="all", per_page=1)
         self.assertEqual([r.name for r in repos], ["trojan-war", "trojan-war", "trojan-war", "trojan-war", "immutable", "org-repo"])
 
-    @Enterprise("zeus")
     def testCreateRepo(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         r = o.create_repo("ephemeral")
         self.assertEqual(r.name, "ephemeral")
         self.assertIsNone(r.description)
@@ -249,9 +225,8 @@ class OrganizationRepositories(TestCase):
         self.assertEqual(r.has_wiki, True)
         r.delete()
 
-    @Enterprise("zeus")
     def testCreateRepo_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         teamId = o.get_teams()[1].id
         r = o.create_repo("ephemeral", description="Created by PyGithub", homepage="http://bar.com", private=True, has_issues=False, has_wiki=False, team_id=teamId, auto_init=True, gitignore_template="Python", license_template="mit")
         self.assertEqual(r.name, "ephemeral")
@@ -260,24 +235,21 @@ class OrganizationRepositories(TestCase):
         self.assertEqual(r.private, True)
         self.assertEqual(r.has_issues, False)
         self.assertEqual(r.has_wiki, False)
-        self.assertTrue(self.g.get_team(teamId).has_in_repos(("olympus", "ephemeral")))
+        self.assertTrue(self.zeus.get_team(teamId).has_in_repos(("olympus", "ephemeral")))
         r.delete()
 
-    @Enterprise("zeus")
     def testCreateFork(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         r = o.create_fork(("electra", "mutable"))
         self.assertEqual(r.full_name, "olympus/mutable")
         r.delete()
 
-    @Enterprise("zeus")
     def testGetIssues(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         issues = o.get_issues()
         self.assertEqual([i.title for i in issues], ["Immutable issue 2", "Immutable issue 1"])
 
-    @Enterprise("zeus")
     def testGetIssues_allParameters(self):
-        o = self.g.get_org("olympus")
+        o = self.zeus.get_org("olympus")
         issues = o.get_issues(filter="all", state="all", labels=["question", "enhancement"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
         self.assertEqual([i.title for i in issues], ["Immutable issue 2", "Immutable issue 1"])

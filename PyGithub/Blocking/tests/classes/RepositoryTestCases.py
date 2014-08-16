@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class RepositoryAttributes(TestCase):
-    @Enterprise("electra")
     def testOwned(self):
-        r = self.g.get_repo(("electra", "immutable"))
+        r = self.electra.get_repo(("electra", "immutable"))
         self.assertEqual(r.archive_url, "http://github.home.jacquev6.net/api/v3/repos/electra/immutable/{archive_format}{/ref}")
         self.assertEqual(r.assignees_url, "http://github.home.jacquev6.net/api/v3/repos/electra/immutable/assignees{/user}")
         self.assertEqual(r.blobs_url, "http://github.home.jacquev6.net/api/v3/repos/electra/immutable/git/blobs{/sha}")
@@ -80,9 +79,8 @@ class RepositoryAttributes(TestCase):
         self.assertEqual(r.watchers_count, 0)
         self.assertIsInstance(r.owner, PyGithub.Blocking.User.User)
 
-    @Enterprise("electra")
     def testForkByOrg(self):
-        r = self.g.get_repo(("olympus", "immutable"))
+        r = self.electra.get_repo(("olympus", "immutable"))
         self.assertEqual(r.fork, True)
         self.assertEqual(r.parent.owner.login, "electra")
         self.assertEqual(r.source.owner.login, "electra")
@@ -90,9 +88,8 @@ class RepositoryAttributes(TestCase):
         self.assertIsInstance(r.parent.owner, PyGithub.Blocking.User.User)
         self.assertIsInstance(r.source.owner, PyGithub.Blocking.User.User)
 
-    @Enterprise("electra")
     def testForkOfFork(self):
-        r = self.g.get_repo(("penelope", "immutable"))
+        r = self.electra.get_repo(("penelope", "immutable"))
         self.assertEqual(r.parent.owner.login, "olympus")
         self.assertEqual(r.source.owner.login, "electra")
         self.assertIsInstance(r.owner, PyGithub.Blocking.User.User)
@@ -112,17 +109,15 @@ class RepositoryContents(TestCase):
     #       union: [File, Dir, Submodule, SymLink]
     # @todoAlpha We could also have a Dir.create_file method
 
-    @Enterprise("electra")
     def testGetRootContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("")
         self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
         self.assertEqual(c[0].path, "README.md")
         self.assertIsInstance(c[1], PyGithub.Blocking.File.File)
         self.assertEqual(c[1].path, "foo.md")
 
-    @Enterprise("electra")
     def testGetRootContents_allParameters(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
         self.assertEqual(c[0].path, "a_blob")
         self.assertIsInstance(c[1], PyGithub.Blocking.Submodule.Submodule)
@@ -139,54 +134,45 @@ class RepositoryContents(TestCase):
         self.assertEqual(c[3].type, "dir")
         self.assertEqual(c[3].url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_tree?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")  # Dir is not updatable because its url points to a list of its contents, not its hash representation
 
-    @Enterprise("electra")
     def testGetDirContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_tree", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("a_tree", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c[0], PyGithub.Blocking.File.File)
 
-    @Enterprise("electra")
     def testGetFileContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_blob", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("a_blob", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c, PyGithub.Blocking.File.File)
 
-    @Enterprise("electra")
     def testGetFileInDirContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_tree/test.txt", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("a_tree/test.txt", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c, PyGithub.Blocking.File.File)
 
-    @Enterprise("electra")
     def testGetSubmoduleContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_submodule", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("a_submodule", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c, PyGithub.Blocking.Submodule.Submodule)
 
-    @Enterprise("electra")
     def testGetSymlinkContents(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_contents("a_symlink", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_contents("a_symlink", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertIsInstance(c, PyGithub.Blocking.SymLink.SymLink)
 
-    @Enterprise("electra")
     def testGetReadme(self):
-        c = self.g.get_repo(("electra", "immutable")).get_readme()
+        c = self.electra.get_repo(("electra", "immutable")).get_readme()
         self.assertIsInstance(c, PyGithub.Blocking.File.File)
         self.assertEqual(c.path, "README.md")
 
-    @Enterprise("electra")
     def testGetReadme_allParameters(self):
-        c = self.g.get_repo(("electra", "immutable")).get_readme(ref="master")
+        c = self.electra.get_repo(("electra", "immutable")).get_readme(ref="master")
         self.assertIsInstance(c, PyGithub.Blocking.File.File)
         self.assertEqual(c.path, "README.md")
 
-    @Enterprise("electra")
     def testCreateFile(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         cc = repo.create_file("foo.txt", "Add foo.txt", "Q3JlYXRlZCBieSBQeUdpdGh1Yg==")
         self.assertEqual(cc.commit.message, "Add foo.txt")
         self.assertEqual(cc.content.path, "foo.txt")
         repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
-    @Enterprise("electra")
     def testCreateFile_allParameters(self):
-        repo = self.g.get_repo(("electra", "git-objects"))
+        repo = self.electra.get_repo(("electra", "git-objects"))
         ref = repo.create_git_ref("refs/heads/ephemeral", "627777afd4859d16e30880f4d8d0a178d99d395c")
         cc = repo.create_file("foo.txt", "Add foo.txt", "Q3JlYXRlZCBieSBQeUdpdGh1Yg==", branch="ephemeral", author={"name": "John Doe", "email": "john@doe.com"}, committer={"name": "Jane Doe", "email": "jane@doe.com"})
         self.assertEqual(cc.commit.author.name, "John Doe")
@@ -195,13 +181,13 @@ class RepositoryContents(TestCase):
         ref.delete()
 
 
-class RepositoryDelete(TestCase2):
+class RepositoryDelete(TestCase):
     def test(self):
         r = self.electra.get_authenticated_user().create_repo("ephemeral")
         r.delete()
 
 
-class RepositoryEdit(TestCase2):
+class RepositoryEdit(TestCase):
     def setUpEnterprise(self):
         electra = self.electra.get_authenticated_user()
         try:
@@ -269,21 +255,18 @@ class RepositoryEdit(TestCase2):
 
 
 class RepositoryGitStuff(TestCase):
-    @Enterprise("electra")
     def testGetBranches(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         branches = r.get_branches()
         self.assertEqual([b.name for b in branches], ["develop", "master"])
 
-    @Enterprise("electra")
     def testGetBranches_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         branches = r.get_branches(per_page=1)
         self.assertEqual([b.name for b in branches], ["develop", "master"])
 
-    @Enterprise("electra")
     def testGetBranch(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         b = r.get_branch("develop")
         self.assertEqual(b.commit.author.login, "electra")
 
@@ -291,9 +274,8 @@ class RepositoryGitStuff(TestCase):
     # Branch.update can be tested like this if Branch is modified to take its url attribute from _links["self"]
     # but _links is returned only by Repository.get_branch, not by Repository.get_branches
     # so we have no way to make Branch generaly updatable
-    # @Enterprise("electra")
     # def testUpdateBranch(self):
-    #     r = self.g.get_repo(("electra", "git-objects"))
+    #     r = self.electra.get_repo(("electra", "git-objects"))
     #     b = r.get_branch("test_update")
     #     self.assertEqual(b.commit.sha, "e078f69fb050b75fe5f3c7aa70adc24d692e75b8")
     #     self.assertFalse(b.update())
@@ -303,106 +285,90 @@ class RepositoryGitStuff(TestCase):
     #     self.assertEqual(b.commit.sha, "7820fadc2429652016611e98fdc21766ba075161")
     #     r.get_git_ref("refs/heads/test_update").edit(sha="e078f69fb050b75fe5f3c7aa70adc24d692e75b8", force=True)
 
-    @Enterprise("electra")
     def testGetCommits(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commits = r.get_commits()
         self.assertEqual([c.commit.message for c in commits], ["Modify README.md", "Create foo.md", "Initial commit"])
 
-    @Enterprise("electra")
     def testGetCommits_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commits = r.get_commits(sha="refs/heads/master", path="README.md", author="electra", since=datetime.datetime(2014, 1, 1, 0, 0, 0), until=datetime.datetime(2049, 12, 31, 23, 59, 59), per_page=1)
         self.assertEqual([c.commit.message for c in commits], ["Modify README.md", "Initial commit"])
 
-    @Enterprise("electra")
     def testGetCommit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         c = r.get_commit("refs/heads/master")
         self.assertEqual(c.commit.message, "Modify README.md")
 
-    @Enterprise("electra")
     def testGetTags(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tags = r.get_tags()
         self.assertEqual([t.name for t in tags], ["light-tag-2", "light-tag-1"])
         self.assertEqual(tags[0].commit.sha, "d9343bbb63ef53a264dee9ccbd75c6b5ebae0bef")
         self.assertEqual(tags[0].tarball_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/tarball/light-tag-2")
         self.assertEqual(tags[0].zipball_url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/zipball/light-tag-2")
 
-    @Enterprise("electra")
     def testGetTags_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tags = r.get_tags(per_page=1)
         self.assertEqual([t.name for t in tags], ["light-tag-2", "light-tag-1"])
 
-    @Enterprise("electra")
     def testGetGitTag(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         t = r.get_git_tag("b55a47efb4f8c891b6719a3d85a80c7f875e33ec")
         self.assertEqual(t.tag, "heavy-tag")
 
-    @Enterprise("electra")
     def testGetGitRefs(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         refs = r.get_git_refs()
         # @todoAlpha What about GET /repos/.../git/refs/heads? It returns a list of refs as well
         self.assertEqual([r.ref for r in refs], ["refs/heads/develop", "refs/heads/master", "refs/tags/light-tag-1", "refs/tags/light-tag-2"])
 
-    @Enterprise("electra")
     def testGetGitRefs_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         refs = r.get_git_refs(per_page=2)
         self.assertEqual([r.ref for r in refs], ["refs/heads/develop", "refs/heads/master", "refs/tags/light-tag-1", "refs/tags/light-tag-2"])
 
-    @Enterprise("electra")
     def testGetGitRef(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         ref = r.get_git_ref("refs/heads/develop")
         # @todoAlpha Test get_git_ref with a string not starting with "refs/"
         self.assertEqual(ref.ref, "refs/heads/develop")
 
-    @Enterprise("electra")
     def testCreateGitBlob(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         blob = r.create_git_blob("This is some content", "utf8")
         self.assertEqual(blob.sha, "3daf0da6bca38181ab52610dd6af6e92f1a5469d")
 
-    @Enterprise("electra")
     def testGetGitBlob(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         blob = r.get_git_blob("3daf0da6bca38181ab52610dd6af6e92f1a5469d")
         self.assertEqual(blob.content, "VGhpcyBpcyBzb21lIGNvbnRlbnQ=\n")
 
-    @Enterprise("electra")
     def testCreateGitTree(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tree = r.create_git_tree(tree=[{"path": "test.txt", "mode": "100644", "type": "blob", "sha": "3daf0da6bca38181ab52610dd6af6e92f1a5469d"}])
         self.assertEqual(tree.sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
 
-    @Enterprise("electra")
     def testGetGitTree(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tree = r.get_git_tree("65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
         self.assertEqual(len(tree.tree), 1)
 
-    @Enterprise("electra")
     def testGetGitCommit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commit = r.get_git_commit("f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         self.assertEqual(commit.message, "first commit")
 
-    @Enterprise("electra")
     def testCreateInitialGitCommit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commit = r.create_git_commit(tree="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad", message="first commit", parents=[])
         self.assertEqual(commit.message, "first commit")
         self.assertEqual(commit.tree.sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
         self.assertEqual(len(commit.parents), 0)
 
-    @Enterprise("electra")
     def testCreateInitialGitCommit_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commit = r.create_git_commit(tree="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad", message="first commit", parents=[], author={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"}, committer={"name": "Jane Doe", "email": "jane@doe.com", "date": "2000-01-01T00:00:00Z"})
         self.assertEqual(commit.author.name, "John Doe")
         self.assertEqual(commit.author.email, "john@doe.com")
@@ -412,102 +378,89 @@ class RepositoryGitStuff(TestCase):
         self.assertEqual(commit.committer.date, datetime.datetime(2000, 1, 1, 0, 0, 0))
         self.assertEqual(commit.sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
 
-    @Enterprise("electra")
     def testCreateSubsequentGitCommit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         commit = r.create_git_commit(tree="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad", message="second commit", parents=["f739e7ae2fd0e7b2bce99c073bcc7b57d713877e"])
         self.assertEqual(commit.parents[0].sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
 
-    @Enterprise("electra")
     def testCreateGitRef_commit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         ref = r.create_git_ref(ref="refs/tests/commit_ref", sha="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         self.assertEqual(ref.ref, "refs/tests/commit_ref")
         self.assertEqual(ref.object.type, "commit")
         self.assertIsInstance(ref.object, PyGithub.Blocking.GitCommit.GitCommit)
         ref.delete()
 
-    @Enterprise("electra")
     def testCreateGitRef_tree(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         ref = r.create_git_ref(ref="refs/tests/tree_ref", sha="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
         self.assertEqual(ref.ref, "refs/tests/tree_ref")
         self.assertEqual(ref.object.type, "tree")
         self.assertIsInstance(ref.object, PyGithub.Blocking.GitTree.GitTree)
         ref.delete()
 
-    @Enterprise("electra")
     def testCreateGitRef_blob(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         ref = r.create_git_ref(ref="refs/tests/blob_ref", sha="3daf0da6bca38181ab52610dd6af6e92f1a5469d")
         self.assertEqual(ref.ref, "refs/tests/blob_ref")
         self.assertEqual(ref.object.type, "blob")
         self.assertIsInstance(ref.object, PyGithub.Blocking.GitBlob.GitBlob)
         ref.delete()
 
-    @Enterprise("electra")
     def testCreateGitRef_tag(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         ref = r.create_git_ref(ref="refs/tests/tag_ref", sha="b55a47efb4f8c891b6719a3d85a80c7f875e33ec")
         self.assertEqual(ref.ref, "refs/tests/tag_ref")
         self.assertEqual(ref.object.type, "tag")
         self.assertIsInstance(ref.object, PyGithub.Blocking.GitTag.GitTag)
         ref.delete()
 
-    @Enterprise("electra")
     def testCreateGitRef_existing(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         with self.assertRaises(PyGithub.Blocking.UnprocessableEntityException):
             r.create_git_ref(ref="refs/heads/master", sha="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
 
-    @Enterprise("electra")
     def testCreateGitTag_allParameters(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tag = r.create_git_tag(tag="heavy-tag", message="This is a tag", object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", type="commit", tagger={"name": "John Doe", "email": "john@doe.com", "date": "1999-12-31T23:59:59Z"})
         self.assertEqual(tag.tagger.name, "John Doe")
         self.assertEqual(tag.tagger.email, "john@doe.com")
         self.assertEqual(tag.tagger.date, datetime.datetime(1999, 12, 31, 23, 59, 59))
         self.assertEqual(tag.sha, "b55a47efb4f8c891b6719a3d85a80c7f875e33ec")
 
-    @Enterprise("electra")
     def testCreateGitTag_commit(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tag = r.create_git_tag(tag="commit_tag", message="This is a commit tag", object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", type="commit")
         self.assertEqual(tag.object.type, "commit")
         self.assertIsInstance(tag.object, PyGithub.Blocking.GitCommit.GitCommit)
 
-    @Enterprise("electra")
     def testCreateGitTag_tree(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tag = r.create_git_tag(tag="tree_tag", message="This is a tree tag", object="65208a85edf4a0d2c2f757ab655fb3ba2cd63bad", type="tree")
         self.assertEqual(tag.object.type, "tree")
         self.assertIsInstance(tag.object, PyGithub.Blocking.GitTree.GitTree)
 
-    @Enterprise("electra")
     def testCreateGitTag_blob(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tag = r.create_git_tag(tag="blob_tag", message="This is a blob tag", object="3daf0da6bca38181ab52610dd6af6e92f1a5469d", type="blob")
         self.assertEqual(tag.object.type, "blob")
         self.assertIsInstance(tag.object, PyGithub.Blocking.GitBlob.GitBlob)
 
-    @Enterprise("electra")
     def testCreateGitTag_tag(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         tag = r.create_git_tag(tag="tag_tag", message="This is a tag tag", object="b55a47efb4f8c891b6719a3d85a80c7f875e33ec", type="tag")
         self.assertEqual(tag.object.type, "tag")
         self.assertIsInstance(tag.object, PyGithub.Blocking.GitTag.GitTag)
 
-    @Enterprise("electra")
     def testCreateGitTag_badType(self):
-        r = self.g.get_repo(("electra", "git-objects"))
+        r = self.electra.get_repo(("electra", "git-objects"))
         with self.assertRaises(PyGithub.Blocking.UnprocessableEntityException):
             r.create_git_tag(tag="bad_tag", message="This is a tag to a commit, pretending to be a blob", object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", type="blob")
 
 
 class RepositoryIssues(TestCase):
-    @Enterprise("electra")
     def testCreateIssue(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         issue = r.create_issue("Created by PyGithub")
         self.assertEqual(issue.title, "Created by PyGithub")
         self.assertIsNone(issue.body)
@@ -516,9 +469,8 @@ class RepositoryIssues(TestCase):
         self.assertEqual(len(issue.labels), 0)
         issue.edit(state="closed")
 
-    @Enterprise("electra")
     def testCreateIssue_allParameters(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         issue = r.create_issue("Also created by PyGithub", body="Body", assignee="electra", milestone=1, labels=["question"])
         self.assertEqual(issue.title, "Also created by PyGithub")
         self.assertEqual(issue.body, "Body")
@@ -527,69 +479,59 @@ class RepositoryIssues(TestCase):
         self.assertEqual(len(issue.labels), 1)
         issue.edit(state="closed")
 
-    @Enterprise("electra")
     def testGetIssue(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         issue = r.get_issue(1)
         self.assertEqual(issue.title, "Immutable issue")
 
-    @Enterprise("electra")
     def testGetIssues(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         issues = r.get_issues()
         self.assertEqual([i.title for i in issues], ["Mutable issue", "Immutable issue"])
 
-    @Enterprise("electra")
     def testGetIssues_allParameters(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         issues = r.get_issues(milestone=1, state="closed", assignee="electra", creator="penelope", mentioned="electra", labels=["question"], sort="created", direction="asc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
         self.assertEqual([i.title for i in issues], ["Closed issue 1", "Closed issue 2"])
 
-    @Enterprise("electra")
     def testHasInAssignees(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         self.assertTrue(r.has_in_assignees("penelope"))
         self.assertFalse(r.has_in_assignees("zeus"))
 
-    @Enterprise("electra")
     def testGetAssignees(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         assignees = r.get_assignees()
         self.assertEqual([a.login for a in assignees], ["electra", "penelope"])
 
-    @Enterprise("electra")
     def testGetAssignees_allParameters(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         assignees = r.get_assignees(per_page=1)
         self.assertEqual([a.login for a in assignees], ["electra", "penelope"])
 
-    @Enterprise("electra")
     def testGetLabels(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         labels = r.get_labels()
         self.assertEqual([l.name for l in labels], ["bug", "duplicate", "enhancement", "help wanted", "invalid", "question", "wontfix"])
 
-    @Enterprise("electra")
     def testCreateLabel(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         label = r.create_label("to_be_deleted", "FF0000")
         self.assertEqual(label.color, "FF0000")
         label.delete()
 
-    @Enterprise("electra")
     def testGetLabel(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         label = r.get_label("bug")
         self.assertEqual(label.color, "fc2929")
 
     # @todoAlpha follow-up with issue opened to github for labels with % sign
     # def testGetLabelWithWeirdName(self):
-    #     label = self.g.get_repo("jacquev6/PyGithubIntegrationTests").get_label("space é % space")
+    #     label = self.electra.get_repo("jacquev6/PyGithubIntegrationTests").get_label("space é % space")
     #     self.assertEqual(label.name, "space é % space".decode("utf-8"))
 
-    @Enterprise("electra")
     def testCreateMilestone(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         milestone = r.create_milestone("Created by PyGithub")
         self.assertEqual(milestone.title, "Created by PyGithub")
         self.assertEqual(milestone.state, "open")
@@ -597,9 +539,8 @@ class RepositoryIssues(TestCase):
         self.assertIsNone(milestone.due_on)
         milestone.delete()
 
-    @Enterprise("electra")
     def testCreateMilestone_allParameters(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         milestone = r.create_milestone("Created by PyGithub", state="closed", description="Body", due_on=datetime.datetime(2014, 8, 1, 0, 0, 0))
         self.assertEqual(milestone.title, "Created by PyGithub")
         self.assertEqual(milestone.state, "closed")
@@ -607,27 +548,23 @@ class RepositoryIssues(TestCase):
         self.assertEqual(milestone.due_on, datetime.datetime(2014, 8, 1, 0, 0, 0))
         milestone.delete()
 
-    @Enterprise("electra")
     def testGetMilestone(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         milestone = r.get_milestone(1)
         self.assertEqual(milestone.title, "Immutable milestone")
 
-    @Enterprise("electra")
     def testGetMilestones(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         milestones = r.get_milestones()
         self.assertEqual([m.title for m in milestones], ["Immutable milestone", "Mutable milestone"])
 
-    @Enterprise("electra")
     def testGetMilestones_allParameters(self):
-        r = self.g.get_repo(("electra", "issues"))
+        r = self.electra.get_repo(("electra", "issues"))
         milestones = r.get_milestones(state="open", sort="due_date", direction="asc", per_page=1)
         self.assertEqual([m.title for m in milestones], ["Immutable milestone", "Mutable milestone"])
 
-    @Enterprise("electra")
     def testCreatePull(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         p = r.create_pull("Created by PyGithub", "penelope:issue_to_pull", "master")
         self.assertEqual(p.title, "Created by PyGithub")
         self.assertEqual(p.base.label, "electra:master")
@@ -635,9 +572,8 @@ class RepositoryIssues(TestCase):
         self.assertEqual(p.body, None)
         p.edit(state="closed")
 
-    @Enterprise("electra")
     def testCreatePull_allParameters(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         p = r.create_pull("Also created by PyGithub", "penelope:issue_to_pull", "master", "Body body body")
         self.assertEqual(p.title, "Also created by PyGithub")
         self.assertEqual(p.base.label, "electra:master")
@@ -645,45 +581,38 @@ class RepositoryIssues(TestCase):
         self.assertEqual(p.body, "Body body body")
         p.edit(state="closed")
 
-    @Enterprise("electra")
     def testGetPulls(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         pulls = r.get_pulls()
         self.assertEqual([p.title for p in pulls], ["Mutable pull", "Conflict pull", "Mergeable pull"])
 
-    @Enterprise("electra")
     def testGetPulls_almostAllParameters(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         pulls = r.get_pulls(state="open", head="penelope:mergeable", sort="updated", direction="asc")
         self.assertEqual([p.title for p in pulls], ["Mergeable pull"])
 
-    @Enterprise("electra")
     def testGetPulls_base(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         pulls = r.get_pulls(base="master", per_page=1)
         self.assertEqual([p.title for p in pulls], ["Mutable pull", "Conflict pull", "Mergeable pull"])
 
-    @Enterprise("electra")
     def testGetPull(self):
-        r = self.g.get_repo(("electra", "pulls"))
+        r = self.electra.get_repo(("electra", "pulls"))
         pull = r.get_pull(1)
         self.assertEqual(pull.title, "Merged pull")
 
 
 class RepositoryKeys(TestCase):
-    @Enterprise("electra")
     def testGetKeys(self):
-        keys = self.g.get_repo(("electra", "immutable")).get_keys()
+        keys = self.electra.get_repo(("electra", "immutable")).get_keys()
         self.assertEqual([k.title for k in keys], ["immutable-1", "immutable-2"])
 
-    @Enterprise("electra")
     def testGetKey(self):
-        k = self.g.get_repo(("electra", "immutable")).get_key(6)
+        k = self.electra.get_repo(("electra", "immutable")).get_key(6)
         self.assertEqual(k.title, "immutable-1")
 
-    @Enterprise("electra")
     def testCreateKey(self):
-        k = self.g.get_repo(("electra", "mutable")).create_key("mutable-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkQih2DtSwBzLUtSNYEKULlI5M1qa6vnq42xt9qZpkLav3G9eD/GqJRST+zZMsyfpP62PtiYKXJdLJX2MQIzUgI2PzNy+iMy+ldiTEABYEOCa+BH9+x2R5xXGlmmCPblpamx3kstGtCTa3LSkyIvxbt5vjbXCyThhJaSKyh+42Uedcz7l0y/TODhnkpid/5eiBz6k0VEbFfhM6h71eBdCFpeMJIhGaPTjbKsEjXIK0SRe0v0UQnpXJQkhAINbm+q/2yjt7zwBF74u6tQjRqJK7vQO2k47ZmFMAGeIxS6GheI+JPmwtHkxvfaJjy2lIGX+rt3lkW8xEUxiMTlxeh+0R")
+        k = self.electra.get_repo(("electra", "mutable")).create_key("mutable-1", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkQih2DtSwBzLUtSNYEKULlI5M1qa6vnq42xt9qZpkLav3G9eD/GqJRST+zZMsyfpP62PtiYKXJdLJX2MQIzUgI2PzNy+iMy+ldiTEABYEOCa+BH9+x2R5xXGlmmCPblpamx3kstGtCTa3LSkyIvxbt5vjbXCyThhJaSKyh+42Uedcz7l0y/TODhnkpid/5eiBz6k0VEbFfhM6h71eBdCFpeMJIhGaPTjbKsEjXIK0SRe0v0UQnpXJQkhAINbm+q/2yjt7zwBF74u6tQjRqJK7vQO2k47ZmFMAGeIxS6GheI+JPmwtHkxvfaJjy2lIGX+rt3lkW8xEUxiMTlxeh+0R")
         self.assertEqual(k.title, "mutable-1")
         # @todoAlpha Open ticket to GitHub because k.delete fails because of k.url
         # We would need url=https://api.github.com/repos/electra/mutable/keys/9 to be able to delete it
@@ -692,36 +621,31 @@ class RepositoryKeys(TestCase):
 
 
 class RepositoryPeople(TestCase):
-    @Enterprise("electra")
     def testGetCollaborators(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         collaborators = r.get_collaborators()
         self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
 
-    @Enterprise("electra")
     def testGetCollaborators_allParameters(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         collaborators = r.get_collaborators(per_page=1)
         self.assertEqual([c.login for c in collaborators], ["electra", "zeus", "penelope"])
 
-    @Enterprise("electra")
     def testAddToAndRemoveFromCollaborators(self):
-        r = self.g.get_repo(("electra", "mutable"))
+        r = self.electra.get_repo(("electra", "mutable"))
         self.assertTrue(r.has_in_collaborators("penelope"))
         r.remove_from_collaborators("penelope")
         self.assertFalse(r.has_in_collaborators("penelope"))
         r.add_to_collaborators("penelope")
         self.assertTrue(r.has_in_collaborators("penelope"))
 
-    @Enterprise("electra")
     def testGetContributors(self):
-        r = self.g.get_repo(("electra", "contributors"))
+        r = self.electra.get_repo(("electra", "contributors"))
         contributors = r.get_contributors()
         self.assertEqual([c.login for c in contributors], ["electra", "penelope", "zeus"])
 
-    @Enterprise("electra")
     def testGetContributors_allParameters(self):
-        r = self.g.get_repo(("electra", "contributors"))
+        r = self.electra.get_repo(("electra", "contributors"))
         contributors = r.get_contributors(anon=True, per_page=1)
         self.assertEqual(len(list(contributors)), 4)
         self.assertIsInstance(contributors[0], PyGithub.Blocking.User.User)
@@ -735,42 +659,34 @@ class RepositoryPeople(TestCase):
         self.assertIsInstance(contributors[3], PyGithub.Blocking.User.User)
         self.assertEqual(contributors[3].login, "zeus")
 
-    @Enterprise("electra")
     def testGetForks(self):
-        forks = self.g.get_repo(("electra", "immutable")).get_forks()
+        forks = self.electra.get_repo(("electra", "immutable")).get_forks()
         self.assertEqual([f.full_name for f in forks], ["zeus/immutable", "olympus/immutable"])
 
-    @Enterprise("electra")
     def testGetForks_allParameters(self):
-        forks = self.g.get_repo(("electra", "immutable")).get_forks(sort="oldest", per_page=1)
+        forks = self.electra.get_repo(("electra", "immutable")).get_forks(sort="oldest", per_page=1)
         self.assertEqual([f.full_name for f in forks], ["olympus/immutable", "zeus/immutable"])
 
-    @Enterprise("electra")
     def testGetStargazers(self):
-        stargazers = self.g.get_repo(("electra", "immutable")).get_stargazers()
+        stargazers = self.electra.get_repo(("electra", "immutable")).get_stargazers()
         self.assertEqual([s.login for s in stargazers], ["penelope", "zeus"])
 
-    @Enterprise("electra")
     def testGetStargazers_allParameters(self):
-        stargazers = self.g.get_repo(("electra", "immutable")).get_stargazers(per_page=1)
+        stargazers = self.electra.get_repo(("electra", "immutable")).get_stargazers(per_page=1)
         self.assertEqual([s.login for s in stargazers], ["penelope", "zeus"])
 
-    @Enterprise("electra")
     def testGetSubscribers(self):
-        subscribers = self.g.get_repo(("electra", "immutable")).get_subscribers()
+        subscribers = self.electra.get_repo(("electra", "immutable")).get_subscribers()
         self.assertEqual([s.login for s in subscribers], ["electra", "penelope"])
 
-    @Enterprise("electra")
     def testGetSubscribers_allParameters(self):
-        subscribers = self.g.get_repo(("electra", "immutable")).get_subscribers(per_page=1)
+        subscribers = self.electra.get_repo(("electra", "immutable")).get_subscribers(per_page=1)
         self.assertEqual([s.login for s in subscribers], ["electra", "penelope"])
 
-    @Enterprise("zeus")
     def testGetTeams(self):
-        teams = self.g.get_repo(("olympus", "immutable")).get_teams()
+        teams = self.zeus.get_repo(("olympus", "immutable")).get_teams()
         self.assertEqual([t.name for t in teams], ["Gods", "Humans"])
 
-    @Enterprise("zeus")
     def testGetTeams_allParameters(self):
-        teams = self.g.get_repo(("olympus", "immutable")).get_teams(per_page=1)
+        teams = self.zeus.get_repo(("olympus", "immutable")).get_teams(per_page=1)
         self.assertEqual([t.name for t in teams], ["Gods", "Humans"])

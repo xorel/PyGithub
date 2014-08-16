@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class PullRequestAttributes(TestCase):
-    @Enterprise("electra")
     def testMergeable(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(2)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(2)
         self.assertEqual(p.additions, 1)
         self.assertEqual(p.base.label, "electra:master")
         self.assertEqual(p.base.ref, "master")
@@ -52,16 +51,14 @@ class PullRequestAttributes(TestCase):
         self.assertEqual(p.updated_at, datetime.datetime(2014, 8, 4, 0, 22, 57))
         self.assertEqual(p.user.login, "penelope")
 
-    @Enterprise("electra")
     def testNotMergeable(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(3)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(3)
         self.assertEqual(p.mergeable, False)
         self.assertEqual(p.mergeable_state, "dirty")
         self.assertEqual(p.merge_commit_sha, None)
 
-    @Enterprise("electra")
     def testMerged(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(1)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(1)
         self.assertEqual(p.mergeable, None)
         self.assertEqual(p.closed_at, datetime.datetime(2014, 8, 4, 0, 25, 5))
         self.assertEqual(p.merged, True)
@@ -73,26 +70,23 @@ class PullRequestAttributes(TestCase):
 
 
 class PullRequestCommits(TestCase):
-    @Enterprise("electra")
     def testGetCommits(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(2)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(2)
         commits = p.get_commits()
         self.assertEqual([c.sha for c in commits], ["c604e9a2f1daf7bf9f96338a2d1899cf9dbb86cf"])
 
 
 class PullRequestEdit(TestCase):
-    @Enterprise("electra")
     def testTitle(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(4)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(4)
         self.assertEqual(p.title, "Mutable pull")
         p.edit(title="Mutable pull!")
         self.assertEqual(p.title, "Mutable pull!")
         p.edit(title="Mutable pull")
         self.assertEqual(p.title, "Mutable pull")
 
-    @Enterprise("electra")
     def testBody(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(4)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(4)
         self.assertEqual(p.body, None)
         p.edit(body="This should be mergeable")
         self.assertEqual(p.body, "This should be mergeable")
@@ -101,18 +95,16 @@ class PullRequestEdit(TestCase):
         p.edit(body=PyGithub.Blocking.Reset)
         self.assertEqual(p.body, None)
 
-    @Enterprise("electra")
     def testState(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(4)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(4)
         self.assertEqual(p.state, "open")
         p.edit(state="closed")
         self.assertEqual(p.state, "closed")
         p.edit(state="open")
         self.assertEqual(p.state, "open")
 
-    @Enterprise("electra")
     def testAssignee(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(4)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(4)
         self.assertEqual(p.assignee, None)
         p.get_issue().edit(assignee="electra")
         self.assertTrue(p.update())
@@ -121,9 +113,8 @@ class PullRequestEdit(TestCase):
         self.assertTrue(p.update())
         self.assertEqual(p.assignee, None)
 
-    @Enterprise("electra")
     def testMilestone(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(4)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(4)
         self.assertEqual(p.milestone, None)
         p.get_issue().edit(milestone=1)
         self.assertTrue(p.update())
@@ -134,9 +125,8 @@ class PullRequestEdit(TestCase):
 
 
 class PullRequestFiles(TestCase):
-    @Enterprise("electra")
     def testGetFiles(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(2)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(2)
         files = p.get_files()
         self.assertEqual(len(files), 1)
         self.assertEqual(files[0].additions, 1)
@@ -153,23 +143,20 @@ class PullRequestFiles(TestCase):
 
 
 class PullRequestMerge(TestCase):
-    @Enterprise("electra")
     def testGetIsMerged(self):
-        self.assertFalse(self.g.get_repo(("electra", "pulls")).get_pull(2).get_is_merged())
-        self.assertTrue(self.g.get_repo(("electra", "pulls")).get_pull(1).get_is_merged())
+        self.assertFalse(self.electra.get_repo(("electra", "pulls")).get_pull(2).get_is_merged())
+        self.assertTrue(self.electra.get_repo(("electra", "pulls")).get_pull(1).get_is_merged())
 
-    @Enterprise("electra")
     def testMergeUnmergeable(self):
-        p = self.g.get_repo(("electra", "pulls")).get_pull(3)
+        p = self.electra.get_repo(("electra", "pulls")).get_pull(3)
         self.assertEqual(p.mergeable, False)
         with self.assertRaises(PyGithub.Blocking.MethodNotAllowedException) as cm:
             p.merge()
         self.assertEqual(cm.exception.args[2]["documentation_url"], "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button")
         self.assertEqual(cm.exception.args[2]["message"], "Pull Request is not mergeable")
 
-    @Enterprise("electra")
     def testMergeMergeable(self):
-        repo = self.g.get_repo(("electra", "pulls"))
+        repo = self.electra.get_repo(("electra", "pulls"))
         ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("refs/heads/master").object.sha)
         p = repo.create_pull("Merge pull", "penelope:mergeable", "ephemeral")
         self.assertEqual(p.mergeable, None)
@@ -182,9 +169,8 @@ class PullRequestMerge(TestCase):
         self.assertEqual(r.sha, "a34257f72bbda674155899c6c7dc2ab255da3a05")
         ephemeral.delete()
 
-    @Enterprise("electra")
     def testMergeMergeable_allParameters(self):
-        repo = self.g.get_repo(("electra", "pulls"))
+        repo = self.electra.get_repo(("electra", "pulls"))
         ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("refs/heads/master").object.sha)
         p = repo.create_pull("Merge pull", "penelope:mergeable", "ephemeral")
         self.assertEqual(p.mergeable, None)

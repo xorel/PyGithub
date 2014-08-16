@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class SubscriptionAttributes(TestCase):
-    @Enterprise.User(2)
     def test(self):
-        s = self.g.get_authenticated_user().get_subscription(("ghe-user-1", "repo-user-1-1"))
+        s = self.user2.get_authenticated_user().get_subscription(("ghe-user-1", "repo-user-1-1"))
         self.assertEqual(s.created_at, datetime.datetime(2014, 7, 23, 1, 43, 22))
         self.assertEqual(s.ignored, False)
         self.assertIsNone(s.reason)
@@ -17,9 +16,8 @@ class SubscriptionAttributes(TestCase):
 
 
 class SubscriptionEdit(TestCase):
-    @Enterprise.User(2)
     def test(self):
-        s = self.g.get_authenticated_user().get_subscription(("ghe-user-1", "repo-user-1-1"))
+        s = self.user2.get_authenticated_user().get_subscription(("ghe-user-1", "repo-user-1-1"))
         s.edit(subscribed=False, ignored=True)
         self.assertEqual(s.subscribed, False)
         self.assertEqual(s.ignored, True)
@@ -29,7 +27,6 @@ class SubscriptionEdit(TestCase):
 
 
 class SubscriptionDelete(TestCase):
-    @Enterprise.User(2)
     def test(self):
-        s = self.g.get_authenticated_user().create_subscription(("ghe-org-1", "repo-org-1-1"), subscribed=True, ignored=False)
+        s = self.user2.get_authenticated_user().create_subscription(("ghe-org-1", "repo-org-1-1"), subscribed=True, ignored=False)
         s.delete()

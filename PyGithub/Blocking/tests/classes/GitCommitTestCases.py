@@ -6,9 +6,8 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class GitCommitAttributes(TestCase):
-    @Enterprise("electra")
     def test(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertEqual(c.author.date, datetime.datetime(2000, 12, 31, 23, 59, 59))
         self.assertEqual(c.author.name, "John Doe")
         self.assertEqual(c.author.email, "john@doe.com")
@@ -26,14 +25,12 @@ class GitCommitAttributes(TestCase):
 
 
 class GitCommitUpdate(TestCase):
-    @Enterprise("electra")
     def testThroughLazyCompletion(self):
-        c = self.g.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]
+        c = self.electra.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]
         self.assertEqual(c.sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         self.assertEqual(c.tree.sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
 
-    @Enterprise("electra")
     def testArtifical(self):
         # Author are always returned completely so there is no other way to cover _updateAttributes
-        c = self.g.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")
+        c = self.electra.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")
         c.author._updateAttributes()

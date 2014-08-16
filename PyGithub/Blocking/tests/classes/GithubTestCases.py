@@ -6,58 +6,49 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class GithubEntities(TestCase):
-    @Enterprise("electra")
     def testGetOrg(self):
-        o = self.g.get_org("olympus")
+        o = self.electra.get_org("olympus")
         self.assertEqual(o.billing_email, "ghe-olympus@jacquev6.net")
 
-    @Enterprise("electra")
     def testGetUser(self):
-        u = self.g.get_user("zeus")
+        u = self.electra.get_user("zeus")
         self.assertEqual(u.name, "Zeus, god of the sky")
 
-    @Enterprise("electra")
     def testGetAuthenticatedUser(self):
-        u = self.g.get_authenticated_user()
+        u = self.electra.get_authenticated_user()
         self.assertEqual(u.name, "Electra")
 
-    @Enterprise("zeus")
     def testGetTeam(self):
-        t = self.g.get_team(73)
+        t = self.zeus.get_team(73)
         self.assertEqual(t.name, "Humans")
 
-    @Enterprise("electra")
     def testGetUsers(self):
-        users = self.g.get_users()
+        users = self.electra.get_users()
         self.assertEqual([u.login for u in users], ["ghost", "github-enterprise", "zeus", "poseidon", "morpheus", "antigone", "electra", "penelope", "olympus", "underground"])
         self.assertIsInstance(users[0], PyGithub.Blocking.User.User)
         self.assertIsInstance(users[1], PyGithub.Blocking.Organization.Organization)
 
-    @Enterprise("electra")
     def testGetUsers_allParameters(self):
-        users = self.g.get_users(since=16)
+        users = self.electra.get_users(since=16)
         self.assertEqual([u.login for u in users], ["penelope", "olympus", "underground"])
         self.assertEqual(users[0].id, 17)
 
-    @DotCom
     def testGetUsers_pagination(self):
-        users = self.g.get_users()[:250]
+        users = self.dotcom.get_users()[:250]
         self.assertEqual(len(users), 250)
 
 
 class GithubGists(TestCase):
-    @Enterprise("electra")
     def testCreateAnonymousGist(self):
-        g = self.g.create_anonymous_gist(files={"foo.txt": {"content": "barbaz"}})
+        g = self.electra.create_anonymous_gist(files={"foo.txt": {"content": "barbaz"}})
         self.assertEqual(g.owner, None)
         self.assertEqual(g.user, None)
         self.assertEqual(g.public, False)
         with self.assertRaises(PyGithub.Blocking.ObjectNotFoundException):
             g.delete()
 
-    @Enterprise("electra")
     def testCreateAnonymousGist_allParameters(self):
-        g = self.g.create_anonymous_gist(files={"foo.txt": {"content": "barbaz"}}, description="Created by PyGithub", public=True)
+        g = self.electra.create_anonymous_gist(files={"foo.txt": {"content": "barbaz"}}, description="Created by PyGithub", public=True)
         self.assertEqual(g.owner, None)
         self.assertEqual(g.user, None)
         self.assertEqual(g.description, "Created by PyGithub")
@@ -65,48 +56,41 @@ class GithubGists(TestCase):
         with self.assertRaises(PyGithub.Blocking.ObjectNotFoundException):
             g.delete()
 
-    @Enterprise("zeus")
     def testGetGist(self):
-        g = self.g.get_gist("3f784a17f0b5851efeee")
+        g = self.zeus.get_gist("3f784a17f0b5851efeee")
         self.assertEqual(g.description, "Immutable gist")
 
-    @Enterprise("zeus")
     def testGetPublicGists(self):
-        gists = self.g.get_public_gists()
+        gists = self.zeus.get_public_gists()
         self.assertEqual([g.description for g in gists], ["Created by PyGithub", "Mutable gist 2", "Mutable gist 1", "Immutable gist"])
 
-    @Enterprise("zeus")
     def testGetPublicGists_allParameters(self):
-        gists = self.g.get_public_gists(since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=2)
+        gists = self.zeus.get_public_gists(since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=2)
         self.assertEqual([g.description for g in gists], ["Created by PyGithub", "Mutable gist 2", "Mutable gist 1", "Immutable gist"])
 
 
 class GithubMisc(TestCase):
-    @Enterprise("electra")
     def testGetHooks(self):
-        hooks = self.g.get_hooks()
+        hooks = self.electra.get_hooks()
         self.assertEqual([h.name for h in hooks[:3]], ["activecollab", "acunote", "agilebench"])
 
-    @Enterprise("electra")
     def testGetHook(self):
-        h = self.g.get_hook("campfire")
+        h = self.electra.get_hook("campfire")
         self.assertEqual(h.events, ["push", "pull_request", "issues"])
         self.assertEqual(h.supported_events, ["gollum", "issues", "public", "pull_request", "push"])
         self.assertEqual(h.title, "Campfire")
         self.assertEqual(h.name, "campfire")
         self.assertEqual(h.schema, [["string", "subdomain"], ["string", "room"], ["string", "token"], ["string", "sound"], ["boolean", "master_only"], ["boolean", "play_sound"], ["boolean", "long_url"]])
 
-    @DotCom
     def testMeta(self):
         # @todoAlpha Consider making Meta updatable, with a constant url "/meta"
-        m = self.g.get_meta()
+        m = self.dotcom.get_meta()
         self.assertEqual(m.git, ["192.30.252.0/22"])
         self.assertEqual(m.hooks, ["192.30.252.0/22"])
         self.assertEqual(m.verifiable_password_authentication, True)
 
-    @Enterprise("electra")
     def testGetEmojis(self):
-        emojis = self.g.get_emojis()
+        emojis = self.electra.get_emojis()
         self.assertEqual(len(emojis), 887)
         for k, v in {
             "+1": "http://github.home.jacquev6.net/images/icons/emoji/+1.png?v5",
@@ -122,9 +106,8 @@ class GithubMisc(TestCase):
         }.iteritems():
             self.assertEqual(emojis[k], v)
 
-    @Enterprise("electra")
     def testGetGitIgnoreTemplate(self):
-        t = self.g.get_gitignore_template("C")
+        t = self.electra.get_gitignore_template("C")
         self.assertEqual(t.name, "C")
         self.maxDiff = None
         self.assertEqual(t.source.split("\n"), [
@@ -154,9 +137,8 @@ class GithubMisc(TestCase):
             ""
         ])
 
-    @Enterprise("electra")
     def testGetGitIgnoreTemplates(self):
-        templates = self.g.get_gitignore_templates()
+        templates = self.electra.get_gitignore_templates()
         self.assertEqual(len(templates), 102)
         self.assertEqual(
             templates[:5],
@@ -179,9 +161,8 @@ class GithubMisc(TestCase):
             ]
         )
 
-    @DotCom
     def testGetRateLimit(self):
-        r = self.g.get_rate_limit()
+        r = self.dotcom.get_rate_limit()
         self.assertEqual(r.resources.core.limit, 5000)
         self.assertEqual(r.resources.core.remaining, 5000)
         self.assertEqual(r.resources.core.reset, datetime.datetime(2014, 8, 10, 20, 0, 53))
@@ -189,39 +170,32 @@ class GithubMisc(TestCase):
         self.assertEqual(r.resources.search.remaining, 30)
         self.assertEqual(r.resources.search.reset, datetime.datetime(2014, 8, 10, 19, 1, 53))
 
-    @DotCom
     def testGetFreshSessionRateLimits(self):
-        self.assertEqual(self.g.Session.RateLimit.remaining, 4999)
+        self.assertEqual(self.dotcom.Session.RateLimit.remaining, 4999)
 
-    @DotCom
     def testSetSessionRateLimits(self):
-        self.g.get_authenticated_user()
-        self.assertEqual(self.g.Session.RateLimit.remaining, 4998)
+        self.dotcom.get_authenticated_user()
+        self.assertEqual(self.dotcom.Session.RateLimit.remaining, 4998)
 
-    @DotCom
     def testUpdateSessionRateLimits(self):
-        self.assertEqual(self.g.Session.RateLimit.remaining, 4998)
-        self.g.get_authenticated_user()
-        self.assertEqual(self.g.Session.RateLimit.remaining, 4997)
+        self.assertEqual(self.dotcom.Session.RateLimit.remaining, 4998)
+        self.dotcom.get_authenticated_user()
+        self.assertEqual(self.dotcom.Session.RateLimit.remaining, 4997)
 
 
 class GithubRepositories(TestCase):
-    @Enterprise("electra")
     def testGetRepo(self):
-        r = self.g.get_repo(("electra", "immutable"))
+        r = self.electra.get_repo(("electra", "immutable"))
         self.assertEqual(r.full_name, "electra/immutable")
 
-    @Enterprise("electra")
     def testGetRepos(self):
-        repos = self.g.get_repos()
+        repos = self.electra.get_repos()
         self.assertEqual([r.full_name for r in repos], ["/repo-user-1-1", "/repo-user-1-1", "/repo-org-1-1", "/repo-user-1-ephemeral", "/repo-user-1-1", "olympus/trojan-war", "olympus/trojan-war", "olympus/trojan-war", "olympus/trojan-war", "electra/issues", "electra/pulls", "penelope/pulls", "electra/immutable", "olympus/immutable", "penelope/immutable", "electra/contributors", "electra/mutable", "electra/issues", "penelope/mutable", "electra/ephemeral", "olympus/org-repo", "electra/git-objects", "zeus/immutable"])
 
-    @Enterprise("electra")
     def testGetRepos_allParameters(self):
-        repos = self.g.get_repos(since=68)
+        repos = self.electra.get_repos(since=68)
         self.assertEqual([r.full_name for r in repos], ["electra/ephemeral", "olympus/org-repo", "electra/git-objects", "zeus/immutable"])
 
-    @DotCom
     def testGetRepos_pagination(self):
-        repos = self.g.get_repos()[:250]
+        repos = self.dotcom.get_repos()[:250]
         self.assertEqual(len(repos), 250)

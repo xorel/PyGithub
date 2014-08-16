@@ -13,11 +13,3 @@ class TestGenerator:
 
     def generateClass(self, klass):  # pragma no cover
         yield "from PyGithub.Blocking.tests.Framework import *"
-        yield ""
-        yield ""
-        yield "class {}Attributes(TestCase):".format(klass.simpleName)
-        yield "    pass"
-        yield ""
-        yield ""
-        yield "class {}EditUpdateDelete(TestCase):".format(klass.simpleName)
-        yield "    pass"
