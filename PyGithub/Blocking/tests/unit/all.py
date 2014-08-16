@@ -4,6 +4,7 @@
 
 from PyGithub.Blocking.tests.unit.BaseObjectsTestCases import *
 from PyGithub.Blocking.tests.unit.BuilderTestCases import *
+from PyGithub.Blocking.tests.unit.PaginatedListTestCases import *
 from PyGithub.Blocking.tests.unit.ReceiveTestCases import *
 from PyGithub.Blocking.tests.unit.SendTestCases import *
 from PyGithub.Blocking.tests.unit.SessionTestCases import *

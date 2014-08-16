@@ -73,6 +73,8 @@ class PaginatedList(object):
     See also :meth:`.Builder.PerPage`.
     """
 
+    # @todoAlpha CurrentLenght and IsComplete
+
     def __init__(self, session, content, r):
         self.__session = session
         self.__content = content
