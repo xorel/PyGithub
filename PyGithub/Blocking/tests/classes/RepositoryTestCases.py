@@ -188,14 +188,15 @@ class RepositoryDelete(TestCase):
 
 
 class RepositoryEdit(TestCase):
-    def setUpEnterprise(self):
+    def setUpEnterprise(self):  # pragma no cover
         electra = self.electra.get_authenticated_user()
         try:
             electra.get_repo("edit").delete()
-        except PyGithub.ObjectNotFoundException:  # pragma no cover (setup branch)
-            pass  # pragma no cover (setup branch)
+        except PyGithub.ObjectNotFoundException:
+            pass
         r = electra.create_repo("edit", auto_init=True)
         r.create_git_ref("refs/heads/develop", r.get_git_ref("refs/heads/master").object.sha)
+        return Data()
 
     def testName(self):
         r = self.electra.get_repo(("electra", "edit"))

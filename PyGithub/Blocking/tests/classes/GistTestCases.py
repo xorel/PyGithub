@@ -6,7 +6,7 @@ from PyGithub.Blocking.tests.Framework import *
 
 
 class GistAttributes(TestCase):
-    def setUpEnterprise(self):
+    def setUpEnterprise(self):  # pragma no cover
         source = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}, "bar.txt": {"content": "tartempion"}}, public=True, description="attributes")
         fork = self.penelope.get_authenticated_user().create_gist_fork(source.id)
         fork.edit(files={"new.txt": {"content": "added"}})
@@ -79,7 +79,7 @@ class GistAttributes(TestCase):
 
 
 class GistEdit(TestCase):
-    def setUpEnterprise(self):
+    def setUpEnterprise(self):  # pragma no cover
         g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="edit")
         return Data(id=g.id)
 

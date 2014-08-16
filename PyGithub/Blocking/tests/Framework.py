@@ -203,18 +203,22 @@ class TestCase(unittest.TestCase):
     data = None
 
     def pause(self):
-        self.__recordHelper.pause()
+        if hasattr(self, "_TestCase__recordHelper"):
+            self.__recordHelper.pause()
+        else:
+            time.sleep(2)
 
     def getBuilder(self):
         builder = PyGithub.BlockingBuilder().UserAgent("jacquev6/PyGithub/2; UnitTests recorder")
-        origBuild = builder.Build
+        if hasattr(self, "_TestCase__recordHelper"):
+            origBuild = builder.Build
 
-        def newBuild(*args, **kwds):
-            github = origBuild(*args, **kwds)
-            self.__recordHelper.apply(github)
-            return github
+            def newBuild(*args, **kwds):
+                github = origBuild(*args, **kwds)
+                self.__recordHelper.apply(github)
+                return github
 
-        builder.Build = newBuild
+            builder.Build = newBuild
         return builder
 
     def setUp(self):
@@ -227,10 +231,20 @@ class TestCase(unittest.TestCase):
             self.__setUpResources()
 
     def __setUpResources(self):
-        self.__setUpMocks("setUpEnterprise")
-        self.__class__.data = 0
-        self.__class__.data = self.setUpEnterprise()
-        self.__recordHelper.finalize()  # Don't finalize if setUpEnterprise raises an exception
+        pythonFileName = inspect.getfile(self.__class__)
+        fileName = "{}/{}_RecordedData/{}.setUpEnterprise.json".format(os.path.dirname(pythonFileName), os.path.splitext(os.path.basename(pythonFileName))[0], self.__class__.__name__)
+        if os.path.exists(fileName):
+            with open(fileName) as f:
+                self.__class__.data = Data(**json.load(f))
+        else:
+            self.__class__.data = object()
+            self.__setUpUsers()
+            self.__class__.data = self.setUpEnterprise()
+            assert isinstance(self.__class__.data, Data)
+            if not os.path.exists(os.path.dirname(fileName)):
+                os.makedirs(os.path.dirname(fileName))
+            with open(fileName, "w") as f:
+                json.dump(self.__class__.data._raw, f, sort_keys=True, indent=4, separators=(',', ': '))
 
     def __setUpMocks(self, methodName):
         self.mocks = MockMockMock.Engine()
