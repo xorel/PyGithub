@@ -17,24 +17,28 @@
         },
         "response": {
             "body": {
-                "documentation_url": "http://developer.github.com/v3",
+                "documentation_url": "https://developer.github.com/v3",
                 "message": "Requires authentication"
             },
             "headers": {
                 "access-control-allow-credentials": "true",
                 "access-control-allow-origin": "*",
                 "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
-                "content-length": "90",
+                "content-length": "91",
+                "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 22 Feb 2014 21:06:22 GMT",
+                "date": "Sat, 16 Aug 2014 02:10:44 GMT",
                 "server": "GitHub.com",
                 "status": "401 Unauthorized",
+                "strict-transport-security": "max-age=31536000; includeSubdomains",
                 "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "62E81E32:732C:565354:5309114E",
+                "x-github-request-id": "62E81E54:4A6D:FD7DC51:53EEBDA3",
                 "x-ratelimit-limit": "60",
-                "x-ratelimit-remaining": "56",
-                "x-ratelimit-reset": "1393104182"
+                "x-ratelimit-remaining": "53",
+                "x-ratelimit-reset": "1408158370",
+                "x-xss-protection": "1; mode=block"
             },
             "status": 401
         }
