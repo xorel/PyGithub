@@ -1,0 +1,270 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "id": 91,
+                "members_count": 2,
+                "members_url": "http://github.home.jacquev6.net/api/v3/teams/91/members{/member}",
+                "name": "members",
+                "organization": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/98f13708210194c475687be6106a3b84.png",
+                    "created_at": "2014-08-16T15:52:03Z",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/events",
+                    "followers": 0,
+                    "following": 0,
+                    "html_url": "http://github.home.jacquev6.net/teamss",
+                    "id": 20,
+                    "login": "teamss",
+                    "members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/members{/member}",
+                    "public_gists": 0,
+                    "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/public_members{/member}",
+                    "public_repos": 2,
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/repos",
+                    "type": "Organization",
+                    "updated_at": "2014-08-16T16:43:19Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/orgs/teamss"
+                },
+                "permission": "pull",
+                "repos_count": 0,
+                "repositories_url": "http://github.home.jacquev6.net/api/v3/teams/91/repos",
+                "slug": "members",
+                "url": "http://github.home.jacquev6.net/api/v3/teams/91"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1039",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:46:43 GMT",
+                "etag": "\"0655f1444669a25f8ffad3cae0300d9a\"",
+                "last-modified": "Sat, 16 Aug 2014 16:46:43 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "b8d1f8a8-b91c-414b-8191-671924443810",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91/members/electra",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "documentation_url": "https://developer.github.com/v3",
+                "message": "Not Found"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-length": "77",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:46:43 GMT",
+                "server": "GitHub.com",
+                "status": "404 Not Found",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "1d5355d8-3205-4c03-b4ea-72c53190b4a9",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 404
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "0",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91/members/electra",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PUT"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Sat, 16 Aug 2014 16:46:43 GMT",
+                "server": "GitHub.com",
+                "status": "204 No Content",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "efca9d23-538e-4c99-bcd6-aa9084b9cdae",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 204
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91/members/electra",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Sat, 16 Aug 2014 16:46:44 GMT",
+                "server": "GitHub.com",
+                "status": "204 No Content",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "42250a37-e9b6-49cf-9646-bd5a622f8076",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 204
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "0",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91/members/electra",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "DELETE"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Sat, 16 Aug 2014 16:46:44 GMT",
+                "server": "GitHub.com",
+                "status": "204 No Content",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "8e3b0424-3539-4f93-b510-92ffaf1533ca",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 204
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/91/members/electra",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "documentation_url": "https://developer.github.com/v3",
+                "message": "Not Found"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-length": "77",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:46:44 GMT",
+                "server": "GitHub.com",
+                "status": "404 Not Found",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "44a528e4-8a37-4fa6-9628-13de9d3cc140",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 404
+        }
+    }
+]

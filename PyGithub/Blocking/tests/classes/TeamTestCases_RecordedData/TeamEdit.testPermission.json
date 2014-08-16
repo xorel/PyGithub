@@ -1,0 +1,219 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/95",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "id": 95,
+                "members_count": 0,
+                "members_url": "http://github.home.jacquev6.net/api/v3/teams/95/members{/member}",
+                "name": "edit",
+                "organization": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/98f13708210194c475687be6106a3b84.png",
+                    "created_at": "2014-08-16T15:52:03Z",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/events",
+                    "followers": 0,
+                    "following": 0,
+                    "html_url": "http://github.home.jacquev6.net/teamss",
+                    "id": 20,
+                    "login": "teamss",
+                    "members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/members{/member}",
+                    "public_gists": 0,
+                    "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/public_members{/member}",
+                    "public_repos": 2,
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/repos",
+                    "type": "Organization",
+                    "updated_at": "2014-08-16T16:43:19Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/orgs/teamss"
+                },
+                "permission": "pull",
+                "repos_count": 0,
+                "repositories_url": "http://github.home.jacquev6.net/api/v3/teams/95/repos",
+                "slug": "edit",
+                "url": "http://github.home.jacquev6.net/api/v3/teams/95"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1033",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:57:22 GMT",
+                "etag": "\"29c6b71b486e140ddfdf6274c4e66a00\"",
+                "last-modified": "Sat, 16 Aug 2014 16:56:41 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "158ec327-69fe-4eee-82c5-397b5c0d4f3f",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "permission": "push"
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "22",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/95",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PATCH"
+        },
+        "response": {
+            "body": {
+                "id": 95,
+                "members_count": 0,
+                "members_url": "http://github.home.jacquev6.net/api/v3/teams/95/members{/member}",
+                "name": "edit",
+                "organization": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/98f13708210194c475687be6106a3b84.png",
+                    "created_at": "2014-08-16T15:52:03Z",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/events",
+                    "followers": 0,
+                    "following": 0,
+                    "html_url": "http://github.home.jacquev6.net/teamss",
+                    "id": 20,
+                    "login": "teamss",
+                    "members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/members{/member}",
+                    "public_gists": 0,
+                    "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/public_members{/member}",
+                    "public_repos": 2,
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/repos",
+                    "type": "Organization",
+                    "updated_at": "2014-08-16T16:43:19Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/orgs/teamss"
+                },
+                "permission": "push",
+                "repos_count": 0,
+                "repositories_url": "http://github.home.jacquev6.net/api/v3/teams/95/repos",
+                "slug": "edit",
+                "url": "http://github.home.jacquev6.net/api/v3/teams/95"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1033",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:57:22 GMT",
+                "etag": "\"849d524608b47d9a9d121941cac56fde\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "d13494b7-7f69-4e9c-ba3d-aaf1a39ccb58",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "permission": "pull"
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "22",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/teams/95",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PATCH"
+        },
+        "response": {
+            "body": {
+                "id": 95,
+                "members_count": 0,
+                "members_url": "http://github.home.jacquev6.net/api/v3/teams/95/members{/member}",
+                "name": "edit",
+                "organization": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/98f13708210194c475687be6106a3b84.png",
+                    "created_at": "2014-08-16T15:52:03Z",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/events",
+                    "followers": 0,
+                    "following": 0,
+                    "html_url": "http://github.home.jacquev6.net/teamss",
+                    "id": 20,
+                    "login": "teamss",
+                    "members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/members{/member}",
+                    "public_gists": 0,
+                    "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/public_members{/member}",
+                    "public_repos": 2,
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/teamss/repos",
+                    "type": "Organization",
+                    "updated_at": "2014-08-16T16:43:19Z",
+                    "url": "http://github.home.jacquev6.net/api/v3/orgs/teamss"
+                },
+                "permission": "pull",
+                "repos_count": 0,
+                "repositories_url": "http://github.home.jacquev6.net/api/v3/teams/95/repos",
+                "slug": "edit",
+                "url": "http://github.home.jacquev6.net/api/v3/teams/95"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1033",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 16 Aug 2014 16:57:22 GMT",
+                "etag": "\"4a19a3bb674c70a4e00499293a804c04\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "9c1d7726-25eb-44a7-9e68-49b9087dad58",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]
