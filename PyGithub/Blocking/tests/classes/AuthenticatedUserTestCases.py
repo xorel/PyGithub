@@ -45,6 +45,51 @@ class AuthenticatedUserAttributes(TestCase):
         self.assertEqual(u.updated_at, datetime.datetime(2014, 8, 2, 18, 21, 07))
 
 
+class AuthenticatedUserAuthorizations(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        u = self.electra.get_authenticated_user()
+        for a in u.get_authorizations():
+            a.delete()
+        a = u.create_authorization("a", scopes=["repo", "user"])
+        u.create_authorization("b")
+        return Data(id=a.id)
+
+    def testGetAuthorization(self):
+        u = self.electra.get_authenticated_user()
+        a = u.get_authorization(self.data.id)
+        self.assertEqual(a.note, "a")
+
+    def testGetAuthorizations(self):
+        u = self.electra.get_authenticated_user()
+        auths = u.get_authorizations()
+        self.assertEqual([a.note for a in auths], ["a", "b"])
+
+    def testGetAuthorizations_allParameters(self):
+        u = self.electra.get_authenticated_user()
+        auths = u.get_authorizations(per_page=1)
+        self.assertEqual([a.note for a in auths], ["a", "b"])
+
+    def testCreateAuthorization(self):
+        u = self.electra.get_authenticated_user()
+        a = u.create_authorization("c")
+        self.assertEqual(a.note, "c")
+        self.assertEqual(a.scopes, [])
+        self.assertEqual(a.note_url, None)
+        self.assertEqual(a.app.client_id, "00000000000000000000")
+        self.assertEqual(a.app.name, "c (API)")
+        a.delete()
+
+    def testCreateAuthorization_allParameters(self):
+        u = self.electra.get_authenticated_user()
+        a = u.create_authorization("d", scopes=["repo", "user"], note_url="http://foo.com", client_id="dfb1584c2c0674284875", client_secret="16a529070ec817d87e5b186d966fa935bfad1575")  # Create application manually as electra
+        self.assertEqual(a.note, "d")
+        self.assertEqual(a.scopes, ["repo", "user"])
+        self.assertEqual(a.note_url, "http://foo.com")
+        self.assertEqual(a.app.client_id, "dfb1584c2c0674284875")
+        self.assertEqual(a.app.name, "authorizations")
+        a.delete()
+
+
 class AuthenticatedUserEdit(TestCase):
     def testName(self):
         u = self.penelope.get_authenticated_user()

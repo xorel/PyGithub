@@ -131,6 +131,35 @@ methods:
       - name: id
         value: parameter gist
     return_type: none
+  - name: create_authorization
+    end_point: POST /authorizations
+    parameters:
+      - name: note
+        type: string
+    optional_parameters:
+      - name: scopes
+        type:
+          container: list
+          content: string
+      - name: note_url
+        type: string
+      - name: client_id
+        type: string
+      - name: client_secret
+        type: string
+    url_template: end_point
+    post_arguments:
+      - name: client_id
+        value: parameter client_id
+      - name: client_secret
+        value: parameter client_secret
+      - name: note
+        value: parameter note
+      - name: note_url
+        value: parameter note_url
+      - name: scopes
+        value: parameter scopes
+    return_type: Authorization
   - name: create_fork
     end_point: POST /repos/:owner/:repo/forks
     parameters:
@@ -306,6 +335,28 @@ methods:
         value: parameter name
     effect: update
     return_type: none
+  - name: get_authorization
+    end_point: GET /authorizations/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: id
+        value: parameter id
+    return_type: Authorization
+  - name: get_authorizations
+    end_point: GET /authorizations
+    optional_parameters:
+      - name: per_page
+        type: int
+    url_template: end_point
+    url_arguments:
+      - name: per_page
+        value: parameter per_page
+    return_type:
+      container: PaginatedList
+      content: Authorization
   - name: get_emails
     end_point: GET /user/emails
     url_template: end_point

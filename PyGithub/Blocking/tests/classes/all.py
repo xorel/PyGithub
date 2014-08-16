@@ -7,6 +7,7 @@
 # ######################################################################
 
 from PyGithub.Blocking.tests.classes.AuthenticatedUserTestCases import *
+from PyGithub.Blocking.tests.classes.AuthorizationTestCases import *
 from PyGithub.Blocking.tests.classes.CommitTestCases import *
 from PyGithub.Blocking.tests.classes.ContributorTestCases import *
 from PyGithub.Blocking.tests.classes.FileTestCases import *

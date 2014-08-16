@@ -1,0 +1,67 @@
+structures:
+  - name: Application
+    attributes:
+      - name: client_id
+        type: string
+      - name: name
+        type: string
+      - name: url
+        type: string
+attributes:
+  - name: app
+    type: Authorization.Application
+  - name: created_at
+    type: datetime
+  - name: id
+    type: int
+  - name: note
+    type: string
+  - name: note_url
+    type: string
+  - name: scopes
+    type:
+      container: list
+      content: string
+  - name: token
+    type: string
+  - name: updated_at
+    type: datetime
+methods:
+  - name: delete
+    end_point: DELETE /authorizations/:id
+    url_template: attribute url
+    return_type: none
+  - name: edit
+    end_point: PATCH /authorizations/:id
+    optional_parameters:
+      - name: scopes
+        type:
+          container: list
+          content: string
+      - name: add_scopes
+        type:
+          container: list
+          content: string
+      - name: remove_scopes
+        type:
+          container: list
+          content: string
+      - name: note
+        type: string
+      - name: note_url
+        type:
+          union: [string, Reset]
+    url_template: attribute url
+    post_arguments:
+      - name: add_scopes
+        value: parameter add_scopes
+      - name: note
+        value: parameter note
+      - name: note_url
+        value: parameter note_url
+      - name: remove_scopes
+        value: parameter remove_scopes
+      - name: scopes
+        value: parameter scopes
+    effect: update
+    return_type: none

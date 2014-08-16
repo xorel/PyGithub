@@ -239,7 +239,9 @@ class TestCase(unittest.TestCase):
         else:
             self.__class__.data = object()
             self.__setUpUsers()
+            logging.getLogger("PyGithub").setLevel(logging.DEBUG)
             self.__class__.data = self.setUpEnterprise()
+            logging.getLogger("PyGithub").setLevel(logging.INFO)
             assert isinstance(self.__class__.data, Data)
             if not os.path.exists(os.path.dirname(fileName)):
                 os.makedirs(os.path.dirname(fileName))

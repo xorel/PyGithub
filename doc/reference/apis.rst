@@ -83,35 +83,40 @@ GET /authorizations
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#list-your-authorizations>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.AuthenticatedUser.get_authorizations`
 
 POST /authorizations
 --------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#create-a-new-authorization>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.AuthenticatedUser.create_authorization`
 
 DELETE /authorizations/:id
 --------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#delete-an-authorization>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Authorization.delete`
 
 GET /authorizations/:id
 -----------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#get-a-single-authorization>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.AuthenticatedUser.get_authorization`
 
 PATCH /authorizations/:id
 -------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/oauth_authorizations#update-an-existing-authorization>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Authorization.edit`
 
 PUT /authorizations/clients/:client_id
 --------------------------------------

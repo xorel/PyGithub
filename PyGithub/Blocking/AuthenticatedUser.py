@@ -494,6 +494,36 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/gists/{id}/star", id=gist)
         r = self.Session._request("PUT", url)
 
+    def create_authorization(self, note, scopes=None, note_url=None, client_id=None, client_secret=None):
+        """
+        Calls the `POST /authorizations <http://developer.github.com/v3/oauth_authorizations#create-a-new-authorization>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param note: mandatory :class:`string`
+        :param scopes: optional :class:`list` of :class:`string`
+        :param note_url: optional :class:`string`
+        :param client_id: optional :class:`string`
+        :param client_secret: optional :class:`string`
+        :rtype: :class:`~.Authorization.Authorization`
+        """
+        import PyGithub.Blocking.Authorization
+
+        note = _snd.normalizeString(note)
+        if scopes is not None:
+            scopes = _snd.normalizeList(_snd.normalizeString, scopes)
+        if note_url is not None:
+            note_url = _snd.normalizeString(note_url)
+        if client_id is not None:
+            client_id = _snd.normalizeString(client_id)
+        if client_secret is not None:
+            client_secret = _snd.normalizeString(client_secret)
+
+        url = uritemplate.expand("https://api.github.com/authorizations")
+        postArguments = _snd.dictionary(client_id=client_id, client_secret=client_secret, note=note, note_url=note_url, scopes=scopes)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Authorization.Authorization)(None, r.json(), r.headers.get("ETag"))
+
     def create_fork(self, repo):
         """
         Calls the `POST /repos/:owner/:repo/forks <http://developer.github.com/v3/repos/forks#create-a-fork>`__ end point.
@@ -670,6 +700,44 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(blog=blog, company=company, email=email, hireable=hireable, location=location, name=name)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def get_authorization(self, id):
+        """
+        Calls the `GET /authorizations/:id <http://developer.github.com/v3/oauth_authorizations#get-a-single-authorization>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.Authorization.Authorization`
+        """
+        import PyGithub.Blocking.Authorization
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/authorizations/{id}", id=str(id))
+        r = self.Session._request("GET", url)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Authorization.Authorization)(None, r.json(), r.headers.get("ETag"))
+
+    def get_authorizations(self, per_page=None):
+        """
+        Calls the `GET /authorizations <http://developer.github.com/v3/oauth_authorizations#list-your-authorizations>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.Authorization.Authorization`
+        """
+        import PyGithub.Blocking.Authorization
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/authorizations")
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Authorization.Authorization))(None, r)
 
     def get_emails(self):
         """
