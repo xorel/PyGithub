@@ -26,7 +26,7 @@ Definition = collections.namedtuple("Definition", "endPoints, classes, unimpleme
 Class = collections.namedtuple("Class", "name, base, structures, attributes, methods, deprecatedAttributes")
 Structure = collections.namedtuple("Structure", "name, updatable, attributes, deprecatedAttributes")
 Attribute = collections.namedtuple("Attribute", "name, type")
-Method = collections.namedtuple("Method", "name, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, effects, returnFrom, returnType")
+Method = collections.namedtuple("Method", "name, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType")
 EndPoint = collections.namedtuple("EndPoint", "verb, url, parameters, doc")
 Parameter = collections.namedtuple("Parameter", "name, type, optional, variable")
 Argument = collections.namedtuple("Argument", "name, value")
@@ -181,7 +181,7 @@ class _DefinitionLoader:
             reason=reason,
         )
 
-    def buildMethod(self, name, url_template, effect=None, effects=None, return_from=None, return_type=None, end_point=None, end_points=None, url_template_arguments=[], url_arguments=[], post_arguments=[], parameters=[], optional_parameters=[], variable_parameter=None, unimplemented_parameters=[]):
+    def buildMethod(self, name, url_template, effect=None, effects=None, return_from=None, return_type=None, end_point=None, end_points=None, url_template_arguments=[], url_arguments=[], post_arguments=[], headers=[], parameters=[], optional_parameters=[], variable_parameter=None, unimplemented_parameters=[]):
         assert isinstance(name, str), name
         # no assert on url_template
         effects = self.makeList(effect, effects)
@@ -193,6 +193,7 @@ class _DefinitionLoader:
         assert all(isinstance(a, dict) for a in url_template_arguments), url_template_arguments
         assert all(isinstance(a, dict) for a in url_arguments), url_arguments
         assert all(isinstance(a, dict) for a in post_arguments), post_arguments
+        assert all(isinstance(h, dict) for h in headers), headers
         assert all(isinstance(p, dict) for p in parameters), parameters
         assert all(isinstance(p, dict) for p in optional_parameters), optional_parameters
         assert isinstance(variable_parameter, (type(None), dict)), variable_parameter
@@ -214,6 +215,7 @@ class _DefinitionLoader:
                 [dict(name="per_page", value="parameter per_page")] if isinstance(return_type, dict) and return_type.get("container") == "PaginatedList" else []
             )),
             postArguments=self.buildArguments(post_arguments),
+            headers=self.buildArguments(headers),
             effects=tuple(self.buildEffect(e) for e in effects),
             returnFrom=return_from,
             returnType=self.buildType(return_type),
@@ -385,6 +387,8 @@ class _DefinitionDumper:
             data["url_arguments"] = self.createDataForArguments(method.urlArguments)
         if len(method.postArguments) != 0:
             data["post_arguments"] = self.createDataForArguments(method.postArguments)
+        if len(method.headers) != 0:
+            data["headers"] = self.createDataForArguments(method.headers)
         if len(method.effects) == 1:
             data["effect"] = method.effects[0]
         elif len(method.effects) > 1:

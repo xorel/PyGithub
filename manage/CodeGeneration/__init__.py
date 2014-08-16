@@ -25,7 +25,7 @@ def main():
 
     crossReferenced = CrossReferenced.Definition(structured, typesRepo)
 
-    builder = CrossReferenced.Class("Builder", None, (), (), (Structured.Method("Build", (), (), (), Structured.EndPointValue(), (), (), (), (), None, Structured.ScalarType("Github")),), ())
+    builder = CrossReferenced.Class("Builder", None, (), (), (Structured.Method("Build", (), (), (), Structured.EndPointValue(), (), (), (), (), (), None, Structured.ScalarType("Github")),), ())
     github = [c for c in crossReferenced.classes if c.simpleName == "Github"][0]
     github._addSource(CrossReferenced.MethodSource(builder.methods[0]))
     github._sortSources()

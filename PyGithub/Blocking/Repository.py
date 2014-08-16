@@ -1265,6 +1265,39 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("POST", url, postArguments=postArguments)
         return _rcv.ClassConverter(self.Session, PyGithub.Blocking.PullRequest.PullRequest)(None, r.json(), r.headers.get("ETag"))
 
+    def create_release(self, tag_name, target_commitish=None, name=None, body=None, draft=None, prerelease=None):
+        """
+        Calls the `POST /repos/:owner/:repo/releases <http://developer.github.com/v3/repos/releases#create-a-release>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param tag_name: mandatory :class:`string`
+        :param target_commitish: optional :class:`string`
+        :param name: optional :class:`string`
+        :param body: optional :class:`string`
+        :param draft: optional :class:`bool`
+        :param prerelease: optional :class:`bool`
+        :rtype: :class:`~.Release.Release`
+        """
+        import PyGithub.Blocking.Release
+
+        tag_name = _snd.normalizeString(tag_name)
+        if target_commitish is not None:
+            target_commitish = _snd.normalizeString(target_commitish)
+        if name is not None:
+            name = _snd.normalizeString(name)
+        if body is not None:
+            body = _snd.normalizeString(body)
+        if draft is not None:
+            draft = _snd.normalizeBool(draft)
+        if prerelease is not None:
+            prerelease = _snd.normalizeBool(prerelease)
+
+        url = uritemplate.expand(self.releases_url)
+        postArguments = _snd.dictionary(body=body, draft=draft, name=name, prerelease=prerelease, tag_name=tag_name, target_commitish=target_commitish)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Release.Release)(None, r.json(), r.headers.get("ETag"))
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo <http://developer.github.com/v3/repos#delete-a-repository>`__ end point.
@@ -1870,6 +1903,61 @@ class Repository(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(ref=ref)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File)(None, r.json(), r.headers.get("ETag"))
+
+    def get_release(self, id):
+        """
+        Calls the `GET /repos/:owner/:repo/releases/:id <http://developer.github.com/v3/repos/releases#get-a-single-release>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.Release.Release`
+        """
+        import PyGithub.Blocking.Release
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand(self.releases_url, id=str(id))
+        r = self.Session._request("GET", url)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Release.Release)(None, r.json(), r.headers.get("ETag"))
+
+    def get_release_asset(self, id):
+        """
+        Calls the `GET /repos/:owner/:repo/releases/assets/:id <http://developer.github.com/v3/repos/releases#get-a-single-release-asset>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.Asset.Asset`
+        """
+        import PyGithub.Blocking.Asset
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/releases/assets/{id}", id=str(id), owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Asset.Asset)(None, r.json(), r.headers.get("ETag"))
+
+    def get_releases(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/releases <http://developer.github.com/v3/repos/releases#list-releases-for-a-repository>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.Release.Release`
+        """
+        import PyGithub.Blocking.Release
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.releases_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Release.Release))(None, r)
 
     def get_stargazers(self, per_page=None):
         """

@@ -691,3 +691,56 @@ class RepositoryPeople(TestCase):
     def testGetTeams_allParameters(self):
         teams = self.zeus.get_repo(("olympus", "immutable")).get_teams(per_page=1)
         self.assertEqual([t.name for t in teams], ["Gods", "Humans"])
+
+
+class RepositoryReleases(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-releases")
+        r = repo.create_release("a")
+        repo.create_release("b")
+        return Data(id=r.id)
+
+    def testGetRelease(self):
+        r = self.electra.get_repo(("electra", "repository-releases")).get_release(self.data.id)
+
+    def testGetReleases(self):
+        rels = self.electra.get_repo(("electra", "repository-releases")).get_releases()
+        self.assertEqual([r.tag_name for r in rels], ["b", "a"])
+
+    def testGetReleases_allParameters(self):
+        rels = self.electra.get_repo(("electra", "repository-releases")).get_releases(per_page=1)
+        self.assertEqual([r.tag_name for r in rels], ["b", "a"])
+
+    def testCreateRelease(self):
+        r = self.electra.get_repo(("electra", "repository-releases")).create_release("c")
+        self.assertEqual(r.tag_name, "c")
+        self.assertEqual(r.target_commitish, "master")
+        self.assertEqual(r.name, None)
+        self.assertEqual(r.body, None)
+        self.assertEqual(r.draft, False)
+        self.assertEqual(r.prerelease, False)
+        r.delete()
+
+    def testCreateRelease_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-releases")).create_release("d", target_commitish="master", name="The D release", body="The long-awaited D release", draft=True, prerelease=True)
+        self.assertEqual(r.tag_name, "d")
+        self.assertEqual(r.target_commitish, "master")
+        self.assertEqual(r.name, "The D release")
+        self.assertEqual(r.body, "The long-awaited D release")
+        self.assertEqual(r.draft, True)
+        self.assertEqual(r.prerelease, True)
+        r.delete()
+
+
+class RepositoryReleaseAssets(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-release-assets")
+        rel = repo.create_release("assets")
+        self.pause()
+        a = rel.upload_asset("text/plain", "foo.txt", "barbaz")
+        self.pause()
+        return Data(id=a.id)
+
+    def testGetReleaseAsset(self):
+        a = self.electra.get_repo(("electra", "repository-release-assets")).get_release_asset(self.data.id)
+        self.assertEqual(a.name, "foo.txt")

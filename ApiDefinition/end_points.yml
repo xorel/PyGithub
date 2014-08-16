@@ -552,6 +552,8 @@
 /repos/:owner/:repo/releases/:id/assets:
   - verb: GET
     doc: http://developer.github.com/v3/repos/releases#list-assets-for-a-release
+  - verb: POST
+    doc: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
 /repos/:owner/:repo/releases/assets/:id:
   - verb: DELETE
     doc: http://developer.github.com/v3/repos/releases#delete-a-release-asset

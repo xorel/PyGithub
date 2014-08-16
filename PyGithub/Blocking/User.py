@@ -21,6 +21,7 @@ class User(_bgo.UpdatableGithubObject):
       * :class:`.Contributor`
 
     Methods and attributes returning instances of this class:
+      * :attr:`.Asset.uploader`
       * :meth:`.AuthenticatedUser.get_followers`
       * :meth:`.AuthenticatedUser.get_following`
       * :attr:`.Commit.author`
@@ -41,6 +42,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.PullRequest.assignee`
       * :attr:`.PullRequest.merged_by`
       * :attr:`.PullRequest.user`
+      * :attr:`.Release.author`
       * :meth:`.Repository.get_assignees`
       * :meth:`.Repository.get_collaborators`
       * :meth:`.Repository.get_stargazers`

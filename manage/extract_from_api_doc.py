@@ -94,6 +94,7 @@ class ReferenceDocumentation:
         self.endPoints.append(EndPoint("GET", "/api/status.json", "https://status.github.com/api"))
         self.endPoints.append(EndPoint("GET", "/api/last-message.json", "https://status.github.com/api"))
         self.endPoints.append(EndPoint("GET", "/api/messages.json", "https://status.github.com/api"))
+        self.endPoints.append(EndPoint("POST", "/repos/:owner/:repo/releases/:id/assets", "https://developer.github.com/v3/repos/releases/#upload-a-release-asset"))
 
     def readFiles(self):
         for root, _, fileNames in os.walk(self.rootDirectory):

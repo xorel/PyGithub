@@ -1,0 +1,44 @@
+attributes:
+  - name: browser_download_url
+    type: string
+  - name: content_type
+    type: string
+  - name: created_at
+    type: datetime
+  - name: download_count
+    type: int
+  - name: id
+    type: int
+  - name: label
+    type: string
+  - name: name
+    type: string
+  - name: size
+    type: int
+  - name: state
+    type: string
+  - name: updated_at
+    type: datetime
+  - name: uploader
+    type: User
+methods:
+  - name: delete
+    end_point: DELETE /repos/:owner/:repo/releases/assets/:id
+    url_template: attribute url
+    return_type: none
+  - name: edit
+    end_point: PATCH /repos/:owner/:repo/releases/assets/:id
+    parameters:
+      - name: name
+        type: string
+    optional_parameters:
+      - name: label
+        type: string
+    url_template: attribute url
+    post_arguments:
+      - name: label
+        value: parameter label
+      - name: name
+        value: parameter name
+    effect: update
+    return_type: none

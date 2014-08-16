@@ -326,13 +326,17 @@ class CodeGenerator:
             yield "urlArguments = _snd.dictionary({})".format(", ".join("{}={}".format(a.name, self.generateCodeForValue(method, a.value)) for a in method.urlArguments))  # pragma no branch
         if len(method.postArguments) != 0:
             if method.qualifiedName in ["AuthenticatedUser.add_to_emails", "AuthenticatedUser.remove_from_emails"]:
-                # @todoAlpha solve this special case by changing Method.postArguments to Method.postPaylod, polymorphic, with DictionaryPayload and DirectPayload. Also change Session._request's parameter.
+                # @todoAlpha solve those special cases by changing Method.postArguments to Method.postPaylod, polymorphic, with DictionaryPayload and DirectPayload. Also change Session._request's parameter.
                 yield "postArguments = email"
             elif method.qualifiedName in ["Issue.add_to_labels", "Issue.set_labels"]:
-                # @todoAlpha solve this special case by changing Method.postArguments to Method.postPaylod, polymorphic, with DictionaryPayload and DirectPayload. Also change Session._request's parameter.
                 yield "postArguments = label"
+            elif method.qualifiedName == "Release.upload_asset":
+                yield "postArguments = content"
             else:
                 yield "postArguments = _snd.dictionary({})".format(", ".join("{}={}".format(a.name, self.generateCodeForValue(method, a.value)) for a in method.postArguments))  # pragma no branch
+        if len(method.headers) != 0:
+            headers = ", ".join('"{}": {}'.format(a.name, self.generateCodeForValue(method, a.value)) for a in method.headers)
+            yield "headers = {" + headers + "}"
 
         yield "r = self.Session._request{}({})".format("Anonymous" if method.qualifiedName == "Github.create_anonymous_gist" else "", self.generateCallArguments(method))  # @todoSomeday Remove hard-coded method name
         yield from self.generateCodeForEffects(method)
@@ -406,6 +410,8 @@ class CodeGenerator:
             args += ", urlArguments=urlArguments"
         if len(m.postArguments) != 0:
             args += ", postArguments=postArguments"
+        if len(m.headers) != 0:
+            args += ", headers=headers"
         return args
 
     def generateDocForType(self, type):

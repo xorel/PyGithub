@@ -1374,63 +1374,80 @@ GET /repos/:owner/:repo/releases
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#list-releases-for-a-repository>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_releases`
 
 POST /repos/:owner/:repo/releases
 ---------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#create-a-release>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.create_release`
 
 DELETE /repos/:owner/:repo/releases/:id
 ---------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#delete-a-release>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Release.delete`
 
 GET /repos/:owner/:repo/releases/:id
 ------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#get-a-single-release>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_release`
 
 PATCH /repos/:owner/:repo/releases/:id
 --------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#edit-a-release>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Release.edit`
 
 GET /repos/:owner/:repo/releases/:id/assets
 -------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#list-assets-for-a-release>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Release.get_assets`
+
+POST /repos/:owner/:repo/releases/:id/assets
+--------------------------------------------
+
+(`Reference documentation of Github API v3 <https://developer.github.com/v3/repos/releases/#upload-a-release-asset>`__)
+
+Implemented in PyGithub by:
+  * :meth:`.Release.upload_asset`
 
 DELETE /repos/:owner/:repo/releases/assets/:id
 ----------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#delete-a-release-asset>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Asset.delete`
 
 GET /repos/:owner/:repo/releases/assets/:id
 -------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#get-a-single-release-asset>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_release_asset`
 
 PATCH /repos/:owner/:repo/releases/assets/:id
 ---------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/releases#edit-a-release-asset>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Asset.edit`
 
 GET /repos/:owner/:repo/stargazers
 ----------------------------------

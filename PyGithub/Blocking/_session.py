@@ -112,7 +112,11 @@ class Session(object):
 
         data = None
         if postArguments is not None:
-            data = json.dumps(postArguments)
+            if headers is None or headers.get("Content-Type") is None:
+                # @todoAlpha Should we set Content-Type here?
+                data = json.dumps(postArguments)
+            else:
+                data = postArguments
         if urlArguments is not None:
             for k, v in urlArguments.iteritems():
                 if isinstance(v, bool):

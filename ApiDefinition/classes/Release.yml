@@ -1,0 +1,101 @@
+attributes:
+  - name: assets
+    type:
+      container: list
+      content: Asset
+  - name: assets_url
+    type: string
+  - name: author
+    type: User
+  - name: body
+    type: string
+  - name: body_html
+    type: string
+  - name: body_text
+    type: string
+  - name: created_at
+    type: datetime
+  - name: draft
+    type: bool
+  - name: html_url
+    type: string
+  - name: id
+    type: int
+  - name: name
+    type: string
+  - name: prerelease
+    type: bool
+  - name: published_at
+    type: datetime
+  - name: tag_name
+    type: string
+  - name: tarball_url
+    type: string
+  - name: target_commitish
+    type: string
+  - name: upload_url
+    type: string
+  - name: zipball_url
+    type: string
+methods:
+  - name: delete
+    end_point: DELETE /repos/:owner/:repo/releases/:id
+    url_template: attribute url
+    return_type: none
+  - name: edit
+    end_point: PATCH /repos/:owner/:repo/releases/:id
+    optional_parameters:
+      - name: tag_name
+        type: string
+      - name: target_commitish
+        type: string
+      - name: name
+        type: string
+      - name: body
+        type: string
+      - name: draft
+        type: bool
+      - name: prerelease
+        type: bool
+    url_template: attribute url
+    post_arguments:
+      - name: body
+        value: parameter body
+      - name: draft
+        value: parameter draft
+      - name: name
+        value: parameter name
+      - name: prerelease
+        value: parameter prerelease
+      - name: tag_name
+        value: parameter tag_name
+      - name: target_commitish
+        value: parameter target_commitish
+    effect: update
+    return_type: none
+  - name: get_assets
+    end_point: GET /repos/:owner/:repo/releases/:id/assets
+    url_template: attribute assets_url
+    return_type:
+      container: PaginatedList
+      content: Asset
+  - name: upload_asset
+    end_point: POST /repos/:owner/:repo/releases/:id/assets
+    parameters:
+      - name: content_type
+        type: string
+      - name: name
+        type: string
+      - name: content
+        type: string
+    url_template: attribute upload_url
+    url_arguments:
+      - name: name
+        value: parameter name
+    post_arguments:
+      - name: content
+        value: parameter content
+    headers:
+      - name: Content-Type
+        value: parameter content_type
+    return_type: Asset

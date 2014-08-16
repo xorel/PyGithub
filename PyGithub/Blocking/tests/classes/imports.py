@@ -6,6 +6,7 @@
 # #### This file is generated. Manual changes will likely be lost. #####
 # ######################################################################
 
+import PyGithub.Blocking.Asset
 import PyGithub.Blocking.AuthenticatedUser
 import PyGithub.Blocking.Authorization
 import PyGithub.Blocking.Commit
@@ -24,6 +25,7 @@ import PyGithub.Blocking.Milestone
 import PyGithub.Blocking.Organization
 import PyGithub.Blocking.PublicKey
 import PyGithub.Blocking.PullRequest
+import PyGithub.Blocking.Release
 import PyGithub.Blocking.Repository
 import PyGithub.Blocking.Submodule
 import PyGithub.Blocking.Subscription

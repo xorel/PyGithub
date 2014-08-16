@@ -90,6 +90,11 @@ class RequestsTestCase(SessionTestCase):
         response = self.session._request("POST", "http://foo.com/bar/baz", urlArguments=dict(urlArgument="query-value"), postArguments=dict(postArgument="post-value"), headers=dict(header="header-value"))
         self.assertEqual(response.status_code, 200)
 
+    def testRequestWithPayloadAlreadyEncoded(self):
+        self.adapter.expect.send.withArguments(RequestMatcher("POST", "http://foo.com/", {"Content-Type": "text/plain", "Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": "user-agent", "Content-Length": "12"}, 'post-payload')).andReturn(rebuildResponse(200, dict(), ""))
+        response = self.session._request("POST", "http://foo.com", postArguments="post-payload", headers={"Content-Type": "text/plain"})
+        self.assertEqual(response.status_code, 200)
+
     def testRequestWithTrueBooleanUrlArgument(self):
         self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/?t=true", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": "user-agent"}, None)).andReturn(rebuildResponse(200, dict(), ""))
         response = self.session._request("GET", "http://foo.com", urlArguments=dict(t=True))

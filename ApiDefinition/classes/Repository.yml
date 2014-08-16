@@ -540,6 +540,37 @@ methods:
       - name: title
         value: parameter title
     return_type: PullRequest
+  - name: create_release
+    end_point: POST /repos/:owner/:repo/releases
+    parameters:
+      - name: tag_name
+        type: string
+    optional_parameters:
+      - name: target_commitish
+        type: string
+      - name: name
+        type: string
+      - name: body
+        type: string
+      - name: draft
+        type: bool
+      - name: prerelease
+        type: bool
+    url_template: attribute releases_url
+    post_arguments:
+      - name: body
+        value: parameter body
+      - name: draft
+        value: parameter draft
+      - name: name
+        value: parameter name
+      - name: prerelease
+        value: parameter prerelease
+      - name: tag_name
+        value: parameter tag_name
+      - name: target_commitish
+        value: parameter target_commitish
+    return_type: Release
   - name: delete
     end_point: DELETE /repos/:owner/:repo
     url_template: attribute url
@@ -980,6 +1011,36 @@ methods:
       - name: ref
         value: parameter ref
     return_type: File
+  - name: get_release
+    end_point: GET /repos/:owner/:repo/releases/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: attribute releases_url
+    url_template_arguments:
+      - name: id
+        value: parameter id
+    return_type: Release
+  - name: get_release_asset
+    end_point: GET /repos/:owner/:repo/releases/assets/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: id
+        value: parameter id
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: Asset
+  - name: get_releases
+    end_point: GET /repos/:owner/:repo/releases
+    url_template: attribute releases_url
+    return_type:
+      container: PaginatedList
+      content: Release
   - name: get_stargazers
     end_point: GET /repos/:owner/:repo/stargazers
     url_template: attribute stargazers_url

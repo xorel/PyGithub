@@ -208,6 +208,17 @@ class TestCase(unittest.TestCase):
         else:
             time.sleep(2)
 
+    def setUpTestRepo(self, owner, name):
+        g = getattr(self, owner)
+        try:
+            g.get_repo((owner, name)).delete()
+            self.pause()
+        except PyGithub.Blocking.ObjectNotFoundException:
+            pass
+        repo = g.get_authenticated_user().create_repo(name, auto_init=True)
+        self.pause()
+        return repo
+
     def getBuilder(self):
         builder = PyGithub.BlockingBuilder().UserAgent("jacquev6/PyGithub/2; UnitTests recorder")
         if hasattr(self, "_TestCase__recordHelper"):
