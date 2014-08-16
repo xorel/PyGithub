@@ -11,5 +11,9 @@ class TestGenerator:
         for klass in classes:
             yield "from PyGithub.Blocking.tests.classes.{}TestCases import *".format(klass.simpleName)
 
+    def generateAllImports(self, classes):
+        for klass in classes:
+            yield "import PyGithub.Blocking.{}".format(klass.simpleName)
+
     def generateClass(self, klass):  # pragma no cover
         yield "from PyGithub.Blocking.tests.Framework import *"

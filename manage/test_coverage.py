@@ -57,29 +57,7 @@ def main():
 
     cov = coverage.coverage(branch=True, data_file="coverage/data.imports")
     cov.start()
-    import PyGithub.Blocking.AuthenticatedUser
-    import PyGithub.Blocking.Commit
-    import PyGithub.Blocking.Contributor
-    import PyGithub.Blocking.File
-    import PyGithub.Blocking.Gist
-    import PyGithub.Blocking.GitBlob
-    import PyGithub.Blocking.GitCommit
-    import PyGithub.Blocking.Github
-    import PyGithub.Blocking.GitRef
-    import PyGithub.Blocking.GitTag
-    import PyGithub.Blocking.GitTree
-    import PyGithub.Blocking.Issue
-    import PyGithub.Blocking.Label
-    import PyGithub.Blocking.Milestone
-    import PyGithub.Blocking.Organization
-    import PyGithub.Blocking.PublicKey
-    import PyGithub.Blocking.PullRequest
-    import PyGithub.Blocking.Repository
-    import PyGithub.Blocking.Submodule
-    import PyGithub.Blocking.Subscription
-    import PyGithub.Blocking.SymLink
-    import PyGithub.Blocking.Team
-    import PyGithub.Blocking.User
+    import PyGithub.Blocking.tests.classes.imports
     cov.stop()
     cov.save()
 
