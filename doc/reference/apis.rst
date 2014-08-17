@@ -686,7 +686,8 @@ GET /repos/:owner/:repo/commits/:ref/statuses
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statuses#list-statuses-for-a-specific-ref>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Commit.get_statuses`
 
 GET /repos/:owner/:repo/commits/:sha
 ------------------------------------
@@ -1497,7 +1498,8 @@ POST /repos/:owner/:repo/statuses/:sha
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statuses#create-a-status>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Commit.create_status`
 
 GET /repos/:owner/:repo/subscribers
 -----------------------------------

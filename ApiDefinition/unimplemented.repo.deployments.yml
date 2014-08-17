@@ -1,0 +1,6 @@
+/repos/:owner/:repo/deployments:
+  - GET
+  - POST
+/repos/:owner/:repo/deployments/:id/statuses:
+  - GET
+  - POST

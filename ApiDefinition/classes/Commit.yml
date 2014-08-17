@@ -29,6 +29,25 @@ structures:
         type: int
       - name: total
         type: int
+  - name: Status
+    updatable: false
+    attributes:
+      - name: created_at
+        type: datetime
+      - name: creator
+        type: User
+      - name: description
+        type: string
+      - name: id
+        type: int
+      - name: state
+        type: string
+      - name: target_url
+        type: string
+      - name: updated_at
+        type: datetime
+      - name: url
+        type: string
 attributes:
   - name: author
     type: User
@@ -52,3 +71,36 @@ attributes:
     type: string
   - name: stats
     type: Commit.Stats
+methods:
+  - name: create_status
+    end_point: POST /repos/:owner/:repo/statuses/:sha
+    parameters:
+      - name: state
+        type:
+          enum: [error, failure, pending, success]
+    optional_parameters:
+      - name: target_url
+        type: string
+      - name: description
+        type: string
+    unimplemented_parameters:
+      - name: context
+        reason: "@todoAlpha Implement, but it does not work on GitHub Enterprise ('...preview period, you must specify a custom media type...'). Idem for method get_status. Consider opening issue to GitHub"
+    url_template: end_point
+    post_arguments:
+      - name: description
+        value: parameter description
+      - name: state
+        value: parameter state
+      - name: target_url
+        value: parameter target_url
+    return_type: Commit.Status
+  - name: get_statuses
+    end_point: GET /repos/:owner/:repo/commits/:ref/statuses
+    unimplemented_parameters:
+      - name: ref
+        reason: Taken from attribute url
+    url_template: end_point
+    return_type:
+      container: PaginatedList
+      content: Commit.Status

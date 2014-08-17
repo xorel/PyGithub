@@ -316,6 +316,12 @@ class CodeGenerator:
             yield "url = uritemplate.expand(self.git_refs_url) + ref[4:]"
         elif method.qualifiedName == "Issue.create_pull":
             yield 'url = "/".join(self.url.split("/")[:-2]) + "/pulls"'
+        elif method.qualifiedName == "Commit.create_status":
+            yield 'url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha'
+        elif method.qualifiedName == "Commit.get_statuses":
+            yield 'url = self.url + "/statuses"'
+        elif method.qualifiedName == "Commit.get_status":
+            yield 'url = self.url + "/status"'
         elif method.qualifiedName == "GitTree.create_modified_copy":
             yield "url = self.url[:self.url.rfind(self.sha) - 1]"
         elif len(method.urlTemplateArguments) == 0:

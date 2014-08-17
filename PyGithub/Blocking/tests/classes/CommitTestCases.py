@@ -35,6 +35,51 @@ class CommitAttributes(TestCase):
         self.assertEqual(c.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/commits/db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
+class CommitStatuses(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "commit-statuses")
+        commit = repo.get_commits()[0]
+        commit.create_status("success", "http://foo.com", "My first status")
+        self.pause()
+        commit.create_status("pending", "http://bar.com", "My second status")
+        self.pause()
+        cc = repo.create_file("foo.txt", "Create file", "Zm9vYmFy")
+        return Data(sha=commit.sha, otherSha=cc.commit.sha)
+
+    def testGetStatuses(self):
+        c = self.electra.get_repo(("electra", "commit-statuses")).get_commit(self.data.sha)
+        statuses = c.get_statuses()
+        self.assertEqual([s.description for s in statuses], ["My second status", "My first status"])
+        self.assertEqual(statuses[0].created_at, datetime.datetime(2014, 8, 17, 4, 43, 24))
+        self.assertEqual(statuses[0].creator.login, "electra")
+        self.assertEqual(statuses[0].description, "My second status")
+        self.assertEqual(statuses[0].id, 10)
+        self.assertEqual(statuses[0].state, "pending")
+        self.assertEqual(statuses[0].target_url, "http://bar.com")
+        self.assertEqual(statuses[0].updated_at, datetime.datetime(2014, 8, 17, 4, 43, 24))
+        # status.url is in fact the url of a collection of statuses
+        self.assertEqual(statuses[0].url, "http://github.home.jacquev6.net/api/v3/repos/electra/commit-statuses/statuses/a74e609f4d12a526611ff1fcc7d4ddef2bdafa00")
+
+    def testGetStatuses_allParameters(self):
+        c = self.electra.get_repo(("electra", "commit-statuses")).get_commit(self.data.sha)
+        statuses = c.get_statuses(per_page=1)
+        self.assertEqual([s.description for s in statuses], ["My second status", "My first status"])
+
+    def testCreateStatus(self):
+        c = self.electra.get_repo(("electra", "commit-statuses")).get_commit(self.data.otherSha)
+        s = c.create_status("failure")
+        self.assertEqual(s.state, "failure")
+        self.assertEqual(s.target_url, None)
+        self.assertEqual(s.description, None)
+
+    def testCreateStatus_allParameters(self):
+        c = self.electra.get_repo(("electra", "commit-statuses")).get_commit(self.data.otherSha)
+        s = c.create_status("error", "http://baz.com", "My third status")
+        self.assertEqual(s.state, "error")
+        self.assertEqual(s.target_url, "http://baz.com")
+        self.assertEqual(s.description, "My third status")
+
+
 class CommitUpdate(TestCase):
     def testThroughLazyCompletion(self):
         c = self.electra.get_repo(("electra", "git-objects")).get_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]

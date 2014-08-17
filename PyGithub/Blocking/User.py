@@ -24,6 +24,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.Asset.uploader`
       * :meth:`.AuthenticatedUser.get_followers`
       * :meth:`.AuthenticatedUser.get_following`
+      * :attr:`.Commit.Status.creator`
       * :attr:`.Commit.author`
       * :attr:`.Commit.committer`
       * :attr:`.Gist.Commit.user`

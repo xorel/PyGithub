@@ -1,10 +1,9 @@
 /repos/:owner/:repo/:archive_format/:ref:
   - GET
+/repos/:owner/:repo/commits/:ref/status:
+  - GET
 /repos/:owner/:repo/compare/:base...:head:
   - GET
-/repos/:owner/:repo/deployments:
-  - GET
-  - POST
 /repos/:owner/:repo/languages:
   - GET
 /repos/:owner/:repo/merges:

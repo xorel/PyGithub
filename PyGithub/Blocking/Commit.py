@@ -175,6 +175,83 @@ class Commit(_bgo.UpdatableGithubObject):
             """
             return self.__total.value
 
+    class Status(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Commit.create_status`
+          * :meth:`.Commit.get_statuses`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, created_at=None, creator=None, description=None, id=None, state=None, target_url=None, updated_at=None, url=None, **kwds):
+            import PyGithub.Blocking.User
+            super(Commit.Status, self)._initAttributes(**kwds)
+            self.__created_at = _rcv.Attribute("Commit.Status.created_at", _rcv.DatetimeConverter, created_at)
+            self.__creator = _rcv.Attribute("Commit.Status.creator", _rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User), creator)
+            self.__description = _rcv.Attribute("Commit.Status.description", _rcv.StringConverter, description)
+            self.__id = _rcv.Attribute("Commit.Status.id", _rcv.IntConverter, id)
+            self.__state = _rcv.Attribute("Commit.Status.state", _rcv.StringConverter, state)
+            self.__target_url = _rcv.Attribute("Commit.Status.target_url", _rcv.StringConverter, target_url)
+            self.__updated_at = _rcv.Attribute("Commit.Status.updated_at", _rcv.DatetimeConverter, updated_at)
+            self.__url = _rcv.Attribute("Commit.Status.url", _rcv.StringConverter, url)
+
+        @property
+        def created_at(self):
+            """
+            :type: :class:`datetime`
+            """
+            return self.__created_at.value
+
+        @property
+        def creator(self):
+            """
+            :type: :class:`~.User.User`
+            """
+            return self.__creator.value
+
+        @property
+        def description(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__description.value
+
+        @property
+        def id(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__id.value
+
+        @property
+        def state(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__state.value
+
+        @property
+        def target_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__target_url.value
+
+        @property
+        def updated_at(self):
+            """
+            :type: :class:`datetime`
+            """
+            return self.__updated_at.value
+
+        @property
+        def url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__url.value
+
     def _initAttributes(self, author=_rcv.Absent, comments_url=_rcv.Absent, commit=_rcv.Absent, committer=_rcv.Absent, files=_rcv.Absent, html_url=_rcv.Absent, parents=_rcv.Absent, sha=_rcv.Absent, stats=_rcv.Absent, **kwds):
         import PyGithub.Blocking.GitCommit
         import PyGithub.Blocking.User
@@ -272,3 +349,46 @@ class Commit(_bgo.UpdatableGithubObject):
         """
         self._completeLazily(self.__stats.needsLazyCompletion)
         return self.__stats.value
+
+    def create_status(self, state, target_url=None, description=None):
+        """
+        Calls the `POST /repos/:owner/:repo/statuses/:sha <http://developer.github.com/v3/repos/statuses#create-a-status>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param state: mandatory "error" or "failure" or "pending" or "success"
+        :param target_url: optional :class:`string`
+        :param description: optional :class:`string`
+        :rtype: :class:`.Commit.Status`
+        """
+
+        state = _snd.normalizeEnum(state, "error", "failure", "pending", "success")
+        if target_url is not None:
+            target_url = _snd.normalizeString(target_url)
+        if description is not None:
+            description = _snd.normalizeString(description)
+
+        url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha
+        postArguments = _snd.dictionary(description=description, state=state, target_url=target_url)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return _rcv.StructureConverter(self.Session, Commit.Status)(None, r.json())
+
+    def get_statuses(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/commits/:ref/statuses <http://developer.github.com/v3/repos/statuses#list-statuses-for-a-specific-ref>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`.Commit.Status`
+        """
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = self.url + "/statuses"
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.StructureConverter(self.Session, Commit.Status))(None, r)
