@@ -8,9 +8,3 @@
   - GET
 /repos/:owner/:repo/merges:
   - POST
-/repos/:owner/:repo/pages:
-  - GET
-/repos/:owner/:repo/pages/builds:
-  - GET
-/repos/:owner/:repo/pages/builds/latest:
-  - GET

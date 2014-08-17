@@ -23,6 +23,8 @@ import PyGithub.Blocking.Issue
 import PyGithub.Blocking.Label
 import PyGithub.Blocking.Milestone
 import PyGithub.Blocking.Organization
+import PyGithub.Blocking.PagesBuild
+import PyGithub.Blocking.PagesInformation
 import PyGithub.Blocking.PublicKey
 import PyGithub.Blocking.PullRequest
 import PyGithub.Blocking.Release

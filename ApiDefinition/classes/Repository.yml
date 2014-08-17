@@ -922,6 +922,15 @@ methods:
     return_type:
       container: list
       content: Label
+  - name: get_latest_pages_build
+    end_point: GET /repos/:owner/:repo/pages/builds/latest
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: PagesBuild
   - name: get_milestone
     end_point: GET /repos/:owner/:repo/milestones/:number
     parameters:
@@ -955,6 +964,26 @@ methods:
     return_type:
       container: PaginatedList
       content: Milestone
+  - name: get_pages
+    end_point: GET /repos/:owner/:repo/pages
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: PagesInformation
+  - name: get_pages_builds
+    end_point: GET /repos/:owner/:repo/pages/builds
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      container: PaginatedList
+      content: PagesBuild
   - name: get_pull
     end_point: GET /repos/:owner/:repo/pulls/:number
     parameters:

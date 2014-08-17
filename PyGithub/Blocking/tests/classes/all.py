@@ -23,6 +23,8 @@ from PyGithub.Blocking.tests.classes.IssueTestCases import *
 from PyGithub.Blocking.tests.classes.LabelTestCases import *
 from PyGithub.Blocking.tests.classes.MilestoneTestCases import *
 from PyGithub.Blocking.tests.classes.OrganizationTestCases import *
+from PyGithub.Blocking.tests.classes.PagesBuildTestCases import *
+from PyGithub.Blocking.tests.classes.PagesInformationTestCases import *
 from PyGithub.Blocking.tests.classes.PublicKeyTestCases import *
 from PyGithub.Blocking.tests.classes.PullRequestTestCases import *
 from PyGithub.Blocking.tests.classes.ReleaseTestCases import *

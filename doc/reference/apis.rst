@@ -1239,21 +1239,24 @@ GET /repos/:owner/:repo/pages
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/pages#get-information-about-a-pages-site>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_pages`
 
 GET /repos/:owner/:repo/pages/builds
 ------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/pages#list-pages-builds>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_pages_builds`
 
 GET /repos/:owner/:repo/pages/builds/latest
 -------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/pages#list-latest-pages-build>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_latest_pages_build`
 
 GET /repos/:owner/:repo/pulls
 -----------------------------

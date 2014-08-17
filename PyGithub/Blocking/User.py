@@ -39,6 +39,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.Milestone.creator`
       * :meth:`.Organization.get_members`
       * :meth:`.Organization.get_public_members`
+      * :attr:`.PagesBuild.pusher`
       * :attr:`.PullRequest.End.user`
       * :attr:`.PullRequest.assignee`
       * :attr:`.PullRequest.merged_by`

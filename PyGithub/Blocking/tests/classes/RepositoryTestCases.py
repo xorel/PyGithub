@@ -621,6 +621,42 @@ class RepositoryKeys(TestCase):
         self.assertTrue(k.url.startswith("http://github.home.jacquev6.net/api/v3/user/keys/"))
 
 
+class RepositoryPages(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-pages")
+        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("refs/heads/master").object.sha)
+        self.pause()
+        while repo.get_pages().status != "built":
+            self.pause()
+        repo.create_file("index.html", "Add Index", "SGkgdGhlcmUh", branch="gh-pages")
+        self.pause()
+        while len(list(repo.get_pages_builds())) < 2:
+            self.pause()
+        while repo.get_pages().status != "built":
+            self.pause()
+        return Data()
+
+    def testGetPages(self):
+        r = self.electra.get_repo(("electra", "repository-pages"))
+        i = r.get_pages()
+        self.assertEqual(i.status, "built")
+
+    def testGetLatestPagesBuild(self):
+        r = self.electra.get_repo(("electra", "repository-pages"))
+        b = r.get_latest_pages_build()
+        self.assertEqual(b.status, "built")
+
+    def testGetPagesBuilds(self):
+        r = self.electra.get_repo(("electra", "repository-pages"))
+        builds = r.get_pages_builds()
+        self.assertEqual([b.status for b in builds], ["built", "built"])
+
+    def testGetPagesBuilds_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-pages"))
+        builds = r.get_pages_builds(per_page=1)
+        self.assertEqual([b.status for b in builds], ["built", "built"])
+
+
 class RepositoryPeople(TestCase):
     def testGetCollaborators(self):
         r = self.electra.get_repo(("electra", "mutable"))

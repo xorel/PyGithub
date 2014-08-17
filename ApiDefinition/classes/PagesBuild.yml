@@ -1,0 +1,20 @@
+structures:
+  - name: Error
+    attributes:
+      - name: message
+        type: string
+attributes:
+  - name: commit
+    type: string
+  - name: created_at
+    type: datetime
+  - name: duration
+    type: int
+  - name: error
+    type: PagesBuild.Error
+  - name: pusher
+    type: User
+  - name: status
+    type: string
+  - name: updated_at
+    type: datetime

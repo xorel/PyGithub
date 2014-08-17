@@ -1785,6 +1785,20 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Label.Label))(None, r.json())
 
+    def get_latest_pages_build(self):
+        """
+        Calls the `GET /repos/:owner/:repo/pages/builds/latest <http://developer.github.com/v3/repos/pages#list-latest-pages-build>`__ end point.
+
+        This is the only method calling this end point.
+
+        :rtype: :class:`~.PagesBuild.PagesBuild`
+        """
+        import PyGithub.Blocking.PagesBuild
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages/builds/latest", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.PagesBuild.PagesBuild)(None, r.json(), r.headers.get("ETag"))
+
     def get_milestone(self, number):
         """
         Calls the `GET /repos/:owner/:repo/milestones/:number <http://developer.github.com/v3/issues/milestones#get-a-single-milestone>`__ end point.
@@ -1831,6 +1845,41 @@ class Repository(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.Milestone.Milestone))(None, r)
+
+    def get_pages(self):
+        """
+        Calls the `GET /repos/:owner/:repo/pages <http://developer.github.com/v3/repos/pages#get-information-about-a-pages-site>`__ end point.
+
+        This is the only method calling this end point.
+
+        :rtype: :class:`~.PagesInformation.PagesInformation`
+        """
+        import PyGithub.Blocking.PagesInformation
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.PagesInformation.PagesInformation)(None, r.json(), r.headers.get("ETag"))
+
+    def get_pages_builds(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/pages/builds <http://developer.github.com/v3/repos/pages#list-pages-builds>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.PagesBuild.PagesBuild`
+        """
+        import PyGithub.Blocking.PagesBuild
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages/builds", owner=self.owner.login, repo=self.name)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, PyGithub.Blocking.PagesBuild.PagesBuild))(None, r)
 
     def get_pull(self, number):
         """

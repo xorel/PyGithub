@@ -70,8 +70,8 @@ class _RecordModeHelper(object):
             for k, v in s._Session__anonymousRequestsSession.adapters.iteritems():
                 s._Session__anonymousRequestsSession.mount(k, self.__instance.adapter.record(v))
 
-        def pause(self):
-            time.sleep(5)
+        def pause(self, duration):
+            time.sleep(duration)
 
         def finalize(self):
             interractions = []
@@ -174,7 +174,7 @@ class _RecordModeHelper(object):
             for k, v in s._Session__anonymousRequestsSession.adapters.iteritems():
                 s._Session__anonymousRequestsSession.mount(k, self.__instance.adapter.object)
 
-        def pause(self):
+        def pause(self, duration):
             pass
 
         def finalize(self):
@@ -192,8 +192,8 @@ class _RecordModeHelper(object):
     def apply(self, g):
         self.__mode.apply(g)
 
-    def pause(self):
-        self.__mode.pause()
+    def pause(self, duration):
+        self.__mode.pause(duration)
 
     def finalize(self):
         self.__mode.finalize()
@@ -202,11 +202,11 @@ class _RecordModeHelper(object):
 class TestCase(unittest.TestCase):
     data = None
 
-    def pause(self):
+    def pause(self, duration=5):
         if hasattr(self, "_TestCase__recordHelper"):
-            self.__recordHelper.pause()
+            self.__recordHelper.pause(duration)
         else:
-            time.sleep(5)
+            time.sleep(duration)
 
     def setUpTestRepo(self, owner, name):
         g = getattr(self, owner)

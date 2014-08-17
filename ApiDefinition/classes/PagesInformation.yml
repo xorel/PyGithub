@@ -1,0 +1,7 @@
+attributes:
+  - name: cname
+    type: string
+  - name: custom_404
+    type: bool
+  - name: status
+    type: string
