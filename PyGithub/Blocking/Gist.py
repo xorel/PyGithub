@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Gist(_bgo.UpdatableGithubObject):
@@ -506,7 +507,7 @@ class Gist(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.commits_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.StructureReturnValue(self.Session, Gist.Commit))(r)
+        return _pgl.PaginatedList(Gist.Commit, self.Session, r)
 
     def get_forks(self, per_page=None):
         """
@@ -526,4 +527,4 @@ class Gist(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.forks_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, Gist))(r)
+        return _pgl.PaginatedList(Gist, self.Session, r)

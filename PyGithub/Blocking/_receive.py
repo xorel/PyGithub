@@ -238,121 +238,35 @@ class _ReturnValueException(Exception):
     pass
 
 
-class _BuiltinReturnValue(object):
-    def __init__(self, type):
-        self.__type = type
-
-    def __call__(self, value, eTag=None):
-        if isinstance(value, self.__type):
-            return value
-        else:
-            raise _ReturnValueException("Not a " + self.desc)
-
-    @property
-    def desc(self):
-        return self.__type.__name__
-
-
-IntReturnValue = _BuiltinReturnValue(numbers.Integral)
-StringReturnValue = _BuiltinReturnValue(basestring)
-BoolReturnValue = _BuiltinReturnValue(bool)
-
-
-class ListReturnValue(object):
-    def __init__(self, content):
-        self.__content = content
-
-    def __call__(self, value, eTag=None):
-        if isinstance(value, list):
-            return [self.__content(v, None) for v in value]
-        else:
-            raise _ReturnValueException("Not a list")
-
-    @property
-    def desc(self):
-        return "list of " + self.__content.desc
-
-
-class PaginatedListReturnValue(object):
-    def __init__(self, session, content):
-        self.__session = session
-        self.__content = content
-
-    def __call__(self, r):
-        return pgl.PaginatedList(self.__session, self.__content, r)
-
-    @property
-    def desc(self):
-        return "PaginatedList of " + self.__content.desc
-
-
-class DictReturnValue(object):
-    def __init__(self, key, value):
+class KeyedUnion(object):
+    def __init__(self, key, structs):
         self.__key = key
-        self.__value = value
+        self.__structs = structs
 
-    def __call__(self, value, eTag=None):
-        if isinstance(value, dict):
-            return {kk: self.__value(v, None) for kk, v in ((self.__key(k, None), v) for k, v in value.iteritems())}
-        else:
-            raise _ReturnValueException("Not a dict")
-
-    @property
-    def desc(self):
-        return "dict of " + self.__key.desc + " to " + self.__value.desc
-
-
-class _StructureReturnValue(object):
-    def __init__(self, session, struct):
-        self.__session = session
-        self.__struct = struct
-
-    def __call__(self, value, eTag=None):
-        if isinstance(value, dict):
-            return self.create(self.__struct, self.__session, value, eTag)
-        else:
-            raise _ReturnValueException("Not a dict")
-
-    @property
-    def desc(self):
-        return self.__struct.__name__
-
-
-class StructureReturnValue(_StructureReturnValue):
-    def create(self, type, session, value, eTag):
-        return type(session, value)
-
-
-class ClassReturnValue(_StructureReturnValue):
-    def create(self, type, session, value, eTag):
-        return type(session, value, eTag)
-
-
-class KeyedStructureUnionReturnValue(object):
-    def __init__(self, key, convs):
-        self.__key = key
-        self.__convs = convs
-
-    def __call__(self, value, eTag=None):
+    def __call__(self, session, value, eTag=None):
         if isinstance(value, dict):
             key = value.get(self.__key)
             if key is None:
+                # @todo Raise a more reasonable exception. Delete _ReturnValueException entirely.
                 raise _ReturnValueException("No " + self.__key + " attribute")
             else:
-                conv = self.__convs.get(key)
-                if conv is None:
+                struct = self.__structs.get(key)
+                if struct is None:
                     raise _ReturnValueException("No return value for key " + key)
                 else:
-                    return conv(value, eTag)
+                    if eTag is None:
+                        return struct(session, value)
+                    else:
+                        return struct(session, value, eTag)
         else:
             raise _ReturnValueException("Not a dict")
 
     @property
     def desc(self):
-        return " or ".join(sorted(c.desc for c in self.__convs.itervalues()))
+        return " or ".join(sorted(c.desc for c in self.__structs.itervalues()))
 
 
-class FileDirSubmoduleSymLinkUnionReturnValue(object):
+class FileDirSubmoduleSymLinkUnion(object):
     def __init__(self, file, dir, submodule, symlink):
         self.__file = file
         self.__dir = dir
@@ -360,18 +274,18 @@ class FileDirSubmoduleSymLinkUnionReturnValue(object):
         self.__symlink = symlink
         self.__convs = (file, dir, submodule, symlink)
 
-    def __call__(self, value, eTag):
+    def __call__(self, session, value):
         if isinstance(value, dict):
             type = value.get("type")
             gitUrl = value.get("git_url", "")
             if type == "file" and (gitUrl is None or "/git/trees/" in gitUrl):  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
-                return self.__submodule(value, eTag)
+                return self.__submodule(session, value)
             elif type == "file":
-                return self.__file(value, eTag)
+                return self.__file(session, value)
             elif type == "symlink":
-                return self.__symlink(value, eTag)
+                return self.__symlink(session, value)
             elif type == "dir":
-                return self.__dir(value, eTag)
+                return self.__dir(session, value)
             else:
                 raise _ReturnValueException()
         else:
@@ -380,20 +294,3 @@ class FileDirSubmoduleSymLinkUnionReturnValue(object):
     @property
     def desc(self):
         return " or ".join(c.desc for c in self.__convs)
-
-
-class FirstMatchUnionReturnValue(object):
-    def __init__(self, *convs):
-        self.__convs = convs
-
-    def __call__(self, value, eTag):
-        for conv in self.__convs:
-            try:
-                return conv(value, eTag)
-            except _ReturnValueException:
-                pass
-        raise _ReturnValueException()
-
-    @property
-    def desc(self):
-        return " or ".join(sorted(c.desc for c in self.__convs))

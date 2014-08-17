@@ -289,7 +289,6 @@ methods:
         value: parameter content
       - name: encoding
         value: parameter encoding
-    return_from: json
     return_type: GitBlob
   - name: create_git_commit
     end_point: POST /repos/:owner/:repo/git/commits

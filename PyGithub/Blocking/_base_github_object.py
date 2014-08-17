@@ -64,7 +64,7 @@ class UpdatableGithubObject(SessionedGithubObject):
     or duplicated in concrete subclasses.
     """
 
-    def __init__(self, session, attributes, eTag):
+    def __init__(self, session, attributes, eTag=None):
         self.__eTag = eTag
         super(UpdatableGithubObject, self).__init__(session, attributes)
 

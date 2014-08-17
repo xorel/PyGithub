@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Release(_bgo.UpdatableGithubObject):
@@ -279,7 +280,7 @@ class Release(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.assets_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Asset.Asset))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Asset.Asset, self.Session, r)
 
     def upload_asset(self, content_type, name, content):
         """

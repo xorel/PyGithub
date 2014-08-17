@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class File(_bgo.UpdatableGithubObject):
@@ -148,7 +149,7 @@ class File(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.url)
         postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, message=message, sha=self.sha)
         r = self.Session._request("DELETE", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json()["commit"])
+        return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json()["commit"], r.headers.get("ETag"))
 
     def edit(self, message, content, branch=None, author=None, committer=None):
         """
@@ -180,4 +181,4 @@ class File(_bgo.UpdatableGithubObject):
         r = self.Session._request("PUT", url, postArguments=postArguments)
         self._updateAttributes(None, **(r.json()["content"]))
         self.__content.update(content)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json()["commit"])
+        return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json()["commit"], r.headers.get("ETag"))

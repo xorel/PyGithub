@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class User(_bgo.UpdatableGithubObject):
@@ -530,7 +531,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.followers_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, User))(r)
+        return _pgl.PaginatedList(User, self.Session, r)
 
     def get_following(self, per_page=None):
         """
@@ -550,7 +551,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.following_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, User))(r)
+        return _pgl.PaginatedList(User, self.Session, r)
 
     def get_gists(self, since=None, per_page=None):
         """
@@ -574,7 +575,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.gists_url)
         urlArguments = _snd.dictionary(per_page=per_page, since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Gist.Gist))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Gist.Gist, self.Session, r)
 
     def get_keys(self):
         """
@@ -587,7 +588,7 @@ class User(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/users/{username}/keys", username=self.login)
         r = self.Session._request("GET", url)
-        return _rcv.ListReturnValue(_rcv.StructureReturnValue(self.Session, User.Key))(r.json())
+        return [User.Key(self.Session, x) for x in r.json()]
 
     def get_orgs(self, per_page=None):
         """
@@ -608,7 +609,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.organizations_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Organization.Organization))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Organization.Organization, self.Session, r)
 
     def get_repo(self, repo):
         """
@@ -658,7 +659,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.repos_url)
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort, type=type)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def get_starred(self, sort=None, direction=None, per_page=None):
         """
@@ -685,7 +686,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.starred_url)
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def get_subscriptions(self, per_page=None):
         """
@@ -706,7 +707,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.subscriptions_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def has_in_following(self, target_user):
         """
@@ -722,4 +723,4 @@ class User(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.following_url, other_user=target_user)
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolReturnValue(r.status_code == 204)
+        return r.status_code == 204

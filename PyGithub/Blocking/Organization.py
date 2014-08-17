@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Organization(_bgo.UpdatableGithubObject):
@@ -460,7 +461,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/orgs/{org}/issues", org=self.login)
         urlArguments = _snd.dictionary(direction=direction, filter=filter, labels=labels, per_page=per_page, since=since, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Issue.Issue))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Issue.Issue, self.Session, r)
 
     def get_members(self, filter=None, per_page=None):
         """
@@ -484,7 +485,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.members_url)
         urlArguments = _snd.dictionary(filter=filter, per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.User.User))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_public_members(self, per_page=None):
         """
@@ -505,7 +506,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.public_members_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.User.User))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_repo(self, repo):
         """
@@ -549,7 +550,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.repos_url)
         urlArguments = _snd.dictionary(per_page=per_page, type=type)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def get_teams(self, per_page=None):
         """
@@ -570,7 +571,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/orgs/{org}/teams", org=self.login)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Team.Team))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Team.Team, self.Session, r)
 
     def has_in_members(self, username):
         """
@@ -586,7 +587,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.members_url, member=username)
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolReturnValue(r.status_code == 204)
+        return r.status_code == 204
 
     def has_in_public_members(self, username):
         """
@@ -602,7 +603,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.public_members_url, member=username)
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolReturnValue(r.status_code == 204)
+        return r.status_code == 204
 
     def remove_from_members(self, username):
         """

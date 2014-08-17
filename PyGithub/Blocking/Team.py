@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Team(_bgo.UpdatableGithubObject):
@@ -209,7 +210,7 @@ class Team(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.members_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.User.User))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_repos(self, per_page=None):
         """
@@ -230,7 +231,7 @@ class Team(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.repositories_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository))(r)
+        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def has_in_members(self, username):
         """
@@ -246,7 +247,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.members_url, member=username)
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolReturnValue(r.status_code == 204)
+        return r.status_code == 204
 
     def has_in_repos(self, repo):
         """
@@ -262,7 +263,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/teams/{id}/repos/{owner}/{repo}", id=str(self.id), owner=repo[0], repo=repo[1])
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolReturnValue(r.status_code == 204)
+        return r.status_code == 204
 
     def remove_from_members(self, username):
         """

@@ -3,8 +3,10 @@
 
 # Copyright 2013-2014 Vincent Jacques <vincent@vincent-jacques.net>
 
-import coverage
+import sys
 import unittest
+
+import coverage
 
 
 def main():
@@ -21,4 +23,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 1:
+        main()
+    else:
+        import CodeGeneration
+        CodeGeneration.main("q")
