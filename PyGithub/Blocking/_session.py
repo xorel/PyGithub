@@ -113,7 +113,7 @@ class Session(object):
         data = None
         if postArguments is not None:
             if headers is None or headers.get("Content-Type") is None:
-                # @todoAlpha Should we set Content-Type here?
+                # @todoAlpha Should we set Content-Type here? If yes, we'll need to record all tests again, so consider sending an Accept header as well.
                 data = json.dumps(postArguments)
             else:
                 data = postArguments
