@@ -345,7 +345,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
-        return [PyGithub.Blocking.Label.Label(self.Session, x) for x in r.json()]
+        return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]
 
     def remove_all_labels(self):
         """

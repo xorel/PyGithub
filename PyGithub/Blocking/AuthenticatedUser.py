@@ -887,7 +887,7 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/user/keys")
         r = self.Session._request("GET", url)
-        return [PyGithub.Blocking.PublicKey.PublicKey(self.Session, x) for x in r.json()]
+        return [PyGithub.Blocking.PublicKey.PublicKey(self.Session, x, None) for x in r.json()]
 
     def get_or_create_authorization(self, client_id, client_secret, scopes=None, note=None, note_url=None):
         """

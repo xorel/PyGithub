@@ -1756,7 +1756,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.keys_url)
         r = self.Session._request("GET", url)
-        return [PyGithub.Blocking.PublicKey.PublicKey(self.Session, x) for x in r.json()]
+        return [PyGithub.Blocking.PublicKey.PublicKey(self.Session, x, None) for x in r.json()]
 
     def get_label(self, name):
         """
@@ -1787,7 +1787,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
-        return [PyGithub.Blocking.Label.Label(self.Session, x) for x in r.json()]
+        return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]
 
     def get_latest_pages_build(self):
         """

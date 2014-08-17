@@ -334,7 +334,15 @@ class CodeGenerator:
 
         yield "r = self.Session._request{}({})".format("Anonymous" if method.qualifiedName == "Github.create_anonymous_gist" else "", self.generateCallArguments(method))  # @todoSomeday Remove hard-coded method name
         yield from self.generateCodeForEffects(method)
-        yield from self.generateCodeForReturn(method)
+        if method.qualifiedName == "Repository.get_contents":
+            yield "if isinstance(r.json(), dict):"
+            yield '    return _rcv.KeyedUnion("type", dict(file=PyGithub.Blocking.File.File, submodule=PyGithub.Blocking.Submodule.Submodule, symlink=PyGithub.Blocking.SymLink.SymLink))(self.Session, r.json(), r.headers.get("ETag"))'
+            yield "else:"
+            yield "    return [_rcv.FileDirSubmoduleSymLinkUnion(PyGithub.Blocking.File.File, Repository.Dir, PyGithub.Blocking.Submodule.Submodule, PyGithub.Blocking.SymLink.SymLink)(self.Session, x) for x in r.json()]"
+        elif method.qualifiedName in ["Github.get_users", "Repository.get_contributors"]:
+            yield 'return _pgl.PaginatedList(_rcv.KeyedUnion("{}", dict({})), self.Session, r)'.format(method.returnType.content.key, ", ".join("{}={}".format(k, v) for k, v in sorted((k, self.computeContextualName(t, method)) for k, t in zip(method.returnType.content.keys, method.returnType.content.types))))
+        else:
+            yield from self.generateCodeForReturn(method)
 
     def generateCodeToNormalizeParameter(self, parameter):
         # @todoAlpha To solve the "variable parameter needs to be normalized as list" case, don't pass the parameter but its type, and return a format string where the caller will substitute the param name
@@ -376,63 +384,65 @@ class CodeGenerator:
             assert False  # pragma no cover
 
     def generateCodeForReturn(self, method):
-        if method.returnType.__class__.__name__ == "NoneType_":
-            return
-        elif method.returnFrom is None and method.returnType.__class__.__name__ == "Class":
-            if self.computeModuleNameFor(method.returnType) == self.computeModuleNameFor(method.containerClass):
-                typeName = method.returnType.qualifiedName
-            else:
-                typeName = self.computeFullyQualifiedName(method.returnType)
-            yield 'return {}(self.Session, r.json(), r.headers.get("ETag"))'.format(typeName)
-        elif method.returnFrom == "json.commit" and method.returnType.__class__.__name__ == "Class":
-            if self.computeModuleNameFor(method.returnType) == self.computeModuleNameFor(method.containerClass):
-                typeName = method.returnType.qualifiedName
-            else:
-                typeName = self.computeFullyQualifiedName(method.returnType)
-            yield 'return {}(self.Session, r.json()["commit"], r.headers.get("ETag"))'.format(typeName)
-        elif method.returnFrom is None and method.returnType.__class__.__name__ == "Structure":
-            yield 'return {}(self.Session, r.json())'.format(method.returnType.qualifiedName)
-        elif method.returnFrom is None and method.returnType.__class__.__name__ == "LinearCollection" and method.returnType.container.qualifiedName == "list":
-            if method.returnType.content.__class__.__name__ in ["Class", "Structure"]:
-                if self.computeModuleNameFor(method.returnType.content) == self.computeModuleNameFor(method.containerClass):
-                    typeName = method.returnType.content.qualifiedName
-                else:
-                    typeName = self.computeFullyQualifiedName(method.returnType.content)
-                yield 'return [{}(self.Session, x) for x in r.json()]'.format(typeName)
-            elif method.returnType.content.__class__.__name__ == "BuiltinType":
-                yield "return r.json()"
-            else:
-                assert False, method.returnType.content.__class__.__name__  # pragma no cover
-        elif method.returnFrom is None and method.returnType.__class__.__name__ == "LinearCollection" and method.returnType.container.qualifiedName == "PaginatedList":
-            if method.returnType.content.__class__.__name__ in ["Class", "Structure"]:
-                if self.computeModuleNameFor(method.returnType.content) == self.computeModuleNameFor(method.containerClass):
-                    typeName = method.returnType.content.qualifiedName
-                else:
-                    typeName = self.computeFullyQualifiedName(method.returnType.content)
-                yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(typeName)
-            elif method.returnType.content.__class__.__name__ == "UnionType":
-                classes = {}
-                for k, t in zip(method.returnType.content.keys, method.returnType.content.types):
-                    if self.computeModuleNameFor(t) == self.computeModuleNameFor(method.containerClass):
-                        typeName = t.qualifiedName
-                    else:
-                        typeName = self.computeFullyQualifiedName(t)
-                    classes[k] = typeName
-                keyed = '_rcv.KeyedUnion("{}", dict({}))'.format(method.returnType.content.key, ", ".join("{}={}".format(k, v) for k, v in sorted(classes.items())))
-                yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(keyed)
-            else:
-                assert False, method.returnType.content.__class__.__name__  # pragma no cover
-        elif method.returnFrom == "status":
-            yield "return r.status_code == 204"
-        elif method.returnType.__class__.__name__ == "MappingCollection":
-            yield "return r.json()"
-        elif method.returnType.__class__.__name__ == "UnionType":
-            yield "if isinstance(r.json(), dict):"
-            yield '    return _rcv.KeyedUnion("type", dict(file=PyGithub.Blocking.File.File, submodule=PyGithub.Blocking.Submodule.Submodule, symlink=PyGithub.Blocking.SymLink.SymLink))(self.Session, r.json(), r.headers.get("ETag"))'
-            yield "else:"
-            yield "    return [_rcv.FileDirSubmoduleSymLinkUnion(PyGithub.Blocking.File.File, Repository.Dir, PyGithub.Blocking.Submodule.Submodule, PyGithub.Blocking.SymLink.SymLink)(self.Session, x) for x in r.json()]"
+        yield from self.getMethod("generateCodeForReturn{}", method.returnType.__class__.__name__)(method)
+
+    def generateCodeForReturnNoneType(self, method):
+        assert method.returnFrom is None
+        return []
+
+    def generateCodeForReturnBuiltinType(self, method):
+        assert method.returnFrom == "status"
+        assert method.returnType.simpleName == "bool"
+        yield "return r.status_code == 204"
+
+    def generateCodeForReturnMappingCollection(self, method):
+        assert method.returnFrom is None
+        assert method.returnType.container.simpleName == "dict"
+        assert method.returnType.key.simpleName == "string"
+        assert method.returnType.value.simpleName == "string"
+        yield "return r.json()"
+
+    def generateCodeForReturnStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return {}(self.Session, r.json())'.format(self.computeContextualName(method.returnType, method))
+
+    def generateCodeForReturnClass(self, method):
+        if method.returnFrom is None:
+            data = "r.json()"
         else:
-            assert False, method.returnType.__class__.__name__  # pragma no cover
+            assert method.returnFrom == "json.commit"
+            data = 'r.json()["commit"]'
+        yield 'return {}(self.Session, {}, r.headers.get("ETag"))'.format(self.computeContextualName(method.returnType, method), data)
+
+    def generateCodeForReturnLinearCollection(self, method):
+        yield from self.getMethod("generateCodeForReturn{}Of{}", method.returnType.container.simpleName, method.returnType.content.__class__.__name__)(method)
+
+    def generateCodeForReturnPaginatedListOfClass(self, method):
+        assert method.returnFrom is None
+        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnPaginatedListOfStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfClass(self, method):
+        assert method.returnFrom is None
+        yield 'return [{}(self.Session, x, None) for x in r.json()]'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return [{}(self.Session, x) for x in r.json()]'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfBuiltinType(self, method):
+        assert method.returnFrom is None
+        assert method.returnType.content.simpleName == "string"
+        yield "return r.json()"
+
+    def computeContextualName(self, type, context):
+        if self.computeModuleNameFor(type) == self.computeModuleNameFor(context.containerClass):
+            return type.qualifiedName
+        else:
+            return self.computeFullyQualifiedName(type)
 
     def generateCallArguments(self, m):
         args = '"{}", url'.format(m.endPoints[0].verb)

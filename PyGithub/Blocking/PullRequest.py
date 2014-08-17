@@ -622,7 +622,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.commits_url)
         r = self.Session._request("GET", url)
-        return [PyGithub.Blocking.Commit.Commit(self.Session, x) for x in r.json()]
+        return [PyGithub.Blocking.Commit.Commit(self.Session, x, None) for x in r.json()]
 
     def get_files(self):
         """
