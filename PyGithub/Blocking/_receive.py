@@ -43,9 +43,6 @@ class _ConversionException(Exception):
     pass
 
 
-# @todoAlpha Separate converters for attributes from creators for return values. Converters should never have to deal with eTag. Creators should never have to deal with previous value. PaginatedListConverter doesn't make sense because no attribute can ba a PaginatedList.
-
-
 class Attribute(object):
     def __init__(self, name, conv, value):
         self.__name = name

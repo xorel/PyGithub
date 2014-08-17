@@ -27,12 +27,6 @@ from CodeGeneration.CaseUtils import toUpperCamel
 #   True        AuthenticatedUser.Plan
 #   False       Github.GitIgnoreTemplate
 
-# CodeGeneration.ApiDefinition.Structured
-# @todoAlpha go back to the PaginatedListWithoutPerPage model; remove the warning "returns paginated list but has no per_page"
-
-# CodeGeneration.ApiDefinition.CrossReferenced
-# @todoAlpha for methods returning a PaginatedList (with per_page), add parameter per_page. Or at least reimplement the warning
-
 # CodeGeneration.CodeGenerator
 # @todoAlpha remove special cases :-/
 
@@ -42,8 +36,7 @@ from CodeGeneration.CaseUtils import toUpperCamel
 
 # Global
 # @todoAlpha hide UpdatableGithubObject.update and generate an update method for each class
-# @todoAlpha assert url is not none in any updatable instance
-# @todoAlpha test lazy completion and update of all classes in two topic test cases, not in each class test case? Maybe?
+# @todoAlpha test lazy completion and update of all classes
 # @todoAlpha What happens when a suspended enterprise user tries to do anything?
 
 
@@ -208,12 +201,7 @@ class CodeGenerator:
         return "{}Converter".format(toUpperCamel(type.simpleName))
 
     def generateCodeForClassConverter(self, attribute, type):
-        # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
-        if self.computeModuleNameFor(type) == self.computeModuleNameFor(attribute.containerClass):
-            typeName = type.qualifiedName
-        else:
-            typeName = self.computeFullyQualifiedName(type)
-        return "ClassConverter(self.Session, {})".format(typeName)
+        return "ClassConverter(self.Session, {})".format(self.computeContextualName(type, attribute))
 
     def generateCodeForUnionTypeConverter(self, attribute, type):
         assert type.key is not None
@@ -221,12 +209,7 @@ class CodeGenerator:
         return 'KeyedStructureUnionConverter("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(converters.items())))
 
     def generateCodeForStructureConverter(self, attribute, type):
-        # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
-        if self.computeModuleNameFor(type.containerClass) == self.computeModuleNameFor(attribute.containerClass):
-            typeName = type.qualifiedName
-        else:
-            typeName = self.computeFullyQualifiedName(type)
-        return "StructureConverter(self.Session, {})".format(typeName)
+        return "StructureConverter(self.Session, {})".format(self.computeContextualName(type, attribute))
 
     def createClassProperty(self, attribute):
         return (
@@ -266,6 +249,7 @@ class CodeGenerator:
         yield ":rtype: {}".format(self.generateDocForType(method.returnType))
 
     def generateMethodBody(self, method):
+        # @todoAlpha Maybe for special cases we should just call a function named after the method, but living in real code so that we can unit-test it.
         yield from self.generateImportsForAllUnderlyingTypes(method.containerClass, [method.returnType])
         yield ""
         if len(method.parameters) != 0:
