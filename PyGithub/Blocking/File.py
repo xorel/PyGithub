@@ -148,7 +148,7 @@ class File(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.url)
         postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, message=message, sha=self.sha)
         r = self.Session._request("DELETE", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(None, r.json()["commit"])
+        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json()["commit"])
 
     def edit(self, message, content, branch=None, author=None, committer=None):
         """
@@ -180,4 +180,4 @@ class File(_bgo.UpdatableGithubObject):
         r = self.Session._request("PUT", url, postArguments=postArguments)
         self._updateAttributes(None, **(r.json()["content"]))
         self.__content.update(content)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(None, r.json()["commit"])
+        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json()["commit"])

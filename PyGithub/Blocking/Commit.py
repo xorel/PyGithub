@@ -371,7 +371,7 @@ class Commit(_bgo.UpdatableGithubObject):
         url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha
         postArguments = _snd.dictionary(description=description, state=state, target_url=target_url)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.StructureReturnValue(self.Session, Commit.Status)(None, r.json())
+        return _rcv.StructureReturnValue(self.Session, Commit.Status)(r.json())
 
     def get_statuses(self, per_page=None):
         """
@@ -391,4 +391,4 @@ class Commit(_bgo.UpdatableGithubObject):
         url = self.url + "/statuses"
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListReturnValue(self.Session, _rcv.StructureReturnValue(self.Session, Commit.Status))(None, r)
+        return _rcv.PaginatedListReturnValue(self.Session, _rcv.StructureReturnValue(self.Session, Commit.Status))(r)

@@ -155,4 +155,4 @@ class GitTree(_bgo.UpdatableGithubObject):
         url = self.url[:self.url.rfind(self.sha) - 1]
         postArguments = _snd.dictionary(base_tree=self.sha, tree=tree)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, GitTree)(None, r.json(), r.headers.get("ETag"))
+        return _rcv.ClassReturnValue(self.Session, GitTree)(r.json(), r.headers.get("ETag"))

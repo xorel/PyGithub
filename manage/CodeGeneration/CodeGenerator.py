@@ -409,7 +409,7 @@ class CodeGenerator:
                 args = 'r.json()["commit"]'
             else:
                 assert False  # pragma no cover
-            yield "return {}(None, {})".format(self.generateCodeForReturnValue(method, method.returnType), args)
+            yield "return {}({})".format(self.generateCodeForReturnValue(method, method.returnType), args)
 
     def generateCodeForReturnValue(self, attribute, type):
         return "_rcv.{}".format(self.getMethod("generateCodeFor{}ReturnValue", type.__class__.__name__)(attribute, type))
