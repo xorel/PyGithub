@@ -75,7 +75,7 @@ class PaginatedList(object):
 
     # @todoAlpha CurrentLenght and IsComplete
 
-    def __init__(self, session, content, r):
+    def __init__(self, content, session, r):
         self.__session = session
         self.__content = content
         self.__elements = []
@@ -95,7 +95,7 @@ class PaginatedList(object):
             self.__growWith(self.__session._request("GET", self.__url))
 
     def __growWith(self, r):
-        newElements = [self.__content(None, v) for v in r.json()]
+        newElements = [self.__content(self.__session, v) for v in r.json()]
         self.__elements += newElements
         if len(newElements) > 0:
             self.__url = r.links.get("next", {"url": None})["url"]

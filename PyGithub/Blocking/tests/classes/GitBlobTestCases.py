@@ -25,5 +25,6 @@ class GitBlobAttributes(TestCase):
 class GitBlobUpdate(TestCase):
     def testThroughLazyCompletion(self):
         b = self.electra.get_repo(("electra", "git-objects")).create_git_blob("This is some content", "utf8")
+        b._UpdatableGithubObject__eTag = None  # @todoAlpha All create_xxx function should return lazy-completable objects
         self.assertEqual(b.sha, "3daf0da6bca38181ab52610dd6af6e92f1a5469d")
         self.assertEqual(b.content, "VGhpcyBpcyBzb21lIGNvbnRlbnQ=\n")

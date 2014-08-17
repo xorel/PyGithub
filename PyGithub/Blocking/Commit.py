@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Commit(_bgo.UpdatableGithubObject):
@@ -371,7 +372,7 @@ class Commit(_bgo.UpdatableGithubObject):
         url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha
         postArguments = _snd.dictionary(description=description, state=state, target_url=target_url)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.StructureConverter(self.Session, Commit.Status)(None, r.json())
+        return Commit.Status(self.Session, r.json())
 
     def get_statuses(self, per_page=None):
         """
@@ -391,4 +392,4 @@ class Commit(_bgo.UpdatableGithubObject):
         url = self.url + "/statuses"
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListConverter(self.Session, _rcv.StructureConverter(self.Session, Commit.Status))(None, r)
+        return _pgl.PaginatedList(Commit.Status, self.Session, r)

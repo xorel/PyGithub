@@ -11,7 +11,7 @@ from CodeGeneration.ApiDefinition.Checker import Checker
 from CodeGeneration.Generator import Generator
 
 
-def main():
+def main(*args):
     structured = Structured.load("ApiDefinition")
     Structured.dump("ApiDefinition", structured)
 
@@ -35,5 +35,6 @@ def main():
     rateLimits._addSource(CrossReferenced.AttributeSource(session.attributes[0]))
     rateLimits._sortSources()
 
-    Checker(crossReferenced).check()
+    if len(args) == 0:
+        Checker(crossReferenced).check()
     Generator(crossReferenced).generate()

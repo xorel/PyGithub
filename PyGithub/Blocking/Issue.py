@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Issue(_bgo.UpdatableGithubObject):
@@ -297,7 +298,7 @@ class Issue(_bgo.UpdatableGithubObject):
         url = "/".join(self.url.split("/")[:-2]) + "/pulls"
         postArguments = _snd.dictionary(base=base, head=head, issue=self.number)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.PullRequest.PullRequest)(None, r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
 
     def edit(self, title=None, body=None, assignee=None, state=None, milestone=None, labels=None):
         """
@@ -344,7 +345,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
-        return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Label.Label))(None, r.json())
+        return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]
 
     def remove_all_labels(self):
         """

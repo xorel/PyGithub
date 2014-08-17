@@ -96,7 +96,7 @@ class _BuiltinConverter(object):
     def __init__(self, type):
         self.__type = type
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if isinstance(value, self.__type):
             return value
         else:
@@ -115,7 +115,7 @@ BoolConverter = _BuiltinConverter(bool)
 class _DatetimeConverter(object):
     desc = "datetime"
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if isinstance(value, int):
             return datetime.datetime.utcfromtimestamp(value)
         else:
@@ -135,14 +135,14 @@ class ListConverter(object):
     def __init__(self, content):
         self.__content = content
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if not isinstance(previousValue, list):
             previousValue = []
         if isinstance(value, list):
             if len(value) == len(previousValue):
-                new = [self.__content(pv, v, None) for pv, v in zip(previousValue, value)]
+                new = [self.__content(pv, v) for pv, v in zip(previousValue, value)]
             else:
-                new = [self.__content(None, v, None) for v in value]
+                new = [self.__content(None, v) for v in value]
             previousValue[:] = new
             return previousValue
         else:
@@ -153,29 +153,16 @@ class ListConverter(object):
         return "list of " + self.__content.desc
 
 
-class PaginatedListConverter(object):
-    def __init__(self, session, content):
-        self.__session = session
-        self.__content = content
-
-    def __call__(self, previousValue, r):
-        return pgl.PaginatedList(self.__session, self.__content, r)
-
-    @property
-    def desc(self):
-        return "PaginatedList of " + self.__content.desc
-
-
 class DictConverter(object):
     def __init__(self, key, value):
         self.__key = key
         self.__value = value
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if not isinstance(previousValue, dict):
             previousValue = {}
         if isinstance(value, dict):
-            new = {kk: self.__value(previousValue.get(kk), v, None) for kk, v in ((self.__key(None, k, None), v) for k, v in value.iteritems())}
+            new = {kk: self.__value(previousValue.get(kk), v) for kk, v in ((self.__key(None, k), v) for k, v in value.iteritems())}
             previousValue.clear()
             previousValue.update(new)
             return previousValue
@@ -192,12 +179,12 @@ class _StructureConverter(object):
         self.__session = session
         self.__struct = struct
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if isinstance(value, dict):
             if previousValue is None or previousValue.__class__ is not self.__struct:
-                return self.create(self.__struct, self.__session, value, eTag)
+                return self.create(self.__struct, self.__session, value)
             else:
-                self.update(previousValue, value, eTag)
+                self.update(previousValue, value)
                 return previousValue
         else:
             raise _ConversionException("Not a dict")
@@ -208,19 +195,19 @@ class _StructureConverter(object):
 
 
 class StructureConverter(_StructureConverter):
-    def create(self, type, session, value, eTag):
+    def create(self, type, session, value):
         return type(session, value)
 
-    def update(self, previousValue, value, eTag):
+    def update(self, previousValue, value):
         previousValue._updateAttributes(**value)
 
 
 class ClassConverter(_StructureConverter):
-    def create(self, type, session, value, eTag):
-        return type(session, value, eTag)
+    def create(self, type, session, value):
+        return type(session, value, None)
 
-    def update(self, previousValue, value, eTag):
-        previousValue._updateAttributes(eTag, **value)
+    def update(self, previousValue, value):
+        previousValue._updateAttributes(None, **value)
 
 
 class KeyedStructureUnionConverter(object):
@@ -228,7 +215,7 @@ class KeyedStructureUnionConverter(object):
         self.__key = key
         self.__convs = convs
 
-    def __call__(self, previousValue, value, eTag=None):
+    def __call__(self, previousValue, value):
         if isinstance(value, dict):
             key = value.get(self.__key)
             if key is None:
@@ -238,7 +225,7 @@ class KeyedStructureUnionConverter(object):
                 if conv is None:
                     raise _ConversionException("No converter for key " + key)
                 else:
-                    return conv(previousValue, value, eTag)
+                    return conv(previousValue, value)
         else:
             raise _ConversionException("Not a dict")
 
@@ -247,7 +234,39 @@ class KeyedStructureUnionConverter(object):
         return " or ".join(sorted(c.desc for c in self.__convs.itervalues()))
 
 
-class FileDirSubmoduleSymLinkUnionConverter(object):
+class _ReturnValueException(Exception):
+    pass
+
+
+class KeyedUnion(object):
+    def __init__(self, key, structs):
+        self.__key = key
+        self.__structs = structs
+
+    def __call__(self, session, value, eTag=None):
+        if isinstance(value, dict):
+            key = value.get(self.__key)
+            if key is None:
+                # @todo Raise a more reasonable exception. Delete _ReturnValueException entirely.
+                raise _ReturnValueException("No " + self.__key + " attribute")
+            else:
+                struct = self.__structs.get(key)
+                if struct is None:
+                    raise _ReturnValueException("No return value for key " + key)
+                else:
+                    if eTag is None:
+                        return struct(session, value)
+                    else:
+                        return struct(session, value, eTag)
+        else:
+            raise _ReturnValueException("Not a dict")
+
+    @property
+    def desc(self):
+        return " or ".join(sorted(c.desc for c in self.__structs.itervalues()))
+
+
+class FileDirSubmoduleSymLinkUnion(object):
     def __init__(self, file, dir, submodule, symlink):
         self.__file = file
         self.__dir = dir
@@ -255,40 +274,23 @@ class FileDirSubmoduleSymLinkUnionConverter(object):
         self.__symlink = symlink
         self.__convs = (file, dir, submodule, symlink)
 
-    def __call__(self, previousValue, value, eTag):
+    def __call__(self, session, value):
         if isinstance(value, dict):
             type = value.get("type")
             gitUrl = value.get("git_url", "")
             if type == "file" and (gitUrl is None or "/git/trees/" in gitUrl):  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
-                return self.__submodule(previousValue, value, eTag)
+                return self.__submodule(session, value)
             elif type == "file":
-                return self.__file(previousValue, value, eTag)
+                return self.__file(session, value)
             elif type == "symlink":
-                return self.__symlink(previousValue, value, eTag)
+                return self.__symlink(session, value)
             elif type == "dir":
-                return self.__dir(previousValue, value, eTag)
+                return self.__dir(session, value)
             else:
-                raise _ConversionException()
+                raise _ReturnValueException()
         else:
-            raise _ConversionException("Not a dict")
+            raise _ReturnValueException("Not a dict")
 
     @property
     def desc(self):
         return " or ".join(c.desc for c in self.__convs)
-
-
-class FirstMatchUnionConverter(object):
-    def __init__(self, *convs):
-        self.__convs = convs
-
-    def __call__(self, previousValue, value, eTag):
-        for conv in self.__convs:
-            try:
-                return conv(previousValue, value, eTag)
-            except _ConversionException:
-                pass
-        raise _ConversionException()
-
-    @property
-    def desc(self):
-        return " or ".join(sorted(c.desc for c in self.__convs))

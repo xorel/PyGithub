@@ -54,6 +54,7 @@ class CodeGenerator:
         yield "import PyGithub.Blocking._base_github_object as _bgo"
         yield "import PyGithub.Blocking._send as _snd"
         yield "import PyGithub.Blocking._receive as _rcv"
+        yield "import PyGithub.Blocking._paginated_list as _pgl"
         if klass.base is not None:
             yield ""
             yield "import {}".format(self.computeModuleNameFor(klass.base))
@@ -200,9 +201,6 @@ class CodeGenerator:
     def generateCodeForListConverter(self, attribute, type):
         return "ListConverter({})".format(self.generateCodeForConverter(attribute, type.content))
 
-    def generateCodeForPaginatedListConverter(self, attribute, type):
-        return "PaginatedListConverter(self.Session, {})".format(self.generateCodeForConverter(attribute, type.content))
-
     def generateCodeForMappingCollectionConverter(self, attribute, type):
         return "DictConverter({}, {})".format(self.generateCodeForConverter(attribute, type.key), self.generateCodeForConverter(attribute, type.value))
 
@@ -218,19 +216,9 @@ class CodeGenerator:
         return "ClassConverter(self.Session, {})".format(typeName)
 
     def generateCodeForUnionTypeConverter(self, attribute, type):
-        if type.key is not None:
-            converters = {k: self.generateCodeForConverter(attribute, t) for k, t in zip(type.keys, type.types)}
-            return 'KeyedStructureUnionConverter("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(converters.items())))
-        elif type.converter is not None:
-            return '{}UnionConverter({})'.format(
-                type.converter,
-                ", ".join(self.generateCodeForConverter(attribute, t) for t in type.types)
-            )
-        else:
-            return '{}UnionConverter({})'.format(
-                "".join(t.simpleName for t in type.types),
-                ", ".join(self.generateCodeForConverter(attribute, t) for t in type.types)
-            )
+        assert type.key is not None
+        converters = {k: self.generateCodeForConverter(attribute, t) for k, t in zip(type.keys, type.types)}
+        return 'KeyedStructureUnionConverter("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(converters.items())))
 
     def generateCodeForStructureConverter(self, attribute, type):
         # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
@@ -346,7 +334,15 @@ class CodeGenerator:
 
         yield "r = self.Session._request{}({})".format("Anonymous" if method.qualifiedName == "Github.create_anonymous_gist" else "", self.generateCallArguments(method))  # @todoSomeday Remove hard-coded method name
         yield from self.generateCodeForEffects(method)
-        yield from self.generateCodeForReturnValue(method)
+        if method.qualifiedName == "Repository.get_contents":
+            yield "if isinstance(r.json(), dict):"
+            yield '    return _rcv.KeyedUnion("type", dict(file=PyGithub.Blocking.File.File, submodule=PyGithub.Blocking.Submodule.Submodule, symlink=PyGithub.Blocking.SymLink.SymLink))(self.Session, r.json(), r.headers.get("ETag"))'
+            yield "else:"
+            yield "    return [_rcv.FileDirSubmoduleSymLinkUnion(PyGithub.Blocking.File.File, Repository.Dir, PyGithub.Blocking.Submodule.Submodule, PyGithub.Blocking.SymLink.SymLink)(self.Session, x) for x in r.json()]"
+        elif method.qualifiedName in ["Github.get_users", "Repository.get_contributors"]:
+            yield 'return _pgl.PaginatedList(_rcv.KeyedUnion("{}", dict({})), self.Session, r)'.format(method.returnType.content.key, ", ".join("{}={}".format(k, v) for k, v in sorted((k, self.computeContextualName(t, method)) for k, t in zip(method.returnType.content.keys, method.returnType.content.types))))
+        else:
+            yield from self.generateCodeForReturn(method)
 
     def generateCodeToNormalizeParameter(self, parameter):
         # @todoAlpha To solve the "variable parameter needs to be normalized as list" case, don't pass the parameter but its type, and return a format string where the caller will substitute the param name
@@ -387,29 +383,66 @@ class CodeGenerator:
         else:
             assert False  # pragma no cover
 
-    def generateCodeForReturnValue(self, method):
-        if method.returnType.__class__.__name__ == "NoneType_":
-            return []
+    def generateCodeForReturn(self, method):
+        yield from self.getMethod("generateCodeForReturn{}", method.returnType.__class__.__name__)(method)
+
+    def generateCodeForReturnNoneType(self, method):
+        assert method.returnFrom is None
+        return []
+
+    def generateCodeForReturnBuiltinType(self, method):
+        assert method.returnFrom == "status"
+        assert method.returnType.simpleName == "bool"
+        yield "return r.status_code == 204"
+
+    def generateCodeForReturnMappingCollection(self, method):
+        assert method.returnFrom is None
+        assert method.returnType.container.simpleName == "dict"
+        assert method.returnType.key.simpleName == "string"
+        assert method.returnType.value.simpleName == "string"
+        yield "return r.json()"
+
+    def generateCodeForReturnStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return {}(self.Session, r.json())'.format(self.computeContextualName(method.returnType, method))
+
+    def generateCodeForReturnClass(self, method):
+        if method.returnFrom is None:
+            data = "r.json()"
         else:
-            if method.returnFrom is None:
-                if method.returnType.__class__.__name__ in ["Structure", "MappingCollection"]:
-                    args = "r.json()"
-                elif method.returnType.__class__.__name__ == "LinearCollection":
-                    if method.returnType.container.qualifiedName in ["PaginatedList", "SearchResult"]:
-                        args = "r"
-                    else:
-                        args = "r.json()"
-                else:
-                    args = 'r.json(), r.headers.get("ETag")'
-            elif method.returnFrom == "json":
-                args = "r.json()"
-            elif method.returnFrom == "status":
-                args = "r.status_code == 204"
-            elif method.returnFrom == "json.commit":
-                args = 'r.json()["commit"]'
-            else:
-                assert False  # pragma no cover
-            yield "return {}(None, {})".format(self.generateCodeForConverter(method, method.returnType), args)
+            assert method.returnFrom == "json.commit"
+            data = 'r.json()["commit"]'
+        yield 'return {}(self.Session, {}, r.headers.get("ETag"))'.format(self.computeContextualName(method.returnType, method), data)
+
+    def generateCodeForReturnLinearCollection(self, method):
+        yield from self.getMethod("generateCodeForReturn{}Of{}", method.returnType.container.simpleName, method.returnType.content.__class__.__name__)(method)
+
+    def generateCodeForReturnPaginatedListOfClass(self, method):
+        assert method.returnFrom is None
+        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnPaginatedListOfStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfClass(self, method):
+        assert method.returnFrom is None
+        yield 'return [{}(self.Session, x, None) for x in r.json()]'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfStructure(self, method):
+        assert method.returnFrom is None
+        yield 'return [{}(self.Session, x) for x in r.json()]'.format(self.computeContextualName(method.returnType.content, method))
+
+    def generateCodeForReturnListOfBuiltinType(self, method):
+        assert method.returnFrom is None
+        assert method.returnType.content.simpleName == "string"
+        yield "return r.json()"
+
+    def computeContextualName(self, type, context):
+        if self.computeModuleNameFor(type) == self.computeModuleNameFor(context.containerClass):
+            return type.qualifiedName
+        else:
+            return self.computeFullyQualifiedName(type)
 
     def generateCallArguments(self, m):
         args = '"{}", url'.format(m.endPoints[0].verb)
@@ -498,7 +531,7 @@ class CodeGenerator:
             if a.simpleName == n:
                 return a
         if t.base is not None:
-            return self.findAttribute(t.base, n)
+            return self.findAttribute(t.base, n)  # pragma no cover
 
     def computeModuleNameFor(self, t):
         return self.getMethod("computeModuleNameFor{}", t.__class__.__name__)(t)

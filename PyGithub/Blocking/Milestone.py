@@ -11,6 +11,7 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
+import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Milestone(_bgo.UpdatableGithubObject):
@@ -210,4 +211,4 @@ class Milestone(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
-        return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Label.Label))(None, r.json())
+        return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]

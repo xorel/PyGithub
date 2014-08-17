@@ -35,6 +35,7 @@ class SessionedGithubObject(object):
 
     def __init__(self, session, attributes):
         self.__session = session
+        # @todoAlpha Check that attributes is a dict before expanding it. Raise appropriate exception if not.
         self._initAttributes(**attributes)
 
     def _initAttributes(self, **kwds):
@@ -63,7 +64,7 @@ class UpdatableGithubObject(SessionedGithubObject):
     or duplicated in concrete subclasses.
     """
 
-    def __init__(self, session, attributes, eTag):
+    def __init__(self, session, attributes, eTag=None):
         self.__eTag = eTag
         super(UpdatableGithubObject, self).__init__(session, attributes)
 
