@@ -297,7 +297,7 @@ class Issue(_bgo.UpdatableGithubObject):
         url = "/".join(self.url.split("/")[:-2]) + "/pulls"
         postArguments = _snd.dictionary(base=base, head=head, issue=self.number)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PullRequest.PullRequest)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
 
     def edit(self, title=None, body=None, assignee=None, state=None, milestone=None, labels=None):
         """

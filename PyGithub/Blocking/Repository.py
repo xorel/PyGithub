@@ -1026,7 +1026,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/contents/{path}", owner=self.owner.login, path=path, repo=self.name)
         postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, content=content, message=message)
         r = self.Session._request("PUT", url, postArguments=postArguments)
-        return _rcv.StructureReturnValue(self.Session, Repository.ContentCommit)(r.json())
+        return Repository.ContentCommit(self.Session, r.json())
 
     def create_git_blob(self, content, encoding):
         """
@@ -1074,7 +1074,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.git_commits_url, owner=self.owner.login, repo=self.name)
         postArguments = _snd.dictionary(author=author, committer=committer, message=message, parents=parents, tree=tree)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_git_ref(self, ref, sha):
         """
@@ -1094,7 +1094,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.git_refs_url, owner=self.owner.login, repo=self.name)
         postArguments = _snd.dictionary(ref=ref, sha=sha)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitRef.GitRef)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitRef.GitRef(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_git_tag(self, tag, message, object, type, tagger=None):
         """
@@ -1121,7 +1121,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.git_tags_url, owner=self.owner.login, repo=self.name)
         postArguments = _snd.dictionary(message=message, object=object, tag=tag, tagger=tagger, type=type)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitTag.GitTag)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitTag.GitTag(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_git_tree(self, tree):
         """
@@ -1140,7 +1140,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/git/trees", owner=self.owner.login, repo=self.name)
         postArguments = _snd.dictionary(tree=tree)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitTree.GitTree)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitTree.GitTree(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_issue(self, title, body=None, assignee=None, milestone=None, labels=None):
         """
@@ -1170,7 +1170,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.issues_url)
         postArguments = _snd.dictionary(assignee=assignee, body=body, labels=labels, milestone=milestone, title=title)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Issue.Issue)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_key(self, title, key):
         """
@@ -1190,7 +1190,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.keys_url)
         postArguments = _snd.dictionary(key=key, title=title)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PublicKey.PublicKey)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PublicKey.PublicKey(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_label(self, name, color):
         """
@@ -1210,7 +1210,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.labels_url)
         postArguments = _snd.dictionary(color=color, name=name)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Label.Label)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Label.Label(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_milestone(self, title, state=None, description=None, due_on=None):
         """
@@ -1237,7 +1237,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.milestones_url)
         postArguments = _snd.dictionary(description=description, due_on=due_on, state=state, title=title)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Milestone.Milestone)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Milestone.Milestone(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_pull(self, title, head, base, body=None):
         """
@@ -1263,7 +1263,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.pulls_url)
         postArguments = _snd.dictionary(base=base, body=body, head=head, title=title)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PullRequest.PullRequest)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_release(self, tag_name, target_commitish=None, name=None, body=None, draft=None, prerelease=None):
         """
@@ -1296,7 +1296,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.releases_url)
         postArguments = _snd.dictionary(body=body, draft=draft, name=name, prerelease=prerelease, tag_name=tag_name, target_commitish=target_commitish)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Release.Release)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Release.Release(self.Session, r.json(), r.headers.get("ETag"))
 
     def delete(self):
         """
@@ -1384,7 +1384,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.branches_url, branch=branch)
         r = self.Session._request("GET", url)
-        return _rcv.StructureReturnValue(self.Session, Repository.Branch)(r.json())
+        return Repository.Branch(self.Session, r.json())
 
     def get_branches(self, per_page=None):
         """
@@ -1442,7 +1442,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.commits_url, sha=sha)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Commit.Commit)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Commit.Commit(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_commits(self, sha=None, path=None, author=None, since=None, until=None, per_page=None):
         """
@@ -1565,7 +1565,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/git/blobs/{sha}", owner=self.owner.login, repo=self.name, sha=sha)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitBlob.GitBlob)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitBlob.GitBlob(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_git_commit(self, sha):
         """
@@ -1582,7 +1582,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/git/commits/{sha}", owner=self.owner.login, repo=self.name, sha=sha)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitCommit.GitCommit)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_git_ref(self, ref):
         """
@@ -1600,7 +1600,7 @@ class Repository(_bgo.UpdatableGithubObject):
         assert ref.startswith("refs/")
         url = uritemplate.expand(self.git_refs_url) + ref[4:]
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitRef.GitRef)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitRef.GitRef(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_git_refs(self, per_page=None):
         """
@@ -1638,7 +1638,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.git_tags_url, sha=sha)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitTag.GitTag)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitTag.GitTag(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_git_tree(self, sha):
         """
@@ -1655,7 +1655,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/git/trees/{sha}", owner=self.owner.login, repo=self.name, sha=sha)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.GitTree.GitTree)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.GitTree.GitTree(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_issue(self, number):
         """
@@ -1673,7 +1673,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.issues_url, number=str(number))
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Issue.Issue)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_issues(self, milestone=None, state=None, assignee=None, creator=None, mentioned=None, labels=None, sort=None, direction=None, since=None, per_page=None):
         """
@@ -1738,7 +1738,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.keys_url, key_id=str(id))
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PublicKey.PublicKey)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PublicKey.PublicKey(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_keys(self):
         """
@@ -1769,7 +1769,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url, name=name)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Label.Label)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Label.Label(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_labels(self):
         """
@@ -1797,7 +1797,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages/builds/latest", owner=self.owner.login, repo=self.name)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PagesBuild.PagesBuild)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PagesBuild.PagesBuild(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_milestone(self, number):
         """
@@ -1814,7 +1814,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.milestones_url, number=str(number))
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Milestone.Milestone)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Milestone.Milestone(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_milestones(self, state=None, sort=None, direction=None, per_page=None):
         """
@@ -1858,7 +1858,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages", owner=self.owner.login, repo=self.name)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PagesInformation.PagesInformation)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PagesInformation.PagesInformation(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_pages_builds(self, per_page=None):
         """
@@ -1896,7 +1896,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.pulls_url, number=str(number))
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.PullRequest.PullRequest)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_pulls(self, state=None, head=None, base=None, sort=None, direction=None, per_page=None):
         """
@@ -1951,7 +1951,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/readme", owner=self.owner.login, repo=self.name)
         urlArguments = _snd.dictionary(ref=ref)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.File.File)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.File.File(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_release(self, id):
         """
@@ -1968,7 +1968,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.releases_url, id=str(id))
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Release.Release)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Release.Release(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_release_asset(self, id):
         """
@@ -1985,7 +1985,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/releases/assets/{id}", id=str(id), owner=self.owner.login, repo=self.name)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Asset.Asset)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Asset.Asset(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_releases(self, per_page=None):
         """

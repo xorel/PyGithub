@@ -628,7 +628,7 @@ class User(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}", owner=self.login, repo=repo)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_repos(self, type=None, sort=None, direction=None, per_page=None):
         """

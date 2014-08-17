@@ -303,4 +303,4 @@ class Release(_bgo.UpdatableGithubObject):
         postArguments = content
         headers = {"Content-Type": content_type}
         r = self.Session._request("POST", url, urlArguments=urlArguments, postArguments=postArguments, headers=headers)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Asset.Asset)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Asset.Asset(self.Session, r.json(), r.headers.get("ETag"))

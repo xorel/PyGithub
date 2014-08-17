@@ -377,6 +377,14 @@ class CodeGenerator:
     def generateCodeForReturn(self, method):
         if method.returnType.__class__.__name__ == "NoneType_":
             return []
+        elif method.returnFrom is None and method.returnType.__class__.__name__ == "Class":
+            if self.computeModuleNameFor(method.returnType) == self.computeModuleNameFor(method.containerClass):
+                typeName = method.returnType.qualifiedName
+            else:
+                typeName = self.computeFullyQualifiedName(method.returnType)
+            yield 'return {}(self.Session, r.json(), r.headers.get("ETag"))'.format(typeName)
+        elif method.returnFrom is None and method.returnType.__class__.__name__ == "Structure":
+            yield 'return {}(self.Session, r.json())'.format(method.returnType.qualifiedName)
         else:
             if method.returnFrom is None:
                 if method.returnType.__class__.__name__ in ["Structure", "MappingCollection"]:

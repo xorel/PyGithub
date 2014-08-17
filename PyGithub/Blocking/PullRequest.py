@@ -662,7 +662,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.issue_url)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Issue.Issue)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
 
     def merge(self, commit_message=None):
         """
@@ -680,4 +680,4 @@ class PullRequest(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/{number}/merge", number=str(self.number), owner=self.base.repo.owner.login, repo=self.base.repo.name)
         postArguments = _snd.dictionary(commit_message=commit_message)
         r = self.Session._request("PUT", url, postArguments=postArguments)
-        return _rcv.StructureReturnValue(self.Session, PullRequest.MergeResult)(r.json())
+        return PullRequest.MergeResult(self.Session, r.json())

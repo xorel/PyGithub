@@ -319,7 +319,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/forks", owner=repo[0], repo=repo[1])
         postArguments = _snd.dictionary(organization=self.login)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_repo(self, name, description=None, homepage=None, private=None, has_issues=None, has_wiki=None, team_id=None, auto_init=None, gitignore_template=None, license_template=None):
         """
@@ -364,7 +364,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.repos_url)
         postArguments = _snd.dictionary(auto_init=auto_init, description=description, gitignore_template=gitignore_template, has_issues=has_issues, has_wiki=has_wiki, homepage=homepage, license_template=license_template, name=name, private=private, team_id=team_id)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_team(self, name, repo_names=None, permission=None):
         """
@@ -388,7 +388,7 @@ class Organization(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/orgs/{org}/teams", org=self.login)
         postArguments = _snd.dictionary(name=name, permission=permission, repo_names=repo_names)
         r = self.Session._request("POST", url, postArguments=postArguments)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Team.Team)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Team.Team(self.Session, r.json(), r.headers.get("ETag"))
 
     def edit(self, billing_email=None, blog=None, company=None, email=None, location=None, name=None):
         """
@@ -525,7 +525,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}", owner=self.login, repo=repo)
         r = self.Session._request("GET", url)
-        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Repository.Repository)(r.json(), r.headers.get("ETag"))
+        return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_repos(self, type=None, per_page=None):
         """
