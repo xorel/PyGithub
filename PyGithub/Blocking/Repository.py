@@ -1501,7 +1501,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/contents/{path}", owner=self.owner.login, path=path, repo=self.name)
         urlArguments = _snd.dictionary(ref=ref)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.FirstMatchUnionConverter(_rcv.KeyedStructureUnionConverter("type", dict(file=_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), submodule=_rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), symlink=_rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))), _rcv.ListConverter(_rcv.FileDirSubmoduleSymLinkUnionConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), _rcv.StructureConverter(self.Session, Repository.Dir), _rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), _rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))))(None, r.json())
+        return _rcv.FirstMatchUnionConverter(_rcv.KeyedStructureUnionConverter("type", dict(file=_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), submodule=_rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), symlink=_rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))), _rcv.ListConverter(_rcv.FileDirSubmoduleSymLinkUnionConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.File.File), _rcv.StructureConverter(self.Session, Repository.Dir), _rcv.ClassConverter(self.Session, PyGithub.Blocking.Submodule.Submodule), _rcv.ClassConverter(self.Session, PyGithub.Blocking.SymLink.SymLink))))(None, r.json(), r.headers.get("ETag"))
 
     def get_contributors(self, anon=None, per_page=None):
         """

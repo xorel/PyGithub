@@ -91,9 +91,9 @@
                 },
                 "private": false,
                 "pulls_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/pulls{/number}",
-                "pushed_at": "2014-08-10T16:47:34Z",
+                "pushed_at": "2014-08-17T15:55:52Z",
                 "releases_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/releases{/id}",
-                "size": 484,
+                "size": 632,
                 "ssh_url": "git@github.home.jacquev6.net:electra/git-objects.git",
                 "stargazers_count": 0,
                 "stargazers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/stargazers",
@@ -105,7 +105,7 @@
                 "tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/tags",
                 "teams_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/teams",
                 "trees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/trees{/sha}",
-                "updated_at": "2014-08-10T16:47:34Z",
+                "updated_at": "2014-08-17T15:55:52Z",
                 "url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects",
                 "watchers": 0,
                 "watchers_count": 0
@@ -119,16 +119,16 @@
                 "content-length": "5487",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
-                "etag": "\"ba140c1011985fc79ffd16edcf9d8465\"",
-                "last-modified": "Sun, 10 Aug 2014 16:47:34 GMT",
+                "date": "Sun, 17 Aug 2014 15:56:29 GMT",
+                "etag": "\"f43c7f6d19ae717292176b3bbd9826a0\"",
+                "last-modified": "Sun, 17 Aug 2014 15:55:52 GMT",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "654ae6a8-2e77-4f6d-b594-65825ba3ae88",
+                "x-github-request-id": "fe8174e8-4d6c-4948-aedd-b415350f9669",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -174,7 +174,7 @@
                 "content-length": "330",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
+                "date": "Sun, 17 Aug 2014 15:56:29 GMT",
                 "etag": "\"64b21580b581a2c5293cfd8327c84b4d\"",
                 "location": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/refs/heads/ephemeral",
                 "server": "GitHub.com",
@@ -183,7 +183,7 @@
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "1aedb296-63bd-4988-a2ff-e5397b76aa9f",
+                "x-github-request-id": "9aeb0c21-605d-4108-b192-e4b9e4ce0569",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 201
@@ -234,16 +234,16 @@
                 "content-length": "427",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
-                "etag": "\"ba140c1011985fc79ffd16edcf9d8465\"",
-                "last-modified": "Sun, 10 Aug 2014 16:47:34 GMT",
+                "date": "Sun, 17 Aug 2014 15:56:29 GMT",
+                "etag": "\"f43c7f6d19ae717292176b3bbd9826a0\"",
+                "last-modified": "Sun, 17 Aug 2014 15:55:52 GMT",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "c334ad3c-3def-4f9b-8b90-cc6ff2edb48f",
+                "x-github-request-id": "c8101cfa-bb94-499b-959a-5942360f0503",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -275,16 +275,16 @@
             "body": {
                 "commit": {
                     "author": {
-                        "date": "2014-08-10T16:48:16Z",
+                        "date": "2014-08-17T15:56:29Z",
                         "email": "ghe-electra@jacquev6.net",
                         "name": "Electra"
                     },
                     "committer": {
-                        "date": "2014-08-10T16:48:16Z",
+                        "date": "2014-08-17T15:56:29Z",
                         "email": "ghe-electra@jacquev6.net",
                         "name": "Electra"
                     },
-                    "html_url": "http://github.home.jacquev6.net/electra/git-objects/commit/5850461185f4ce8811c2ef265dc6222d626103f2",
+                    "html_url": "http://github.home.jacquev6.net/electra/git-objects/commit/908d130b5443c6af3bcb9248b791e7fc480a7c70",
                     "message": "Add .gitmodules",
                     "parents": [
                         {
@@ -293,12 +293,12 @@
                             "url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/commits/db09e03a13f7910b9cae93ca91cd35800e15c695"
                         }
                     ],
-                    "sha": "5850461185f4ce8811c2ef265dc6222d626103f2",
+                    "sha": "908d130b5443c6af3bcb9248b791e7fc480a7c70",
                     "tree": {
                         "sha": "81dec0230590a0ddef340e662654d6cd7911d91d",
                         "url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/trees/81dec0230590a0ddef340e662654d6cd7911d91d"
                     },
-                    "url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/commits/5850461185f4ce8811c2ef265dc6222d626103f2"
+                    "url": "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/commits/908d130b5443c6af3bcb9248b791e7fc480a7c70"
                 },
                 "content": {
                     "_links": {
@@ -325,15 +325,15 @@
                 "content-length": "1789",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
-                "etag": "\"a1d945090841cb785220df9923eba418\"",
+                "date": "Sun, 17 Aug 2014 15:56:29 GMT",
+                "etag": "\"1b582d3cadc7340e5f2967dac139da8d\"",
                 "server": "GitHub.com",
                 "status": "201 Created",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "c78068fc-808b-4313-9ffc-38bf421190ca",
+                "x-github-request-id": "fcd9b94f-6645-459c-b6a0-bef9b3f2c540",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 201
@@ -346,6 +346,7 @@
                 "Accept": "application/vnd.github.v3.full+json",
                 "Accept-Encoding": "gzip, deflate, compress",
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "If-None-Match": "\"f43c7f6d19ae717292176b3bbd9826a0\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
             "url": {
@@ -384,16 +385,16 @@
                 "content-length": "886",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
-                "etag": "\"ba140c1011985fc79ffd16edcf9d8465\"",
-                "last-modified": "Sun, 10 Aug 2014 16:47:34 GMT",
+                "date": "Sun, 17 Aug 2014 15:56:34 GMT",
+                "etag": "\"1df4825be5a828ee48268bc4ac2d3289\"",
+                "last-modified": "Sun, 17 Aug 2014 15:56:34 GMT",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "8499571d-929d-4f31-81bb-e10e46a922a3",
+                "x-github-request-id": "95b6463e-8499-47f7-9a9f-ef4ae37b994f",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -425,13 +426,13 @@
                 "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
                 "connection": "keep-alive",
                 "content-security-policy": "default-src 'none'",
-                "date": "Sun, 10 Aug 2014 16:48:16 GMT",
+                "date": "Sun, 17 Aug 2014 15:56:34 GMT",
                 "server": "GitHub.com",
                 "status": "204 No Content",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "1151bfd5-ce3f-4271-bdd5-0831eed70fe1",
+                "x-github-request-id": "21e06228-164a-443a-a79c-ec4a1ae31649",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 204

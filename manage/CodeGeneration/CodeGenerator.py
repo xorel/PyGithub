@@ -392,12 +392,15 @@ class CodeGenerator:
             return []
         else:
             if method.returnFrom is None:
-                if method.returnType.__class__.__name__ == "Class":
-                    args = 'r.json(), r.headers.get("ETag")'
-                elif method.returnType.__class__.__name__ == "LinearCollection" and method.returnType.container.qualifiedName == "PaginatedList":
-                    args = "r"
-                else:
+                if method.returnType.__class__.__name__ in ["Structure", "MappingCollection"]:
                     args = "r.json()"
+                elif method.returnType.__class__.__name__ == "LinearCollection":
+                    if method.returnType.container.qualifiedName in ["PaginatedList", "SearchResult"]:
+                        args = "r"
+                    else:
+                        args = "r.json()"
+                else:
+                    args = 'r.json(), r.headers.get("ETag")'
             elif method.returnFrom == "json":
                 args = "r.json()"
             elif method.returnFrom == "status":
