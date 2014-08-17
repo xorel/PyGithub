@@ -346,7 +346,7 @@ class CodeGenerator:
 
         yield "r = self.Session._request{}({})".format("Anonymous" if method.qualifiedName == "Github.create_anonymous_gist" else "", self.generateCallArguments(method))  # @todoSomeday Remove hard-coded method name
         yield from self.generateCodeForEffects(method)
-        yield from self.generateCodeForReturnValue(method)
+        yield from self.generateCodeForReturn(method)
 
     def generateCodeToNormalizeParameter(self, parameter):
         # @todoAlpha To solve the "variable parameter needs to be normalized as list" case, don't pass the parameter but its type, and return a format string where the caller will substitute the param name
@@ -387,7 +387,7 @@ class CodeGenerator:
         else:
             assert False  # pragma no cover
 
-    def generateCodeForReturnValue(self, method):
+    def generateCodeForReturn(self, method):
         if method.returnType.__class__.__name__ == "NoneType_":
             return []
         else:
@@ -409,7 +409,56 @@ class CodeGenerator:
                 args = 'r.json()["commit"]'
             else:
                 assert False  # pragma no cover
-            yield "return {}(None, {})".format(self.generateCodeForConverter(method, method.returnType), args)
+            yield "return {}(None, {})".format(self.generateCodeForReturnValue(method, method.returnType), args)
+
+    def generateCodeForReturnValue(self, attribute, type):
+        return "_rcv.{}".format(self.getMethod("generateCodeFor{}ReturnValue", type.__class__.__name__)(attribute, type))
+
+    def generateCodeForLinearCollectionReturnValue(self, attribute, type):
+        return self.getMethod("generateCodeFor{}ReturnValue", type.container.simpleName)(attribute, type)
+
+    def generateCodeForListReturnValue(self, attribute, type):
+        return "ListReturnValue({})".format(self.generateCodeForReturnValue(attribute, type.content))
+
+    def generateCodeForPaginatedListReturnValue(self, attribute, type):
+        return "PaginatedListReturnValue(self.Session, {})".format(self.generateCodeForReturnValue(attribute, type.content))
+
+    def generateCodeForMappingCollectionReturnValue(self, attribute, type):
+        return "DictReturnValue({}, {})".format(self.generateCodeForReturnValue(attribute, type.key), self.generateCodeForReturnValue(attribute, type.value))
+
+    def generateCodeForBuiltinTypeReturnValue(self, attribute, type):
+        return "{}ReturnValue".format(toUpperCamel(type.simpleName))
+
+    def generateCodeForClassReturnValue(self, attribute, type):
+        # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
+        if self.computeModuleNameFor(type) == self.computeModuleNameFor(attribute.containerClass):
+            typeName = type.qualifiedName
+        else:
+            typeName = self.computeFullyQualifiedName(type)
+        return "ClassReturnValue(self.Session, {})".format(typeName)
+
+    def generateCodeForUnionTypeReturnValue(self, attribute, type):
+        if type.key is not None:
+            ReturnValues = {k: self.generateCodeForReturnValue(attribute, t) for k, t in zip(type.keys, type.types)}
+            return 'KeyedStructureUnionReturnValue("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(ReturnValues.items())))
+        elif type.converter is not None:
+            return '{}UnionReturnValue({})'.format(
+                type.converter,
+                ", ".join(self.generateCodeForReturnValue(attribute, t) for t in type.types)
+            )
+        else:
+            return '{}UnionReturnValue({})'.format(
+                "".join(t.simpleName for t in type.types),
+                ", ".join(self.generateCodeForReturnValue(attribute, t) for t in type.types)
+            )
+
+    def generateCodeForStructureReturnValue(self, attribute, type):
+        # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
+        if self.computeModuleNameFor(type.containerClass) == self.computeModuleNameFor(attribute.containerClass):
+            typeName = type.qualifiedName
+        else:
+            typeName = self.computeFullyQualifiedName(type)
+        return "StructureReturnValue(self.Session, {})".format(typeName)
 
     def generateCallArguments(self, m):
         args = '"{}", url'.format(m.endPoints[0].verb)

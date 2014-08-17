@@ -506,7 +506,7 @@ class Gist(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.commits_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListConverter(self.Session, _rcv.StructureConverter(self.Session, Gist.Commit))(None, r)
+        return _rcv.PaginatedListReturnValue(self.Session, _rcv.StructureReturnValue(self.Session, Gist.Commit))(None, r)
 
     def get_forks(self, per_page=None):
         """
@@ -526,4 +526,4 @@ class Gist(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.forks_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedListConverter(self.Session, _rcv.ClassConverter(self.Session, Gist))(None, r)
+        return _rcv.PaginatedListReturnValue(self.Session, _rcv.ClassReturnValue(self.Session, Gist))(None, r)

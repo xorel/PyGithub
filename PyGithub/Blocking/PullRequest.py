@@ -621,7 +621,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.commits_url)
         r = self.Session._request("GET", url)
-        return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Commit.Commit))(None, r.json())
+        return _rcv.ListReturnValue(_rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Commit.Commit))(None, r.json())
 
     def get_files(self):
         """
@@ -634,7 +634,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/{number}/files", number=str(self.number), owner=self.base.repo.owner.login, repo=self.base.repo.name)
         r = self.Session._request("GET", url)
-        return _rcv.ListConverter(_rcv.StructureConverter(self.Session, PullRequest.File))(None, r.json())
+        return _rcv.ListReturnValue(_rcv.StructureReturnValue(self.Session, PullRequest.File))(None, r.json())
 
     def get_is_merged(self):
         """
@@ -647,7 +647,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/{number}/merge", number=str(self.number), owner=self.base.repo.owner.login, repo=self.base.repo.name)
         r = self.Session._request("GET", url, accept404=True)
-        return _rcv.BoolConverter(None, r.status_code == 204)
+        return _rcv.BoolReturnValue(None, r.status_code == 204)
 
     def get_issue(self):
         """
@@ -662,7 +662,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.issue_url)
         r = self.Session._request("GET", url)
-        return _rcv.ClassConverter(self.Session, PyGithub.Blocking.Issue.Issue)(None, r.json(), r.headers.get("ETag"))
+        return _rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Issue.Issue)(None, r.json(), r.headers.get("ETag"))
 
     def merge(self, commit_message=None):
         """
@@ -680,4 +680,4 @@ class PullRequest(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/{number}/merge", number=str(self.number), owner=self.base.repo.owner.login, repo=self.base.repo.name)
         postArguments = _snd.dictionary(commit_message=commit_message)
         r = self.Session._request("PUT", url, postArguments=postArguments)
-        return _rcv.StructureConverter(self.Session, PullRequest.MergeResult)(None, r.json())
+        return _rcv.StructureReturnValue(self.Session, PullRequest.MergeResult)(None, r.json())

@@ -210,4 +210,4 @@ class Milestone(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
-        return _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Label.Label))(None, r.json())
+        return _rcv.ListReturnValue(_rcv.ClassReturnValue(self.Session, PyGithub.Blocking.Label.Label))(None, r.json())

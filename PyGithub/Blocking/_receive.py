@@ -292,3 +292,209 @@ class FirstMatchUnionConverter(object):
     @property
     def desc(self):
         return " or ".join(sorted(c.desc for c in self.__convs))
+
+
+class _ReturnValueException(Exception):
+    pass
+
+
+class _BuiltinReturnValue(object):
+    def __init__(self, type):
+        self.__type = type
+
+    def __call__(self, previousValue, value, eTag=None):
+        if isinstance(value, self.__type):
+            return value
+        else:
+            raise _ReturnValueException("Not a " + self.desc)
+
+    @property
+    def desc(self):
+        return self.__type.__name__
+
+
+IntReturnValue = _BuiltinReturnValue(numbers.Integral)
+StringReturnValue = _BuiltinReturnValue(basestring)
+BoolReturnValue = _BuiltinReturnValue(bool)
+
+
+class _DatetimeReturnValue(object):
+    desc = "datetime"
+
+    def __call__(self, previousValue, value, eTag=None):
+        if isinstance(value, int):
+            return datetime.datetime.utcfromtimestamp(value)
+        else:
+            try:
+                return datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+            except (ValueError, TypeError) as e:
+                try:
+                    return datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S+00:00")
+                except (ValueError, TypeError) as e:
+                    raise _ReturnValueException(e)
+
+
+DatetimeReturnValue = _DatetimeReturnValue()
+
+
+class ListReturnValue(object):
+    def __init__(self, content):
+        self.__content = content
+
+    def __call__(self, previousValue, value, eTag=None):
+        if not isinstance(previousValue, list):
+            previousValue = []
+        if isinstance(value, list):
+            if len(value) == len(previousValue):
+                new = [self.__content(pv, v, None) for pv, v in zip(previousValue, value)]
+            else:
+                new = [self.__content(None, v, None) for v in value]
+            previousValue[:] = new
+            return previousValue
+        else:
+            raise _ReturnValueException("Not a list")
+
+    @property
+    def desc(self):
+        return "list of " + self.__content.desc
+
+
+class PaginatedListReturnValue(object):
+    def __init__(self, session, content):
+        self.__session = session
+        self.__content = content
+
+    def __call__(self, previousValue, r):
+        return pgl.PaginatedList(self.__session, self.__content, r)
+
+    @property
+    def desc(self):
+        return "PaginatedList of " + self.__content.desc
+
+
+class DictReturnValue(object):
+    def __init__(self, key, value):
+        self.__key = key
+        self.__value = value
+
+    def __call__(self, previousValue, value, eTag=None):
+        if not isinstance(previousValue, dict):
+            previousValue = {}
+        if isinstance(value, dict):
+            new = {kk: self.__value(previousValue.get(kk), v, None) for kk, v in ((self.__key(None, k, None), v) for k, v in value.iteritems())}
+            previousValue.clear()
+            previousValue.update(new)
+            return previousValue
+        else:
+            raise _ReturnValueException("Not a dict")
+
+    @property
+    def desc(self):
+        return "dict of " + self.__key.desc + " to " + self.__value.desc
+
+
+class _StructureReturnValue(object):
+    def __init__(self, session, struct):
+        self.__session = session
+        self.__struct = struct
+
+    def __call__(self, previousValue, value, eTag=None):
+        if isinstance(value, dict):
+            if previousValue is None or previousValue.__class__ is not self.__struct:
+                return self.create(self.__struct, self.__session, value, eTag)
+            else:
+                self.update(previousValue, value, eTag)
+                return previousValue
+        else:
+            raise _ReturnValueException("Not a dict")
+
+    @property
+    def desc(self):
+        return self.__struct.__name__
+
+
+class StructureReturnValue(_StructureReturnValue):
+    def create(self, type, session, value, eTag):
+        return type(session, value)
+
+    def update(self, previousValue, value, eTag):
+        previousValue._updateAttributes(**value)
+
+
+class ClassReturnValue(_StructureReturnValue):
+    def create(self, type, session, value, eTag):
+        return type(session, value, eTag)
+
+    def update(self, previousValue, value, eTag):
+        previousValue._updateAttributes(eTag, **value)
+
+
+class KeyedStructureUnionReturnValue(object):
+    def __init__(self, key, convs):
+        self.__key = key
+        self.__convs = convs
+
+    def __call__(self, previousValue, value, eTag=None):
+        if isinstance(value, dict):
+            key = value.get(self.__key)
+            if key is None:
+                raise _ReturnValueException("No " + self.__key + " attribute")
+            else:
+                conv = self.__convs.get(key)
+                if conv is None:
+                    raise _ReturnValueException("No return value for key " + key)
+                else:
+                    return conv(previousValue, value, eTag)
+        else:
+            raise _ReturnValueException("Not a dict")
+
+    @property
+    def desc(self):
+        return " or ".join(sorted(c.desc for c in self.__convs.itervalues()))
+
+
+class FileDirSubmoduleSymLinkUnionReturnValue(object):
+    def __init__(self, file, dir, submodule, symlink):
+        self.__file = file
+        self.__dir = dir
+        self.__submodule = submodule
+        self.__symlink = symlink
+        self.__convs = (file, dir, submodule, symlink)
+
+    def __call__(self, previousValue, value, eTag):
+        if isinstance(value, dict):
+            type = value.get("type")
+            gitUrl = value.get("git_url", "")
+            if type == "file" and (gitUrl is None or "/git/trees/" in gitUrl):  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
+                return self.__submodule(previousValue, value, eTag)
+            elif type == "file":
+                return self.__file(previousValue, value, eTag)
+            elif type == "symlink":
+                return self.__symlink(previousValue, value, eTag)
+            elif type == "dir":
+                return self.__dir(previousValue, value, eTag)
+            else:
+                raise _ReturnValueException()
+        else:
+            raise _ReturnValueException("Not a dict")
+
+    @property
+    def desc(self):
+        return " or ".join(c.desc for c in self.__convs)
+
+
+class FirstMatchUnionReturnValue(object):
+    def __init__(self, *convs):
+        self.__convs = convs
+
+    def __call__(self, previousValue, value, eTag):
+        for conv in self.__convs:
+            try:
+                return conv(previousValue, value, eTag)
+            except _ReturnValueException:
+                pass
+        raise _ReturnValueException()
+
+    @property
+    def desc(self):
+        return " or ".join(sorted(c.desc for c in self.__convs))
