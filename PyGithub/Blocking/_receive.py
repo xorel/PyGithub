@@ -153,19 +153,6 @@ class ListConverter(object):
         return "list of " + self.__content.desc
 
 
-class PaginatedListConverter(object):
-    def __init__(self, session, content):
-        self.__session = session
-        self.__content = content
-
-    def __call__(self, previousValue, r):
-        return pgl.PaginatedList(self.__session, self.__content, r)
-
-    @property
-    def desc(self):
-        return "PaginatedList of " + self.__content.desc
-
-
 class DictConverter(object):
     def __init__(self, key, value):
         self.__key = key
@@ -247,53 +234,6 @@ class KeyedStructureUnionConverter(object):
         return " or ".join(sorted(c.desc for c in self.__convs.itervalues()))
 
 
-class FileDirSubmoduleSymLinkUnionConverter(object):
-    def __init__(self, file, dir, submodule, symlink):
-        self.__file = file
-        self.__dir = dir
-        self.__submodule = submodule
-        self.__symlink = symlink
-        self.__convs = (file, dir, submodule, symlink)
-
-    def __call__(self, previousValue, value):
-        if isinstance(value, dict):
-            type = value.get("type")
-            gitUrl = value.get("git_url", "")
-            if type == "file" and (gitUrl is None or "/git/trees/" in gitUrl):  # https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490
-                return self.__submodule(previousValue, value)
-            elif type == "file":
-                return self.__file(previousValue, value)
-            elif type == "symlink":
-                return self.__symlink(previousValue, value)
-            elif type == "dir":
-                return self.__dir(previousValue, value)
-            else:
-                raise _ConversionException()
-        else:
-            raise _ConversionException("Not a dict")
-
-    @property
-    def desc(self):
-        return " or ".join(c.desc for c in self.__convs)
-
-
-class FirstMatchUnionConverter(object):
-    def __init__(self, *convs):
-        self.__convs = convs
-
-    def __call__(self, previousValue, value):
-        for conv in self.__convs:
-            try:
-                return conv(previousValue, value)
-            except _ConversionException:
-                pass
-        raise _ConversionException()
-
-    @property
-    def desc(self):
-        return " or ".join(sorted(c.desc for c in self.__convs))
-
-
 class _ReturnValueException(Exception):
     pass
 
@@ -316,25 +256,6 @@ class _BuiltinReturnValue(object):
 IntReturnValue = _BuiltinReturnValue(numbers.Integral)
 StringReturnValue = _BuiltinReturnValue(basestring)
 BoolReturnValue = _BuiltinReturnValue(bool)
-
-
-class _DatetimeReturnValue(object):
-    desc = "datetime"
-
-    def __call__(self, value, eTag=None):
-        if isinstance(value, int):
-            return datetime.datetime.utcfromtimestamp(value)
-        else:
-            try:
-                return datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
-            except (ValueError, TypeError) as e:
-                try:
-                    return datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S+00:00")
-                except (ValueError, TypeError) as e:
-                    raise _ReturnValueException(e)
-
-
-DatetimeReturnValue = _DatetimeReturnValue()
 
 
 class ListReturnValue(object):

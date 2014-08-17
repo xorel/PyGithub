@@ -363,43 +363,6 @@ class KeyedStructureUnionConverterTestCase(unittest.TestCase):
         self.assertIs(instance2, ret2)
 
 
-class FirstMatchUnionConverterTestCase(unittest.TestCase):
-    def setUp(self):
-        self.mocks = MockMockMock.Engine()
-        self.conv1 = self.mocks.create("conv1")
-        self.conv2 = self.mocks.create("conv2")
-        self.instance1 = self.mocks.create("instance1")
-        self.instance2 = self.mocks.create("instance2")
-        self.conv = rcv.FirstMatchUnionConverter(self.conv1.object, self.conv2.object)
-
-    def tearDown(self):
-        self.mocks.tearDown()
-
-    def testDesc(self):
-        self.conv1.expect.desc.andReturn("desc1")
-        self.conv2.expect.desc.andReturn("desc2")
-
-        self.assertEqual(self.conv.desc, "desc1 or desc2")
-
-    def testFirstConverterMatches(self):
-        self.conv1.expect(None, 42).andReturn("42")
-
-        self.assertEqual(self.conv(None, 42), "42")
-
-    def testSecondConverterMatches(self):
-        self.conv1.expect(None, 42).andRaise(rcv._ConversionException())
-        self.conv2.expect(None, 42).andReturn("forty-two")
-
-        self.assertEqual(self.conv(None, 42), "forty-two")
-
-    def testNoConverterMatches(self):
-        self.conv1.expect(None, 42).andRaise(rcv._ConversionException())
-        self.conv2.expect(None, 42).andRaise(rcv._ConversionException())
-
-        with self.assertRaises(rcv._ConversionException):
-            self.conv(None, 42)
-
-
 class DictConverterTestCase(unittest.TestCase):
     def setUp(self):
         self.mocks = MockMockMock.Engine()
@@ -461,87 +424,6 @@ class DictConverterTestCase(unittest.TestCase):
             self.conv(None, [])
 
 
-class PaginatedListConverterTestCase(unittest.TestCase):
-    def setUp(self):
-        self.mocks = MockMockMock.Engine()
-        self.session = (42, )
-        self.content = self.mocks.create("content")
-        self.request = self.mocks.create("request")
-        self.conv = rcv.PaginatedListConverter(self.session, self.content.object)
-
-    def tearDown(self):
-        self.mocks.tearDown()
-
-    def testDesc(self):
-        self.content.expect.desc.andReturn("desc")
-
-        self.assertEqual(self.conv.desc, "PaginatedList of desc")
-
-    def testCall(self):
-        self.request.expect.json().andReturn([])
-
-        l = self.conv(None, self.request.object)
-        self.assertIsInstance(l, pgl.PaginatedList)
-
-
-class FileDirSubmoduleSymLinkUnionConverterTestCase(unittest.TestCase):
-    def setUp(self):
-        self.mocks = MockMockMock.Engine()
-        self.file = self.mocks.create("file")
-        self.dir = self.mocks.create("dir")
-        self.submodule = self.mocks.create("submodule")
-        self.symlink = self.mocks.create("symlink")
-        self.conv = rcv.FileDirSubmoduleSymLinkUnionConverter(self.file.object, self.dir.object, self.submodule.object, self.symlink.object)
-
-    def tearDown(self):
-        self.mocks.tearDown()
-
-    def testDesc(self):
-        self.file.expect.desc.andReturn("file")
-        self.dir.expect.desc.andReturn("dir")
-        self.submodule.expect.desc.andReturn("submodule")
-        self.symlink.expect.desc.andReturn("symlink")
-
-        self.assertEqual(self.conv.desc, "file or dir or submodule or symlink")
-
-    def testBadConversion(self):
-        with self.assertRaises(rcv._ConversionException):
-            self.conv(None, [])
-
-    def testEmptyDict(self):
-        with self.assertRaises(rcv._ConversionException):
-            self.conv(None, {})
-
-    def testBadType(self):
-        with self.assertRaises(rcv._ConversionException):
-            self.conv(None, {"type": "foo"})
-
-    def testFile(self):
-        self.file.expect(None, {"type": "file"}).andReturn(42)
-
-        self.assertEqual(self.conv(None, {"type": "file"}), 42)
-
-    def testDir(self):
-        self.dir.expect(None, {"type": "dir"}).andReturn(42)
-
-        self.assertEqual(self.conv(None, {"type": "dir"}), 42)
-
-    def testSymlink(self):
-        self.symlink.expect(None, {"type": "symlink"}).andReturn(42)
-
-        self.assertEqual(self.conv(None, {"type": "symlink"}), 42)
-
-    def testSubmodule(self):
-        self.submodule.expect(None, {"type": "file", "git_url": "foo/git/trees/xxx"}).andReturn(42)
-
-        self.assertEqual(self.conv(None, {"type": "file", "git_url": "foo/git/trees/xxx"}), 42)
-
-    def testSubmoduleWithoutDotGitmodules(self):
-        self.submodule.expect(None, {"type": "file", "git_url": None}).andReturn(42)
-
-        self.assertEqual(self.conv(None, {"type": "file", "git_url": None}), 42)
-
-
 class BuiltinReturnValueTestCase(unittest.TestCase):
     def testIntegerReturnValueDescription(self):
         self.assertEqual(rcv.IntReturnValue.desc, "Integral")
@@ -565,23 +447,6 @@ class BuiltinReturnValueTestCase(unittest.TestCase):
     def testBadStringConversion(self):
         with self.assertRaises(rcv._ReturnValueException):
             rcv.StringReturnValue(42)
-
-    def testDatetimeReturnValueDescription(self):
-        self.assertEqual(rcv.DatetimeReturnValue.desc, "datetime")
-
-    def testDatetimeConversionFromInt(self):
-        self.assertEqual(rcv.DatetimeReturnValue(1395971262), datetime.datetime(2014, 3, 28, 1, 47, 42))
-
-    def testDatetimeConversionFromString(self):
-        self.assertEqual(rcv.DatetimeReturnValue("2010-07-09T06:10:06Z"), datetime.datetime(2010, 7, 9, 6, 10, 6))
-
-    def testBadDatetimeConversion(self):
-        with self.assertRaises(rcv._ReturnValueException):
-            rcv.DatetimeReturnValue(4.5)
-
-    def testBadDatetimeConversionFromString(self):
-        with self.assertRaises(rcv._ReturnValueException):
-            rcv.DatetimeReturnValue("foobar")
 
 
 class ListReturnValueTestCase(unittest.TestCase):

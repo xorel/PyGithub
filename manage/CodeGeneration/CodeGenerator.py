@@ -200,9 +200,6 @@ class CodeGenerator:
     def generateCodeForListConverter(self, attribute, type):
         return "ListConverter({})".format(self.generateCodeForConverter(attribute, type.content))
 
-    def generateCodeForPaginatedListConverter(self, attribute, type):
-        return "PaginatedListConverter(self.Session, {})".format(self.generateCodeForConverter(attribute, type.content))
-
     def generateCodeForMappingCollectionConverter(self, attribute, type):
         return "DictConverter({}, {})".format(self.generateCodeForConverter(attribute, type.key), self.generateCodeForConverter(attribute, type.value))
 
@@ -218,19 +215,9 @@ class CodeGenerator:
         return "ClassConverter(self.Session, {})".format(typeName)
 
     def generateCodeForUnionTypeConverter(self, attribute, type):
-        if type.key is not None:
-            converters = {k: self.generateCodeForConverter(attribute, t) for k, t in zip(type.keys, type.types)}
-            return 'KeyedStructureUnionConverter("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(converters.items())))
-        elif type.converter is not None:
-            return '{}UnionConverter({})'.format(
-                type.converter,
-                ", ".join(self.generateCodeForConverter(attribute, t) for t in type.types)
-            )
-        else:
-            return '{}UnionConverter({})'.format(
-                "".join(t.simpleName for t in type.types),
-                ", ".join(self.generateCodeForConverter(attribute, t) for t in type.types)
-            )
+        assert type.key is not None
+        converters = {k: self.generateCodeForConverter(attribute, t) for k, t in zip(type.keys, type.types)}
+        return 'KeyedStructureUnionConverter("{}", dict({}))'.format(type.key, ", ".join("{}={}".format(k, v) for k, v in sorted(converters.items())))
 
     def generateCodeForStructureConverter(self, attribute, type):
         # @todoAlpha computeContextualName(attribute.qualifiedName, type.qualifiedName) ?
@@ -547,7 +534,7 @@ class CodeGenerator:
             if a.simpleName == n:
                 return a
         if t.base is not None:
-            return self.findAttribute(t.base, n)
+            return self.findAttribute(t.base, n)  # pragma no cover
 
     def computeModuleNameFor(self, t):
         return self.getMethod("computeModuleNameFor{}", t.__class__.__name__)(t)
