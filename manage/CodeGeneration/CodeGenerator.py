@@ -47,7 +47,6 @@ class CodeGenerator:
         yield "import PyGithub.Blocking._base_github_object as _bgo"
         yield "import PyGithub.Blocking._send as _snd"
         yield "import PyGithub.Blocking._receive as _rcv"
-        yield "import PyGithub.Blocking._paginated_list as _pgl"
         if klass.base is not None:
             yield ""
             yield "import {}".format(self.computeModuleNameFor(klass.base))
@@ -324,7 +323,7 @@ class CodeGenerator:
             yield "else:"
             yield "    return [_rcv.FileDirSubmoduleSymLinkUnion(PyGithub.Blocking.File.File, Repository.Dir, PyGithub.Blocking.Submodule.Submodule, PyGithub.Blocking.SymLink.SymLink)(self.Session, x) for x in r.json()]"
         elif method.qualifiedName in ["Github.get_users", "Repository.get_contributors"]:
-            yield 'return _pgl.PaginatedList(_rcv.KeyedUnion("{}", dict({})), self.Session, r)'.format(method.returnType.content.key, ", ".join("{}={}".format(k, v) for k, v in sorted((k, self.computeContextualName(t, method)) for k, t in zip(method.returnType.content.keys, method.returnType.content.types))))
+            yield 'return _rcv.PaginatedList(_rcv.KeyedUnion("{}", dict({})), self.Session, r)'.format(method.returnType.content.key, ", ".join("{}={}".format(k, v) for k, v in sorted((k, self.computeContextualName(t, method)) for k, t in zip(method.returnType.content.keys, method.returnType.content.types))))
         else:
             yield from self.generateCodeForReturn(method)
 
@@ -403,11 +402,11 @@ class CodeGenerator:
 
     def generateCodeForReturnPaginatedListOfClass(self, method):
         assert method.returnFrom is None
-        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+        yield 'return _rcv.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
 
     def generateCodeForReturnPaginatedListOfStructure(self, method):
         assert method.returnFrom is None
-        yield 'return _pgl.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
+        yield 'return _rcv.PaginatedList({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
 
     def generateCodeForReturnListOfClass(self, method):
         assert method.returnFrom is None

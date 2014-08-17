@@ -11,7 +11,6 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
-import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Submodule(_bgo.UpdatableGithubObject):

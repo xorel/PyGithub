@@ -9,7 +9,7 @@ import numbers
 log = logging.getLogger(__name__)
 
 import PyGithub.Blocking._exceptions as exn
-import PyGithub.Blocking._paginated_list as pgl
+from PyGithub.Blocking._paginated_list import PaginatedList
 
 """
 This module is a bit contrieved because of the following goals:

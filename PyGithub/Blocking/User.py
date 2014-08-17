@@ -11,7 +11,6 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
-import PyGithub.Blocking._paginated_list as _pgl
 
 
 class User(_bgo.UpdatableGithubObject):
@@ -531,7 +530,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.followers_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(User, self.Session, r)
+        return _rcv.PaginatedList(User, self.Session, r)
 
     def get_following(self, per_page=None):
         """
@@ -551,7 +550,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.following_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(User, self.Session, r)
+        return _rcv.PaginatedList(User, self.Session, r)
 
     def get_gists(self, since=None, per_page=None):
         """
@@ -575,7 +574,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.gists_url)
         urlArguments = _snd.dictionary(per_page=per_page, since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Gist.Gist, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Gist.Gist, self.Session, r)
 
     def get_keys(self):
         """
@@ -609,7 +608,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.organizations_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Organization.Organization, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Organization.Organization, self.Session, r)
 
     def get_repo(self, repo):
         """
@@ -659,7 +658,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.repos_url)
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort, type=type)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def get_starred(self, sort=None, direction=None, per_page=None):
         """
@@ -686,7 +685,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.starred_url)
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def get_subscriptions(self, per_page=None):
         """
@@ -707,7 +706,7 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.subscriptions_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
     def has_in_following(self, target_user):
         """

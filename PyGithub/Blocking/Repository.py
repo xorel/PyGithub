@@ -11,7 +11,6 @@ import uritemplate
 import PyGithub.Blocking._base_github_object as _bgo
 import PyGithub.Blocking._send as _snd
 import PyGithub.Blocking._receive as _rcv
-import PyGithub.Blocking._paginated_list as _pgl
 
 
 class Repository(_bgo.UpdatableGithubObject):
@@ -1369,7 +1368,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.assignees_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_branch(self, branch):
         """
@@ -1405,7 +1404,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.branches_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(Repository.Branch, self.Session, r)
+        return _rcv.PaginatedList(Repository.Branch, self.Session, r)
 
     def get_collaborators(self, per_page=None):
         """
@@ -1426,7 +1425,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.collaborators_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_commit(self, sha):
         """
@@ -1479,7 +1478,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.commits_url)
         urlArguments = _snd.dictionary(author=author, path=path, per_page=per_page, sha=sha, since=since, until=until)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Commit.Commit, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Commit.Commit, self.Session, r)
 
     def get_contents(self, path, ref=None):
         """
@@ -1529,7 +1528,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.contributors_url)
         urlArguments = _snd.dictionary(anon=anon, per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(_rcv.KeyedUnion("type", dict(Anonymous=Repository.AnonymousContributor, User=PyGithub.Blocking.Contributor.Contributor)), self.Session, r)
+        return _rcv.PaginatedList(_rcv.KeyedUnion("type", dict(Anonymous=Repository.AnonymousContributor, User=PyGithub.Blocking.Contributor.Contributor)), self.Session, r)
 
     def get_forks(self, sort=None, per_page=None):
         """
@@ -1552,7 +1551,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.forks_url)
         urlArguments = _snd.dictionary(per_page=per_page, sort=sort)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(Repository, self.Session, r)
+        return _rcv.PaginatedList(Repository, self.Session, r)
 
     def get_git_blob(self, sha):
         """
@@ -1625,7 +1624,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.git_refs_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.GitRef.GitRef, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.GitRef.GitRef, self.Session, r)
 
     def get_git_tag(self, sha):
         """
@@ -1725,7 +1724,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.issues_url)
         urlArguments = _snd.dictionary(assignee=assignee, creator=creator, direction=direction, labels=labels, mentioned=mentioned, milestone=milestone, per_page=per_page, since=since, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Issue.Issue, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Issue.Issue, self.Session, r)
 
     def get_key(self, id):
         """
@@ -1848,7 +1847,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.milestones_url)
         urlArguments = _snd.dictionary(direction=direction, per_page=per_page, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Milestone.Milestone, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Milestone.Milestone, self.Session, r)
 
     def get_pages(self):
         """
@@ -1883,7 +1882,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pages/builds", owner=self.owner.login, repo=self.name)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.PagesBuild.PagesBuild, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.PagesBuild.PagesBuild, self.Session, r)
 
     def get_pull(self, number):
         """
@@ -1936,7 +1935,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.pulls_url)
         urlArguments = _snd.dictionary(base=base, direction=direction, head=head, per_page=per_page, sort=sort, state=state)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.PullRequest.PullRequest, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.PullRequest.PullRequest, self.Session, r)
 
     def get_readme(self, ref=None):
         """
@@ -2010,7 +2009,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.releases_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Release.Release, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Release.Release, self.Session, r)
 
     def get_stargazers(self, per_page=None):
         """
@@ -2031,7 +2030,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.stargazers_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_subscribers(self, per_page=None):
         """
@@ -2052,7 +2051,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.subscribers_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
     def get_tags(self, per_page=None):
         """
@@ -2072,7 +2071,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.tags_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(Repository.Tag, self.Session, r)
+        return _rcv.PaginatedList(Repository.Tag, self.Session, r)
 
     def get_teams(self, per_page=None):
         """
@@ -2093,7 +2092,7 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.teams_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _pgl.PaginatedList(PyGithub.Blocking.Team.Team, self.Session, r)
+        return _rcv.PaginatedList(PyGithub.Blocking.Team.Team, self.Session, r)
 
     def has_in_assignees(self, assignee):
         """
