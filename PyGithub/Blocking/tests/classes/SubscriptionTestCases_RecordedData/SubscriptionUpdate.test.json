@@ -1,0 +1,375 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/user",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                "bio": null,
+                "blog": "http://jacquev6.net/electra",
+                "collaborators": 0,
+                "company": "Electra Software",
+                "created_at": "2014-08-02T16:54:48Z",
+                "disk_usage": 3876,
+                "email": "ghe-electra@jacquev6.net",
+                "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                "followers": 0,
+                "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                "following": 2,
+                "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                "hireable": false,
+                "html_url": "http://github.home.jacquev6.net/electra",
+                "id": 16,
+                "location": "Greece",
+                "login": "electra",
+                "name": "Electra",
+                "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                "owned_private_repos": 0,
+                "private_gists": 1,
+                "public_gists": 41,
+                "public_repos": 33,
+                "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                "site_admin": false,
+                "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                "suspended_at": null,
+                "total_private_repos": 0,
+                "type": "User",
+                "updated_at": "2014-08-18T01:00:10Z",
+                "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1512",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:15 GMT",
+                "etag": "\"43c349a72e5da019eb3c1c4ea86e369b\"",
+                "last-modified": "Mon, 18 Aug 2014 01:00:10 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "b0d75076-258d-4937-be01-fe6afea47141",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "created_at": "2014-08-18T01:00:09Z",
+                "ignored": false,
+                "reason": null,
+                "repository_url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update",
+                "subscribed": true,
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update/subscription"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "271",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:16 GMT",
+                "etag": "\"ccb7c260bbfd4d9d9d7c765c0b1dce4a\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "46e2fb3c-05de-4880-87b9-71c6c2322f72",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "created_at": "2014-08-18T01:00:09Z",
+                "ignored": false,
+                "reason": null,
+                "repository_url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update",
+                "subscribed": true,
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update/subscription"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "271",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:16 GMT",
+                "etag": "\"ccb7c260bbfd4d9d9d7c765c0b1dce4a\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "11f3261f-71ed-46f9-8abb-22e3b67338a5",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "ignored": true,
+                "subscribed": false
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "38",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PUT"
+        },
+        "response": {
+            "body": {
+                "created_at": "2014-08-18T01:00:09Z",
+                "ignored": true,
+                "reason": null,
+                "repository_url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update",
+                "subscribed": false,
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update/subscription"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "271",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:16 GMT",
+                "etag": "\"4ba72cde8b652d670efb55e7cb08ee7e\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "5a58032d-507b-4a30-a05d-ae7fc04a0f6d",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "If-None-Match": "\"ccb7c260bbfd4d9d9d7c765c0b1dce4a\"",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "created_at": "2014-08-18T01:00:09Z",
+                "ignored": true,
+                "reason": null,
+                "repository_url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update",
+                "subscribed": false,
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update/subscription"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "271",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:21 GMT",
+                "etag": "\"4ba72cde8b652d670efb55e7cb08ee7e\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "885327e9-29fc-4062-b755-0e6a3ddcdfdc",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "If-None-Match": "\"4ba72cde8b652d670efb55e7cb08ee7e\"",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Mon, 18 Aug 2014 01:00:21 GMT",
+                "etag": "\"4ba72cde8b652d670efb55e7cb08ee7e\"",
+                "server": "GitHub.com",
+                "status": "304 Not Modified",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-request-id": "64a2d044-6448-4e16-b927-b9740f988235",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 304
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "ignored": false,
+                "subscribed": true
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "38",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/subscription-update/subscription",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PUT"
+        },
+        "response": {
+            "body": {
+                "created_at": "2014-08-18T01:00:09Z",
+                "ignored": false,
+                "reason": null,
+                "repository_url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update",
+                "subscribed": true,
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/subscription-update/subscription"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "271",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 01:00:21 GMT",
+                "etag": "\"ccb7c260bbfd4d9d9d7c765c0b1dce4a\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "fa281053-ce46-48f8-840a-793340a177b5",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

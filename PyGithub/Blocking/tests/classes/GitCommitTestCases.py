@@ -22,6 +22,7 @@ class GitCommitAttributes(TestCase):
         self.assertEqual(c.sha, "db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.assertEqual(c.tree.sha, "f2b2248a59b245891a16e7d7eecfd7bd499e4521")
         self.assertEqual(c.type, None)
+        self.assertEqual(c.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/commits/db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
 class GitCommitUpdate(TestCase):
@@ -34,3 +35,11 @@ class GitCommitUpdate(TestCase):
         # Author are always returned completely so there is no other way to cover _updateAttributes
         c = self.electra.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")
         c.author._updateAttributes()
+
+    def testWithIncompleteObject(self):
+        # Commits are immutable so there is no way to update a complete object
+        c = self.electra.get_repo(("electra", "git-objects")).get_git_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]
+        self.assertTrue(c.update())
+        self.assertEqual(c.sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
+        self.assertEqual(c.tree.sha, "65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
+        self.assertFalse(c.update())

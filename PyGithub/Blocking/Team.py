@@ -127,6 +127,13 @@ class Team(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__slug.needsLazyCompletion)
         return self.__slug.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def add_to_members(self, username):
         """
         Calls the `PUT /teams/:id/members/:username <http://developer.github.com/v3/orgs/teams#add-team-member>`__ end point.
@@ -166,7 +173,7 @@ class Team(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, name=None, permission=None):
@@ -185,7 +192,7 @@ class Team(_bgo.UpdatableGithubObject):
         if permission is not None:
             permission = _snd.normalizeEnum(permission, "admin", "pull", "push")
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(name=name, permission=permission)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -293,3 +300,12 @@ class Team(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/teams/{id}/repos/{owner}/{repo}", id=str(self.id), owner=repo[0], repo=repo[1])
         r = self.Session._request("DELETE", url)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

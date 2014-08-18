@@ -43,6 +43,7 @@ class AuthenticatedUserAttributes(TestCase):
         self.assertEqual(u.total_private_repos, 0)
         self.assertEqual(u.type, "User")
         self.assertEqual(u.updated_at, datetime.datetime(2014, 8, 2, 18, 21, 07))
+        self.assertEqual(u.url, "http://github.home.jacquev6.net/api/v3/users/antigone")
 
 
 class AuthenticatedUserAuthorizations(TestCase):
@@ -417,3 +418,15 @@ class AuthenticatedUserSubscriptions(TestCase):
         s = u.create_subscription(("electra", "mutable"), subscribed=False, ignored=False)
         self.assertEqual(s.subscribed, True)
         self.assertEqual(s.ignored, False)
+
+
+class AuthenticatedUserUpdate(TestCase):
+    def test(self):
+        u1 = self.electra.get_authenticated_user()
+        u2 = self.electra.get_authenticated_user()
+        u2.edit(name="Electra!")
+        self.assertEqual(u1.name, "Electra")
+        self.assertTrue(u1.update())
+        self.assertEqual(u1.name, "Electra!")
+        self.assertFalse(u1.update())
+        u2.edit(name="Electra")

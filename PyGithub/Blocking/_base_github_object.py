@@ -83,17 +83,17 @@ class UpdatableGithubObject(SessionedGithubObject):
 
     def _completeLazily(self, attributeNeedsCompletion):
         if self.__eTag is None and attributeNeedsCompletion:
-            self.update()
+            self._update()
 
-    def update(self):
+    def _update(self):
         """
         Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
 
-        Returns True if the the update was needed.
+        Returns True if the update was needed.
         """
-        if self.url is None:
+        if self._url is None:
             raise _exn.BadAttributeException("UpdatableGithubObject.url", basestring.__name__, None)
-        r = self.Session._request("GET", self.url, headers={"If-None-Match": self.__eTag})
+        r = self.Session._request("GET", self._url, headers={"If-None-Match": self.__eTag})
         if r.status_code == 304:
             return False
         else:
@@ -101,7 +101,7 @@ class UpdatableGithubObject(SessionedGithubObject):
             return True
 
     @property
-    def url(self):
+    def _url(self):
         """
         :type: :class:`string`
         """

@@ -982,6 +982,13 @@ class Repository(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__watchers_count.needsLazyCompletion)
         return self.__watchers_count.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def add_to_collaborators(self, username):
         """
         Calls the `PUT /repos/:owner/:repo/collaborators/:username <http://developer.github.com/v3/repos/collaborators#add-collaborator>`__ end point.
@@ -1307,7 +1314,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, name=None, description=None, homepage=None, private=None, has_issues=None, has_wiki=None, default_branch=None):
@@ -1344,7 +1351,7 @@ class Repository(_bgo.UpdatableGithubObject):
         if name is None:
             name = self.name
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(default_branch=default_branch, description=description, has_issues=has_issues, has_wiki=has_wiki, homepage=homepage, name=name, private=private)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -2140,3 +2147,12 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.collaborators_url, collaborator=username)
         r = self.Session._request("DELETE", url)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

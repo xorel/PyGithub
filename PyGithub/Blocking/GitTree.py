@@ -139,6 +139,13 @@ class GitTree(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__type.needsLazyCompletion)
         return self.__type.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def create_modified_copy(self, tree):
         """
         Calls the `POST /repos/:owner/:repo/git/trees <http://developer.github.com/v3/git/trees#create-a-tree>`__ end point.
@@ -152,7 +159,16 @@ class GitTree(_bgo.UpdatableGithubObject):
 
         tree = _snd.normalizeList(_snd.normalizeDict, tree)
 
-        url = self.url[:self.url.rfind(self.sha) - 1]
+        url = self._url[:self._url.rfind(self.sha) - 1]
         postArguments = _snd.dictionary(base_tree=self.sha, tree=tree)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return GitTree(self.Session, r.json(), r.headers.get("ETag"))
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

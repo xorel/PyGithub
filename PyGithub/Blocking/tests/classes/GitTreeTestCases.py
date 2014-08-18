@@ -24,12 +24,14 @@ class GitTreeAttributes(TestCase):
         self.assertEqual(t.tree[3].path, "a_tree")
         self.assertIsInstance(t.tree[3], PyGithub.Blocking.GitTree.GitTree)
         self.assertEqual(t.type, None)
+        self.assertEqual(t.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/trees/f2b2248a59b245891a16e7d7eecfd7bd499e4521")
 
     def testInTree(self):
         b = self.electra.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521").tree[3]
         self.assertEqual(b.mode, "040000")
         self.assertEqual(b.path, "a_tree")
         self.assertEqual(b.type, "tree")
+        self.assertEqual(b.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/trees/65208a85edf4a0d2c2f757ab655fb3ba2cd63bad")
 
 
 class GitTreeMisc(TestCase):
@@ -51,3 +53,10 @@ class GitTreeUpdate(TestCase):
         # GitSubmodule are always returned completely so there is no other way to cover _updateAttributes
         t = self.electra.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521")
         t.tree[1]._updateAttributes()
+
+    def testWithIncompleteObject(self):
+        # Trees are immutable so there is no way to update a complete object
+        t = self.electra.get_repo(("electra", "git-objects")).get_git_tree("f2b2248a59b245891a16e7d7eecfd7bd499e4521").tree[3]
+        self.assertTrue(t.update())
+        self.assertEqual(len(t.tree), 1)
+        self.assertFalse(t.update())

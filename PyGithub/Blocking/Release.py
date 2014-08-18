@@ -215,6 +215,13 @@ class Release(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__zipball_url.needsLazyCompletion)
         return self.__zipball_url.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/releases/:id <http://developer.github.com/v3/repos/releases#delete-a-release>`__ end point.
@@ -224,7 +231,7 @@ class Release(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, tag_name=None, target_commitish=None, name=None, body=None, draft=None, prerelease=None):
@@ -255,7 +262,7 @@ class Release(_bgo.UpdatableGithubObject):
         if prerelease is not None:
             prerelease = _snd.normalizeBool(prerelease)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(body=body, draft=draft, name=name, prerelease=prerelease, tag_name=tag_name, target_commitish=target_commitish)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -304,3 +311,12 @@ class Release(_bgo.UpdatableGithubObject):
         headers = {"Content-Type": content_type}
         r = self.Session._request("POST", url, urlArguments=urlArguments, postArguments=postArguments, headers=headers)
         return PyGithub.Blocking.Asset.Asset(self.Session, r.json(), r.headers.get("ETag"))
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

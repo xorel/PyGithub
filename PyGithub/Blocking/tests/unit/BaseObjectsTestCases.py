@@ -37,28 +37,28 @@ class BaseGithubObjectTestCase(unittest.TestCase):
 
     def testUrlAttribute(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
-        self.assertEqual(o.url, "url")
+        self.assertEqual(o._url, "url")
 
     def testUrlAttributeAbsent(self):
         self.bgoLog.expect.warn("GitHub API v3 did not return a url")
         o = bgo.UpdatableGithubObject(self.session.object, {}, "etag")
-        self.assertIsNone(o.url)
+        self.assertIsNone(o._url)
         with self.assertRaises(PyGithub.Blocking.BadAttributeException) as cm:
-            o.update()
+            o._update()
         self.assertEqual(cm.exception.args, ("UpdatableGithubObject.url", stringName, None))
 
     def testUrlAttributeBadlyTyped(self):
         self.rcvLog.expect.warn("Attribute UpdatableGithubObject.url is expected to be a " + stringName + " but GitHub API v3 returned 42")
         o = bgo.UpdatableGithubObject(self.session.object, dict(url=42), "etag")
         with self.assertRaises(PyGithub.Blocking.BadAttributeException) as cm:
-            o.url
+            o._url
         self.assertEqual(cm.exception.args[:3], ("UpdatableGithubObject.url", stringName, 42))
 
     def testUpdateNothing(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
         self.session.expect._request("GET", "url", headers={"If-None-Match": "etag"}).andReturn(self.result.object)
         self.result.expect.status_code.andReturn(304)
-        self.assertFalse(o.update())
+        self.assertFalse(o._update())
 
     def testUpdateSomething(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
@@ -66,7 +66,7 @@ class BaseGithubObjectTestCase(unittest.TestCase):
         self.result.expect.status_code.andReturn(200)
         self.result.expect.headers.andReturn({"ETag": "new-etag"})
         self.result.expect.json().andReturn(dict(url="new-url"))
-        self.assertTrue(o.update())
+        self.assertTrue(o._update())
 
     def testUpdateTwice(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
@@ -74,10 +74,10 @@ class BaseGithubObjectTestCase(unittest.TestCase):
         self.result.expect.status_code.andReturn(200)
         self.result.expect.headers.andReturn({"ETag": "new-etag"})
         self.result.expect.json().andReturn(dict(url="new-url"))
-        self.assertTrue(o.update())
+        self.assertTrue(o._update())
         self.session.expect._request("GET", "new-url", headers={"If-None-Match": "new-etag"}).andReturn(self.result.object)
         self.result.expect.status_code.andReturn(304)
-        self.assertFalse(o.update())
+        self.assertFalse(o._update())
 
     def testUpdateWithoutUrl(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), "etag")
@@ -86,7 +86,7 @@ class BaseGithubObjectTestCase(unittest.TestCase):
         self.result.expect.headers.andReturn({"ETag": "new-etag"})
         self.result.expect.json().andReturn(dict())
         self.bgoLog.expect.warn("GitHub API v3 did not return a url")
-        self.assertTrue(o.update())
+        self.assertTrue(o._update())
 
     def testCompleteLazily(self):
         o = bgo.UpdatableGithubObject(self.session.object, dict(url="url"), None)

@@ -27,6 +27,7 @@ class AssetAttributes(TestCase):
         self.assertEqual(a.state, "uploaded")
         self.assertEqual(a.updated_at, datetime.datetime(2014, 8, 16, 22, 26, 12))
         self.assertEqual(a.uploader.login, "electra")
+        self.assertEqual(a.url, "http://github.home.jacquev6.net/api/v3/repos/electra/asset-attributes/releases/assets/10")
 
 
 class AssetDelete(TestCase):
@@ -69,3 +70,25 @@ class AssetEdit(TestCase):
         self.assertEqual(a.label, "bar")
         a.edit(a.name, label="foo")
         self.assertEqual(a.label, "foo")
+
+
+class AssetUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "asset-update")
+        r = repo.create_release("assets")
+        self.pause()
+        a = r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        self.pause()
+        return Data(id=a.id)
+
+    def test(self):
+        repo = self.electra.get_repo(("electra", "asset-update"))
+        a1 = repo.get_release_asset(self.data.id)
+        a2 = repo.get_release_asset(self.data.id)
+        a2.edit(name="changelog.txt")
+        self.pause()
+        self.assertEqual(a1.name, "readme.txt")
+        self.assertTrue(a1.update())
+        self.assertEqual(a1.name, "changelog.txt")
+        self.assertFalse(a1.update())
+        a2.edit(name="readme.txt")

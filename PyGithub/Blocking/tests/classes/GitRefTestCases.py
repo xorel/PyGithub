@@ -14,6 +14,7 @@ class GitRefAttributes(TestCase):
         self.assertEqual(r.ref, "refs/heads/develop")
         self.assertEqual(r.object.type, "commit")
         self.assertEqual(r.object.message, "Create bar.md")
+        self.assertEqual(r.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/git/refs/heads/develop")
 
 
 class GitRefEdit(TestCase):
@@ -32,3 +33,18 @@ class GitRefEdit(TestCase):
         with self.assertRaises(PyGithub.Blocking.UnprocessableEntityException):
             r.edit("f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         r.delete()
+
+
+class GitRefUpdate(TestCase):
+    def test(self):
+        repo = self.electra.get_repo(("electra", "git-objects"))
+        r1 = repo.create_git_ref("refs/heads/ephemeral", "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
+        self.pause()
+        r2 = repo.get_git_ref("refs/heads/ephemeral")
+        r2.edit("db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.pause()
+        self.assertEqual(r1.object.sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
+        self.assertTrue(r1.update())
+        self.assertEqual(r1.object.sha, "db09e03a13f7910b9cae93ca91cd35800e15c695")
+        self.assertFalse(r1.update())
+        r2.delete()

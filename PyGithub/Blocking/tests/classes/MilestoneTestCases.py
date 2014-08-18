@@ -23,6 +23,12 @@ class MilestoneAttributes(TestCase):
         self.assertEqual(m.url, "http://github.home.jacquev6.net/api/v3/repos/electra/issues/milestones/1")
 
 
+class MilestoneDelete(TestCase):
+    def test(self):
+        m = self.electra.get_repo(("electra", "issues")).create_milestone("Created by PyGithub")
+        m.delete()
+
+
 class MilestoneEdit(TestCase):
     def testTitle(self):
         m = self.electra.get_repo(("electra", "issues")).get_milestone(3)
@@ -64,7 +70,20 @@ class MilestoneLabels(TestCase):
         self.assertEqual([l.name for l in labels], ["enhancement", "question"])
 
 
-class MilestoneDelete(TestCase):
+class MilestoneUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        self.setUpTestRepo("electra", "milestone-update").create_milestone("update")
+        return Data()
+
     def test(self):
-        m = self.electra.get_repo(("electra", "issues")).create_milestone("Created by PyGithub")
-        m.delete()
+        repo = self.electra.get_repo(("electra", "milestone-update"))
+        self.pause()
+        m1 = repo.get_milestone(1)
+        m2 = repo.get_milestone(1)
+        m2.edit(title="update!")
+        self.pause()
+        self.assertEqual(m1.title, "update")
+        self.assertTrue(m1.update())
+        self.assertEqual(m1.title, "update!")
+        self.assertFalse(m1.update())
+        m2.edit(title="update")

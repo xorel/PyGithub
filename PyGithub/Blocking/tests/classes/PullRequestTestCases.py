@@ -50,6 +50,7 @@ class PullRequestAttributes(TestCase):
         self.assertEqual(p.title, "Mergeable pull")
         self.assertEqual(p.updated_at, datetime.datetime(2014, 8, 4, 0, 22, 57))
         self.assertEqual(p.user.login, "penelope")
+        self.assertEqual(p.url, "http://github.home.jacquev6.net/api/v3/repos/electra/pulls/pulls/2")
 
     def testNotMergeable(self):
         p = self.electra.get_repo(("electra", "pulls")).get_pull(3)
@@ -179,3 +180,17 @@ class PullRequestMerge(TestCase):
         self.assertEqual(p.mergeable, True)
         r = p.merge("Commit message")
         ephemeral.delete()
+
+
+class PullRequestUpdate(TestCase):
+    def test(self):
+        repo = self.electra.get_repo(("electra", "pulls"))
+        p1 = repo.get_pull(4)
+        p2 = repo.get_pull(4)
+        p2.edit(title="Mutable pull!")
+        self.pause()
+        self.assertEqual(p1.title, "Mutable pull")
+        self.assertTrue(p1.update())
+        self.assertEqual(p1.title, "Mutable pull!")
+        self.assertFalse(p1.update())
+        p2.edit(title="Mutable pull")

@@ -780,3 +780,20 @@ class RepositoryReleaseAssets(TestCase):
     def testGetReleaseAsset(self):
         a = self.electra.get_repo(("electra", "repository-release-assets")).get_release_asset(self.data.id)
         self.assertEqual(a.name, "foo.txt")
+
+
+class RepositoryUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        self.setUpTestRepo("electra", "repository-update")
+        return Data()
+
+    def test(self):
+        r1 = self.electra.get_repo(("electra", "repository-update"))
+        r2 = self.electra.get_repo(("electra", "repository-update"))
+        r2.edit(description="Description")
+        self.pause()
+        self.assertEqual(r1.description, None)
+        self.assertTrue(r1.update())
+        self.assertEqual(r1.description, "Description")
+        self.assertFalse(r1.update())
+        r2.edit(description=PyGithub.Blocking.Reset)

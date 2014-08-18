@@ -43,6 +43,7 @@ class UserAttributes(TestCase):
         self.assertEqual(u.total_private_repos, 0)
         self.assertEqual(u.type, "User")
         self.assertEqual(u.updated_at, datetime.datetime(2014, 8, 2, 18, 21, 07))
+        self.assertEqual(u.url, "http://github.home.jacquev6.net/api/v3/users/antigone")
 
     def testEnterpriseAdmin(self):
         u = self.zeus.get_user("poseidon")
@@ -156,10 +157,12 @@ class UserRepositories(TestCase):
 
 class UserUpdate(TestCase):
     def test(self):
-        u = self.dotcom.get_user("jacquev6")
-        au = self.dotcom.get_authenticated_user()
-        self.assertEqual(u.name, "Vincent Jacques")
-        au.edit(name="Vincent Jacques!")
-        self.assertTrue(u.update())
-        self.assertEqual(u.name, "Vincent Jacques!")
-        au.edit(name="Vincent Jacques")
+        # dotcom to cover User.Plan._updateAttributes
+        u1 = self.dotcom.get_user("jacquev6")
+        u2 = self.dotcom.get_authenticated_user()
+        u2.edit(name="Vincent Jacques!")
+        self.assertEqual(u1.name, "Vincent Jacques")
+        self.assertTrue(u1.update())
+        self.assertEqual(u1.name, "Vincent Jacques!")
+        self.assertFalse(u1.update())
+        u2.edit(name="Vincent Jacques")

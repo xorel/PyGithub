@@ -512,6 +512,13 @@ class User(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__updated_at.needsLazyCompletion)
         return self.__updated_at.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def get_followers(self, per_page=None):
         """
         Calls the `GET /users/:username/followers <http://developer.github.com/v3/users/followers#list-followers-of-a-user>`__ end point.
@@ -723,3 +730,12 @@ class User(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.following_url, other_user=target_user)
         r = self.Session._request("GET", url, accept404=True)
         return r.status_code == 204
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

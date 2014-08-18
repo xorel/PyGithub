@@ -67,6 +67,7 @@ class ReleaseAttributes(TestCase):
         self.assertEqual(r.target_commitish, "release_branch")
         self.assertEqual(r.upload_url, "http://github.home.jacquev6.net/api/uploads/repos/electra/release-attributes/releases/36/assets{?name}")
         self.assertEqual(r.zipball_url, "http://github.home.jacquev6.net/api/v3/repos/electra/release-attributes/zipball/attributes")
+        self.assertEqual(r.url, "http://github.home.jacquev6.net/api/v3/repos/electra/release-attributes/releases/36")
 
 
 class ReleaseDelete(TestCase):
@@ -137,3 +138,23 @@ class ReleaseEdit(TestCase):
         self.assertEqual(r.prerelease, True)
         r.edit(prerelease=False)
         self.assertEqual(r.prerelease, False)
+
+
+class ReleaseUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "release-update")
+        r = repo.create_release("update")
+        self.pause()
+        return Data(id=r.id)
+
+    def test(self):
+        repo = self.electra.get_repo(("electra", "release-update"))
+        r1 = repo.get_release(self.data.id)
+        r2 = repo.get_release(self.data.id)
+        r2.edit(tag_name="updatex")
+        self.pause()
+        self.assertEqual(r1.tag_name, "update")
+        self.assertTrue(r1.update())
+        self.assertEqual(r1.tag_name, "updatex")
+        self.assertFalse(r1.update())
+        r2.edit(tag_name="update")

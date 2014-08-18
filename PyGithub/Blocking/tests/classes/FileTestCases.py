@@ -17,6 +17,7 @@ class FileAttributes(TestCase):
         self.assertEqual(f.sha, "3daf0da6bca38181ab52610dd6af6e92f1a5469d")
         self.assertEqual(f.size, 20)
         self.assertEqual(f.type, "file")
+        self.assertEqual(f.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_blob?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
 class FileDelete(TestCase):
@@ -71,3 +72,22 @@ class FileEdit(TestCase):
         self.assertEqual(c.author.name, "John Doe")
         self.assertEqual(c.committer.name, "Jane Doe")
         ref.delete()
+
+
+class FileUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        self.setUpTestRepo("electra", "file-update")
+        return Data()
+
+    def test(self):
+        repo = self.electra.get_repo(("electra", "file-update"))
+        f1 = repo.get_readme()
+        f2 = repo.get_readme()
+        f2.edit("Modified by PyGithub", "T3RoZXIgY29udGVudA==\n")
+        self.pause()
+        self.assertEqual(f1.content, "ZmlsZS11cGRhdGUKPT09PT09PT09PT0K\n")
+        self.assertTrue(f1.update())
+        self.assertEqual(f1.content, "T3RoZXIgY29udGVudA==\n")
+        self.assertFalse(f1.update())
+        f2.edit("Restored by PyGithub", "ZmlsZS11cGRhdGUKPT09PT09PT09PT0K\n")
+        self.assertEqual(f2.content, "ZmlsZS11cGRhdGUKPT09PT09PT09PT0K\n")

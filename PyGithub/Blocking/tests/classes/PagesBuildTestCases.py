@@ -23,6 +23,7 @@ class PagesBuildAttributes(TestCase):
         self.assertEqual(b.pusher.login, "electra")
         self.assertEqual(b.status, "built")
         self.assertEqual(b.updated_at, datetime.datetime(2014, 8, 17, 6, 8, 55))
+        self.assertEqual(b.url, "http://github.home.jacquev6.net/api/v3/repos/electra/pages-build-attributes/pages/builds/22")
 
 
 class PagesBuildUpdate(TestCase):

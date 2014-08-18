@@ -65,6 +65,13 @@ class Label(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__name.needsLazyCompletion)
         return self.__name.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/labels/:name <http://developer.github.com/v3/issues/labels#delete-a-label>`__ end point.
@@ -74,7 +81,7 @@ class Label(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, name=None, color=None):
@@ -93,7 +100,16 @@ class Label(_bgo.UpdatableGithubObject):
         if color is not None:
             color = _snd.normalizeString(color)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(color=color, name=name)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

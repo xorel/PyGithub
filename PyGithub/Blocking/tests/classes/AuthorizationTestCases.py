@@ -26,6 +26,7 @@ class AuthorizationAttributes(TestCase):
         self.assertEqual(a.scopes, ["repo", "user"])
         self.assertEqual(a.token, "d8d4d7739c3fbefa5cbab92869e468da4b276bd1")
         self.assertEqual(a.updated_at, datetime.datetime(2014, 8, 16, 18, 47, 21))
+        self.assertEqual(a.url, "http://github.home.jacquev6.net/api/v3/authorizations/11")
 
 
 class AuthorizationDelete(TestCase):
@@ -68,3 +69,25 @@ class AuthorizationEdit(TestCase):
         self.assertEqual(a.scopes, ["user", "repo", "gist", "delete_repo"])
         a.edit(remove_scopes=["user", "repo", "gist", "delete_repo"])
         self.assertEqual(a.scopes, [])
+
+
+class AuthorizationUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        u = self.penelope.get_authenticated_user()
+        for a in u.get_authorizations():
+            if a.note in ["update", "update!"]:
+                a.delete()
+        a = u.create_authorization("update")
+        return Data(id=a.id)
+
+    def test(self):
+        user = self.penelope.get_authenticated_user()
+        a1 = user.get_authorization(self.data.id)
+        a2 = user.get_authorization(self.data.id)
+        a2.edit(note="update!")
+        self.pause()
+        self.assertEqual(a1.note, "update")
+        self.assertTrue(a1.update())
+        self.assertEqual(a1.note, "update!")
+        self.assertFalse(a1.update())
+        a2.edit(note="update")

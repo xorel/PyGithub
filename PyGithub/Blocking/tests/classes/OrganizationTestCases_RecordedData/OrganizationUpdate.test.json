@@ -1,0 +1,427 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png",
+                "billing_email": "ghe-olympus@jacquev6.net",
+                "blog": null,
+                "collaborators": 0,
+                "company": null,
+                "created_at": "2014-08-02T18:44:42Z",
+                "disk_usage": 0,
+                "email": null,
+                "events_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/events",
+                "followers": 0,
+                "following": 0,
+                "html_url": "http://github.home.jacquev6.net/olympus",
+                "id": 18,
+                "location": null,
+                "login": "olympus",
+                "members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/members{/member}",
+                "name": null,
+                "owned_private_repos": 0,
+                "plan": {
+                    "name": "enterprise",
+                    "private_repos": 999999999999,
+                    "space": 976562499
+                },
+                "private_gists": 0,
+                "public_gists": 0,
+                "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/public_members{/member}",
+                "public_repos": 2,
+                "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/repos",
+                "total_private_repos": 0,
+                "type": "Organization",
+                "updated_at": "2014-08-08T01:46:25Z",
+                "url": "http://github.home.jacquev6.net/api/v3/orgs/olympus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1007",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 00:37:06 GMT",
+                "etag": "\"e255269e44cdadccfbd62fbbddd37caf\"",
+                "last-modified": "Fri, 08 Aug 2014 01:46:25 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "5ca4f4ee-9d3e-45a9-9a50-348bee60255f",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png",
+                "billing_email": "ghe-olympus@jacquev6.net",
+                "blog": null,
+                "collaborators": 0,
+                "company": null,
+                "created_at": "2014-08-02T18:44:42Z",
+                "disk_usage": 0,
+                "email": null,
+                "events_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/events",
+                "followers": 0,
+                "following": 0,
+                "html_url": "http://github.home.jacquev6.net/olympus",
+                "id": 18,
+                "location": null,
+                "login": "olympus",
+                "members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/members{/member}",
+                "name": null,
+                "owned_private_repos": 0,
+                "plan": {
+                    "name": "enterprise",
+                    "private_repos": 999999999999,
+                    "space": 976562499
+                },
+                "private_gists": 0,
+                "public_gists": 0,
+                "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/public_members{/member}",
+                "public_repos": 2,
+                "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/repos",
+                "total_private_repos": 0,
+                "type": "Organization",
+                "updated_at": "2014-08-08T01:46:25Z",
+                "url": "http://github.home.jacquev6.net/api/v3/orgs/olympus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1007",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 00:37:06 GMT",
+                "etag": "\"e255269e44cdadccfbd62fbbddd37caf\"",
+                "last-modified": "Fri, 08 Aug 2014 01:46:25 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "18e8e94b-e859-47c8-8fe6-3083ed60b4d9",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "name": "Olympus Software"
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "Content-Length": "28",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PATCH"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png",
+                "billing_email": "ghe-olympus@jacquev6.net",
+                "blog": null,
+                "collaborators": 0,
+                "company": null,
+                "created_at": "2014-08-02T18:44:42Z",
+                "disk_usage": 0,
+                "email": null,
+                "events_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/events",
+                "followers": 0,
+                "following": 0,
+                "html_url": "http://github.home.jacquev6.net/olympus",
+                "id": 18,
+                "location": null,
+                "login": "olympus",
+                "members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/members{/member}",
+                "name": "Olympus Software",
+                "owned_private_repos": 0,
+                "plan": {
+                    "name": "enterprise",
+                    "private_repos": 999999999999,
+                    "space": 976562499
+                },
+                "private_gists": 0,
+                "public_gists": 0,
+                "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/public_members{/member}",
+                "public_repos": 2,
+                "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/repos",
+                "total_private_repos": 0,
+                "type": "Organization",
+                "updated_at": "2014-08-08T01:46:25Z",
+                "url": "http://github.home.jacquev6.net/api/v3/orgs/olympus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1021",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 00:37:07 GMT",
+                "etag": "\"27f78646ace8328abef898a4dbe0b787\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "c45f78a2-0cd5-4065-b14b-919d34439fdc",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "If-None-Match": "\"e255269e44cdadccfbd62fbbddd37caf\"",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png",
+                "billing_email": "ghe-olympus@jacquev6.net",
+                "blog": null,
+                "collaborators": 0,
+                "company": null,
+                "created_at": "2014-08-02T18:44:42Z",
+                "disk_usage": 0,
+                "email": null,
+                "events_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/events",
+                "followers": 0,
+                "following": 0,
+                "html_url": "http://github.home.jacquev6.net/olympus",
+                "id": 18,
+                "location": null,
+                "login": "olympus",
+                "members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/members{/member}",
+                "name": "Olympus Software",
+                "owned_private_repos": 0,
+                "plan": {
+                    "name": "enterprise",
+                    "private_repos": 999999999999,
+                    "space": 976562499
+                },
+                "private_gists": 0,
+                "public_gists": 0,
+                "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/public_members{/member}",
+                "public_repos": 2,
+                "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/repos",
+                "total_private_repos": 0,
+                "type": "Organization",
+                "updated_at": "2014-08-18T00:37:07Z",
+                "url": "http://github.home.jacquev6.net/api/v3/orgs/olympus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1021",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 00:37:12 GMT",
+                "etag": "\"0cc2ee7509890c8b4edb144e9214e1fe\"",
+                "last-modified": "Mon, 18 Aug 2014 00:37:07 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "c3754b0a-255f-4629-8300-856681befc18",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "If-None-Match": "\"0cc2ee7509890c8b4edb144e9214e1fe\"",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Mon, 18 Aug 2014 00:37:12 GMT",
+                "etag": "\"0cc2ee7509890c8b4edb144e9214e1fe\"",
+                "last-modified": "Mon, 18 Aug 2014 00:37:07 GMT",
+                "server": "GitHub.com",
+                "status": "304 Not Modified",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-request-id": "cdf56eea-85e3-4972-b0fb-39effbb4dbe4",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 304
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "name": null
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
+                "Content-Length": "14",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/orgs/olympus",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "PATCH"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/6f4922f45568161a8cdf4ad2299f6d23.png",
+                "billing_email": "ghe-olympus@jacquev6.net",
+                "blog": null,
+                "collaborators": 0,
+                "company": null,
+                "created_at": "2014-08-02T18:44:42Z",
+                "disk_usage": 0,
+                "email": null,
+                "events_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/events",
+                "followers": 0,
+                "following": 0,
+                "html_url": "http://github.home.jacquev6.net/olympus",
+                "id": 18,
+                "location": null,
+                "login": "olympus",
+                "members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/members{/member}",
+                "name": null,
+                "owned_private_repos": 0,
+                "plan": {
+                    "name": "enterprise",
+                    "private_repos": 999999999999,
+                    "space": 976562499
+                },
+                "private_gists": 0,
+                "public_gists": 0,
+                "public_members_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/public_members{/member}",
+                "public_repos": 2,
+                "repos_url": "http://github.home.jacquev6.net/api/v3/orgs/olympus/repos",
+                "total_private_repos": 0,
+                "type": "Organization",
+                "updated_at": "2014-08-18T00:37:07Z",
+                "url": "http://github.home.jacquev6.net/api/v3/orgs/olympus"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1007",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Mon, 18 Aug 2014 00:37:12 GMT",
+                "etag": "\"6f736d6434978a24b8305d11c15d154b\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "99efa8cd-b943-4ae8-9f55-30c5c68a23c4",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

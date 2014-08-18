@@ -76,6 +76,13 @@ class PublicKey(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__verified.needsLazyCompletion)
         return self.__verified.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/keys/:id <http://developer.github.com/v3/repos/keys#delete>`__ end point.
@@ -89,5 +96,14 @@ class PublicKey(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

@@ -48,6 +48,7 @@ class GistAttributes(TestCase):
         self.assertEqual(g.public, True)
         self.assertEqual(g.updated_at, datetime.datetime(2014, 8, 15, 5, 29, 1))
         self.assertEqual(g.user, None)
+        self.assertEqual(g.url, "http://github.home.jacquev6.net/api/v3/gists/a6a7bf0c2a37e429e4ff")
 
     def testForkAttributes(self):
         g = self.penelope.get_gist(self.data.forkId)
@@ -76,6 +77,12 @@ class GistAttributes(TestCase):
     def testGetForks_allParameters(self):
         forks = self.electra.get_gist(self.data.sourceId).get_forks(per_page=1)
         self.assertEqual([f.owner.login for f in forks], ["penelope", "zeus"])
+
+
+class GistDelete(TestCase):
+    def test(self):
+        g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="ephemeral")
+        g.delete()
 
 
 class GistEdit(TestCase):
@@ -134,7 +141,23 @@ class GistEdit(TestCase):
 # @todoAlpha Newly created objects should be candidate for lazy completion: create_gist_fork doesn't return fork_of!
 
 
-class GistDelete(TestCase):
+class GistUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        u = self.electra.get_authenticated_user()
+        for g in u.get_gists():
+            if g.description == "gist-update":
+                g.delete()
+        g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="gist-update")
+        self.pause()
+        return Data(id=g.id)
+
     def test(self):
-        g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="ephemeral")
-        g.delete()
+        g1 = self.electra.get_gist(self.data.id)
+        g2 = self.electra.get_gist(self.data.id)
+        g2.edit(description="gist-update!")
+        self.pause()
+        self.assertEqual(g1.description, "gist-update")
+        self.assertTrue(g1.update())
+        self.assertEqual(g1.description, "gist-update!")
+        self.assertFalse(g1.update())
+        g2.edit(description="gist-update")

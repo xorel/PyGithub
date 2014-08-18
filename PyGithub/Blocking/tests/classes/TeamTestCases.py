@@ -27,6 +27,7 @@ class TeamAttributes(TestCase):
         self.assertEqual(t.repos_count, 0)
         self.assertEqual(t.repositories_url, "http://github.home.jacquev6.net/api/v3/teams/88/repos")
         self.assertEqual(t.slug, "attributes")
+        self.assertEqual(t.url, "http://github.home.jacquev6.net/api/v3/teams/88")
 
 
 class TeamDelete(TestCase):
@@ -133,3 +134,28 @@ class TeamRepos(TestCase):
         self.assertFalse(t.has_in_repos(("teamss", "b")))
         t.add_to_repos(("teamss", "b"))
         self.assertTrue(t.has_in_repos(("teamss", "b")))
+
+
+
+class TeamUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        reset = False
+        o = self.electra.get_org("teamss")  # Create manually as electra
+        teams = list(o.get_teams())
+        for t in teams:
+            if t.name == "update":
+                t.delete()
+        update = o.create_team("update")
+        self.pause()
+        return Data(id=update.id)
+
+    def test(self):
+        t1 = self.electra.get_team(self.data.id)
+        t2 = self.electra.get_team(self.data.id)
+        t2.edit(name="updatex!")
+        self.pause()
+        self.assertEqual(t1.name, "update")
+        self.assertTrue(t1.update())
+        self.assertEqual(t1.name, "updatex!")
+        self.assertFalse(t1.update())
+        t2.edit(name="update")

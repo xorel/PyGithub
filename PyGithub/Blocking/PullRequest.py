@@ -585,6 +585,13 @@ class PullRequest(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def edit(self, title=None, body=None, state=None):
         """
         Calls the `PATCH /repos/:owner/:repo/pulls/:number <http://developer.github.com/v3/pulls#update-a-pull-request>`__ end point.
@@ -604,7 +611,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         if state is not None:
             state = _snd.normalizeEnum(state, "closed", "open")
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(body=body, state=state, title=title)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -681,3 +688,12 @@ class PullRequest(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(commit_message=commit_message)
         r = self.Session._request("PUT", url, postArguments=postArguments)
         return PullRequest.MergeResult(self.Session, r.json())
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

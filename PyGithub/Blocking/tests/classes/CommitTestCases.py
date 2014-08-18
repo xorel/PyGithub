@@ -85,6 +85,13 @@ class CommitUpdate(TestCase):
         c = self.electra.get_repo(("electra", "git-objects")).get_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]
         self.assertEqual(c.stats.total, 1)
 
+    def testWithIncompleteObject(self):
+        # Commits are immutable so there is no way to update a complete object
+        c = self.electra.get_repo(("electra", "git-objects")).get_commit("db09e03a13f7910b9cae93ca91cd35800e15c695").parents[0]
+        self.assertTrue(c.update())
+        self.assertEqual(c.stats.total, 1)
+        self.assertFalse(c.update())
+
     def testArtifical(self):
         # Stats and Files are always returned completely so there is no other way to cover _updateAttributes
         c = self.electra.get_repo(("electra", "git-objects")).get_commit("db09e03a13f7910b9cae93ca91cd35800e15c695")

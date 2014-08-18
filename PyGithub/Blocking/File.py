@@ -123,6 +123,13 @@ class File(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__type.needsLazyCompletion)
         return self.__type.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self, message, branch=None, author=None, committer=None):
         """
         Calls the `DELETE /repos/:owner/:repo/contents/:path <http://developer.github.com/v3/repos/contents#delete-a-file>`__ end point.
@@ -145,7 +152,7 @@ class File(_bgo.UpdatableGithubObject):
         if committer is not None:
             committer = _snd.normalizeGitAuthor(committer)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, message=message, sha=self.sha)
         r = self.Session._request("DELETE", url, postArguments=postArguments)
         return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json()["commit"], r.headers.get("ETag"))
@@ -175,9 +182,18 @@ class File(_bgo.UpdatableGithubObject):
         if committer is not None:
             committer = _snd.normalizeGitAuthor(committer)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(author=author, branch=branch, committer=committer, content=content, message=message, sha=self.sha)
         r = self.Session._request("PUT", url, postArguments=postArguments)
         self._updateAttributes(None, **(r.json()["content"]))
         self.__content.update(content)
         return PyGithub.Blocking.GitCommit.GitCommit(self.Session, r.json()["commit"], r.headers.get("ETag"))
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

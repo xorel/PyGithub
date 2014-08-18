@@ -36,6 +36,7 @@ class OrganizationAttributes(TestCase):
         self.assertEqual(o.total_private_repos, 0)
         self.assertEqual(o.type, "Organization")
         self.assertEqual(o.updated_at, datetime.datetime(2014, 8, 2, 19, 58, 49))
+        self.assertEqual(o.url, "http://github.home.jacquev6.net/api/v3/orgs/olympus")
 
 
 class OrganizationEdit(TestCase):
@@ -253,3 +254,16 @@ class OrganizationRepositories(TestCase):
         o = self.zeus.get_org("olympus")
         issues = o.get_issues(filter="all", state="all", labels=["question", "enhancement"], sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
         self.assertEqual([i.title for i in issues], ["Immutable issue 2", "Immutable issue 1"])
+
+
+class OrganizationUpdate(TestCase):
+    def test(self):
+        o1 = self.zeus.get_org("olympus")
+        o2 = self.zeus.get_org("olympus")
+        o2.edit(name="Olympus Software")
+        self.pause()
+        self.assertEqual(o1.name, None)
+        self.assertTrue(o1.update())
+        self.assertEqual(o1.name, "Olympus Software")
+        self.assertFalse(o1.update())
+        o2.edit(name=PyGithub.Blocking.Reset)

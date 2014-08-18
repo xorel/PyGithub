@@ -82,6 +82,13 @@ class Subscription(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__subscribed.needsLazyCompletion)
         return self.__subscribed.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/subscription <http://developer.github.com/v3/activity/watching#delete-a-repository-subscription>`__ end point.
@@ -91,7 +98,7 @@ class Subscription(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, subscribed, ignored):
@@ -109,7 +116,16 @@ class Subscription(_bgo.UpdatableGithubObject):
         subscribed = _snd.normalizeBool(subscribed)
         ignored = _snd.normalizeBool(ignored)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(ignored=ignored, subscribed=subscribed)
         r = self.Session._request("PUT", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

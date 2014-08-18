@@ -433,6 +433,13 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__updated_at.needsLazyCompletion)
         return self.__updated_at.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def add_to_emails(self, *email):
         """
         Calls the `POST /user/emails <http://developer.github.com/v3/users/emails#add-email-addresses>`__ end point.
@@ -1245,3 +1252,12 @@ class AuthenticatedUser(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand("https://api.github.com/gists/{id}/star", id=gist)
         r = self.Session._request("DELETE", url)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

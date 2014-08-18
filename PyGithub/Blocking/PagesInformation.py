@@ -60,3 +60,19 @@ class PagesInformation(_bgo.UpdatableGithubObject):
         """
         self._completeLazily(self.__status.needsLazyCompletion)
         return self.__status.value
+
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

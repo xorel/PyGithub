@@ -287,6 +287,13 @@ class Organization(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__updated_at.needsLazyCompletion)
         return self.__updated_at.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def add_to_public_members(self, username):
         """
         Calls the `PUT /orgs/:org/public_members/:username <http://developer.github.com/v3/orgs/members#publicize-a-users-membership>`__ end point.
@@ -418,7 +425,7 @@ class Organization(_bgo.UpdatableGithubObject):
         if name is not None:
             name = _snd.normalizeStringReset(name)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(billing_email=billing_email, blog=blog, company=company, email=email, location=location, name=name)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -633,3 +640,12 @@ class Organization(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.public_members_url, member=username)
         r = self.Session._request("DELETE", url)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

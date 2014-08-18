@@ -262,6 +262,13 @@ class Issue(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def add_to_labels(self, *label):
         """
         Calls the `POST /repos/:owner/:repo/issues/:number/labels <http://developer.github.com/v3/issues/labels#add-labels-to-an-issue>`__ end point.
@@ -294,7 +301,7 @@ class Issue(_bgo.UpdatableGithubObject):
         head = _snd.normalizeString(head)
         base = _snd.normalizeString(base)
 
-        url = "/".join(self.url.split("/")[:-2]) + "/pulls"
+        url = "/".join(self._url.split("/")[:-2]) + "/pulls"
         postArguments = _snd.dictionary(base=base, head=head, issue=self.number)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
@@ -327,7 +334,7 @@ class Issue(_bgo.UpdatableGithubObject):
         if labels is not None:
             labels = _snd.normalizeList(_snd.normalizeLabelName, labels)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(assignee=assignee, body=body, labels=labels, milestone=milestone, state=state, title=title)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -388,3 +395,12 @@ class Issue(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.labels_url)
         postArguments = label
         r = self.Session._request("PUT", url, postArguments=postArguments)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

@@ -457,6 +457,13 @@ class Gist(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__user.needsLazyCompletion)
         return self.__user.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /gists/:id <http://developer.github.com/v3/gists#delete-a-gist>`__ end point.
@@ -466,7 +473,7 @@ class Gist(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, description=None, files=None):
@@ -483,7 +490,7 @@ class Gist(_bgo.UpdatableGithubObject):
         if description is not None:
             description = _snd.normalizeString(description)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(description=description, files=files)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -527,3 +534,12 @@ class Gist(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(Gist, self.Session, r)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

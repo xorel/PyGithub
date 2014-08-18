@@ -16,9 +16,16 @@ class SymLinkAttributes(TestCase):
         self.assertEqual(s.size, 7)
         self.assertEqual(s.target, "a_blob\n")
         self.assertEqual(s.type, "symlink")
+        self.assertEqual(s.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_symlink?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
 class SymLinkUpdate(TestCase):
     def testLazyCompletion(self):
         s = self.electra.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")[2]
         self.assertEqual(s.target, "a_blob\n")
+
+    def testWithIncompleteObject(self):
+        s = self.electra.get_repo(("electra", "git-objects")).get_contents("", ref="db09e03a13f7910b9cae93ca91cd35800e15c695")[2]
+        self.assertTrue(s.update())
+        self.assertEqual(s.target, "a_blob\n")
+        self.assertFalse(s.update())

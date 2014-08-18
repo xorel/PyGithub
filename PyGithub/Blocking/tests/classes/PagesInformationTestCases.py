@@ -19,6 +19,7 @@ class PagesInformationAttributes(TestCase):
         self.assertEqual(i.status, "built")
         self.assertEqual(i.cname, None)
         self.assertEqual(i.custom_404, False)
+        self.assertEqual(i.url, "http://github.home.jacquev6.net/api/v3/repos/electra/pages-information-attributes/pages")
 
 
 class PagesInformationUpdate(TestCase):

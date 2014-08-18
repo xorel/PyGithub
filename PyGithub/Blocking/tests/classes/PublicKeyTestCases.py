@@ -12,6 +12,7 @@ class PublicKeyAttributes(TestCase):
         self.assertEqual(k.key, "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGDyni/ShyOFRFLPVLslTRo/EX1kFiPfBYoY7xkKE9Im5+TIz9TwcAYSgLs+VWuG1eRrczHAGr9KeqQDSwyA16givRcRRjcGRowfJ9HtPGQINt83IaManolgTCjyB+nL1yqczXLLl2PR+6AnH5D8yPN9qLEp/Vd77tt2o0Cj1x+fTNnsRX4igdk40HeUg9n91FCn5SPxirzQGgqn1B0lkicoLG+zFHEgSXDFa5FyRv43RXx/7Hd0/4MS/urMRUAO41lRe6T98ZiPQGzvJmdvBQRgc7fdDRg1zRs2JMSZDJ1LUMp+33kR/USXaoZ42RLvkaxK630/5yFuPG8tYT5OK/")
         self.assertEqual(k.title, "key-1-2")
         self.assertEqual(k.verified, True)
+        self.assertEqual(k.url, "http://github.home.jacquev6.net/api/v3/user/keys/3")  # @todoAlpha Test url of repository key
 
 
 class PublicKeyDelete(TestCase):
@@ -26,3 +27,8 @@ class PublicKeyUpdate(TestCase):
         # Public keys are always returned completely so there is no other way to cover _updateAttributes
         k = self.user1.get_authenticated_user().get_key(3)
         k._updateAttributes(None, url=k.url)
+
+    def test(self):
+        # Public keys are immutable so there is no way update a complete object
+        k = self.electra.get_authenticated_user().get_key(5)
+        self.assertFalse(k.update())

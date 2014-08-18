@@ -155,6 +155,13 @@ class Authorization(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__updated_at.needsLazyCompletion)
         return self.__updated_at.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /authorizations/:id <http://developer.github.com/v3/oauth_authorizations#delete-an-authorization>`__ end point.
@@ -164,7 +171,7 @@ class Authorization(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, scopes=None, add_scopes=None, remove_scopes=None, note=None, note_url=None):
@@ -192,7 +199,16 @@ class Authorization(_bgo.UpdatableGithubObject):
         if note_url is not None:
             note_url = _snd.normalizeStringReset(note_url)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(add_scopes=add_scopes, note=note, note_url=note_url, remove_scopes=remove_scopes, scopes=scopes)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

@@ -35,8 +35,7 @@ from CodeGeneration.CaseUtils import toUpperCamel
 # @todoAlpha document how many end-points are implemented and unimplemented
 
 # Global
-# @todoAlpha hide UpdatableGithubObject.update and generate an update method for each class
-# @todoAlpha test lazy completion and update of all classes
+# @todoAlpha test lazy completion of all classes?
 # @todoAlpha What happens when a suspended enterprise user tries to do anything?
 
 
@@ -68,7 +67,18 @@ class CodeGenerator:
             .elements(self.createClassStructure(s) for s in klass.structures)
             .elements(self.createClassPrivateParts(klass))
             .elements(self.createClassProperty(a) for a in klass.attributes)
+            .elements([] if klass.qualifiedName == "Github" else [PS.Property("url")
+                .docstring(":type: :class:`string`")
+                .body("return self._url")]
+            )
             .elements(self.createClassMethod(m) for m in klass.methods)
+            .elements([] if klass.qualifiedName == "Github" else [PS.Method("update")
+                .docstring("Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.")
+                .docstring("Returns True if the object was updated.")
+                .docstring("")
+                .docstring(":rtype: :class:`bool`")
+                .body("return self._update()")]
+            )
         )
 
     def generateDocStringForClass(self, klass, baseName):
@@ -286,15 +296,15 @@ class CodeGenerator:
             yield "assert ref.startswith(\"refs/\")"
             yield "url = uritemplate.expand(self.git_refs_url) + ref[4:]"
         elif method.qualifiedName == "Issue.create_pull":
-            yield 'url = "/".join(self.url.split("/")[:-2]) + "/pulls"'
+            yield 'url = "/".join(self._url.split("/")[:-2]) + "/pulls"'
         elif method.qualifiedName == "Commit.create_status":
-            yield 'url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha'
+            yield 'url = "/".join(self._url.split("/")[:-2]) + "/statuses/" + self.sha'
         elif method.qualifiedName == "Commit.get_statuses":
-            yield 'url = self.url + "/statuses"'
+            yield 'url = self._url + "/statuses"'
         elif method.qualifiedName == "Commit.get_status":
-            yield 'url = self.url + "/status"'
+            yield 'url = self._url + "/status"'
         elif method.qualifiedName == "GitTree.create_modified_copy":
-            yield "url = self.url[:self.url.rfind(self.sha) - 1]"
+            yield "url = self._url[:self._url.rfind(self.sha) - 1]"
         elif len(method.urlTemplateArguments) == 0:
             yield "url = uritemplate.expand({})".format(self.generateCodeForValue(method, method.urlTemplate))
         else:
@@ -482,7 +492,10 @@ class CodeGenerator:
         return '"https://api.github.com{}"'.format(method.endPoints[0].urlTemplate)
 
     def generateCodeForAttributeValue(self, method, value):
-        return "self.{}".format(value.attribute)
+        if value.attribute == "url":
+            return "self._url"
+        else:
+            return "self.{}".format(value.attribute)
 
     def generateCodeForRepositoryNameValue(self, method, value):
         return "{}[1]".format(value.repository)

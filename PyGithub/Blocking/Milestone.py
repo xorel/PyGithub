@@ -159,6 +159,13 @@ class Milestone(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__updated_at.needsLazyCompletion)
         return self.__updated_at.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/milestones/:number <http://developer.github.com/v3/issues/milestones#delete-a-milestone>`__ end point.
@@ -168,7 +175,7 @@ class Milestone(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         r = self.Session._request("DELETE", url)
 
     def edit(self, title=None, state=None, description=None, due_on=None):
@@ -193,7 +200,7 @@ class Milestone(_bgo.UpdatableGithubObject):
         if due_on is not None:
             due_on = _snd.normalizeDatetimeReset(due_on)
 
-        url = uritemplate.expand(self.url)
+        url = uritemplate.expand(self._url)
         postArguments = _snd.dictionary(description=description, due_on=due_on, state=state, title=title)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
@@ -211,3 +218,12 @@ class Milestone(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.labels_url)
         r = self.Session._request("GET", url)
         return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()

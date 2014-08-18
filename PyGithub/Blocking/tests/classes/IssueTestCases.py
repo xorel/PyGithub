@@ -140,3 +140,24 @@ class IssuePullRequests(TestCase):
         p = i.create_pull("penelope:issue_to_pull", "master")
         self.assertEqual(p.number, i.number)
         i.edit(state="closed")
+
+
+
+class IssueUpdate(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "issue-update")
+        i = repo.create_issue("update")
+        self.pause()
+        return Data()
+
+    def test(self):
+        repo = self.electra.get_repo(("electra", "issue-update"))
+        i1 = repo.get_issue(1)
+        i2 = repo.get_issue(1)
+        i2.edit(title="update!")
+        self.pause()
+        self.assertEqual(i1.title, "update")
+        self.assertTrue(i1.update())
+        self.assertEqual(i1.title, "update!")
+        self.assertFalse(i1.update())
+        i2.edit(title="update")

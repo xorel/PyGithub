@@ -16,6 +16,7 @@ class SubmoduleAttributes(TestCase):
         self.assertEqual(s.size, 0)
         self.assertEqual(s.submodule_git_url, None)
         self.assertEqual(s.type, "submodule")
+        self.assertEqual(s.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_submodule?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
 class SubmoduleUpdate(TestCase):
@@ -29,8 +30,11 @@ class SubmoduleUpdate(TestCase):
         s = repo.get_contents("a_submodule", ref="ephemeral")
         repo.create_file(".gitmodules", "Add .gitmodules", "W3N1Ym1vZHVsZSAiYV9zdWJtb2R1bGUiXQ0KICAgIHBhdGggPSBhX3N1Ym1vZHVsZQ0KICAgIHVybCA9IGh0dHA6Ly9naXRodWIuaG9tZS5qYWNxdWV2Ni5uZXQvZWxlY3RyYS9pbW11dGFibGUuZ2l0DQo=", branch="ephemeral")
         self.pause()
+        self.pause()
+        self.pause()
         self.assertTrue(s.update())
         self.assertEqual(s.git_url, "http://github.home.jacquev6.net/api/v3/repos/electra/immutable/git/trees/5e7d45a2f8c09757a0ce6d0bf37a8eec31791578")
         self.assertEqual(s.html_url, "http://github.home.jacquev6.net/electra/immutable/tree/5e7d45a2f8c09757a0ce6d0bf37a8eec31791578")
         self.assertEqual(s.submodule_git_url, "http://github.home.jacquev6.net/electra/immutable.git")
+        self.assertFalse(s.update())
         ref.delete()

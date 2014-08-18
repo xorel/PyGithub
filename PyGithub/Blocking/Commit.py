@@ -350,6 +350,13 @@ class Commit(_bgo.UpdatableGithubObject):
         self._completeLazily(self.__stats.needsLazyCompletion)
         return self.__stats.value
 
+    @property
+    def url(self):
+        """
+        :type: :class:`string`
+        """
+        return self._url
+
     def create_status(self, state, target_url=None, description=None):
         """
         Calls the `POST /repos/:owner/:repo/statuses/:sha <http://developer.github.com/v3/repos/statuses#create-a-status>`__ end point.
@@ -368,7 +375,7 @@ class Commit(_bgo.UpdatableGithubObject):
         if description is not None:
             description = _snd.normalizeString(description)
 
-        url = "/".join(self.url.split("/")[:-2]) + "/statuses/" + self.sha
+        url = "/".join(self._url.split("/")[:-2]) + "/statuses/" + self.sha
         postArguments = _snd.dictionary(description=description, state=state, target_url=target_url)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return Commit.Status(self.Session, r.json())
@@ -388,7 +395,16 @@ class Commit(_bgo.UpdatableGithubObject):
         else:
             per_page = _snd.normalizeInt(per_page)
 
-        url = self.url + "/statuses"
+        url = self._url + "/statuses"
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(Commit.Status, self.Session, r)
+
+    def update(self):
+        """
+        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
+        Returns True if the object was updated.
+
+        :rtype: :class:`bool`
+        """
+        return self._update()
