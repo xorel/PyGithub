@@ -29,27 +29,6 @@ GET /api/status.json
 
 Not yet implemented in PyGithub.
 
-GET /api/v3/enterprise/settings/license
----------------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/license#request>`__)
-
-Not yet implemented in PyGithub.
-
-GET /api/v3/enterprise/stats/:type
-----------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/admin_stats#request>`__)
-
-Not yet implemented in PyGithub.
-
-POST /api/v3/staff/indexing_jobs
---------------------------------
-
-(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/search_indexing#queue-an-indexing-job>`__)
-
-Not yet implemented in PyGithub.
-
 DELETE /applications/:client_id/tokens
 --------------------------------------
 
@@ -133,6 +112,20 @@ GET /emojis
 
 Implemented in PyGithub by:
   * :meth:`.Github.get_emojis`
+
+GET /enterprise/settings/license
+--------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/license#request>`__)
+
+Not yet implemented in PyGithub.
+
+GET /enterprise/stats/:type
+---------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/admin_stats#request>`__)
+
+Not yet implemented in PyGithub.
 
 GET /events
 -----------
@@ -1666,6 +1659,13 @@ POST /setup/api/upgrade
 
 Not yet implemented in PyGithub.
 
+POST /staff/indexing_jobs
+-------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/enterprise/search_indexing#queue-an-indexing-job>`__)
+
+Not yet implemented in PyGithub.
+
 DELETE /teams/:id
 -----------------
 
@@ -1722,6 +1722,27 @@ PUT /teams/:id/members/:username
 Implemented in PyGithub by:
   * :meth:`.Team.add_to_members`
 
+DELETE /teams/:id/memberships/:username
+---------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/orgs/teams#remove-team-membership>`__)
+
+Not yet implemented in PyGithub.
+
+GET /teams/:id/memberships/:username
+------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/orgs/teams#get-team-membership>`__)
+
+Not yet implemented in PyGithub.
+
+PUT /teams/:id/memberships/:username
+------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/orgs/teams#add-team-membership>`__)
+
+Not yet implemented in PyGithub.
+
 GET /teams/:id/repos
 --------------------
 
@@ -1769,6 +1790,34 @@ PATCH /user
 
 Implemented in PyGithub by:
   * :meth:`.AuthenticatedUser.edit`
+
+DELETE /user/:username/site_admin
+---------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/users/administration#demote-a-site-administrator-to-an-ordinary-user>`__)
+
+Not yet implemented in PyGithub.
+
+PUT /user/:username/site_admin
+------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/users/administration#promote-an-ordinary-user-to-a-site-administrator>`__)
+
+Not yet implemented in PyGithub.
+
+DELETE /user/:username/suspended
+--------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/users/administration#unsuspend-a-user>`__)
+
+Not yet implemented in PyGithub.
+
+PUT /user/:username/suspended
+-----------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/users/administration#suspend-a-user>`__)
+
+Not yet implemented in PyGithub.
 
 DELETE /user/emails
 -------------------

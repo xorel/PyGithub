@@ -1,9 +1,7 @@
-/api/v3/enterprise/settings/license:
+/enterprise/settings/license:
   - GET
-/api/v3/enterprise/stats/:type:
+/enterprise/stats/:type:
   - GET
-/api/v3/staff/indexing_jobs:
-  - POST
 /setup/api/configcheck:
   - GET
 /setup/api/configure:
@@ -22,3 +20,11 @@
   - POST
 /setup/api/upgrade:
   - POST
+/staff/indexing_jobs:
+  - POST
+/user/:username/site_admin:
+  - DELETE
+  - PUT
+/user/:username/suspended:
+  - DELETE
+  - PUT

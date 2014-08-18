@@ -7,16 +7,6 @@
 /api/status.json:
   - verb: GET
     doc: https://status.github.com/api
-/api/v3/enterprise/settings/license:
-  - verb: GET
-    doc: http://developer.github.com/v3/enterprise/license#request
-/api/v3/enterprise/stats/:type:
-  - verb: GET
-    doc: http://developer.github.com/v3/enterprise/admin_stats#request
-/api/v3/staff/indexing_jobs:
-  - verb: POST
-    parameters: [target]
-    doc: http://developer.github.com/v3/enterprise/search_indexing#queue-an-indexing-job
 /applications/:client_id/tokens:
   - verb: DELETE
     doc: http://developer.github.com/v3/oauth_authorizations#revoke-all-authorizations-for-an-application
@@ -48,6 +38,12 @@
 /emojis:
   - verb: GET
     doc: http://developer.github.com/v3/emojis#emojis
+/enterprise/settings/license:
+  - verb: GET
+    doc: http://developer.github.com/v3/enterprise/license#request
+/enterprise/stats/:type:
+  - verb: GET
+    doc: http://developer.github.com/v3/enterprise/admin_stats#request
 /events:
   - verb: GET
     doc: http://developer.github.com/v3/activity/events#list-public-events
@@ -291,7 +287,7 @@
   - verb: GET
     doc: http://developer.github.com/v3/repos/deployments#list-deployments
   - verb: POST
-    parameters: [ref, auto_merge, required_contexts, payload, environment, description]
+    parameters: [ref, task, auto_merge, required_contexts, payload, environment, description]
     doc: http://developer.github.com/v3/repos/deployments#create-a-deployment
 /repos/:owner/:repo/deployments/:id/statuses:
   - verb: GET
@@ -657,6 +653,10 @@
   - verb: POST
     parameters: [license, package]
     doc: http://developer.github.com/v3/enterprise/management_console#upgrade-a-license-or-software-package
+/staff/indexing_jobs:
+  - verb: POST
+    parameters: [target]
+    doc: http://developer.github.com/v3/enterprise/search_indexing#queue-an-indexing-job
 /teams/:id:
   - verb: DELETE
     doc: http://developer.github.com/v3/orgs/teams#delete-team
@@ -675,6 +675,13 @@
     doc: http://developer.github.com/v3/orgs/teams#get-team-member
   - verb: PUT
     doc: http://developer.github.com/v3/orgs/teams#add-team-member
+/teams/:id/memberships/:username:
+  - verb: DELETE
+    doc: http://developer.github.com/v3/orgs/teams#remove-team-membership
+  - verb: GET
+    doc: http://developer.github.com/v3/orgs/teams#get-team-membership
+  - verb: PUT
+    doc: http://developer.github.com/v3/orgs/teams#add-team-membership
 /teams/:id/repos:
   - verb: GET
     doc: http://developer.github.com/v3/orgs/teams#list-team-repos
@@ -692,6 +699,16 @@
   - verb: PATCH
     parameters: [name, email, blog, company, location, hireable, bio]
     doc: http://developer.github.com/v3/users#update-the-authenticated-user
+/user/:username/site_admin:
+  - verb: DELETE
+    doc: http://developer.github.com/v3/users/administration#demote-a-site-administrator-to-an-ordinary-user
+  - verb: PUT
+    doc: http://developer.github.com/v3/users/administration#promote-an-ordinary-user-to-a-site-administrator
+/user/:username/suspended:
+  - verb: DELETE
+    doc: http://developer.github.com/v3/users/administration#unsuspend-a-user
+  - verb: PUT
+    doc: http://developer.github.com/v3/users/administration#suspend-a-user
 /user/emails:
   - verb: DELETE
     doc: http://developer.github.com/v3/users/emails#delete-email-addresses
