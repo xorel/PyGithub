@@ -10,9 +10,9 @@ class ReleaseAssets(TestCase):
         repo = self.setUpTestRepo("electra", "release-assets")
         r = repo.create_release("assets")
         self.pause()
-        r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
-        r.upload_asset("text/plain", "changelog.txt", "This is the changelog")
+        r.create_asset("text/plain", "changelog.txt", "This is the changelog")
         self.pause()
         return Data(id=r.id)
 
@@ -26,11 +26,11 @@ class ReleaseAssets(TestCase):
         assets = r.get_assets(per_page=1)
         self.assertEqual([a.name for a in assets], ["changelog.txt", "readme.txt"])
 
-    def testUploadAsset(self):
+    def testCreateAsset(self):
         r = self.electra.get_repo(("electra", "release-assets")).get_release(self.data.id)
         # @todoBeta Allow uploading content from file-like object
         # @todoAlpha Test against DotCom because the end point changes for uploads
-        a = r.upload_asset("text/plain", "doc.txt", "This is the doc")
+        a = r.create_asset("text/plain", "doc.txt", "This is the doc")
         self.assertEqual(a.content_type, "text/plain")
         self.assertEqual(a.name, "doc.txt")
         a.delete()
@@ -42,7 +42,7 @@ class ReleaseAttributes(TestCase):
         repo.create_git_ref("refs/heads/release_branch", repo.get_git_ref("refs/heads/master").object.sha)
         r = repo.create_release("attributes", target_commitish="release_branch", name="The release", body="The long-awaited release")
         self.pause()
-        r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
         return Data(id=r.id)
 

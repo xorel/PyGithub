@@ -222,6 +222,30 @@ class Release(_bgo.UpdatableGithubObject):
         """
         return self._url
 
+    def create_asset(self, content_type, name, content):
+        """
+        Calls the `POST /repos/:owner/:repo/releases/:id/assets <https://developer.github.com/v3/repos/releases/#upload-a-release-asset>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param content_type: mandatory :class:`string`
+        :param name: mandatory :class:`string`
+        :param content: mandatory :class:`string`
+        :rtype: :class:`~.Asset.Asset`
+        """
+        import PyGithub.Blocking.Asset
+
+        content_type = _snd.normalizeString(content_type)
+        name = _snd.normalizeString(name)
+        content = _snd.normalizeString(content)
+
+        url = uritemplate.expand(self.upload_url)
+        urlArguments = _snd.dictionary(name=name)
+        postArguments = content
+        headers = {"Content-Type": content_type}
+        r = self.Session._request("POST", url, urlArguments=urlArguments, postArguments=postArguments, headers=headers)
+        return PyGithub.Blocking.Asset.Asset(self.Session, r.json(), r.headers.get("ETag"))
+
     def delete(self):
         """
         Calls the `DELETE /repos/:owner/:repo/releases/:id <http://developer.github.com/v3/repos/releases#delete-a-release>`__ end point.
@@ -287,30 +311,6 @@ class Release(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.Asset.Asset, self.Session, r)
-
-    def upload_asset(self, content_type, name, content):
-        """
-        Calls the `POST /repos/:owner/:repo/releases/:id/assets <https://developer.github.com/v3/repos/releases/#upload-a-release-asset>`__ end point.
-
-        This is the only method calling this end point.
-
-        :param content_type: mandatory :class:`string`
-        :param name: mandatory :class:`string`
-        :param content: mandatory :class:`string`
-        :rtype: :class:`~.Asset.Asset`
-        """
-        import PyGithub.Blocking.Asset
-
-        content_type = _snd.normalizeString(content_type)
-        name = _snd.normalizeString(name)
-        content = _snd.normalizeString(content)
-
-        url = uritemplate.expand(self.upload_url)
-        urlArguments = _snd.dictionary(name=name)
-        postArguments = content
-        headers = {"Content-Type": content_type}
-        r = self.Session._request("POST", url, urlArguments=urlArguments, postArguments=postArguments, headers=headers)
-        return PyGithub.Blocking.Asset.Asset(self.Session, r.json(), r.headers.get("ETag"))
 
     def update(self):
         """

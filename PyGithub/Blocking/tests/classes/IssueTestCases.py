@@ -142,7 +142,6 @@ class IssuePullRequests(TestCase):
         i.edit(state="closed")
 
 
-
 class IssueUpdate(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "issue-update")

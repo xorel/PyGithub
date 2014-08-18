@@ -773,7 +773,7 @@ class RepositoryReleaseAssets(TestCase):
         repo = self.setUpTestRepo("electra", "repository-release-assets")
         rel = repo.create_release("assets")
         self.pause()
-        a = rel.upload_asset("text/plain", "foo.txt", "barbaz")
+        a = rel.create_asset("text/plain", "foo.txt", "barbaz")
         self.pause()
         return Data(id=a.id)
 

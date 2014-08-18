@@ -67,17 +67,23 @@ class CodeGenerator:
             .elements(self.createClassStructure(s) for s in klass.structures)
             .elements(self.createClassPrivateParts(klass))
             .elements(self.createClassProperty(a) for a in klass.attributes)
-            .elements([] if klass.qualifiedName == "Github" else [PS.Property("url")
-                .docstring(":type: :class:`string`")
-                .body("return self._url")]
+            .elements(
+                [] if klass.qualifiedName == "Github" else [
+                    PS.Property("url")
+                    .docstring(":type: :class:`string`")
+                    .body("return self._url")
+                ]
             )
             .elements(self.createClassMethod(m) for m in klass.methods)
-            .elements([] if klass.qualifiedName == "Github" else [PS.Method("update")
-                .docstring("Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.")
-                .docstring("Returns True if the object was updated.")
-                .docstring("")
-                .docstring(":rtype: :class:`bool`")
-                .body("return self._update()")]
+            .elements(
+                [] if klass.qualifiedName == "Github" else [
+                    PS.Method("update")
+                    .docstring("Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.")
+                    .docstring("Returns True if the object was updated.")
+                    .docstring("")
+                    .docstring(":rtype: :class:`bool`")
+                    .body("return self._update()")
+                ]
             )
         )
 
@@ -317,7 +323,7 @@ class CodeGenerator:
                 yield "postArguments = email"
             elif method.qualifiedName in ["Issue.add_to_labels", "Issue.set_labels"]:
                 yield "postArguments = label"
-            elif method.qualifiedName == "Release.upload_asset":
+            elif method.qualifiedName == "Release.create_asset":
                 yield "postArguments = content"
             else:
                 yield "postArguments = _snd.dictionary({})".format(", ".join("{}={}".format(a.name, self.generateCodeForValue(method, a.value)) for a in method.postArguments))  # pragma no branch

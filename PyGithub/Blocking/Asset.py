@@ -21,8 +21,8 @@ class Asset(_bgo.UpdatableGithubObject):
 
     Methods and attributes returning instances of this class:
       * :attr:`.Release.assets`
+      * :meth:`.Release.create_asset`
       * :meth:`.Release.get_assets`
-      * :meth:`.Release.upload_asset`
       * :meth:`.Repository.get_release_asset`
 
     Methods accepting instances of this class as parameter: none.

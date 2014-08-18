@@ -38,6 +38,26 @@ attributes:
   - name: zipball_url
     type: string
 methods:
+  - name: create_asset
+    end_point: POST /repos/:owner/:repo/releases/:id/assets
+    parameters:
+      - name: content_type
+        type: string
+      - name: name
+        type: string
+      - name: content
+        type: string
+    url_template: attribute upload_url
+    url_arguments:
+      - name: name
+        value: parameter name
+    post_arguments:
+      - name: content
+        value: parameter content
+    headers:
+      - name: Content-Type
+        value: parameter content_type
+    return_type: Asset
   - name: delete
     end_point: DELETE /repos/:owner/:repo/releases/:id
     url_template: attribute url
@@ -79,23 +99,3 @@ methods:
     return_type:
       container: PaginatedList
       content: Asset
-  - name: upload_asset
-    end_point: POST /repos/:owner/:repo/releases/:id/assets
-    parameters:
-      - name: content_type
-        type: string
-      - name: name
-        type: string
-      - name: content
-        type: string
-    url_template: attribute upload_url
-    url_arguments:
-      - name: name
-        value: parameter name
-    post_arguments:
-      - name: content
-        value: parameter content
-    headers:
-      - name: Content-Type
-        value: parameter content_type
-    return_type: Asset

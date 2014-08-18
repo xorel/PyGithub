@@ -1427,7 +1427,7 @@ POST /repos/:owner/:repo/releases/:id/assets
 (`Reference documentation of Github API v3 <https://developer.github.com/v3/repos/releases/#upload-a-release-asset>`__)
 
 Implemented in PyGithub by:
-  * :meth:`.Release.upload_asset`
+  * :meth:`.Release.create_asset`
 
 DELETE /repos/:owner/:repo/releases/assets/:id
 ----------------------------------------------

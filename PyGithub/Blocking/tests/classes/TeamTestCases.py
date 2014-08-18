@@ -136,7 +136,6 @@ class TeamRepos(TestCase):
         self.assertTrue(t.has_in_repos(("teamss", "b")))
 
 
-
 class TeamUpdate(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         reset = False

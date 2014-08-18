@@ -10,7 +10,7 @@ class AssetAttributes(TestCase):
         repo = self.setUpTestRepo("electra", "asset-attributes")
         r = repo.create_release("assets")
         self.pause()
-        a = r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        a = r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
         return Data(id=a.id)
 
@@ -38,7 +38,7 @@ class AssetDelete(TestCase):
 
     def test(self):
         r = self.electra.get_repo(("electra", "asset-delete")).get_release(self.data.id)
-        a = r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        a = r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
         a.delete()
 
@@ -48,7 +48,7 @@ class AssetEdit(TestCase):
         repo = self.setUpTestRepo("electra", "asset-edit")
         r = repo.create_release("assets")
         self.pause()
-        a = r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        a = r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
         a.edit(a.name, label="foo")
         self.pause()
@@ -77,7 +77,7 @@ class AssetUpdate(TestCase):
         repo = self.setUpTestRepo("electra", "asset-update")
         r = repo.create_release("assets")
         self.pause()
-        a = r.upload_asset("text/plain", "readme.txt", "This is the readme")
+        a = r.create_asset("text/plain", "readme.txt", "This is the readme")
         self.pause()
         return Data(id=a.id)
 
