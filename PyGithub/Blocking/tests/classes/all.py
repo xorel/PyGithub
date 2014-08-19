@@ -13,6 +13,7 @@ from PyGithub.Blocking.tests.classes.CommitTestCases import *
 from PyGithub.Blocking.tests.classes.ContributorTestCases import *
 from PyGithub.Blocking.tests.classes.FileTestCases import *
 from PyGithub.Blocking.tests.classes.GistTestCases import *
+from PyGithub.Blocking.tests.classes.GistCommentTestCases import *
 from PyGithub.Blocking.tests.classes.GitBlobTestCases import *
 from PyGithub.Blocking.tests.classes.GitCommitTestCases import *
 from PyGithub.Blocking.tests.classes.GitRefTestCases import *

@@ -13,6 +13,7 @@ import PyGithub.Blocking.Commit
 import PyGithub.Blocking.Contributor
 import PyGithub.Blocking.File
 import PyGithub.Blocking.Gist
+import PyGithub.Blocking.GistComment
 import PyGithub.Blocking.GitBlob
 import PyGithub.Blocking.GitCommit
 import PyGithub.Blocking.GitRef

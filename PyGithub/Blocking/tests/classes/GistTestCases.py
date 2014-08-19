@@ -79,6 +79,41 @@ class GistAttributes(TestCase):
         self.assertEqual([f.owner.login for f in forks], ["penelope", "zeus"])
 
 
+class GistComments(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        u = self.electra.get_authenticated_user()
+        for g in u.get_gists():
+            if g.description == "gist-comments":
+                g.delete()
+        g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="gist-comments")
+        self.pause()
+        c = g.create_comment("First comment")
+        g.create_comment("Second comment")
+        self.pause()
+        return Data(gist_id=g.id, comment_id=c.id)
+
+    def testGetComment(self):
+        g = self.electra.get_gist(self.data.gist_id)
+        c = g.get_comment(self.data.comment_id)
+        self.assertEqual(c.body, "First comment")
+
+    def testGetComments(self):
+        g = self.electra.get_gist(self.data.gist_id)
+        comments = g.get_comments()
+        self.assertEqual([c.body for c in comments], ["First comment", "Second comment"])
+
+    def testGetComments_allParameters(self):
+        g = self.electra.get_gist(self.data.gist_id)
+        comments = g.get_comments(per_page=1)
+        self.assertEqual([c.body for c in comments], ["First comment", "Second comment"])
+
+    def testCreateComment(self):
+        g = self.electra.get_gist(self.data.gist_id)
+        c = g.create_comment("Ephemeral comment")
+        self.assertEqual(c.body, "Ephemeral comment")
+        c.delete()
+
+
 class GistDelete(TestCase):
     def test(self):
         g = self.electra.get_authenticated_user().create_gist(files={"foo.txt": {"content": "barbaz"}}, public=True, description="ephemeral")

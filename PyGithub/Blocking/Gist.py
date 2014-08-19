@@ -464,6 +464,24 @@ class Gist(_bgo.UpdatableGithubObject):
         """
         return self._url
 
+    def create_comment(self, body):
+        """
+        Calls the `POST /gists/:gist_id/comments <http://developer.github.com/v3/gists/comments#create-a-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param body: mandatory :class:`string`
+        :rtype: :class:`~.GistComment.GistComment`
+        """
+        import PyGithub.Blocking.GistComment
+
+        body = _snd.normalizeString(body)
+
+        url = uritemplate.expand(self.comments_url)
+        postArguments = _snd.dictionary(body=body)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.GistComment.GistComment(self.Session, r.json(), r.headers.get("ETag"))
+
     def delete(self):
         """
         Calls the `DELETE /gists/:id <http://developer.github.com/v3/gists#delete-a-gist>`__ end point.
@@ -494,6 +512,44 @@ class Gist(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(description=description, files=files)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def get_comment(self, id):
+        """
+        Calls the `GET /gists/:gist_id/comments/:id <http://developer.github.com/v3/gists/comments#get-a-single-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.GistComment.GistComment`
+        """
+        import PyGithub.Blocking.GistComment
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/gists/{gist_id}/comments/{id}", gist_id=self.id, id=str(id))
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.GistComment.GistComment(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_comments(self, per_page=None):
+        """
+        Calls the `GET /gists/:gist_id/comments <http://developer.github.com/v3/gists/comments#list-comments-on-a-gist>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.GistComment.GistComment`
+        """
+        import PyGithub.Blocking.GistComment
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.comments_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.GistComment.GistComment, self.Session, r)
 
     def get_commits(self, per_page=None):
         """

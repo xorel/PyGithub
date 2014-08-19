@@ -163,35 +163,40 @@ GET /gists/:gist_id/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/gists/comments#list-comments-on-a-gist>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Gist.get_comments`
 
 POST /gists/:gist_id/comments
 -----------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/gists/comments#create-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Gist.create_comment`
 
 DELETE /gists/:gist_id/comments/:id
 -----------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/gists/comments#delete-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.GistComment.delete`
 
 GET /gists/:gist_id/comments/:id
 --------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/gists/comments#get-a-single-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Gist.get_comment`
 
 PATCH /gists/:gist_id/comments/:id
 ----------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/gists/comments#edit-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.GistComment.edit`
 
 DELETE /gists/:id
 -----------------

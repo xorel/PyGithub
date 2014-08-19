@@ -1,0 +1,31 @@
+attributes:
+  - name: body
+    type: string
+  - name: body_html
+    type: string
+  - name: body_text
+    type: string
+  - name: created_at
+    type: datetime
+  - name: id
+    type: int
+  - name: updated_at
+    type: datetime
+  - name: user
+    type: User
+methods:
+  - name: delete
+    end_point: DELETE /gists/:gist_id/comments/:id
+    url_template: attribute url
+    return_type: none
+  - name: edit
+    end_point: PATCH /gists/:gist_id/comments/:id
+    parameters:
+      - name: body
+        type: string
+    url_template: attribute url
+    post_arguments:
+      - name: body
+        value: parameter body
+    effect: update
+    return_type: none

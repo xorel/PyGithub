@@ -93,6 +93,16 @@ attributes:
   - name: user
     type: User
 methods:
+  - name: create_comment
+    end_point: POST /gists/:gist_id/comments
+    parameters:
+      - name: body
+        type: string
+    url_template: attribute comments_url
+    post_arguments:
+      - name: body
+        value: parameter body
+    return_type: GistComment
   - name: delete
     end_point: DELETE /gists/:id
     url_template: attribute url
@@ -117,6 +127,24 @@ methods:
         value: parameter files
     effect: update
     return_type: none
+  - name: get_comment
+    end_point: GET /gists/:gist_id/comments/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: gist_id
+        value: attribute id
+      - name: id
+        value: parameter id
+    return_type: GistComment
+  - name: get_comments
+    end_point: GET /gists/:gist_id/comments
+    url_template: attribute comments_url
+    return_type:
+      container: PaginatedList
+      content: GistComment
   - name: get_commits
     end_point: GET /gists/:id/commits
     url_template: attribute commits_url
