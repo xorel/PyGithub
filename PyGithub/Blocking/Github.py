@@ -249,7 +249,7 @@ class Github(_bgo.SessionedGithubObject):
         if public is not None:
             public = _snd.normalizeBool(public)
 
-        url = uritemplate.expand("https://api.github.com/gists")
+        url = "https://api.github.com/gists"
         postArguments = _snd.dictionary(description=description, files=files, public=public)
         r = self.Session._requestAnonymous("POST", url, postArguments=postArguments)
         return PyGithub.Blocking.Gist.Gist(self.Session, r.json(), r.headers.get("ETag"))
@@ -264,7 +264,7 @@ class Github(_bgo.SessionedGithubObject):
         """
         import PyGithub.Blocking.AuthenticatedUser
 
-        url = uritemplate.expand("https://api.github.com/user")
+        url = "https://api.github.com/user"
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser(self.Session, r.json(), r.headers.get("ETag"))
 
@@ -277,7 +277,7 @@ class Github(_bgo.SessionedGithubObject):
         :rtype: :class:`dict` of :class:`string` to :class:`string`
         """
 
-        url = uritemplate.expand("https://api.github.com/emojis")
+        url = "https://api.github.com/emojis"
         r = self.Session._request("GET", url)
         return r.json()
 
@@ -323,7 +323,7 @@ class Github(_bgo.SessionedGithubObject):
         :rtype: :class:`list` of :class:`string`
         """
 
-        url = uritemplate.expand("https://api.github.com/gitignore/templates")
+        url = "https://api.github.com/gitignore/templates"
         r = self.Session._request("GET", url)
         return r.json()
 
@@ -352,7 +352,7 @@ class Github(_bgo.SessionedGithubObject):
         :rtype: :class:`list` of :class:`.Github.HookDescription`
         """
 
-        url = uritemplate.expand("https://api.github.com/hooks")
+        url = "https://api.github.com/hooks"
         r = self.Session._request("GET", url)
         return [Github.HookDescription(self.Session, x) for x in r.json()]
 
@@ -365,7 +365,7 @@ class Github(_bgo.SessionedGithubObject):
         :rtype: :class:`.Github.Meta`
         """
 
-        url = uritemplate.expand("https://api.github.com/meta")
+        url = "https://api.github.com/meta"
         r = self.Session._request("GET", url)
         return Github.Meta(self.Session, r.json())
 
@@ -405,7 +405,7 @@ class Github(_bgo.SessionedGithubObject):
         else:
             per_page = _snd.normalizeInt(per_page)
 
-        url = uritemplate.expand("https://api.github.com/gists/public")
+        url = "https://api.github.com/gists/public"
         urlArguments = _snd.dictionary(per_page=per_page, since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.Gist.Gist, self.Session, r)
@@ -419,7 +419,7 @@ class Github(_bgo.SessionedGithubObject):
         :rtype: :class:`.Github.RateLimit`
         """
 
-        url = uritemplate.expand("https://api.github.com/rate_limit")
+        url = "https://api.github.com/rate_limit"
         r = self.Session._request("GET", url)
         return Github.RateLimit(self.Session, r.json())
 
@@ -457,7 +457,7 @@ class Github(_bgo.SessionedGithubObject):
         if since is not None:
             since = _snd.normalizeRepositoryId(since)
 
-        url = uritemplate.expand("https://api.github.com/repositories")
+        url = "https://api.github.com/repositories"
         urlArguments = _snd.dictionary(since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
@@ -511,7 +511,7 @@ class Github(_bgo.SessionedGithubObject):
         if since is not None:
             since = _snd.normalizeUserId(since)
 
-        url = uritemplate.expand("https://api.github.com/users")
+        url = "https://api.github.com/users"
         urlArguments = _snd.dictionary(since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(_rcv.KeyedUnion("type", dict(Organization=PyGithub.Blocking.Organization.Organization, User=PyGithub.Blocking.User.User)), self.Session, r)

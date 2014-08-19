@@ -306,12 +306,16 @@ class CodeGenerator:
             yield 'url = "/".join(self._url.split("/")[:-2]) + "/statuses/" + self.sha'
         elif method.qualifiedName == "Commit.get_statuses":
             yield 'url = self._url + "/statuses"'
-        elif method.qualifiedName == "Commit.get_status":
-            yield 'url = self._url + "/status"'
+        # elif method.qualifiedName == "Commit.get_status":
+        #     yield 'url = self._url + "/status"'
         elif method.qualifiedName == "GitTree.create_modified_copy":
             yield "url = self._url[:self._url.rfind(self.sha) - 1]"
         elif len(method.urlTemplateArguments) == 0:
-            yield "url = uritemplate.expand({})".format(self.generateCodeForValue(method, method.urlTemplate))
+            url = self.generateCodeForValue(method, method.urlTemplate)
+            if method.urlTemplate.__class__.__name__ == "EndPointValue":
+                yield "url = {}".format(url)
+            else:
+                yield "url = uritemplate.expand({})".format(url)
         else:
             yield "url = uritemplate.expand({}, {})".format(self.generateCodeForValue(method, method.urlTemplate), ", ".join("{}={}".format(a.name, self.generateCodeForStringValue(method, a.value)) for a in method.urlTemplateArguments))  # pragma no branch
         if len(method.urlArguments) != 0:
