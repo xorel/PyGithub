@@ -18,6 +18,7 @@ class UnusualErrorsTestCase(TestCase):
             )
         )
 
+    # @todoAlpha Do we want to test rate limits in case of Application authentication (client_id, client_secret)?
     def testConsumeRateLimit(self):
         g = self.getBuilder().Build()
 

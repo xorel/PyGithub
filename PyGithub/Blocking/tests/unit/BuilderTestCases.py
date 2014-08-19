@@ -99,6 +99,12 @@ class BuilderTestCase(unittest.TestCase):
         response = s._request("GET", "http://foo.com")
         self.assertEqual(response.status_code, 200)
 
+    def testApplication(self):
+        s = self.makeSession(bld.Builder().Application("id", "secret"))
+        self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/?client_secret=secret&client_id=id", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": bld.Builder.defaultUserAgent}, None)).andReturn(rebuildResponse(200, dict(), ""))
+        response = s._request("GET", "http://foo.com")
+        self.assertEqual(response.status_code, 200)
+
     def testEnterprise(self):
         s = self.makeSession(bld.Builder().Enterprise("net.loc"))
         self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://net.loc/api/v3/foo", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": bld.Builder.defaultUserAgent}, None)).andReturn(rebuildResponse(200, dict(), ""))

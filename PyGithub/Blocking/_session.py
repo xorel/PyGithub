@@ -5,6 +5,8 @@
 import logging
 log = logging.getLogger(__name__)
 import json
+import urlparse
+import urllib
 
 import requests
 
@@ -33,6 +35,15 @@ class _OauthAuthenticator(object):
 
     def prepareSession(self, session):
         session.headers["Authorization"] = "token " + self.__token
+
+
+class _ApplicationAuthenticator(object):
+    def __init__(self, client_id, client_secret):
+        self.__client_id = client_id
+        self.__client_secret = client_secret
+
+    def prepareSession(self, session):
+        session.params = dict(client_id=self.__client_id, client_secret=self.__client_secret)
 
 
 class Session(object):
@@ -113,7 +124,7 @@ class Session(object):
         data = None
         if postArguments is not None:
             if headers is None or headers.get("Content-Type") is None:
-                # @todoAlpha Should we set Content-Type here? If yes, we'll need to record all tests again, so consider sending an Accept header as well.
+                # @todoAlpha Should we set Content-Type here?
                 data = json.dumps(postArguments)
             else:
                 data = postArguments
@@ -183,8 +194,13 @@ class Session(object):
                     requestHeaders["Authorization"] = "token not_logged"
                 else:
                     requestHeaders["Authorization"] = "Unknown not_logged"
+            url = request.url
+            if "client_secret" in url:
+                parse = urlparse.urlparse(url)
+                params = urllib.urlencode(sorted(("client_secret", "not_logged") if k == "client_secret" else (k, v) for (k, v) in urlparse.parse_qsl(parse.query)))
+                url = urlparse.urlunparse(urlparse.ParseResult(scheme=parse.scheme, netloc=parse.netloc, path=parse.path, params=None, query=params, fragment=None))
             # @todoAlpha Understand what happens if response.text contains non-ascii characters (@DotCom Github.get_repositories crashed)
-            elements = [request.method, request.url, sorted(requestHeaders.iteritems()), request.body, "=>", response.status_code, sorted(response.headers.iteritems()), response.text]
+            elements = [request.method, url, sorted(requestHeaders.iteritems()), request.body, "=>", response.status_code, sorted(response.headers.iteritems()), response.text]
             log.debug(" ".join(str(e) for e in elements))
 
     def __parseScopesHeader(self, header):

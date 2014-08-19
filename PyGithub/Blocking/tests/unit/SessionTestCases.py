@@ -261,6 +261,14 @@ class LoggingTestCase(SessionTestCase):
         response = s._request("GET", "https://api.github.com/foo")
         self.assertEqual(response.status_code, 200)
 
+    def testLogWithApplicationAuthentication(self):
+        s = self.makeSession(ses._ApplicationAuthenticator("id", "secret"), "net.loc", None, "user-agent")
+        self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://net.loc/api/v3/foo?client_secret=secret&client_id=id", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": "user-agent"}, None)).andReturn(rebuildResponse(200, dict(header="value"), "response"))
+        self.log.expect.isEnabledFor(logging.DEBUG).andReturn(True)
+        self.log.expect.debug("GET http://net.loc/api/v3/foo?client_id=id&client_secret=not_logged [('Accept', 'application/vnd.github.v3.full+json'), ('Accept-Encoding', 'gzip, deflate, compress'), ('User-Agent', 'user-agent')] None => 200 [('header', 'value')] response")
+        response = s._request("GET", "https://api.github.com/foo")
+        self.assertEqual(response.status_code, 200)
+
     def testLogWithUnknownAuthentication(self):
         class Authenticator(object):
             def prepareSession(self, session):

@@ -58,6 +58,13 @@ class Builder(object):
         self.__authenticator = _ses._OauthAuthenticator(token)
         return self
 
+    def Application(self, client_id, client_secret):
+        """
+        Use `OAuth2 Key/Secret authentication https://developer.github.com/v3/#oauth2-keysecret>`_.
+        """
+        self.__authenticator = _ses._ApplicationAuthenticator(client_id, client_secret)
+        return self
+
     def Enterprise(self, netloc):
         """
         Use the `GitHub Enterprise <https://enterprise.github.com/>`__ server with domain name or ip address `netloc`.

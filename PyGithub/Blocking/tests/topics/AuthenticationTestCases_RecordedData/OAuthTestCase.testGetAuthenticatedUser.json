@@ -1,0 +1,79 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "token 05609fccd5491c0dc684e2577572794dd3c1a642",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/user",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                "bio": null,
+                "blog": "http://jacquev6.net/electra",
+                "company": "Electra Software",
+                "created_at": "2014-08-02T16:54:48Z",
+                "email": "ghe-electra@jacquev6.net",
+                "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                "followers": 0,
+                "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                "following": 2,
+                "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                "hireable": false,
+                "html_url": "http://github.home.jacquev6.net/electra",
+                "id": 16,
+                "location": "Greece",
+                "login": "electra",
+                "name": "Electra",
+                "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                "public_gists": 41,
+                "public_repos": 33,
+                "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                "site_admin": false,
+                "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                "suspended_at": null,
+                "type": "User",
+                "updated_at": "2014-08-19T02:50:56Z",
+                "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1410",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Tue, 19 Aug 2014 02:51:01 GMT",
+                "etag": "\"b792656487da5d10fef9a57fb63f7f13\"",
+                "last-modified": "Tue, 19 Aug 2014 02:50:56 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-accepted-oauth-scopes": "",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "245b006b-2a12-4f07-a89d-fa46a21bdef4",
+                "x-oauth-scopes": "",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

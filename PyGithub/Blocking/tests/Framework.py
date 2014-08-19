@@ -41,10 +41,12 @@ class _RecordModeHelper(object):
             "Basic cGVuZWxvcGU6cGFzc3dvcmQxLXBlbmVsb3Bl",  # Penelope
             "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",  # Electra
 
+            "token 05609fccd5491c0dc684e2577572794dd3c1a642",  # AuthenticationTestCases.py OAuthTestCase
+
             "Basic Z2hlLXVzZXItMTpwYXNzd29yZC11c2VyLTE=",  # ghe-user-1, temporary
             "Basic Z2hlLXVzZXItMjpwYXNzd29yZC11c2VyLTI=",  # ghe-user-2, temporary
         ]:
-            assert request.headers["Authorization"].startswith("Basic ")
+            assert request.headers["Authorization"].startswith("Basic "), request.headers["Authorization"]
             request.headers["Authorization"] = "Basic removed="
 
     @staticmethod
@@ -231,6 +233,9 @@ class TestCase(unittest.TestCase):
 
             builder.Build = newBuild
         return builder
+
+    def getEnterpriseBuilder(self):
+        return self.getBuilder().Enterprise("github.home.jacquev6.net")
 
     def setUp(self):
         super(TestCase, self).setUp()
