@@ -13,6 +13,8 @@ import MockMockMock
 
 import PyGithub.Blocking._builder as bld
 
+import PyGithub.Blocking.tests.Framework as Framework
+
 
 class RequestMatcher(object):
     def __init__(self, verb, url, headers, body):
@@ -32,7 +34,7 @@ class RequestMatcher(object):
     def check(self, request):
         return (
             request.method == self.__verb
-            and request.url == self.__url
+            and Framework._RecordModeHelper.parseUrl(request.url) == Framework._RecordModeHelper.parseUrl(self.__url)
             and dict(request.headers) == self.__headers
             and request.body == self.__body
         )
