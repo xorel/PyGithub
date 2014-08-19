@@ -169,7 +169,7 @@ class RepositoryContents(TestCase):
         cc = repo.create_file("foo.txt", "Add foo.txt", "Q3JlYXRlZCBieSBQeUdpdGh1Yg==")
         self.assertEqual(cc.commit.message, "Add foo.txt")
         self.assertEqual(cc.content.path, "foo.txt")
-        repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
+        repo.get_git_ref("heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
     def testCreateFile_allParameters(self):
         repo = self.electra.get_repo(("electra", "git-objects"))
@@ -195,7 +195,7 @@ class RepositoryEdit(TestCase):
         except PyGithub.ObjectNotFoundException:
             pass
         r = electra.create_repo("edit", auto_init=True)
-        r.create_git_ref("refs/heads/develop", r.get_git_ref("refs/heads/master").object.sha)
+        r.create_git_ref("refs/heads/develop", r.get_git_ref("heads/master").object.sha)
         return Data()
 
     def testName(self):
@@ -281,10 +281,10 @@ class RepositoryGitStuff(TestCase):
     #     self.assertEqual(b.commit.sha, "e078f69fb050b75fe5f3c7aa70adc24d692e75b8")
     #     self.assertFalse(b.update())
     #     self.assertEqual(b.commit.sha, "e078f69fb050b75fe5f3c7aa70adc24d692e75b8")
-    #     r.get_git_ref("refs/heads/test_update").edit(sha="7820fadc2429652016611e98fdc21766ba075161")
+    #     r.get_git_ref("heads/test_update").edit(sha="7820fadc2429652016611e98fdc21766ba075161")
     #     self.assertTrue(b.update())
     #     self.assertEqual(b.commit.sha, "7820fadc2429652016611e98fdc21766ba075161")
-    #     r.get_git_ref("refs/heads/test_update").edit(sha="e078f69fb050b75fe5f3c7aa70adc24d692e75b8", force=True)
+    #     r.get_git_ref("heads/test_update").edit(sha="e078f69fb050b75fe5f3c7aa70adc24d692e75b8", force=True)
 
     def testGetCommits(self):
         r = self.electra.get_repo(("electra", "git-objects"))
@@ -332,7 +332,7 @@ class RepositoryGitStuff(TestCase):
 
     def testGetGitRef(self):
         r = self.electra.get_repo(("electra", "git-objects"))
-        ref = r.get_git_ref("refs/heads/develop")
+        ref = r.get_git_ref("heads/develop")
         # @todoAlpha Test get_git_ref with a string not starting with "refs/"
         self.assertEqual(ref.ref, "refs/heads/develop")
 
@@ -624,7 +624,7 @@ class RepositoryKeys(TestCase):
 class RepositoryPages(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "repository-pages")
-        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("refs/heads/master").object.sha)
+        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("heads/master").object.sha)
         self.pause()
         while repo.get_pages().status != "built":
             self.pause()

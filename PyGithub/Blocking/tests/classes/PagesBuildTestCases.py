@@ -8,7 +8,7 @@ from PyGithub.Blocking.tests.Framework import *
 class PagesBuildAttributes(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "pages-build-attributes")
-        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("refs/heads/master").object.sha)
+        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("heads/master").object.sha)
         self.pause()
         while repo.get_pages().status != "built":
             self.pause()
@@ -29,7 +29,7 @@ class PagesBuildAttributes(TestCase):
 class PagesBuildUpdate(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "pages-build-update")
-        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("refs/heads/master").object.sha)
+        repo.create_git_ref("refs/heads/gh-pages", repo.get_git_ref("heads/master").object.sha)
         self.pause()
         while repo.get_pages().status != "built":
             self.pause()
@@ -47,4 +47,4 @@ class PagesBuildUpdate(TestCase):
         while not after.update():
             self.pause(0.25)
         self.assertEqual(after.updated_at, datetime.datetime(2014, 8, 17, 6, 33, 26))
-        repo.get_git_ref("refs/heads/gh-pages").edit(sha=repo.get_git_ref("refs/heads/master").object.sha, force=True)
+        repo.get_git_ref("heads/gh-pages").edit(sha=repo.get_git_ref("heads/master").object.sha, force=True)

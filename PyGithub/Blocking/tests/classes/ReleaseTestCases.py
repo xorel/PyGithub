@@ -39,7 +39,7 @@ class ReleaseAssets(TestCase):
 class ReleaseAttributes(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "release-attributes")
-        repo.create_git_ref("refs/heads/release_branch", repo.get_git_ref("refs/heads/master").object.sha)
+        repo.create_git_ref("refs/heads/release_branch", repo.get_git_ref("heads/master").object.sha)
         r = repo.create_release("attributes", target_commitish="release_branch", name="The release", body="The long-awaited release")
         self.pause()
         r.create_asset("text/plain", "readme.txt", "This is the readme")
@@ -86,7 +86,7 @@ class ReleaseEdit(TestCase):
         repo = self.setUpTestRepo("electra", "release-edit")
         r = repo.create_release("edit", name="The name", body="The body")
         self.pause()
-        repo.create_git_ref("refs/heads/release_branch", repo.get_git_ref("refs/heads/master").object.sha)
+        repo.create_git_ref("refs/heads/release_branch", repo.get_git_ref("heads/master").object.sha)
         return Data(id=r.id)
 
     def testTagName(self):

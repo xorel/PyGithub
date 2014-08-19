@@ -158,7 +158,7 @@ class PullRequestMerge(TestCase):
 
     def testMergeMergeable(self):
         repo = self.electra.get_repo(("electra", "pulls"))
-        ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("refs/heads/master").object.sha)
+        ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("heads/master").object.sha)
         p = repo.create_pull("Merge pull", "penelope:mergeable", "ephemeral")
         self.assertEqual(p.mergeable, None)
         # time.sleep(5)
@@ -172,7 +172,7 @@ class PullRequestMerge(TestCase):
 
     def testMergeMergeable_allParameters(self):
         repo = self.electra.get_repo(("electra", "pulls"))
-        ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("refs/heads/master").object.sha)
+        ephemeral = repo.create_git_ref("refs/heads/ephemeral", repo.get_git_ref("heads/master").object.sha)
         p = repo.create_pull("Merge pull", "penelope:mergeable", "ephemeral")
         self.assertEqual(p.mergeable, None)
         # time.sleep(5)

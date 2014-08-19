@@ -1607,8 +1607,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         ref = _snd.normalizeString(ref)
 
-        assert ref.startswith("refs/")
-        url = uritemplate.expand(self.git_refs_url) + ref[4:]
+        url = uritemplate.expand(self.git_refs_url) + "/" + ref
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.GitRef.GitRef(self.Session, r.json(), r.headers.get("ETag"))
 

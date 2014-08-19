@@ -116,7 +116,7 @@ except PyGithub.Blocking.ObjectNotFoundException:
     fork = penelope.create_fork(("electra", "pulls"))
     time.sleep(5)
     source.create_file("conflict.md", "Create conflict.md", "Zm9v")
-    master = fork.get_git_ref("refs/heads/master").object.sha
+    master = fork.get_git_ref("heads/master").object.sha
     fork.create_git_ref("refs/heads/merged", master)
     fork.create_git_ref("refs/heads/mergeable", master)
     fork.create_git_ref("refs/heads/issue_to_pull", master)
@@ -164,7 +164,7 @@ except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
     r.add_to_collaborators("penelope")
     r.add_to_collaborators("zeus")
-    r.create_git_ref("refs/heads/develop", r.get_git_ref("refs/heads/master").object.sha)
+    r.create_git_ref("refs/heads/develop", r.get_git_ref("heads/master").object.sha)
     r.create_milestone("First milestone")
 
 try:
@@ -187,10 +187,10 @@ except PyGithub.Blocking.ObjectNotFoundException:
     time.sleep(5)
     r.create_file("foo.md", "Create foo.md", "bWVyZ2U=")
     r.get_readme().edit("Modify README.md", "TmV3IHJlYWRtZQ0K")
-    r.create_git_ref("refs/heads/develop", r.get_git_ref("refs/heads/master").object.sha)
-    r.create_git_ref("refs/tags/light-tag-1", r.get_git_ref("refs/heads/master").object.sha)
+    r.create_git_ref("refs/heads/develop", r.get_git_ref("heads/master").object.sha)
+    r.create_git_ref("refs/tags/light-tag-1", r.get_git_ref("heads/master").object.sha)
     r.create_file("bar.md", "Create bar.md", "bWVyZ2U=", branch="develop")
-    r.create_git_ref("refs/tags/light-tag-2", r.get_git_ref("refs/heads/develop").object.sha)
+    r.create_git_ref("refs/tags/light-tag-2", r.get_git_ref("heads/develop").object.sha)
 
     assert r.create_git_blob("This is some content", "utf8").sha == "3daf0da6bca38181ab52610dd6af6e92f1a5469d"
     assert r.create_git_tree(

@@ -26,7 +26,7 @@ class FileDelete(TestCase):
         f = repo.get_contents("foo.md")
         c = f.delete("Deleted by PyGithub")
         self.assertEqual(c.message, "Deleted by PyGithub")
-        repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
+        repo.get_git_ref("heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
     def test_allParameters(self):
         repo = self.electra.get_repo(("electra", "git-objects"))
@@ -53,7 +53,7 @@ class FileEdit(TestCase):
         self.assertEqual(f.content, "TmV3IGNvbnRlbnQNCg==")
         self.assertEqual(f.sha, "03a66315737e55b3e37af882a52df30f9c025197")
         self.assertEqual(c.message, "Modified by PyGithub")
-        repo.get_git_ref("refs/heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
+        repo.get_git_ref("heads/master").edit("627777afd4859d16e30880f4d8d0a178d99d395c", force=True)
 
     def testContent_allParameters(self):
         repo = self.electra.get_repo(("electra", "git-objects"))

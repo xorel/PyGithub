@@ -10,7 +10,7 @@ from PyGithub.Blocking.tests.Framework import *
 class GitRefAttributes(TestCase):
     def testCommitRef(self):
         # @todoAlpha testTreeRef and testBlobRef?
-        r = self.electra.get_repo(("electra", "git-objects")).get_git_ref("refs/heads/develop")
+        r = self.electra.get_repo(("electra", "git-objects")).get_git_ref("heads/develop")
         self.assertEqual(r.ref, "refs/heads/develop")
         self.assertEqual(r.object.type, "commit")
         self.assertEqual(r.object.message, "Create bar.md")
@@ -40,7 +40,7 @@ class GitRefUpdate(TestCase):
         repo = self.electra.get_repo(("electra", "git-objects"))
         r1 = repo.create_git_ref("refs/heads/ephemeral", "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")
         self.pause()
-        r2 = repo.get_git_ref("refs/heads/ephemeral")
+        r2 = repo.get_git_ref("heads/ephemeral")
         r2.edit("db09e03a13f7910b9cae93ca91cd35800e15c695")
         self.pause()
         self.assertEqual(r1.object.sha, "f739e7ae2fd0e7b2bce99c073bcc7b57d713877e")

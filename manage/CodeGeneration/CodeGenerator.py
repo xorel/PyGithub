@@ -299,8 +299,7 @@ class CodeGenerator:
             yield ""
 
         if method.qualifiedName == "Repository.get_git_ref":
-            yield "assert ref.startswith(\"refs/\")"
-            yield "url = uritemplate.expand(self.git_refs_url) + ref[4:]"
+            yield 'url = uritemplate.expand(self.git_refs_url) + "/" + ref'
         elif method.qualifiedName == "Issue.create_pull":
             yield 'url = "/".join(self._url.split("/")[:-2]) + "/pulls"'
         elif method.qualifiedName == "Commit.create_status":
