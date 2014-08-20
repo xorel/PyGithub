@@ -28,24 +28,28 @@ class IssueComment(_bgo.UpdatableGithubObject):
     Methods accepting instances of this class as parameter: none.
     """
 
-    def _initAttributes(self, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, created_at=_rcv.Absent, id=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
+    def _initAttributes(self, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, created_at=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, issue_url=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
         import PyGithub.Blocking.User
         super(IssueComment, self)._initAttributes(**kwds)
         self.__body = _rcv.Attribute("IssueComment.body", _rcv.StringConverter, body)
         self.__body_html = _rcv.Attribute("IssueComment.body_html", _rcv.StringConverter, body_html)
         self.__body_text = _rcv.Attribute("IssueComment.body_text", _rcv.StringConverter, body_text)
         self.__created_at = _rcv.Attribute("IssueComment.created_at", _rcv.DatetimeConverter, created_at)
+        self.__html_url = _rcv.Attribute("IssueComment.html_url", _rcv.StringConverter, html_url)
         self.__id = _rcv.Attribute("IssueComment.id", _rcv.IntConverter, id)
+        self.__issue_url = _rcv.Attribute("IssueComment.issue_url", _rcv.StringConverter, issue_url)
         self.__updated_at = _rcv.Attribute("IssueComment.updated_at", _rcv.DatetimeConverter, updated_at)
         self.__user = _rcv.Attribute("IssueComment.user", _rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User), user)
 
-    def _updateAttributes(self, eTag, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, created_at=_rcv.Absent, id=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
+    def _updateAttributes(self, eTag, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, created_at=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, issue_url=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
         super(IssueComment, self)._updateAttributes(eTag, **kwds)
         self.__body.update(body)
         self.__body_html.update(body_html)
         self.__body_text.update(body_text)
         self.__created_at.update(created_at)
+        self.__html_url.update(html_url)
         self.__id.update(id)
+        self.__issue_url.update(issue_url)
         self.__updated_at.update(updated_at)
         self.__user.update(user)
 
@@ -82,12 +86,28 @@ class IssueComment(_bgo.UpdatableGithubObject):
         return self.__created_at.value
 
     @property
+    def html_url(self):
+        """
+        :type: :class:`string`
+        """
+        self._completeLazily(self.__html_url.needsLazyCompletion)
+        return self.__html_url.value
+
+    @property
     def id(self):
         """
         :type: :class:`int`
         """
         self._completeLazily(self.__id.needsLazyCompletion)
         return self.__id.value
+
+    @property
+    def issue_url(self):
+        """
+        :type: :class:`string`
+        """
+        self._completeLazily(self.__issue_url.needsLazyCompletion)
+        return self.__issue_url.value
 
     @property
     def updated_at(self):

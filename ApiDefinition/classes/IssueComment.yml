@@ -7,8 +7,12 @@ attributes:
     type: string
   - name: created_at
     type: datetime
+  - name: html_url
+    type: string
   - name: id
     type: int
+  - name: issue_url
+    type: string
   - name: updated_at
     type: datetime
   - name: user
