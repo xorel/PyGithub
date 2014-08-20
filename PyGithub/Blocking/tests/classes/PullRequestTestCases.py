@@ -71,7 +71,7 @@ class PullRequestAttributes(TestCase):
 
 
 class PullRequestComments(TestCase):
-    def setUpEnterprise(self):  #pragma no cover
+    def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "pull-request-comments")
         repo.create_git_ref("refs/heads/release", repo.get_git_ref("heads/master").object.sha)
         c = repo.get_readme().edit("Merge this", content="WWVhaCEgU28gZ29vZCE=")
