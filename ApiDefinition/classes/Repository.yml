@@ -859,9 +859,7 @@ methods:
         value: attribute owner.login
       - name: repo
         value: attribute name
-    return_type:
-      container: PaginatedList
-      content: IssueComment
+    return_type: IssueComment
   - name: get_issue_comments
     end_point: GET /repos/:owner/:repo/issues/comments
     optional_parameters:

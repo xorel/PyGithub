@@ -1722,28 +1722,22 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
 
-    def get_issue_comment(self, id, per_page=None):
+    def get_issue_comment(self, id):
         """
         Calls the `GET /repos/:owner/:repo/issues/comments/:id <http://developer.github.com/v3/issues/comments#get-a-single-comment>`__ end point.
 
         This is the only method calling this end point.
 
         :param id: mandatory :class:`int`
-        :param per_page: optional :class:`int`
-        :rtype: :class:`.PaginatedList` of :class:`~.IssueComment.IssueComment`
+        :rtype: :class:`~.IssueComment.IssueComment`
         """
         import PyGithub.Blocking.IssueComment
 
         id = _snd.normalizeInt(id)
-        if per_page is None:
-            per_page = self.Session.PerPage
-        else:
-            per_page = _snd.normalizeInt(per_page)
 
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/issues/comments/{id}", id=str(id), owner=self.owner.login, repo=self.name)
-        urlArguments = _snd.dictionary(per_page=per_page)
-        r = self.Session._request("GET", url, urlArguments=urlArguments)
-        return _rcv.PaginatedList(PyGithub.Blocking.IssueComment.IssueComment, self.Session, r)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.IssueComment.IssueComment(self.Session, r.json(), r.headers.get("ETag"))
 
     def get_issue_comments(self, sort=None, direction=None, since=None, per_page=None):
         """
