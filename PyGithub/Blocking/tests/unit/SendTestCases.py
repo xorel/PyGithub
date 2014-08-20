@@ -16,6 +16,14 @@ class NormalizationTestCase(unittest.TestCase):
         self.assertEqual(snd.dictionary(foo=None), dict())
         self.assertEqual(snd.dictionary(foo=PyGithub.Blocking.Reset), dict(foo=None))
 
+    def testNormalizeCommitSha(self):
+        self.assertEqual(snd.normalizeCommitSha("foo"), "foo")
+        self.assertEqual(snd.normalizeCommitSha(PyGithub.Blocking.Commit.Commit(None, dict(url="url", sha="foo"), None)), "foo")
+        with self.assertRaises(TypeError):
+            snd.normalizeCommitSha(42)
+        with self.assertRaises(TypeError):
+            snd.normalizeCommitSha(PyGithub.Blocking.Reset)
+
     def testNormalizeGistId(self):
         self.assertEqual(snd.normalizeGistId("foo"), "foo")
         self.assertEqual(snd.normalizeGistId(PyGithub.Blocking.Gist.Gist(None, dict(url="url", id="foo"), None)), "foo")

@@ -611,7 +611,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         path = _snd.normalizeString(path)
         position = _snd.normalizeInt(position)
 
-        url = uritemplate.expand(self.comments_url)
+        url = uritemplate.expand(self.review_comments_url)
         postArguments = _snd.dictionary(body=body, commit_id=commit_id, path=path, position=position)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return PyGithub.Blocking.PullComment.PullComment(self.Session, r.json(), r.headers.get("ETag"))
@@ -711,7 +711,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         else:
             per_page = _snd.normalizeInt(per_page)
 
-        url = uritemplate.expand(self.comments_url)
+        url = uritemplate.expand(self.review_comments_url)
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.PullComment.PullComment, self.Session, r)

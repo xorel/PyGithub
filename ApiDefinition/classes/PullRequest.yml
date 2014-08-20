@@ -136,7 +136,7 @@ methods:
     unimplemented_parameters:
       - name: in_reply_to
         reason: Never managed to make it work https://github.com/jacquev6/PyGithub/issues/37
-    url_template: attribute comments_url
+    url_template: attribute review_comments_url
     post_arguments:
       - name: body
         value: parameter body
@@ -205,7 +205,7 @@ methods:
     return_type: Issue
   - name: get_pull_comments
     end_point: GET /repos/:owner/:repo/pulls/:number/comments
-    url_template: attribute comments_url
+    url_template: attribute review_comments_url
     return_type:
       container: PaginatedList
       content: PullComment

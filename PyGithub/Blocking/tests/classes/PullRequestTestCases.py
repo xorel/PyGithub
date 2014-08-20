@@ -70,6 +70,33 @@ class PullRequestAttributes(TestCase):
         self.assertEqual(p.state, "closed")
 
 
+class PullRequestComments(TestCase):
+    def setUpEnterprise(self):  #pragma no cover
+        repo = self.setUpTestRepo("electra", "pull-request-comments")
+        repo.create_git_ref("refs/heads/release", repo.get_git_ref("heads/master").object.sha)
+        c = repo.get_readme().edit("Merge this", content="WWVhaCEgU28gZ29vZCE=")
+        p = repo.create_pull("comments", "electra:master", "release")
+        p.create_pull_comment("a", c.sha, "README.md", 1)
+        p.create_pull_comment("b", c.sha, "README.md", 1)
+        return Data(sha=c.sha)
+
+    def testGetPullComments(self):
+        i = self.electra.get_repo(("electra", "pull-request-comments")).get_pull(1)
+        comments = i.get_pull_comments()
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testGetPullComments_allParameters(self):
+        i = self.electra.get_repo(("electra", "pull-request-comments")).get_pull(1)
+        comments = i.get_pull_comments(per_page=1)
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testCreatePullComment(self):
+        i = self.electra.get_repo(("electra", "pull-request-comments")).get_pull(1)
+        c = i.create_pull_comment("d", self.data.sha, "README.md", 1)
+        self.assertEqual(c.body, "d")
+        c.delete()
+
+
 class PullRequestCommits(TestCase):
     def testGetCommits(self):
         p = self.electra.get_repo(("electra", "pulls")).get_pull(2)

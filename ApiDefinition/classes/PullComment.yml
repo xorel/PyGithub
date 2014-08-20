@@ -5,14 +5,33 @@ attributes:
     type: string
   - name: body_text
     type: string
+  - name: commit_id
+    type: string
   - name: created_at
     type: datetime
+  - name: diff_hunk
+    type: string
+  - name: html_url
+    type: string
   - name: id
     type: int
+  - name: original_commit_id
+    type: string
+  - name: original_position
+    type: int
+  - name: path
+    type: string
+  - name: position
+    type: int
+  - name: pull_request_url
+    type: string
   - name: updated_at
     type: datetime
   - name: user
     type: User
+deprecated_attributes:
+  - name: _links
+    reason: todoAlpha What should we do with _links?
 methods:
   - name: delete
     end_point: DELETE /repos/:owner/:repo/pulls/comments/:number
