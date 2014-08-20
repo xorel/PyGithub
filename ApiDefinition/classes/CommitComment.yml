@@ -5,9 +5,19 @@ attributes:
     type: string
   - name: body_text
     type: string
+  - name: commit_id
+    type: string
   - name: created_at
     type: datetime
+  - name: html_url
+    type: string
   - name: id
+    type: int
+  - name: line
+    type: int
+  - name: path
+    type: string
+  - name: position
     type: int
   - name: updated_at
     type: datetime
