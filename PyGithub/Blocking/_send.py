@@ -27,7 +27,7 @@ def normalizeCommitSha(commit):
     elif isinstance(commit, basestring):
         return commit
     else:
-        raise TypeError()
+        raise TypeError()  # @todoAlpha Raise something more explicit than a plain TypeError
 
 
 def normalizeGistId(gist):
@@ -248,7 +248,7 @@ def normalizeDatetimeReset(d):
 
 
 def normalizeDict(d):
-    return d
+    return d  # @todoAlpha Actualy normalize something. Or remove if not needed when we add input types for everything.
 
 
 def normalizeGitTreeSha(tree):
