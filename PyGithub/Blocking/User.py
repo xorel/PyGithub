@@ -27,6 +27,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.Commit.Status.creator`
       * :attr:`.Commit.author`
       * :attr:`.Commit.committer`
+      * :attr:`.CommitComment.user`
       * :attr:`.Gist.Commit.user`
       * :attr:`.Gist.HistoryElement.user`
       * :attr:`.Gist.owner`
@@ -37,10 +38,12 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.Issue.assignee`
       * :attr:`.Issue.closed_by`
       * :attr:`.Issue.user`
+      * :attr:`.IssueComment.user`
       * :attr:`.Milestone.creator`
       * :meth:`.Organization.get_members`
       * :meth:`.Organization.get_public_members`
       * :attr:`.PagesBuild.pusher`
+      * :attr:`.PullComment.user`
       * :attr:`.PullRequest.End.user`
       * :attr:`.PullRequest.assignee`
       * :attr:`.PullRequest.merged_by`

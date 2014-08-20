@@ -58,6 +58,16 @@ methods:
       - name: labels
         value: parameter label
     return_type: none
+  - name: create_issue_comment
+    end_point: POST /repos/:owner/:repo/issues/:number/comments
+    parameters:
+      - name: body
+        type: string
+    url_template: attribute comments_url
+    post_arguments:
+      - name: body
+        value: parameter body
+    return_type: IssueComment
   - name: create_pull
     end_point: POST /repos/:owner/:repo/pulls
     parameters:
@@ -128,6 +138,12 @@ methods:
         value: parameter title
     effect: update
     return_type: none
+  - name: get_issue_comments
+    end_point: GET /repos/:owner/:repo/issues/:number/comments
+    url_template: attribute comments_url
+    return_type:
+      container: PaginatedList
+      content: IssueComment
   - name: get_labels
     end_point: GET /repos/:owner/:repo/issues/:number/labels
     url_template: attribute labels_url

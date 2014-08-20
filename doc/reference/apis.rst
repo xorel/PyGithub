@@ -634,28 +634,32 @@ GET /repos/:owner/:repo/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#list-commit-comments-for-a-repository>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_commit_comments`
 
 DELETE /repos/:owner/:repo/comments/:id
 ---------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#delete-a-commit-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.CommitComment.delete`
 
 GET /repos/:owner/:repo/comments/:id
 ------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#get-a-single-commit-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_commit_comment`
 
 PATCH /repos/:owner/:repo/comments/:id
 --------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#update-a-commit-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.CommitComment.edit`
 
 GET /repos/:owner/:repo/commits
 -------------------------------
@@ -670,7 +674,8 @@ GET /repos/:owner/:repo/commits/:ref/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#list-comments-for-a-single-commit>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Commit.get_commit_comments`
 
 GET /repos/:owner/:repo/commits/:ref/status
 -------------------------------------------
@@ -700,7 +705,8 @@ POST /repos/:owner/:repo/commits/:sha/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/comments#create-a-commit-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Commit.create_commit_comment`
 
 GET /repos/:owner/:repo/compare/:base...:head
 ---------------------------------------------
@@ -993,14 +999,16 @@ GET /repos/:owner/:repo/issues/:number/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#list-comments-on-an-issue>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Issue.get_issue_comments`
 
 POST /repos/:owner/:repo/issues/:number/comments
 ------------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#create-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Issue.create_issue_comment`
 
 DELETE /repos/:owner/:repo/issues/:number/labels
 ------------------------------------------------
@@ -1047,28 +1055,32 @@ GET /repos/:owner/:repo/issues/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#list-comments-in-a-repository>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_issue_comments`
 
 DELETE /repos/:owner/:repo/issues/comments/:id
 ----------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#delete-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.IssueComment.delete`
 
 GET /repos/:owner/:repo/issues/comments/:id
 -------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#get-a-single-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_issue_comment`
 
 PATCH /repos/:owner/:repo/issues/comments/:id
 ---------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/issues/comments#edit-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.IssueComment.edit`
 
 GET /repos/:owner/:repo/issues/events
 -------------------------------------
@@ -1294,14 +1306,16 @@ GET /repos/:owner/:repo/pulls/:number/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#list-comments-on-a-pull-request>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.PullRequest.get_pull_comments`
 
 POST /repos/:owner/:repo/pulls/:number/comments
 -----------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#create-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.PullRequest.create_pull_comment`
 
 GET /repos/:owner/:repo/pulls/:number/commits
 ---------------------------------------------
@@ -1340,28 +1354,32 @@ GET /repos/:owner/:repo/pulls/comments
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#list-comments-in-a-repository>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_pull_comments`
 
 DELETE /repos/:owner/:repo/pulls/comments/:number
 -------------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#delete-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.PullComment.delete`
 
 GET /repos/:owner/:repo/pulls/comments/:number
 ----------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#get-a-single-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_pull_comment`
 
 PATCH /repos/:owner/:repo/pulls/comments/:number
 ------------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/pulls/comments#edit-a-comment>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.PullComment.edit`
 
 GET /repos/:owner/:repo/readme
 ------------------------------

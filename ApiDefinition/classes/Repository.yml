@@ -654,6 +654,31 @@ methods:
       - name: sha
         value: parameter sha
     return_type: Commit
+  - name: get_commit_comment
+    end_point: GET /repos/:owner/:repo/comments/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: id
+        value: parameter id
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: CommitComment
+  - name: get_commit_comments
+    end_point: GET /repos/:owner/:repo/comments
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      container: PaginatedList
+      content: CommitComment
   - name: get_commits
     end_point: GET /repos/:owner/:repo/commits
     optional_parameters:
@@ -821,6 +846,49 @@ methods:
       - name: number
         value: parameter number
     return_type: Issue
+  - name: get_issue_comment
+    end_point: GET /repos/:owner/:repo/issues/comments/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: id
+        value: parameter id
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      container: PaginatedList
+      content: IssueComment
+  - name: get_issue_comments
+    end_point: GET /repos/:owner/:repo/issues/comments
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [created, updated]
+      - name: direction
+        type:
+          enum: [asc, desc]
+      - name: since
+        type: datetime
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    url_arguments:
+      - name: direction
+        value: parameter direction
+      - name: since
+        value: parameter since
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: PaginatedList
+      content: IssueComment
   - name: get_issues
     end_point: GET /repos/:owner/:repo/issues
     optional_parameters:
@@ -993,6 +1061,47 @@ methods:
       - name: number
         value: parameter number
     return_type: PullRequest
+  - name: get_pull_comment
+    end_point: GET /repos/:owner/:repo/pulls/comments/:number
+    parameters:
+      - name: number
+        type: int
+    url_template: end_point
+    url_template_arguments:
+      - name: number
+        value: parameter number
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: PullComment
+  - name: get_pull_comments
+    end_point: GET /repos/:owner/:repo/pulls/comments
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [created, updated]
+      - name: direction
+        type:
+          enum: [asc, desc]
+      - name: since
+        type: datetime
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    url_arguments:
+      - name: direction
+        value: parameter direction
+      - name: since
+        value: parameter since
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: PaginatedList
+      content: PullComment
   - name: get_pulls
     end_point: GET /repos/:owner/:repo/pulls
     optional_parameters:
