@@ -285,6 +285,24 @@ class Issue(_bgo.UpdatableGithubObject):
         postArguments = label
         r = self.Session._request("POST", url, postArguments=postArguments)
 
+    def create_issue_comment(self, body):
+        """
+        Calls the `POST /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments#create-a-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param body: mandatory :class:`string`
+        :rtype: :class:`~.IssueComment.IssueComment`
+        """
+        import PyGithub.Blocking.IssueComment
+
+        body = _snd.normalizeString(body)
+
+        url = uritemplate.expand(self.comments_url)
+        postArguments = _snd.dictionary(body=body)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.IssueComment.IssueComment(self.Session, r.json(), r.headers.get("ETag"))
+
     def create_pull(self, head, base):
         """
         Calls the `POST /repos/:owner/:repo/pulls <http://developer.github.com/v3/pulls#create-a-pull-request>`__ end point.
@@ -338,6 +356,27 @@ class Issue(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(assignee=assignee, body=body, labels=labels, milestone=milestone, state=state, title=title)
         r = self.Session._request("PATCH", url, postArguments=postArguments)
         self._updateAttributes(r.headers.get("ETag"), **r.json())
+
+    def get_issue_comments(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments#list-comments-on-an-issue>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.IssueComment.IssueComment`
+        """
+        import PyGithub.Blocking.IssueComment
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.comments_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.IssueComment.IssueComment, self.Session, r)
 
     def get_labels(self):
         """

@@ -35,6 +35,33 @@ class CommitAttributes(TestCase):
         self.assertEqual(c.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/commits/db09e03a13f7910b9cae93ca91cd35800e15c695")
 
 
+class CommitComments(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "commit-comments")
+        commit = repo.get_commits()[0]
+        commit.create_commit_comment("a", "README.md", 1)
+        self.pause()
+        commit.create_commit_comment("b", "README.md", 1)
+        self.pause()
+        return Data(sha=commit.sha)
+
+    def testGetCommitComments(self):
+        c = self.electra.get_repo(("electra", "commit-comments")).get_commit(self.data.sha)
+        comments = c.get_commit_comments()
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testGetCommitComments_allParameters(self):
+        c = self.electra.get_repo(("electra", "commit-comments")).get_commit(self.data.sha)
+        comments = c.get_commit_comments(per_page=1)
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testCreateCommitComment(self):
+        c = self.electra.get_repo(("electra", "commit-comments")).get_commit(self.data.sha)
+        c = c.create_commit_comment("c", "README.md", 1)
+        self.assertEqual(c.body, "c")
+        c.delete()
+
+
 class CommitStatuses(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "commit-statuses")

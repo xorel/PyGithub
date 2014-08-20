@@ -1,0 +1,363 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/commit-comment-delete",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "archive_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/{archive_format}{/ref}",
+                "assignees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/assignees{/user}",
+                "blobs_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/blobs{/sha}",
+                "branches_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/branches{/branch}",
+                "clone_url": "http://github.home.jacquev6.net/electra/commit-comment-delete.git",
+                "collaborators_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/collaborators{/collaborator}",
+                "comments_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/comments{/number}",
+                "commits_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/commits{/sha}",
+                "compare_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/compare/{base}...{head}",
+                "contents_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/contents/{+path}",
+                "contributors_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/contributors",
+                "created_at": "2014-08-20T03:34:18Z",
+                "default_branch": "master",
+                "description": null,
+                "downloads_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/downloads",
+                "events_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/events",
+                "fork": false,
+                "forks": 0,
+                "forks_count": 0,
+                "forks_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/forks",
+                "full_name": "electra/commit-comment-delete",
+                "git_commits_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/commits{/sha}",
+                "git_refs_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/refs{/sha}",
+                "git_tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/tags{/sha}",
+                "git_url": "git://github.home.jacquev6.net/electra/commit-comment-delete.git",
+                "has_downloads": true,
+                "has_issues": true,
+                "has_wiki": true,
+                "homepage": null,
+                "hooks_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/hooks",
+                "html_url": "http://github.home.jacquev6.net/electra/commit-comment-delete",
+                "id": 181,
+                "issue_comment_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/issues/comments/{number}",
+                "issue_events_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/issues/events{/number}",
+                "issues_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/issues{/number}",
+                "keys_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/keys{/key_id}",
+                "labels_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/labels{/name}",
+                "language": null,
+                "languages_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/languages",
+                "merges_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/merges",
+                "milestones_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/milestones{/number}",
+                "mirror_url": null,
+                "name": "commit-comment-delete",
+                "network_count": 0,
+                "notifications_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/notifications{?since,all,participating}",
+                "open_issues": 0,
+                "open_issues_count": 0,
+                "owner": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                    "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                    "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                    "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                    "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                    "html_url": "http://github.home.jacquev6.net/electra",
+                    "id": 16,
+                    "login": "electra",
+                    "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                    "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                    "site_admin": false,
+                    "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                    "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                    "type": "User",
+                    "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                },
+                "permissions": {
+                    "admin": true,
+                    "pull": true,
+                    "push": true
+                },
+                "private": false,
+                "pulls_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/pulls{/number}",
+                "pushed_at": "2014-08-20T03:34:18Z",
+                "releases_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/releases{/id}",
+                "size": 0,
+                "ssh_url": "git@github.home.jacquev6.net:electra/commit-comment-delete.git",
+                "stargazers_count": 0,
+                "stargazers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/stargazers",
+                "statuses_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/statuses/{sha}",
+                "subscribers_count": 1,
+                "subscribers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/subscribers",
+                "subscription_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/subscription",
+                "svn_url": "http://github.home.jacquev6.net/electra/commit-comment-delete",
+                "tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/tags",
+                "teams_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/teams",
+                "trees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/trees{/sha}",
+                "updated_at": "2014-08-20T03:34:18Z",
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete",
+                "watchers": 0,
+                "watchers_count": 0
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "5916",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Wed, 20 Aug 2014 03:36:52 GMT",
+                "etag": "\"d21a390d180b40c2109848340ea14688\"",
+                "last-modified": "Wed, 20 Aug 2014 03:34:18 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "d9b5cc45-e957-4f77-974b-c3103abc2fbc",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/commit-comment-delete/commits",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": [
+                {
+                    "author": {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                        "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                        "html_url": "http://github.home.jacquev6.net/electra",
+                        "id": 16,
+                        "login": "electra",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                        "site_admin": false,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                    },
+                    "comments_url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/commits/04f0edc21d3a5ef4dfd771f749971bcffa3026d8/comments",
+                    "commit": {
+                        "author": {
+                            "date": "2014-08-20T03:34:18Z",
+                            "email": "ghe-electra@jacquev6.net",
+                            "name": "Electra"
+                        },
+                        "comment_count": 0,
+                        "committer": {
+                            "date": "2014-08-20T03:34:18Z",
+                            "email": "ghe-electra@jacquev6.net",
+                            "name": "Electra"
+                        },
+                        "message": "Initial commit",
+                        "tree": {
+                            "sha": "03a1b548c4a48ecc3c961438c36df9b6bff83802",
+                            "url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/trees/03a1b548c4a48ecc3c961438c36df9b6bff83802"
+                        },
+                        "url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/git/commits/04f0edc21d3a5ef4dfd771f749971bcffa3026d8"
+                    },
+                    "committer": {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                        "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                        "html_url": "http://github.home.jacquev6.net/electra",
+                        "id": 16,
+                        "login": "electra",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                        "site_admin": false,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                    },
+                    "html_url": "http://github.home.jacquev6.net/electra/commit-comment-delete/commit/04f0edc21d3a5ef4dfd771f749971bcffa3026d8",
+                    "parents": [],
+                    "sha": "04f0edc21d3a5ef4dfd771f749971bcffa3026d8",
+                    "url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/commits/04f0edc21d3a5ef4dfd771f749971bcffa3026d8"
+                }
+            ],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "3242",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Wed, 20 Aug 2014 03:36:53 GMT",
+                "etag": "\"d21a390d180b40c2109848340ea14688\"",
+                "last-modified": "Wed, 20 Aug 2014 03:34:18 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "f8a9f629-c361-4996-b121-0f3cd2a98cda",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": {
+                "body": "ephemeral",
+                "path": "README.md",
+                "position": 1
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "57",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/commit-comment-delete/commits/04f0edc21d3a5ef4dfd771f749971bcffa3026d8/comments",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "POST"
+        },
+        "response": {
+            "body": {
+                "body": "ephemeral",
+                "body_html": "<p>ephemeral</p>",
+                "body_text": "ephemeral",
+                "commit_id": "04f0edc21d3a5ef4dfd771f749971bcffa3026d8",
+                "created_at": "2014-08-20T03:36:53Z",
+                "html_url": "http://github.home.jacquev6.net/electra/commit-comment-delete/commit/04f0edc21d3a5ef4dfd771f749971bcffa3026d8#commitcomment-12",
+                "id": 12,
+                "line": null,
+                "path": "README.md",
+                "position": 1,
+                "updated_at": "2014-08-20T03:36:53Z",
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/comments/12",
+                "user": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                    "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                    "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                    "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                    "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                    "html_url": "http://github.home.jacquev6.net/electra",
+                    "id": 16,
+                    "login": "electra",
+                    "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                    "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                    "site_admin": false,
+                    "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                    "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                    "type": "User",
+                    "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                }
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "1585",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Wed, 20 Aug 2014 03:36:53 GMT",
+                "etag": "\"4456503893de79479a61c7ca2105603f\"",
+                "location": "http://github.home.jacquev6.net/api/v3/repos/electra/commit-comment-delete/comments/12",
+                "server": "GitHub.com",
+                "status": "201 Created",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "d3c3ad33-dcf8-40cf-8c2e-0671d6b20343",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 201
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "0",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/commit-comment-delete/comments/12",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "DELETE"
+        },
+        "response": {
+            "body": "",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-security-policy": "default-src 'none'",
+                "date": "Wed, 20 Aug 2014 03:36:58 GMT",
+                "server": "GitHub.com",
+                "status": "204 No Content",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "322e6ac8-933a-4ece-90a3-3922ebd38d96",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 204
+        }
+    }
+]

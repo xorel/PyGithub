@@ -50,6 +50,34 @@ class IssueAttributes(TestCase):
         self.assertEqual(i.pull_request.url, "http://github.home.jacquev6.net/api/v3/repos/electra/pulls/pulls/1")
 
 
+class IssueComments(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "issue-comments")
+        i = repo.create_issue("comments")
+        self.pause()
+        i.create_issue_comment("a")
+        self.pause()
+        i.create_issue_comment("b")
+        self.pause()
+        return Data()
+
+    def testGetIssueComments(self):
+        i = self.electra.get_repo(("electra", "issue-comments")).get_issue(1)
+        comments = i.get_issue_comments()
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testGetIssueComments_allParameters(self):
+        i = self.electra.get_repo(("electra", "issue-comments")).get_issue(1)
+        comments = i.get_issue_comments(per_page=1)
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testCreateIssueComment(self):
+        i = self.electra.get_repo(("electra", "issue-comments")).get_issue(1)
+        c = i.create_issue_comment("c")
+        self.assertEqual(c.body, "c")
+        c.delete()
+
+
 class IssueEdit(TestCase):
     def testTitle(self):
         i = self.electra.get_repo(("electra", "issues")).get_issue(3)

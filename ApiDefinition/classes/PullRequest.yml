@@ -120,6 +120,33 @@ deprecated_attributes:
   - name: _links
     reason: todoAlpha What should we do with _links?
 methods:
+  - name: create_pull_comment
+    end_point: POST /repos/:owner/:repo/pulls/:number/comments
+    parameters:
+      - name: body
+        type: string
+      - name: commit_id
+        type:
+          class: Commit
+          attribute: sha
+      - name: path
+        type: string
+      - name: position
+        type: int
+    unimplemented_parameters:
+      - name: in_reply_to
+        reason: Never managed to make it work https://github.com/jacquev6/PyGithub/issues/37
+    url_template: attribute review_comments_url
+    post_arguments:
+      - name: body
+        value: parameter body
+      - name: commit_id
+        value: parameter commit_id
+      - name: path
+        value: parameter path
+      - name: position
+        value: parameter position
+    return_type: PullComment
   - name: edit
     end_point: PATCH /repos/:owner/:repo/pulls/:number
     optional_parameters:
@@ -176,6 +203,12 @@ methods:
     end_point: GET /repos/:owner/:repo/issues/:number
     url_template: attribute issue_url
     return_type: Issue
+  - name: get_pull_comments
+    end_point: GET /repos/:owner/:repo/pulls/:number/comments
+    url_template: attribute review_comments_url
+    return_type:
+      container: PaginatedList
+      content: PullComment
   - name: merge
     end_point: PUT /repos/:owner/:repo/pulls/:number/merge
     optional_parameters:

@@ -27,7 +27,8 @@ class Commit(_bgo.UpdatableGithubObject):
       * :meth:`.Repository.get_commit`
       * :meth:`.Repository.get_commits`
 
-    Methods accepting instances of this class as parameter: none.
+    Methods accepting instances of this class as parameter:
+      * :meth:`.PullRequest.create_pull_comment`
     """
 
     class File(_bgo.SessionedGithubObject):
@@ -357,6 +358,28 @@ class Commit(_bgo.UpdatableGithubObject):
         """
         return self._url
 
+    def create_commit_comment(self, body, path, position):
+        """
+        Calls the `POST /repos/:owner/:repo/commits/:sha/comments <http://developer.github.com/v3/repos/comments#create-a-commit-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param body: mandatory :class:`string`
+        :param path: mandatory :class:`string`
+        :param position: mandatory :class:`int`
+        :rtype: :class:`~.CommitComment.CommitComment`
+        """
+        import PyGithub.Blocking.CommitComment
+
+        body = _snd.normalizeString(body)
+        path = _snd.normalizeString(path)
+        position = _snd.normalizeInt(position)
+
+        url = uritemplate.expand(self.comments_url)
+        postArguments = _snd.dictionary(body=body, path=path, position=position)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.CommitComment.CommitComment(self.Session, r.json(), r.headers.get("ETag"))
+
     def create_status(self, state, target_url=None, description=None):
         """
         Calls the `POST /repos/:owner/:repo/statuses/:sha <http://developer.github.com/v3/repos/statuses#create-a-status>`__ end point.
@@ -379,6 +402,27 @@ class Commit(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(description=description, state=state, target_url=target_url)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return Commit.Status(self.Session, r.json())
+
+    def get_commit_comments(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/commits/:ref/comments <http://developer.github.com/v3/repos/comments#list-comments-for-a-single-commit>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.CommitComment.CommitComment`
+        """
+        import PyGithub.Blocking.CommitComment
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.comments_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.CommitComment.CommitComment, self.Session, r)
 
     def get_statuses(self, per_page=None):
         """

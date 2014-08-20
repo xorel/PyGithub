@@ -97,6 +97,75 @@ class RepositoryAttributes(TestCase):
         self.assertIsInstance(r.source.owner, PyGithub.Blocking.User.User)
 
 
+class RepositoryComments(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-comments")
+
+        i = repo.create_issue("issue-comments")
+        self.pause()
+        ic = i.create_issue_comment("a")
+        i.create_issue_comment("b")
+        self.pause()
+
+        repo.create_git_ref("refs/heads/release", repo.get_git_ref("heads/master").object.sha)
+        c = repo.get_readme().edit("Merge this", content="WWVhaCEgU28gZ29vZCE=")
+        p = repo.create_pull("pull-comments", "electra:master", "release")
+        pc = p.create_pull_comment("c", c.sha, "README.md", 1)
+        p.create_pull_comment("d", c.sha, "README.md", 1)
+
+        commit = repo.get_commits()[0]
+        cc = commit.create_commit_comment("e", "README.md", 1)
+        commit.create_commit_comment("f", "README.md", 1)
+        self.pause()
+
+        return Data(icId=ic.id, pcId=pc.id, ccId=cc.id)
+
+    def testGetCommitComment(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        c = r.get_commit_comment(self.data.ccId)
+        self.assertEqual(c.body, "e")
+
+    def testGetCommitComments(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_commit_comments()
+        self.assertEqual([c.body for c in comments], ["e", "f"])
+
+    def testGetCommitComments_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_commit_comments(per_page=1)
+        self.assertEqual([c.body for c in comments], ["e", "f"])
+
+    def testGetPullComment(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        c = r.get_pull_comment(self.data.pcId)
+        self.assertEqual(c.body, "c")
+
+    def testGetPullComments(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_pull_comments()
+        self.assertEqual([c.body for c in comments], ["c", "d"])
+
+    def testGetPullComments_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_pull_comments(sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
+        self.assertEqual([c.body for c in comments], ["c", "d"])
+
+    def testGetIssueComment(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        c = r.get_issue_comment(self.data.icId)
+        self.assertEqual(c.body, "a")
+
+    def testGetIssueComments(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_issue_comments()
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+    def testGetIssueComments_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-comments"))
+        comments = r.get_issue_comments(sort="created", direction="desc", since=datetime.datetime(2014, 1, 1, 0, 0, 0), per_page=1)
+        self.assertEqual([c.body for c in comments], ["a", "b"])
+
+
 class RepositoryContents(TestCase):
     # @todoAlpha Allow methods in inner structs: Repository.Dir needs get_contents
     #   methods:

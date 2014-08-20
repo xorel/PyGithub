@@ -72,6 +72,29 @@ attributes:
   - name: stats
     type: Commit.Stats
 methods:
+  - name: create_commit_comment
+    end_point: POST /repos/:owner/:repo/commits/:sha/comments
+    parameters:
+      - name: body
+        type: string
+      - name: path
+        type: string
+      - name: position
+        type: int
+    unimplemented_parameters:
+      - name: line
+        reason: Deprecated https://developer.github.com/v3/repos/comments/#create-a-commit-comment
+      - name: sha
+        reason: Taken from attribute url
+    url_template: attribute comments_url
+    post_arguments:
+      - name: body
+        value: parameter body
+      - name: path
+        value: parameter path
+      - name: position
+        value: parameter position
+    return_type: CommitComment
   - name: create_status
     end_point: POST /repos/:owner/:repo/statuses/:sha
     parameters:
@@ -95,6 +118,12 @@ methods:
       - name: target_url
         value: parameter target_url
     return_type: Commit.Status
+  - name: get_commit_comments
+    end_point: GET /repos/:owner/:repo/commits/:ref/comments
+    url_template: attribute comments_url
+    return_type:
+      container: PaginatedList
+      content: CommitComment
   - name: get_statuses
     end_point: GET /repos/:owner/:repo/commits/:ref/statuses
     unimplemented_parameters:

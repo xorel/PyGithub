@@ -592,6 +592,30 @@ class PullRequest(_bgo.UpdatableGithubObject):
         """
         return self._url
 
+    def create_pull_comment(self, body, commit_id, path, position):
+        """
+        Calls the `POST /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments#create-a-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param body: mandatory :class:`string`
+        :param commit_id: mandatory :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :param path: mandatory :class:`string`
+        :param position: mandatory :class:`int`
+        :rtype: :class:`~.PullComment.PullComment`
+        """
+        import PyGithub.Blocking.PullComment
+
+        body = _snd.normalizeString(body)
+        commit_id = _snd.normalizeCommitSha(commit_id)
+        path = _snd.normalizeString(path)
+        position = _snd.normalizeInt(position)
+
+        url = uritemplate.expand(self.review_comments_url)
+        postArguments = _snd.dictionary(body=body, commit_id=commit_id, path=path, position=position)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.PullComment.PullComment(self.Session, r.json(), r.headers.get("ETag"))
+
     def edit(self, title=None, body=None, state=None):
         """
         Calls the `PATCH /repos/:owner/:repo/pulls/:number <http://developer.github.com/v3/pulls#update-a-pull-request>`__ end point.
@@ -670,6 +694,27 @@ class PullRequest(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.issue_url)
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_pull_comments(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments#list-comments-on-a-pull-request>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.PullComment.PullComment`
+        """
+        import PyGithub.Blocking.PullComment
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.review_comments_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.PullComment.PullComment, self.Session, r)
 
     def merge(self, commit_message=None):
         """

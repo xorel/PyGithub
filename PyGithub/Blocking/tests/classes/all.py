@@ -10,6 +10,7 @@ from PyGithub.Blocking.tests.classes.AssetTestCases import *
 from PyGithub.Blocking.tests.classes.AuthenticatedUserTestCases import *
 from PyGithub.Blocking.tests.classes.AuthorizationTestCases import *
 from PyGithub.Blocking.tests.classes.CommitTestCases import *
+from PyGithub.Blocking.tests.classes.CommitCommentTestCases import *
 from PyGithub.Blocking.tests.classes.ContributorTestCases import *
 from PyGithub.Blocking.tests.classes.FileTestCases import *
 from PyGithub.Blocking.tests.classes.GistTestCases import *
@@ -21,12 +22,14 @@ from PyGithub.Blocking.tests.classes.GitTagTestCases import *
 from PyGithub.Blocking.tests.classes.GitTreeTestCases import *
 from PyGithub.Blocking.tests.classes.GithubTestCases import *
 from PyGithub.Blocking.tests.classes.IssueTestCases import *
+from PyGithub.Blocking.tests.classes.IssueCommentTestCases import *
 from PyGithub.Blocking.tests.classes.LabelTestCases import *
 from PyGithub.Blocking.tests.classes.MilestoneTestCases import *
 from PyGithub.Blocking.tests.classes.OrganizationTestCases import *
 from PyGithub.Blocking.tests.classes.PagesBuildTestCases import *
 from PyGithub.Blocking.tests.classes.PagesInformationTestCases import *
 from PyGithub.Blocking.tests.classes.PublicKeyTestCases import *
+from PyGithub.Blocking.tests.classes.PullCommentTestCases import *
 from PyGithub.Blocking.tests.classes.PullRequestTestCases import *
 from PyGithub.Blocking.tests.classes.ReleaseTestCases import *
 from PyGithub.Blocking.tests.classes.RepositoryTestCases import *

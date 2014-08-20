@@ -20,6 +20,16 @@ def dictionary(**args):
     return d
 
 
+def normalizeCommitSha(commit):
+    import PyGithub.Blocking.Commit
+    if isinstance(commit, PyGithub.Blocking.Commit.Commit):
+        return commit.sha
+    elif isinstance(commit, basestring):
+        return commit
+    else:
+        raise TypeError()
+
+
 def normalizeGistId(gist):
     import PyGithub.Blocking.Gist
     if isinstance(gist, PyGithub.Blocking.Gist.Gist):

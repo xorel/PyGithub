@@ -1451,6 +1451,44 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Commit.Commit(self.Session, r.json(), r.headers.get("ETag"))
 
+    def get_commit_comment(self, id):
+        """
+        Calls the `GET /repos/:owner/:repo/comments/:id <http://developer.github.com/v3/repos/comments#get-a-single-commit-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.CommitComment.CommitComment`
+        """
+        import PyGithub.Blocking.CommitComment
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/comments/{id}", id=str(id), owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.CommitComment.CommitComment(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_commit_comments(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/comments <http://developer.github.com/v3/repos/comments#list-commit-comments-for-a-repository>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.CommitComment.CommitComment`
+        """
+        import PyGithub.Blocking.CommitComment
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/comments", owner=self.owner.login, repo=self.name)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.CommitComment.CommitComment, self.Session, r)
+
     def get_commits(self, sha=None, path=None, author=None, since=None, until=None, per_page=None):
         """
         Calls the `GET /repos/:owner/:repo/commits <http://developer.github.com/v3/repos/commits#list-commits-on-a-repository>`__ end point.
@@ -1684,6 +1722,53 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Issue.Issue(self.Session, r.json(), r.headers.get("ETag"))
 
+    def get_issue_comment(self, id):
+        """
+        Calls the `GET /repos/:owner/:repo/issues/comments/:id <http://developer.github.com/v3/issues/comments#get-a-single-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.IssueComment.IssueComment`
+        """
+        import PyGithub.Blocking.IssueComment
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/issues/comments/{id}", id=str(id), owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.IssueComment.IssueComment(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_issue_comments(self, sort=None, direction=None, since=None, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/issues/comments <http://developer.github.com/v3/issues/comments#list-comments-in-a-repository>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param sort: optional "created" or "updated"
+        :param direction: optional "asc" or "desc"
+        :param since: optional :class:`datetime`
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.IssueComment.IssueComment`
+        """
+        import PyGithub.Blocking.IssueComment
+
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "created", "updated")
+        if direction is not None:
+            direction = _snd.normalizeEnum(direction, "asc", "desc")
+        if since is not None:
+            since = _snd.normalizeDatetime(since)
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/issues/comments", owner=self.owner.login, repo=self.name)
+        urlArguments = _snd.dictionary(direction=direction, per_page=per_page, since=since, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.IssueComment.IssueComment, self.Session, r)
+
     def get_issues(self, milestone=None, state=None, assignee=None, creator=None, mentioned=None, labels=None, sort=None, direction=None, since=None, per_page=None):
         """
         Calls the `GET /repos/:owner/:repo/issues <http://developer.github.com/v3/issues#list-issues-for-a-repository>`__ end point.
@@ -1906,6 +1991,53 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand(self.pulls_url, number=str(number))
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.PullRequest.PullRequest(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_pull_comment(self, number):
+        """
+        Calls the `GET /repos/:owner/:repo/pulls/comments/:number <http://developer.github.com/v3/pulls/comments#get-a-single-comment>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param number: mandatory :class:`int`
+        :rtype: :class:`~.PullComment.PullComment`
+        """
+        import PyGithub.Blocking.PullComment
+
+        number = _snd.normalizeInt(number)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/comments/{number}", number=str(number), owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.PullComment.PullComment(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_pull_comments(self, sort=None, direction=None, since=None, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/pulls/comments <http://developer.github.com/v3/pulls/comments#list-comments-in-a-repository>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param sort: optional "created" or "updated"
+        :param direction: optional "asc" or "desc"
+        :param since: optional :class:`datetime`
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.PullComment.PullComment`
+        """
+        import PyGithub.Blocking.PullComment
+
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "created", "updated")
+        if direction is not None:
+            direction = _snd.normalizeEnum(direction, "asc", "desc")
+        if since is not None:
+            since = _snd.normalizeDatetime(since)
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/pulls/comments", owner=self.owner.login, repo=self.name)
+        urlArguments = _snd.dictionary(direction=direction, per_page=per_page, since=since, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.PullComment.PullComment, self.Session, r)
 
     def get_pulls(self, state=None, head=None, base=None, sort=None, direction=None, per_page=None):
         """
