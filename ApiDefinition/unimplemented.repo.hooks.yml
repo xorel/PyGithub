@@ -1,13 +1,2 @@
 /hub:
   - POST
-/repos/:owner/:repo/hooks:
-  - GET
-  - POST
-/repos/:owner/:repo/hooks/:id:
-  - DELETE
-  - GET
-  - PATCH
-/repos/:owner/:repo/hooks/:id/pings:
-  - POST
-/repos/:owner/:repo/hooks/:id/tests:
-  - POST

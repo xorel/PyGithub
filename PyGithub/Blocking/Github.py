@@ -60,7 +60,8 @@ class Github(_bgo.SessionedGithubObject):
           * :meth:`.Github.get_hook`
           * :meth:`.Github.get_hooks`
 
-        Methods accepting instances of this class as parameter: none.
+        Methods accepting instances of this class as parameter:
+          * :meth:`.Repository.create_hook`
         """
 
         def _initAttributes(self, events=None, name=None, schema=None, supported_events=None, title=None, **kwds):

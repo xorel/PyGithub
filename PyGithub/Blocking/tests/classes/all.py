@@ -21,6 +21,7 @@ from PyGithub.Blocking.tests.classes.GitRefTestCases import *
 from PyGithub.Blocking.tests.classes.GitTagTestCases import *
 from PyGithub.Blocking.tests.classes.GitTreeTestCases import *
 from PyGithub.Blocking.tests.classes.GithubTestCases import *
+from PyGithub.Blocking.tests.classes.HookTestCases import *
 from PyGithub.Blocking.tests.classes.IssueTestCases import *
 from PyGithub.Blocking.tests.classes.IssueCommentTestCases import *
 from PyGithub.Blocking.tests.classes.LabelTestCases import *

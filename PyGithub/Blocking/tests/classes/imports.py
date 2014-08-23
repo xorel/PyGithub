@@ -21,6 +21,7 @@ import PyGithub.Blocking.GitRef
 import PyGithub.Blocking.GitTag
 import PyGithub.Blocking.GitTree
 import PyGithub.Blocking.Github
+import PyGithub.Blocking.Hook
 import PyGithub.Blocking.Issue
 import PyGithub.Blocking.IssueComment
 import PyGithub.Blocking.Label

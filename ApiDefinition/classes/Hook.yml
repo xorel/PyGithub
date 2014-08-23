@@ -1,0 +1,49 @@
+attributes:
+  - name: udpated_at
+    type: datetime
+methods:
+  - name: delete
+    end_point: DELETE /repos/:owner/:repo/hooks/:id
+    url_template: attribute url
+    return_type: none
+  - name: edit
+    end_point: PATCH /repos/:owner/:repo/hooks/:id
+    optional_parameters:
+      - name: config
+        type: dict
+      - name: events
+        type:
+          container: list
+          content: string
+      - name: add_events
+        type:
+          container: list
+          content: string
+      - name: remove_events
+        type:
+          container: list
+          content: string
+      - name: active
+        type: bool
+    url_template: attribute url
+    post_arguments:
+      - name: active
+        value: parameter active
+      - name: add_events
+        value: parameter add_events
+      - name: config
+        value: parameter config
+      - name: events
+        value: parameter events
+      - name: remove_events
+        value: parameter remove_events
+    effect: update
+    return_type: none
+  - name: ping
+    end_point: POST /repos/:owner/:repo/hooks/:id/pings
+    url_template: end_point
+    return_type: none
+  - name: test
+    end_point: POST /repos/:owner/:repo/hooks/:id/tests
+    url_template: end_point
+    return_type: none

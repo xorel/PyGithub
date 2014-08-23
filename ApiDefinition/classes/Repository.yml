@@ -503,6 +503,33 @@ methods:
       - name: tree
         value: parameter tree
     return_type: GitTree
+  - name: create_hook
+    end_point: POST /repos/:owner/:repo/hooks
+    parameters:
+      - name: name
+        type:
+          class: Github.HookDescription
+          attribute: name
+      - name: config
+        type: dict
+    optional_parameters:
+      - name: events
+        type:
+          container: list
+          content: string
+      - name: active
+        type: bool
+    url_template: attribute hooks_url
+    post_arguments:
+      - name: active
+        value: parameter active
+      - name: config
+        value: parameter config
+      - name: events
+        value: parameter events
+      - name: name
+        value: parameter name
+    return_type: Hook
   - name: create_issue
     end_point: POST /repos/:owner/:repo/issues
     parameters:
@@ -942,6 +969,22 @@ methods:
       - name: sha
         value: parameter sha
     return_type: GitTree
+  - name: get_hook
+    end_point: GET /repos/:owner/:repo/hooks/:id
+    parameters:
+      - name: id
+        type: int
+    url_template: attribute hooks_url
+    url_template_arguments:
+      - name: id
+        value: parameter id
+    return_type: Hook
+  - name: get_hooks
+    end_point: GET /repos/:owner/:repo/hooks
+    url_template: attribute hooks_url
+    return_type:
+      container: PaginatedList
+      content: Hook
   - name: get_issue
     end_point: GET /repos/:owner/:repo/issues/:number
     parameters:
