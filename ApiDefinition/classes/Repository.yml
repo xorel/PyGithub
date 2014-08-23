@@ -122,6 +122,28 @@ structures:
         type: int
       - name: week
         type: datetime
+  - name: StatsContributor
+    updatable: false
+    attributes:
+      - name: author
+        type: User
+      - name: total
+        type: int
+      - name: weeks
+        type:
+          container: list
+          content: Repository.StatsContributorWeek
+  - name: StatsContributorWeek
+    updatable: false
+    attributes:
+      - name: a
+        type: int
+      - name: c
+        type: int
+      - name: d
+        type: int
+      - name: w
+        type: datetime
   - name: Tag
     updatable: false
     attributes:
@@ -1367,6 +1389,20 @@ methods:
         - none
         - container: list
           content: Repository.StatsCommitActivity
+  - name: get_stats_contributors
+    end_point: GET /repos/:owner/:repo/stats/contributors
+    doc: "This function will return None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content: Repository.StatsContributor
   - name: get_subscribers
     end_point: GET /repos/:owner/:repo/subscribers
     url_template: attribute subscribers_url

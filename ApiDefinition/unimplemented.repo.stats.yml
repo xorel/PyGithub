@@ -1,7 +1,5 @@
 /repos/:owner/:repo/stats/code_frequency:
   - GET
-/repos/:owner/:repo/stats/contributors:
-  - GET
 /repos/:owner/:repo/stats/participation:
   - GET
 /repos/:owner/:repo/stats/punch_card:

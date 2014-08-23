@@ -972,6 +972,7 @@ class RepositoryStats(TestCase):
         self.setUpTestRepo("electra", "repository-stats-empty", auto_init=False)
         r = self.setUpTestRepo("electra", "repository-stats-complete")
         r.get_stats_commit_activity()
+        r.get_stats_contributors()
         self.pause()
         return Data()
 
@@ -992,6 +993,30 @@ class RepositoryStats(TestCase):
         r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
         self.pause()
         s = r.get_stats_commit_activity()
+        self.assertEqual(s, [])
+        r.delete()
+
+    def testGetStatsContributors(self):
+        r = self.electra.get_repo(("electra", "repository-stats-complete"))
+        s = r.get_stats_contributors()
+        self.assertEqual(len(s), 1)
+        self.assertEqual(s[0].author.login, "electra")
+        self.assertEqual(s[0].total, 1)
+        self.assertEqual(len(s[0].weeks), 1)
+        self.assertEqual(s[0].weeks[0].a, 2)
+        self.assertEqual(s[0].weeks[0].c, 1)
+        self.assertEqual(s[0].weeks[0].d, 0)
+        self.assertEqual(s[0].weeks[0].w, datetime.datetime(2014, 8, 17, 0, 0, 0))
+
+    def testGetStatsContributorsOnEmptyRepo(self):
+        r = self.electra.get_repo(("electra", "repository-stats-empty"))
+        s = r.get_stats_contributors()
+        self.assertEqual(s, None)
+
+    def testGetStatsContributorsBeforeCaching(self):
+        r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
+        self.pause()
+        s = r.get_stats_contributors()
         self.assertEqual(s, [])
         r.delete()
 
