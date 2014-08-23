@@ -27,21 +27,142 @@ class Hook(_bgo.UpdatableGithubObject):
     Methods accepting instances of this class as parameter: none.
     """
 
-    def _initAttributes(self, udpated_at=_rcv.Absent, **kwds):
-        super(Hook, self)._initAttributes(**kwds)
-        self.__udpated_at = _rcv.Attribute("Hook.udpated_at", _rcv.DatetimeConverter, udpated_at)
+    class Response(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :attr:`.Hook.last_response`
 
-    def _updateAttributes(self, eTag, udpated_at=_rcv.Absent, **kwds):
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, code=None, message=None, status=None, **kwds):
+            super(Hook.Response, self)._initAttributes(**kwds)
+            self.__code = _rcv.Attribute("Hook.Response.code", _rcv.IntConverter, code)
+            self.__message = _rcv.Attribute("Hook.Response.message", _rcv.StringConverter, message)
+            self.__status = _rcv.Attribute("Hook.Response.status", _rcv.StringConverter, status)
+
+        def _updateAttributes(self, code=None, message=None, status=None, **kwds):
+            super(Hook.Response, self)._updateAttributes(**kwds)
+            self.__code.update(code)
+            self.__message.update(message)
+            self.__status.update(status)
+
+        @property
+        def code(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__code.value
+
+        @property
+        def message(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__message.value
+
+        @property
+        def status(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__status.value
+
+    def _initAttributes(self, active=_rcv.Absent, config=_rcv.Absent, created_at=_rcv.Absent, events=_rcv.Absent, id=_rcv.Absent, last_response=_rcv.Absent, name=_rcv.Absent, test_url=_rcv.Absent, updated_at=_rcv.Absent, **kwds):
+        super(Hook, self)._initAttributes(**kwds)
+        self.__active = _rcv.Attribute("Hook.active", _rcv.BoolConverter, active)
+        self.__config = _rcv.Attribute("Hook.config", _rcv.DictConverter(_rcv.StringConverter, _rcv.AnyConverter), config)
+        self.__created_at = _rcv.Attribute("Hook.created_at", _rcv.DatetimeConverter, created_at)
+        self.__events = _rcv.Attribute("Hook.events", _rcv.ListConverter(_rcv.StringConverter), events)
+        self.__id = _rcv.Attribute("Hook.id", _rcv.IntConverter, id)
+        self.__last_response = _rcv.Attribute("Hook.last_response", _rcv.StructureConverter(self.Session, Hook.Response), last_response)
+        self.__name = _rcv.Attribute("Hook.name", _rcv.StringConverter, name)
+        self.__test_url = _rcv.Attribute("Hook.test_url", _rcv.StringConverter, test_url)
+        self.__updated_at = _rcv.Attribute("Hook.updated_at", _rcv.DatetimeConverter, updated_at)
+
+    def _updateAttributes(self, eTag, active=_rcv.Absent, config=_rcv.Absent, created_at=_rcv.Absent, events=_rcv.Absent, id=_rcv.Absent, last_response=_rcv.Absent, name=_rcv.Absent, test_url=_rcv.Absent, updated_at=_rcv.Absent, **kwds):
         super(Hook, self)._updateAttributes(eTag, **kwds)
-        self.__udpated_at.update(udpated_at)
+        self.__active.update(active)
+        self.__config.update(config)
+        self.__created_at.update(created_at)
+        self.__events.update(events)
+        self.__id.update(id)
+        self.__last_response.update(last_response)
+        self.__name.update(name)
+        self.__test_url.update(test_url)
+        self.__updated_at.update(updated_at)
 
     @property
-    def udpated_at(self):
+    def active(self):
+        """
+        :type: :class:`bool`
+        """
+        self._completeLazily(self.__active.needsLazyCompletion)
+        return self.__active.value
+
+    @property
+    def config(self):
+        """
+        :type: :class:`dict` of :class:`string` to :class:`any`
+        """
+        self._completeLazily(self.__config.needsLazyCompletion)
+        return self.__config.value
+
+    @property
+    def created_at(self):
         """
         :type: :class:`datetime`
         """
-        self._completeLazily(self.__udpated_at.needsLazyCompletion)
-        return self.__udpated_at.value
+        self._completeLazily(self.__created_at.needsLazyCompletion)
+        return self.__created_at.value
+
+    @property
+    def events(self):
+        """
+        :type: :class:`list` of :class:`string`
+        """
+        self._completeLazily(self.__events.needsLazyCompletion)
+        return self.__events.value
+
+    @property
+    def id(self):
+        """
+        :type: :class:`int`
+        """
+        self._completeLazily(self.__id.needsLazyCompletion)
+        return self.__id.value
+
+    @property
+    def last_response(self):
+        """
+        :type: :class:`.Hook.Response`
+        """
+        self._completeLazily(self.__last_response.needsLazyCompletion)
+        return self.__last_response.value
+
+    @property
+    def name(self):
+        """
+        :type: :class:`string`
+        """
+        self._completeLazily(self.__name.needsLazyCompletion)
+        return self.__name.value
+
+    @property
+    def test_url(self):
+        """
+        :type: :class:`string`
+        """
+        self._completeLazily(self.__test_url.needsLazyCompletion)
+        return self.__test_url.value
+
+    @property
+    def updated_at(self):
+        """
+        :type: :class:`datetime`
+        """
+        self._completeLazily(self.__updated_at.needsLazyCompletion)
+        return self.__updated_at.value
 
     @property
     def url(self):

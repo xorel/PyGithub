@@ -9,3 +9,7 @@ Hook
 
 .. autoclass:: PyGithub.Blocking.Hook::Hook()
     :members:
+    :exclude-members: Response
+
+    .. autoclass:: PyGithub.Blocking.Hook::Hook.Response()
+        :members:

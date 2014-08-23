@@ -974,10 +974,14 @@ methods:
     parameters:
       - name: id
         type: int
-    url_template: attribute hooks_url
+    url_template: end_point
     url_template_arguments:
       - name: id
         value: parameter id
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
     return_type: Hook
   - name: get_hooks
     end_point: GET /repos/:owner/:repo/hooks

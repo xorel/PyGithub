@@ -1996,7 +1996,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         id = _snd.normalizeInt(id)
 
-        url = uritemplate.expand(self.hooks_url, id=str(id))
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/hooks/{id}", id=str(id), owner=self.owner.login, repo=self.name)
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Hook.Hook(self.Session, r.json(), r.headers.get("ETag"))
 
