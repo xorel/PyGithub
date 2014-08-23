@@ -538,3 +538,119 @@ class Github(_bgo.SessionedGithubObject):
         postArguments = _snd.dictionary(context=context, mode=mode, text=text)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return r.text
+
+    def search_code(self, q, sort=None, order=None, per_page=None):
+        """
+        Calls the `GET /search/code <http://developer.github.com/v3/search#search-code>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param q: mandatory :class:`string`
+        :param sort: optional "indexed"
+        :param order: optional "asc" or "desc"
+        :param per_page: optional :class:`int`
+        :rtype: :class:`~.SearchResult.SearchResult` of :class:`~.File.File`
+        """
+        import PyGithub.Blocking.File
+
+        q = _snd.normalizeString(q)
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "indexed")
+        if order is not None:
+            order = _snd.normalizeEnum(order, "asc", "desc")
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = "https://api.github.com/search/code"
+        urlArguments = _snd.dictionary(order=order, per_page=per_page, q=q, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.SearchResult(PyGithub.Blocking.File.File, self.Session, r)
+
+    def search_issues(self, q, sort=None, order=None, per_page=None):
+        """
+        Calls the `GET /search/issues <http://developer.github.com/v3/search#search-issues>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param q: mandatory :class:`string`
+        :param sort: optional "comments" or "created" or "updated"
+        :param order: optional "asc" or "desc"
+        :param per_page: optional :class:`int`
+        :rtype: :class:`~.SearchResult.SearchResult` of :class:`~.Issue.Issue`
+        """
+        import PyGithub.Blocking.Issue
+
+        q = _snd.normalizeString(q)
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "comments", "created", "updated")
+        if order is not None:
+            order = _snd.normalizeEnum(order, "asc", "desc")
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = "https://api.github.com/search/issues"
+        urlArguments = _snd.dictionary(order=order, per_page=per_page, q=q, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.SearchResult(PyGithub.Blocking.Issue.Issue, self.Session, r)
+
+    def search_repositories(self, q, sort=None, order=None, per_page=None):
+        """
+        Calls the `GET /search/repositories <http://developer.github.com/v3/search#search-repositories>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param q: mandatory :class:`string`
+        :param sort: optional "forks" or "stars" or "updated"
+        :param order: optional "asc" or "desc"
+        :param per_page: optional :class:`int`
+        :rtype: :class:`~.SearchResult.SearchResult` of :class:`~.Repository.Repository`
+        """
+        import PyGithub.Blocking.Repository
+
+        q = _snd.normalizeString(q)
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "forks", "stars", "updated")
+        if order is not None:
+            order = _snd.normalizeEnum(order, "asc", "desc")
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = "https://api.github.com/search/repositories"
+        urlArguments = _snd.dictionary(order=order, per_page=per_page, q=q, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.SearchResult(PyGithub.Blocking.Repository.Repository, self.Session, r)
+
+    def search_users(self, q, sort=None, order=None, per_page=None):
+        """
+        Calls the `GET /search/users <http://developer.github.com/v3/search#search-users>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param q: mandatory :class:`string`
+        :param sort: optional "followers" or "joined" or "repositories"
+        :param order: optional "asc" or "desc"
+        :param per_page: optional :class:`int`
+        :rtype: :class:`~.SearchResult.SearchResult` of :class:`~.User.User`
+        """
+        import PyGithub.Blocking.User
+
+        q = _snd.normalizeString(q)
+        if sort is not None:
+            sort = _snd.normalizeEnum(sort, "followers", "joined", "repositories")
+        if order is not None:
+            order = _snd.normalizeEnum(order, "asc", "desc")
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = "https://api.github.com/search/users"
+        urlArguments = _snd.dictionary(order=order, per_page=per_page, q=q, sort=sort)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.SearchResult(PyGithub.Blocking.User.User, self.Session, r)

@@ -22,6 +22,7 @@ class Issue(_bgo.UpdatableGithubObject):
     Methods and attributes returning instances of this class:
       * :meth:`.AuthenticatedUser.get_issues`
       * :meth:`.AuthenticatedUser.get_user_issues`
+      * :meth:`.Github.search_issues`
       * :meth:`.Organization.get_issues`
       * :meth:`.PullRequest.get_issue`
       * :meth:`.Repository.create_issue`
@@ -31,7 +32,7 @@ class Issue(_bgo.UpdatableGithubObject):
     Methods accepting instances of this class as parameter: none.
     """
 
-    def _initAttributes(self, assignee=_rcv.Absent, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, closed_at=_rcv.Absent, closed_by=_rcv.Absent, comments=_rcv.Absent, comments_url=_rcv.Absent, created_at=_rcv.Absent, events_url=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, labels=_rcv.Absent, labels_url=_rcv.Absent, milestone=_rcv.Absent, number=_rcv.Absent, pull_request=_rcv.Absent, repository=_rcv.Absent, state=_rcv.Absent, title=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
+    def _initAttributes(self, assignee=_rcv.Absent, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, closed_at=_rcv.Absent, closed_by=_rcv.Absent, comments=_rcv.Absent, comments_url=_rcv.Absent, created_at=_rcv.Absent, events_url=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, labels=_rcv.Absent, labels_url=_rcv.Absent, locked=_rcv.Absent, milestone=_rcv.Absent, number=_rcv.Absent, pull_request=_rcv.Absent, repository=_rcv.Absent, state=_rcv.Absent, title=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
         import PyGithub.Blocking.Label
         import PyGithub.Blocking.Milestone
         import PyGithub.Blocking.PullRequest
@@ -52,6 +53,7 @@ class Issue(_bgo.UpdatableGithubObject):
         self.__id = _rcv.Attribute("Issue.id", _rcv.IntConverter, id)
         self.__labels = _rcv.Attribute("Issue.labels", _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Label.Label)), labels)
         self.__labels_url = _rcv.Attribute("Issue.labels_url", _rcv.StringConverter, labels_url)
+        self.__locked = _rcv.Attribute("Issue.locked", _rcv.BoolConverter, locked)
         self.__milestone = _rcv.Attribute("Issue.milestone", _rcv.ClassConverter(self.Session, PyGithub.Blocking.Milestone.Milestone), milestone)
         self.__number = _rcv.Attribute("Issue.number", _rcv.IntConverter, number)
         self.__pull_request = _rcv.Attribute("Issue.pull_request", _rcv.ClassConverter(self.Session, PyGithub.Blocking.PullRequest.PullRequest), pull_request)
@@ -61,7 +63,7 @@ class Issue(_bgo.UpdatableGithubObject):
         self.__updated_at = _rcv.Attribute("Issue.updated_at", _rcv.DatetimeConverter, updated_at)
         self.__user = _rcv.Attribute("Issue.user", _rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User), user)
 
-    def _updateAttributes(self, eTag, assignee=_rcv.Absent, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, closed_at=_rcv.Absent, closed_by=_rcv.Absent, comments=_rcv.Absent, comments_url=_rcv.Absent, created_at=_rcv.Absent, events_url=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, labels=_rcv.Absent, labels_url=_rcv.Absent, milestone=_rcv.Absent, number=_rcv.Absent, pull_request=_rcv.Absent, repository=_rcv.Absent, state=_rcv.Absent, title=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
+    def _updateAttributes(self, eTag, assignee=_rcv.Absent, body=_rcv.Absent, body_html=_rcv.Absent, body_text=_rcv.Absent, closed_at=_rcv.Absent, closed_by=_rcv.Absent, comments=_rcv.Absent, comments_url=_rcv.Absent, created_at=_rcv.Absent, events_url=_rcv.Absent, html_url=_rcv.Absent, id=_rcv.Absent, labels=_rcv.Absent, labels_url=_rcv.Absent, locked=_rcv.Absent, milestone=_rcv.Absent, number=_rcv.Absent, pull_request=_rcv.Absent, repository=_rcv.Absent, state=_rcv.Absent, title=_rcv.Absent, updated_at=_rcv.Absent, user=_rcv.Absent, **kwds):
         super(Issue, self)._updateAttributes(eTag, **kwds)
         self.__assignee.update(assignee)
         self.__body.update(body)
@@ -77,6 +79,7 @@ class Issue(_bgo.UpdatableGithubObject):
         self.__id.update(id)
         self.__labels.update(labels)
         self.__labels_url.update(labels_url)
+        self.__locked.update(locked)
         self.__milestone.update(milestone)
         self.__number.update(number)
         self.__pull_request.update(pull_request)
@@ -197,6 +200,14 @@ class Issue(_bgo.UpdatableGithubObject):
         """
         self._completeLazily(self.__labels_url.needsLazyCompletion)
         return self.__labels_url.value
+
+    @property
+    def locked(self):
+        """
+        :type: :class:`bool`
+        """
+        self._completeLazily(self.__locked.needsLazyCompletion)
+        return self.__locked.value
 
     @property
     def milestone(self):

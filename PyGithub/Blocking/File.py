@@ -20,6 +20,7 @@ class File(_bgo.UpdatableGithubObject):
     Derived classes: none.
 
     Methods and attributes returning instances of this class:
+      * :meth:`.Github.search_code`
       * :attr:`.Repository.ContentCommit.content`
       * :meth:`.Repository.get_contents`
       * :meth:`.Repository.get_readme`
@@ -27,7 +28,8 @@ class File(_bgo.UpdatableGithubObject):
     Methods accepting instances of this class as parameter: none.
     """
 
-    def _initAttributes(self, content=_rcv.Absent, encoding=_rcv.Absent, git_url=_rcv.Absent, html_url=_rcv.Absent, name=_rcv.Absent, path=_rcv.Absent, sha=_rcv.Absent, size=_rcv.Absent, type=_rcv.Absent, _links=None, **kwds):
+    def _initAttributes(self, content=_rcv.Absent, encoding=_rcv.Absent, git_url=_rcv.Absent, html_url=_rcv.Absent, name=_rcv.Absent, path=_rcv.Absent, repository=_rcv.Absent, sha=_rcv.Absent, size=_rcv.Absent, type=_rcv.Absent, _links=None, **kwds):
+        import PyGithub.Blocking.Repository
         super(File, self)._initAttributes(**kwds)
         self.__content = _rcv.Attribute("File.content", _rcv.StringConverter, content)
         self.__encoding = _rcv.Attribute("File.encoding", _rcv.StringConverter, encoding)
@@ -35,11 +37,12 @@ class File(_bgo.UpdatableGithubObject):
         self.__html_url = _rcv.Attribute("File.html_url", _rcv.StringConverter, html_url)
         self.__name = _rcv.Attribute("File.name", _rcv.StringConverter, name)
         self.__path = _rcv.Attribute("File.path", _rcv.StringConverter, path)
+        self.__repository = _rcv.Attribute("File.repository", _rcv.ClassConverter(self.Session, PyGithub.Blocking.Repository.Repository), repository)
         self.__sha = _rcv.Attribute("File.sha", _rcv.StringConverter, sha)
         self.__size = _rcv.Attribute("File.size", _rcv.IntConverter, size)
         self.__type = _rcv.Attribute("File.type", _rcv.StringConverter, type)
 
-    def _updateAttributes(self, eTag, content=_rcv.Absent, encoding=_rcv.Absent, git_url=_rcv.Absent, html_url=_rcv.Absent, name=_rcv.Absent, path=_rcv.Absent, sha=_rcv.Absent, size=_rcv.Absent, type=_rcv.Absent, _links=None, **kwds):
+    def _updateAttributes(self, eTag, content=_rcv.Absent, encoding=_rcv.Absent, git_url=_rcv.Absent, html_url=_rcv.Absent, name=_rcv.Absent, path=_rcv.Absent, repository=_rcv.Absent, sha=_rcv.Absent, size=_rcv.Absent, type=_rcv.Absent, _links=None, **kwds):
         super(File, self)._updateAttributes(eTag, **kwds)
         self.__content.update(content)
         self.__encoding.update(encoding)
@@ -47,6 +50,7 @@ class File(_bgo.UpdatableGithubObject):
         self.__html_url.update(html_url)
         self.__name.update(name)
         self.__path.update(path)
+        self.__repository.update(repository)
         self.__sha.update(sha)
         self.__size.update(size)
         self.__type.update(type)
@@ -98,6 +102,14 @@ class File(_bgo.UpdatableGithubObject):
         """
         self._completeLazily(self.__path.needsLazyCompletion)
         return self.__path.value
+
+    @property
+    def repository(self):
+        """
+        :type: :class:`~.Repository.Repository`
+        """
+        self._completeLazily(self.__repository.needsLazyCompletion)
+        return self.__repository.value
 
     @property
     def sha(self):

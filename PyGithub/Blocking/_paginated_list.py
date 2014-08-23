@@ -73,11 +73,12 @@ class PaginatedList(object):
     See also :meth:`.Builder.PerPage`.
     """
 
-    # @todoAlpha CurrentLenght and IsComplete
+    # @todoAlpha CurrentElements IsComplete NumberOfPages?
+    # @todoAlpha Idem for SearchResult. Idealy we'd like to factorize those two classes
 
     def __init__(self, content, session, r):
-        self.__session = session
         self.__content = content
+        self.__session = session
         self.__elements = []
         self.__growWith(r)
 

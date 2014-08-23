@@ -20,7 +20,7 @@ def main(*args):
         typesRepo.register(CrossReferenced.BuiltinType(t))
     for t in ["Reset", "(string, string)", "GitAuthor"]:  # @todoAlpha Fix this: those are not builtins
         typesRepo.register(CrossReferenced.BuiltinType(t))
-    for t in ["SessionedGithubObject", "UpdatableGithubObject", "PaginatedList"]:
+    for t in ["SessionedGithubObject", "UpdatableGithubObject", "PaginatedList", "SearchResult"]:
         typesRepo.register(CrossReferenced.Class(t, None, (), (), (), ()))
 
     crossReferenced = CrossReferenced.Definition(structured, typesRepo)

@@ -29,6 +29,8 @@ attributes:
       content: Label
   - name: labels_url
     type: string
+  - name: locked
+    type: bool
   - name: milestone
     type: Milestone
   - name: number

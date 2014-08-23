@@ -10,6 +10,7 @@ log = logging.getLogger(__name__)
 
 import PyGithub.Blocking._exceptions as exn
 from PyGithub.Blocking._paginated_list import PaginatedList
+from PyGithub.Blocking._search_result import SearchResult
 
 """
 This module is a bit contrieved because of the following goals:

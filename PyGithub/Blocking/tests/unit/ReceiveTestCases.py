@@ -10,6 +10,7 @@ import MockMockMock
 
 import PyGithub.Blocking
 import PyGithub.Blocking._paginated_list as pgl
+import PyGithub.Blocking._search_result as srch
 import PyGithub.Blocking._receive as rcv
 
 

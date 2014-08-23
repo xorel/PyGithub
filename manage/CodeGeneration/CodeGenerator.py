@@ -185,7 +185,7 @@ class CodeGenerator:
         imports = set()
         for type in types:
             for t in type.underlyingTypes:
-                if t.__class__.__name__ == "Class" and t is not klass and t.qualifiedName != "PaginatedList":
+                if t.__class__.__name__ == "Class" and t is not klass and t.qualifiedName not in ["PaginatedList", "SearchResult"]:
                     imports.add(self.computeModuleNameFor(t))
                 if t.__class__.__name__ == "Structure" and klass.__class__.__name__ == "Class" and t.containerClass is not klass:
                     imports.add(self.computeModuleNameFor(t))
@@ -423,6 +423,10 @@ class CodeGenerator:
 
     def generateCodeForReturnLinearCollection(self, method):
         yield from self.getMethod("generateCodeForReturn{}Of{}", method.returnType.container.simpleName, method.returnType.content.__class__.__name__)(method)
+
+    def generateCodeForReturnSearchResultOfClass(self, method):
+        assert method.returnFrom is None
+        yield 'return _rcv.SearchResult({}, self.Session, r)'.format(self.computeContextualName(method.returnType.content, method))
 
     def generateCodeForReturnPaginatedListOfClass(self, method):
         assert method.returnFrom is None

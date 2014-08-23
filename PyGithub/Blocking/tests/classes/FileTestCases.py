@@ -14,10 +14,16 @@ class FileAttributes(TestCase):
         self.assertEqual(f.html_url, "http://github.home.jacquev6.net/electra/git-objects/blob/db09e03a13f7910b9cae93ca91cd35800e15c695/a_blob")
         self.assertEqual(f.name, "a_blob")
         self.assertEqual(f.path, "a_blob")
+        self.assertEqual(f.repository, None)
         self.assertEqual(f.sha, "3daf0da6bca38181ab52610dd6af6e92f1a5469d")
         self.assertEqual(f.size, 20)
         self.assertEqual(f.type, "file")
         self.assertEqual(f.url, "http://github.home.jacquev6.net/api/v3/repos/electra/git-objects/contents/a_blob?ref=db09e03a13f7910b9cae93ca91cd35800e15c695")
+
+    def testWithRepository(self):
+        # @todoAlpha Consider removing .repository (and creating a dedicated subclass?)
+        f = self.dotcom.search_code("marbles user:jacquev6", per_page=1).items[0]
+        self.assertEqual(f.repository.name, "MarblesCollide")
 
 
 class FileDelete(TestCase):

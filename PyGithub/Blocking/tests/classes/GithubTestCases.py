@@ -214,3 +214,68 @@ class GithubRepositories(TestCase):
     def testGetRepos_pagination(self):
         repos = self.dotcom.get_repos()[:250]
         self.assertEqual(len(repos), 250)
+
+
+class GithubSearch(TestCase):
+    def testSearchUsers(self):
+        # @todoAlpha Provide a way to build queries described in https://help.github.com/articles/searching-users
+        r = self.electra.search_users("god")
+        self.assertEqual(r.total_count, 2)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual([u.login for u in r.items], ["zeus", "poseidon"])
+
+    def testSearchUsers_allParameters(self):
+        r = self.electra.search_users("god", sort="joined", order="asc", per_page=1)
+        self.assertEqual(r.total_count, 2)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual([u.login for u in r.items], ["zeus", "poseidon"])
+
+    def testSearchUsers_pagination(self):
+        r = self.dotcom.search_users("vincent", per_page=100)
+        self.assertEqual(r.total_count, 3475)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(len(list(r.items)), 1000)
+        self.assertEqual(r.items[6].login, "jacquev6")
+        self.assertEqual(r.items[999].login, "williewillus")
+
+    def testSearchRepositories(self):
+        # @todoAlpha Provide a way to build queries described in https://help.github.com/articles/searching-repositories
+        r = self.dotcom.search_repositories("GitHub API v3")
+        self.assertEqual(r.total_count, 127)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[6].full_name, "jacquev6/PyGithub")
+
+    def testSearchRepositories_allParameters(self):
+        r = self.dotcom.search_repositories("GitHub API v3", sort="stars", order="desc", per_page=4)
+        self.assertEqual(r.total_count, 127)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[1].full_name, "jacquev6/PyGithub")
+        self.assertEqual(r.items[6].full_name, "farnoy/github-api-client")
+
+    def testSearchIssues(self):
+        # @todoAlpha Provide a way to build queries described in https://help.github.com/articles/searching-issues
+        # @todoSomeday Consider opening issue to GitHub to return repository as part of issues here, like in AuthenticatedUser.get_user_issues
+        r = self.dotcom.search_issues("GitHub API v3")
+        self.assertEqual(r.total_count, 6435)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[0].title, "Implement GitHub API v3")
+
+    def testSearchIssues_allParameters(self):
+        r = self.dotcom.search_issues("GitHub API v3", sort="comments", order="desc", per_page=4)
+        self.assertEqual(r.total_count, 6435)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[6].title, "v3 feedback")
+
+    def testSearchCode(self):
+        # @todoAlpha Provide a way to build queries described in https://help.github.com/articles/searching-code
+        r = self.dotcom.search_code("marbles user:jacquev6")
+        self.assertEqual(r.total_count, 6)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[0].name, "README.md")
+
+    def testSearchCode_allParameters(self):
+        # @todoAlpha Provide a way to build queries described in https://help.github.com/articles/searching-code
+        r = self.dotcom.search_code("marbles user:jacquev6", sort="indexed", order="asc", per_page=2)
+        self.assertEqual(r.total_count, 6)
+        self.assertEqual(r.incomplete_results, False)
+        self.assertEqual(r.items[3].name, "test.cpp")

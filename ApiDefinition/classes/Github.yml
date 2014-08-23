@@ -253,3 +253,95 @@ methods:
         value: parameter text
     return_from: text
     return_type: string
+  - name: search_code
+    end_point: GET /search/code
+    parameters:
+      - name: q
+        type: string
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [indexed]
+      - name: order
+        type:
+          enum: [asc, desc]
+    url_template: end_point
+    url_arguments:
+      - name: order
+        value: parameter order
+      - name: q
+        value: parameter q
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: SearchResult
+      content: File
+  - name: search_issues
+    end_point: GET /search/issues
+    parameters:
+      - name: q
+        type: string
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [comments, created, updated]
+      - name: order
+        type:
+          enum: [asc, desc]
+    url_template: end_point
+    url_arguments:
+      - name: order
+        value: parameter order
+      - name: q
+        value: parameter q
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: SearchResult
+      content: Issue
+  - name: search_repositories
+    end_point: GET /search/repositories
+    parameters:
+      - name: q
+        type: string
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [forks, stars, updated]
+      - name: order
+        type:
+          enum: [asc, desc]
+    url_template: end_point
+    url_arguments:
+      - name: order
+        value: parameter order
+      - name: q
+        value: parameter q
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: SearchResult
+      content: Repository
+  - name: search_users
+    end_point: GET /search/users
+    parameters:
+      - name: q
+        type: string
+    optional_parameters:
+      - name: sort
+        type:
+          enum: [followers, joined, repositories]
+      - name: order
+        type:
+          enum: [asc, desc]
+    url_template: end_point
+    url_arguments:
+      - name: order
+        value: parameter order
+      - name: q
+        value: parameter q
+      - name: sort
+        value: parameter sort
+    return_type:
+      container: SearchResult
+      content: User

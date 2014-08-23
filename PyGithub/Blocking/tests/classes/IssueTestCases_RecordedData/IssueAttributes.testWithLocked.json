@@ -1,0 +1,97 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic removed=",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "api.github.com",
+                "path": "/search/issues",
+                "query": {
+                    "per_page": "1",
+                    "q": "GitHub API v3"
+                },
+                "scheme": "https"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "incomplete_results": false,
+                "items": [
+                    {
+                        "assignee": null,
+                        "body": "Use the code in [Elvis](https://github.com/inaka/elvis/blob/master/src/elvis_github.erl).",
+                        "closed_at": null,
+                        "comments": 0,
+                        "comments_url": "https://api.github.com/repos/inaka/erlang-github/issues/1/comments",
+                        "created_at": "2014-08-11T15:07:34Z",
+                        "events_url": "https://api.github.com/repos/inaka/erlang-github/issues/1/events",
+                        "html_url": "https://github.com/inaka/erlang-github/issues/1",
+                        "id": 39967441,
+                        "labels": [],
+                        "labels_url": "https://api.github.com/repos/inaka/erlang-github/issues/1/labels{/name}",
+                        "locked": false,
+                        "milestone": null,
+                        "number": 1,
+                        "score": 23.979458,
+                        "state": "open",
+                        "title": "Implement GitHub API v3",
+                        "updated_at": "2014-08-11T15:08:46Z",
+                        "url": "https://api.github.com/repos/inaka/erlang-github/issues/1",
+                        "user": {
+                            "avatar_url": "https://avatars.githubusercontent.com/u/1522569?v=2",
+                            "events_url": "https://api.github.com/users/jfacorro/events{/privacy}",
+                            "followers_url": "https://api.github.com/users/jfacorro/followers",
+                            "following_url": "https://api.github.com/users/jfacorro/following{/other_user}",
+                            "gists_url": "https://api.github.com/users/jfacorro/gists{/gist_id}",
+                            "gravatar_id": "d6f59d93cc17c698f16e550034a2d1ad",
+                            "html_url": "https://github.com/jfacorro",
+                            "id": 1522569,
+                            "login": "jfacorro",
+                            "organizations_url": "https://api.github.com/users/jfacorro/orgs",
+                            "received_events_url": "https://api.github.com/users/jfacorro/received_events",
+                            "repos_url": "https://api.github.com/users/jfacorro/repos",
+                            "site_admin": false,
+                            "starred_url": "https://api.github.com/users/jfacorro/starred{/owner}{/repo}",
+                            "subscriptions_url": "https://api.github.com/users/jfacorro/subscriptions",
+                            "type": "User",
+                            "url": "https://api.github.com/users/jfacorro"
+                        }
+                    }
+                ],
+                "total_count": 6435
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "no-cache",
+                "content-encoding": "gzip",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 17 Aug 2014 01:33:10 GMT",
+                "link": "<https://api.github.com/search/issues?q=GitHub+API+v3&per_page=1&page=2>; rel=\"next\", <https://api.github.com/search/issues?q=GitHub+API+v3&per_page=1&page=1000>; rel=\"last\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "strict-transport-security": "max-age=31536000; includeSubdomains",
+                "transfer-encoding": "chunked",
+                "vary": "Accept-Encoding",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "62E81E54:0874:11BDA426:53F00656",
+                "x-ratelimit-limit": "30",
+                "x-ratelimit-remaining": "29",
+                "x-ratelimit-reset": "1408239250",
+                "x-served-by": "c046d59f93ede9ab52d5ac29f1ed70f7",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

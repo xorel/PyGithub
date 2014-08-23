@@ -1583,28 +1583,32 @@ GET /search/code
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/search#search-code>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.search_code`
 
 GET /search/issues
 ------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/search#search-issues>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.search_issues`
 
 GET /search/repositories
 ------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/search#search-repositories>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.search_repositories`
 
 GET /search/users
 -----------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/search#search-users>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.search_users`
 
 GET /setup/api/configcheck
 --------------------------

@@ -22,6 +22,7 @@ class IssueAttributes(TestCase):
         self.assertEqual(i.id, 15)
         self.assertEqual([l.name for l in i.labels], ["enhancement", "question"])
         self.assertEqual(i.labels_url, "http://github.home.jacquev6.net/api/v3/repos/electra/issues/issues/1/labels{/name}")
+        self.assertEqual(i.locked, None)
         self.assertEqual(i.milestone, None)
         self.assertEqual(i.number, 1)
         self.assertEqual(i.pull_request, None)
@@ -33,9 +34,15 @@ class IssueAttributes(TestCase):
         self.assertEqual(i.user.login, "penelope")
 
     def testWithRepository(self):
+        # @todoAlpha Consider removing .repository (and creating a dedicated subclass?)
         u = self.electra.get_authenticated_user()
         i = u.get_user_issues()[0]
         self.assertEqual(i.repository.full_name, "electra/issues")
+
+    def testWithLocked(self):
+        # @todoAlpha Consider removing .locked (and creating a dedicated subclass?)
+        i = self.dotcom.search_issues("GitHub API v3", per_page=1).items[0]
+        self.assertEqual(i.locked, False)
 
     def testClosedWithMilestone(self):
         u = self.electra.get_authenticated_user()

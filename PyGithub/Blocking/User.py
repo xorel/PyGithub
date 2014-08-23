@@ -35,6 +35,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.GistComment.user`
       * :meth:`.Github.get_user`
       * :meth:`.Github.get_users`
+      * :meth:`.Github.search_users`
       * :attr:`.Issue.assignee`
       * :attr:`.Issue.closed_by`
       * :attr:`.Issue.user`

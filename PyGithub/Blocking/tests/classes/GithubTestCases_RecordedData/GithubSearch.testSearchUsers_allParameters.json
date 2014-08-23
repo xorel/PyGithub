@@ -1,0 +1,145 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/search/users",
+                "query": {
+                    "order": "asc",
+                    "per_page": "1",
+                    "q": "god",
+                    "sort": "joined"
+                },
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "incomplete_results": false,
+                "items": [
+                    {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c20ad4d76fe97759aa27a0c99bff6710.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/zeus/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/zeus/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/zeus/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/zeus/gists{/gist_id}",
+                        "gravatar_id": "9ae23b5cc04fce1410c5b0a3ae191775",
+                        "html_url": "http://github.home.jacquev6.net/zeus",
+                        "id": 12,
+                        "login": "zeus",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/zeus/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/zeus/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/zeus/repos",
+                        "score": 0.8520549,
+                        "site_admin": true,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/zeus/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/zeus/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/zeus"
+                    }
+                ],
+                "total_count": 2
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "no-cache",
+                "connection": "keep-alive",
+                "content-length": "1124",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 17 Aug 2014 01:03:09 GMT",
+                "link": "<http://github.home.jacquev6.net/api/v3/search/users?q=god&per_page=1&order=asc&sort=joined&page=2>; rel=\"next\", <http://github.home.jacquev6.net/api/v3/search/users?q=god&per_page=1&order=asc&sort=joined&page=2>; rel=\"last\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "de4651f6-095a-498c-8d55-fe983cefbcda",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/search/users",
+                "query": {
+                    "order": "asc",
+                    "page": "2",
+                    "per_page": "1",
+                    "q": "god",
+                    "sort": "joined"
+                },
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "incomplete_results": false,
+                "items": [
+                    {
+                        "avatar_url": "http://github.home.jacquev6.net/identicons/c51ce410c124a10e0db5e4b97fc2af39.png",
+                        "events_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/events{/privacy}",
+                        "followers_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/followers",
+                        "following_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/following{/other_user}",
+                        "gists_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/gists{/gist_id}",
+                        "gravatar_id": "22d74e70751ba3dbdd9440bb0e2a2ad6",
+                        "html_url": "http://github.home.jacquev6.net/poseidon",
+                        "id": 13,
+                        "login": "poseidon",
+                        "organizations_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/orgs",
+                        "received_events_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/received_events",
+                        "repos_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/repos",
+                        "score": 0.5964384,
+                        "site_admin": true,
+                        "starred_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/starred{/owner}{/repo}",
+                        "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/poseidon/subscriptions",
+                        "type": "User",
+                        "url": "http://github.home.jacquev6.net/api/v3/users/poseidon"
+                    }
+                ],
+                "total_count": 2
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "no-cache",
+                "connection": "keep-alive",
+                "content-length": "1172",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sun, 17 Aug 2014 01:03:10 GMT",
+                "link": "<http://github.home.jacquev6.net/api/v3/search/users?q=god&per_page=1&order=asc&sort=joined&page=1>; rel=\"first\", <http://github.home.jacquev6.net/api/v3/search/users?q=god&per_page=1&order=asc&sort=joined&page=1>; rel=\"prev\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "476ecf17-1e62-4fbf-822a-6aa99aeea903",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

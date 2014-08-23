@@ -204,7 +204,7 @@ class _DefinitionLoader:
             parameters=tuple(itertools.chain(
                 (self.buildParameter(optional=False, variable=False, **p) for p in parameters),  # Do not sort
                 (self.buildParameter(optional=True, variable=False, **p) for p in optional_parameters),  # Do not sort
-                [Parameter("per_page", ScalarType("int"), True, False)] if isinstance(return_type, dict) and return_type.get("container") == "PaginatedList" else [],
+                [Parameter("per_page", ScalarType("int"), True, False)] if isinstance(return_type, dict) and return_type.get("container") in ["PaginatedList", "SearchResult"] else [],
                 () if variable_parameter is None else (self.buildParameter(optional=False, variable=True, **variable_parameter),)
             )),
             unimplementedParameters=tuple(sorted((self.buildUnimplementedStuff(**a) for a in unimplemented_parameters), key=lambda a: a.name)),
@@ -212,7 +212,7 @@ class _DefinitionLoader:
             urlTemplateArguments=self.buildArguments(url_template_arguments),
             urlArguments=self.buildArguments(itertools.chain(
                 url_arguments,
-                [dict(name="per_page", value="parameter per_page")] if isinstance(return_type, dict) and return_type.get("container") == "PaginatedList" else []
+                [dict(name="per_page", value="parameter per_page")] if isinstance(return_type, dict) and return_type.get("container") in ["PaginatedList", "SearchResult"] else []
             )),
             postArguments=self.buildArguments(post_arguments),
             headers=self.buildArguments(headers),
