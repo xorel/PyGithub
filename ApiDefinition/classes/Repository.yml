@@ -987,6 +987,13 @@ methods:
     return_type:
       container: list
       content: Label
+  - name: get_languages
+    end_point: GET /repos/:owner/:repo/languages
+    url_template: attribute languages_url
+    return_type:
+      container: dict
+      key: string
+      value: int
   - name: get_latest_pages_build
     end_point: GET /repos/:owner/:repo/pages/builds/latest
     url_template: end_point

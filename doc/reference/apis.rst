@@ -1174,7 +1174,8 @@ GET /repos/:owner/:repo/languages
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos#list-languages>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_languages`
 
 POST /repos/:owner/:repo/merges
 -------------------------------

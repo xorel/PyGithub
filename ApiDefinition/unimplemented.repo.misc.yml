@@ -4,7 +4,5 @@
   - GET
 /repos/:owner/:repo/compare/:base...:head:
   - GET
-/repos/:owner/:repo/languages:
-  - GET
 /repos/:owner/:repo/merges:
   - POST

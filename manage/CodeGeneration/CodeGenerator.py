@@ -406,7 +406,7 @@ class CodeGenerator:
         assert method.returnFrom is None
         assert method.returnType.container.simpleName == "dict"
         assert method.returnType.key.simpleName == "string"
-        assert method.returnType.value.simpleName == "string"
+        assert method.returnType.value.simpleName in ["string", "int"]
         yield "return r.json()"
 
     def generateCodeForReturnStructure(self, method):

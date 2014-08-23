@@ -1882,6 +1882,19 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return [PyGithub.Blocking.Label.Label(self.Session, x, None) for x in r.json()]
 
+    def get_languages(self):
+        """
+        Calls the `GET /repos/:owner/:repo/languages <http://developer.github.com/v3/repos#list-languages>`__ end point.
+
+        This is the only method calling this end point.
+
+        :rtype: :class:`dict` of :class:`string` to :class:`int`
+        """
+
+        url = uritemplate.expand(self.languages_url)
+        r = self.Session._request("GET", url)
+        return r.json()
+
     def get_latest_pages_build(self):
         """
         Calls the `GET /repos/:owner/:repo/pages/builds/latest <http://developer.github.com/v3/repos/pages#list-latest-pages-build>`__ end point.

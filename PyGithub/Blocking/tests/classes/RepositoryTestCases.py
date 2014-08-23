@@ -690,6 +690,20 @@ class RepositoryKeys(TestCase):
         self.assertTrue(k.url.startswith("http://github.home.jacquev6.net/api/v3/user/keys/"))
 
 
+class RepositoryLanguages(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-languages")
+        repo.create_file("hello.cpp", "Add hello.cpp", "I2luY2x1ZGUgPGlvc3RyZWFtPg0KDQp2b2lkIG1haW4oKSB7DQogIHN0ZDo6Y291dCA8PCAiSGVsbG8sIFdvcmxkISIgPDwgc3RkOjplbmRsOw0KfQ0K")
+        repo.create_file("hello.py", "Add hello.py", "IyEvdXNyL2Jpbi9weXRob24zDQoNCnByaW50KCJIZWxsbywgV29ybGQhIikNCg==")
+        self.pause()
+        return Data()
+
+    def testGetLanguages(self):
+        r = self.electra.get_repo(("electra", "repository-languages"))
+        languages = r.get_languages()
+        self.assertEqual(languages, {"C++": 87, "Python": 46})
+
+
 class RepositoryPages(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "repository-pages")
