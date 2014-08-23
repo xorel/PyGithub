@@ -973,6 +973,7 @@ class RepositoryStats(TestCase):
         r = self.setUpTestRepo("electra", "repository-stats-complete")
         r.get_stats_commit_activity()
         r.get_stats_contributors()
+        r.get_stats_code_frequency()
         self.pause()
         return Data()
 
@@ -1017,6 +1018,23 @@ class RepositoryStats(TestCase):
         r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
         self.pause()
         s = r.get_stats_contributors()
+        self.assertEqual(s, [])
+        r.delete()
+
+    def testGetStatsCodeFrequency(self):
+        r = self.electra.get_repo(("electra", "repository-stats-complete"))
+        s = r.get_stats_code_frequency()
+        self.assertEqual(s, [[1408233600, 2, 0]])  # @todoAlpha How could we, and should we, improve this? There is a timestamp, and two fields, but not named.
+
+    def testGetStatsCodeFrequencyOnEmptyRepo(self):
+        r = self.electra.get_repo(("electra", "repository-stats-empty"))
+        s = r.get_stats_code_frequency()
+        self.assertEqual(s, None)
+
+    def testGetStatsCodeFrequencyBeforeCaching(self):
+        r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
+        self.pause()
+        s = r.get_stats_code_frequency()
         self.assertEqual(s, [])
         r.delete()
 

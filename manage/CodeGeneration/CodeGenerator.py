@@ -403,13 +403,16 @@ class CodeGenerator:
         return []
 
     def generateCodeForReturnUnionType(self, method):
-        assert method.qualifiedName in ["Repository.get_stats_commit_activity", "Repository.get_stats_contributors"]
         yield "if r.status_code == 202:"
         yield "    return []"
         yield "elif r.status_code == 204:"
         yield "    return None"
         yield "else:"
-        yield "    return [{}(self.Session, x) for x in r.json()]".format(method.returnType.types[1].content.qualifiedName)
+        if method.qualifiedName in ["Repository.get_stats_commit_activity", "Repository.get_stats_contributors"]:
+            yield "    return [{}(self.Session, x) for x in r.json()]".format(method.returnType.types[1].content.qualifiedName)
+        else:
+            assert method.qualifiedName == "Repository.get_stats_code_frequency"
+            yield "    return r.json()"
 
     def generateCodeForReturnBuiltinType(self, method):
         if method.returnFrom == "status":

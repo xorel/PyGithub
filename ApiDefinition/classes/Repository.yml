@@ -1375,6 +1375,22 @@ methods:
     return_type:
       container: PaginatedList
       content: User
+  - name: get_stats_code_frequency
+    end_point: GET /repos/:owner/:repo/stats/code_frequency
+    doc: "This function will return None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content:
+            container: list
+            content: int
   - name: get_stats_commit_activity
     end_point: GET /repos/:owner/:repo/stats/commit_activity
     doc: "This function will return None on empty repositories, and an empty list when stats have not been computed yet."

@@ -2614,6 +2614,26 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
 
+    def get_stats_code_frequency(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/code_frequency <http://developer.github.com/v3/repos/statistics#code-frequency>`__ end point.
+
+        This is the only method calling this end point.
+
+        This function will return None on empty repositories, and an empty list when stats have not been computed yet.
+
+        :rtype: None or :class:`list` of :class:`list` of :class:`int`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/code_frequency", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 202:
+            return []
+        elif r.status_code == 204:
+            return None
+        else:
+            return r.json()
+
     def get_stats_commit_activity(self):
         """
         Calls the `GET /repos/:owner/:repo/stats/commit_activity <http://developer.github.com/v3/repos/statistics#commit-activity>`__ end point.
