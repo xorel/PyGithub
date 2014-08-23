@@ -255,6 +255,9 @@ class CodeGenerator:
             else:
                 yield "This is the only method calling this end point."
             yield ""
+        if method.doc is not None:
+            yield method.doc
+            yield ""
         for parameter in method.parameters:
             yield ":param {}: {} {}".format(
                 parameter.name,
@@ -398,6 +401,15 @@ class CodeGenerator:
     def generateCodeForReturnNoneType(self, method):
         assert method.returnFrom is None
         return []
+
+    def generateCodeForReturnUnionType(self, method):
+        assert method.qualifiedName == "Repository.get_stats_commit_activity"
+        yield "if r.status_code == 202:"
+        yield "    return []"
+        yield "elif r.status_code == 204:"
+        yield "    return None"
+        yield "else:"
+        yield "    return [Repository.StatsCommitActivity(self.Session, x) for x in r.json()]"
 
     def generateCodeForReturnBuiltinType(self, method):
         if method.returnFrom == "status":

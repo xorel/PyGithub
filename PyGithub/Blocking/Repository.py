@@ -482,6 +482,41 @@ class Repository(_bgo.UpdatableGithubObject):
             """
             return self.__push.value
 
+    class StatsCommitActivity(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_stats_commit_activity`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, days=None, total=None, week=None, **kwds):
+            super(Repository.StatsCommitActivity, self)._initAttributes(**kwds)
+            self.__days = _rcv.Attribute("Repository.StatsCommitActivity.days", _rcv.ListConverter(_rcv.IntConverter), days)
+            self.__total = _rcv.Attribute("Repository.StatsCommitActivity.total", _rcv.IntConverter, total)
+            self.__week = _rcv.Attribute("Repository.StatsCommitActivity.week", _rcv.DatetimeConverter, week)
+
+        @property
+        def days(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__days.value
+
+        @property
+        def total(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__total.value
+
+        @property
+        def week(self):
+            """
+            :type: :class:`datetime`
+            """
+            return self.__week.value
+
     class Tag(_bgo.SessionedGithubObject):
         """
         Methods and attributes returning instances of this class:
@@ -2499,6 +2534,26 @@ class Repository(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+
+    def get_stats_commit_activity(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/commit_activity <http://developer.github.com/v3/repos/statistics#commit-activity>`__ end point.
+
+        This is the only method calling this end point.
+
+        This function will return None on empty repositories, and an empty list when stats have not been computed yet.
+
+        :rtype: None or :class:`list` of :class:`.Repository.StatsCommitActivity`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/commit_activity", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 202:
+            return []
+        elif r.status_code == 204:
+            return None
+        else:
+            return [Repository.StatsCommitActivity(self.Session, x) for x in r.json()]
 
     def get_subscribers(self, per_page=None):
         """

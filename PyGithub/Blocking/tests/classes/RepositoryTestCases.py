@@ -967,6 +967,35 @@ class RepositoryReleaseAssets(TestCase):
         self.assertEqual(a.name, "foo.txt")
 
 
+class RepositoryStats(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        self.setUpTestRepo("electra", "repository-stats-empty", auto_init=False)
+        r = self.setUpTestRepo("electra", "repository-stats-complete")
+        r.get_stats_commit_activity()
+        self.pause()
+        return Data()
+
+    def testGetStatsCommitActivity(self):
+        r = self.electra.get_repo(("electra", "repository-stats-complete"))
+        s = r.get_stats_commit_activity()
+        self.assertEqual(len(s), 52)
+        self.assertEqual(s[-1].days, [0, 0, 0, 0, 0, 0, 1])
+        self.assertEqual(s[-1].total, 1)
+        self.assertEqual(s[-1].week, datetime.datetime(2014, 8, 17, 0, 0, 0))
+
+    def testGetStatsCommitActivityOnEmptyRepo(self):
+        r = self.electra.get_repo(("electra", "repository-stats-empty"))
+        s = r.get_stats_commit_activity()
+        self.assertEqual(s, None)
+
+    def testGetStatsCommitActivityBeforeCaching(self):
+        r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
+        self.pause()
+        s = r.get_stats_commit_activity()
+        self.assertEqual(s, [])
+        r.delete()
+
+
 class RepositoryUpdate(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         self.setUpTestRepo("electra", "repository-update")

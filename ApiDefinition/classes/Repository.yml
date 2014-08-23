@@ -111,6 +111,17 @@ structures:
         type: bool
       - name: push
         type: bool
+  - name: StatsCommitActivity
+    updatable: false
+    attributes:
+      - name: days
+        type:
+          container: list
+          content: int
+      - name: total
+        type: int
+      - name: week
+        type: datetime
   - name: Tag
     updatable: false
     attributes:
@@ -1342,6 +1353,20 @@ methods:
     return_type:
       container: PaginatedList
       content: User
+  - name: get_stats_commit_activity
+    end_point: GET /repos/:owner/:repo/stats/commit_activity
+    doc: "This function will return None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content: Repository.StatsCommitActivity
   - name: get_subscribers
     end_point: GET /repos/:owner/:repo/subscribers
     url_template: attribute subscribers_url

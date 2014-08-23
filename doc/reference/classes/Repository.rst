@@ -9,7 +9,7 @@ Repository
 
 .. autoclass:: PyGithub.Blocking.Repository::Repository()
     :members:
-    :exclude-members: AnonymousContributor, Branch, ComparisonResult, ComparisonResultFile, ContentCommit, Dir, Permissions, Tag
+    :exclude-members: AnonymousContributor, Branch, ComparisonResult, ComparisonResultFile, ContentCommit, Dir, Permissions, StatsCommitActivity, Tag
 
     .. autoclass:: PyGithub.Blocking.Repository::Repository.AnonymousContributor()
         :members:
@@ -24,6 +24,8 @@ Repository
     .. autoclass:: PyGithub.Blocking.Repository::Repository.Dir()
         :members:
     .. autoclass:: PyGithub.Blocking.Repository::Repository.Permissions()
+        :members:
+    .. autoclass:: PyGithub.Blocking.Repository::Repository.StatsCommitActivity()
         :members:
     .. autoclass:: PyGithub.Blocking.Repository::Repository.Tag()
         :members:
