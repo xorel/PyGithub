@@ -1,3 +1,5 @@
+/hub:
+  - POST: this is another way to create and delete repository hooks.
 /legacy/issues/search/:owner/:repository/:state/:keyword:
   - GET: this is a legacy API.
 /legacy/repos/search/:keyword:
