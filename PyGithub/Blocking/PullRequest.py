@@ -460,6 +460,8 @@ class PullRequest(_bgo.UpdatableGithubObject):
     @property
     def mergeable(self):
         """
+        This attribute is None for new requests (until it's actually computed by GitHub) and for merged requests. See `issue #256 <https://github.com/jacquev6/PyGithub/issues/256>`__ for details.
+
         :type: :class:`bool`
         """
         self._completeLazily(self.__mergeable.needsLazyCompletion)

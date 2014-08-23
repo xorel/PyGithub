@@ -52,7 +52,9 @@ class DocstringContainer:
 
     def docstring(self, *args):
         for arg in args:
-            if isinstance(arg, str):
+            if arg is None:
+                pass
+            elif isinstance(arg, str):
                 self.__docstring.append(arg)
             else:
                 self.__docstring += list(arg)

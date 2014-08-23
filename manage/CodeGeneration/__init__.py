@@ -30,7 +30,7 @@ def main(*args):
     github._addSource(CrossReferenced.MethodSource(builder.methods[0]))
     github._sortSources()
 
-    session = CrossReferenced.Class("Session", None, (), (Structured.Attribute("RateLimit", Structured.ScalarType("RateLimits")),), (), ())
+    session = CrossReferenced.Class("Session", None, (), (Structured.Attribute("RateLimit", Structured.ScalarType("RateLimits"), None),), (), ())
     rateLimits = [s for s in github.structures if s.qualifiedName == "Github.RateLimits"][0]
     rateLimits._addSource(CrossReferenced.AttributeSource(session.attributes[0]))
     rateLimits._sortSources()

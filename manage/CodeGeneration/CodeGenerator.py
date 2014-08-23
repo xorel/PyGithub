@@ -229,6 +229,8 @@ class CodeGenerator:
     def createClassProperty(self, attribute):
         return (
             PS.Property(attribute.simpleName)
+            .docstring(attribute.doc)
+            .docstring(None if attribute.doc is None else "")
             .docstring(":type: {}".format(self.generateDocForType(attribute.type)))
             .body("self._completeLazily(self.__{}.needsLazyCompletion)".format(attribute.simpleName))
             .body("return self.__{}.value".format(attribute.simpleName))

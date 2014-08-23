@@ -25,7 +25,7 @@ def dump(*args, **kwds):
 Definition = collections.namedtuple("Definition", "endPoints, classes, unimplementedEndPoints")
 Class = collections.namedtuple("Class", "name, base, structures, attributes, methods, deprecatedAttributes")
 Structure = collections.namedtuple("Structure", "name, updatable, attributes, deprecatedAttributes")
-Attribute = collections.namedtuple("Attribute", "name, type")
+Attribute = collections.namedtuple("Attribute", "name, type, doc")
 Method = collections.namedtuple("Method", "name, doc, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType")
 EndPoint = collections.namedtuple("EndPoint", "verb, url, parameters, doc")
 Parameter = collections.namedtuple("Parameter", "name, type, optional, variable")
@@ -165,12 +165,17 @@ class _DefinitionLoader:
             deprecatedAttributes=tuple(sorted((self.buildUnimplementedStuff(**a) for a in deprecated_attributes), key=lambda a: a.name)),
         )
 
-    def buildAttribute(self, name, type):
+    def buildAttribute(self, name, type, doc=None):
+        return self._buildAttribute(name, type, doc)
+
+    def _buildAttribute(self, name, type_, doc):
         assert isinstance(name, str), name
+        assert isinstance(doc, (str, type(None))), doc
         # no assert on type
         return Attribute(
             name=name,
-            type=self.buildType(type),
+            type=self.buildType(type_),
+            doc=doc
         )
 
     def buildUnimplementedStuff(self, name, reason):
@@ -417,6 +422,8 @@ class _DefinitionDumper:
         data = collections.OrderedDict()
         data["name"] = attribute.name
         data["type"] = self.createDataForType(attribute.type)
+        if attribute.doc is not None:
+            data["doc"] = attribute.doc
         return data
 
     def createDataForUnimplementedStuff(self, attribute):

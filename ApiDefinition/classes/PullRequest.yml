@@ -86,6 +86,7 @@ attributes:
     type: string
   - name: mergeable
     type: bool
+    doc: "This attribute is None for new requests (until it's actually computed by GitHub) and for merged requests. See `issue #256 <https://github.com/jacquev6/PyGithub/issues/256>`__ for details."
   - name: mergeable_state
     type: string
   - name: merged

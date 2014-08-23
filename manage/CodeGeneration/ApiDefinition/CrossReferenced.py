@@ -226,10 +226,11 @@ class AttributedType(SimpleType):
 
 
 class Attribute:
-    def __init__(self, containerClass, simpleName, type):
+    def __init__(self, containerClass, simpleName, type, doc):
         self.__containerClass = containerClass
         self.__qualifiedName = containerClass.qualifiedName + "." + simpleName
         self.__simpleName = simpleName
+        self.__doc = doc
 
         self.__tmp_typeDescription = type
 
@@ -252,6 +253,10 @@ class Attribute:
     @property
     def simpleName(self):
         return self.__simpleName
+
+    @property
+    def doc(self):
+        return self.__doc
 
     @property
     def qualifiedName(self):
