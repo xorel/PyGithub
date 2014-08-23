@@ -2716,6 +2716,24 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("GET", url)
         return Repository.StatsParticipation(self.Session, r.json())
 
+    def get_stats_punch_card(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/punch_card <http://developer.github.com/v3/repos/statistics#punch-card>`__ end point.
+
+        This is the only method calling this end point.
+
+        This method returns None on empty repositories.
+
+        :rtype: None or :class:`list` of :class:`list` of :class:`int`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/punch_card", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 204:
+            return None
+        else:
+            return r.json()
+
     def get_subscribers(self, per_page=None):
         """
         Calls the `GET /repos/:owner/:repo/subscribers <http://developer.github.com/v3/activity/watching#list-watchers>`__ end point.

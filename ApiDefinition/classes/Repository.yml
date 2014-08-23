@@ -1440,6 +1440,22 @@ methods:
       - name: repo
         value: attribute name
     return_type: Repository.StatsParticipation
+  - name: get_stats_punch_card
+    end_point: GET /repos/:owner/:repo/stats/punch_card
+    doc: "This method returns None on empty repositories."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content:
+            container: list
+            content: int
   - name: get_subscribers
     end_point: GET /repos/:owner/:repo/subscribers
     url_template: attribute subscribers_url

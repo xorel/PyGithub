@@ -417,6 +417,11 @@ class CodeGenerator:
             yield "    return None"
             yield "else:"
             yield "    return r.json()"
+        elif method.qualifiedName == "Repository.get_stats_punch_card":
+            yield "if r.status_code == 204:"
+            yield "    return None"
+            yield "else:"
+            yield "    return r.json()"
         elif method.qualifiedName == "Repository.get_stats_participation":
             yield "if r.status_code == 204:"
             yield "    return None"
