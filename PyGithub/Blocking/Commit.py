@@ -34,6 +34,7 @@ class Commit(_bgo.UpdatableGithubObject):
     Methods accepting instances of this class as parameter:
       * :meth:`.PullRequest.create_pull_comment`
       * :meth:`.Repository.compare`
+      * :meth:`.Repository.create_merge`
     """
 
     class File(_bgo.SessionedGithubObject):

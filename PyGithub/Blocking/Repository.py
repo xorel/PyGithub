@@ -1456,14 +1456,14 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param base: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
-        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
         :param commit_message: optional :class:`string`
         :rtype: :class:`~.Commit.Commit`
         """
         import PyGithub.Blocking.Commit
 
         base = _snd.normalizeBranchName(base)
-        head = _snd.normalizeBranchName(head)
+        head = _snd.normalizeBranchNameCommitSha(head)
         if commit_message is not None:
             commit_message = _snd.normalizeString(commit_message)
 

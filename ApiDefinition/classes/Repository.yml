@@ -578,8 +578,11 @@ methods:
           attribute: name
       - name: head
         type:
-          class: Repository.Branch
-          attribute: name
+          union:
+            - class: Repository.Branch
+              attribute: name
+            - class: Commit
+              attribute: sha
     optional_parameters:
       - name: commit_message
         type: string
