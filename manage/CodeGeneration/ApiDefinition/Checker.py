@@ -151,6 +151,7 @@ class Checker(object):
                     yield m, baseMethods[m.simpleName]
 
     def unusedUrlAttributes(self):
+        # @todoAlpha Do the same for structures
         for c in self.definition.classes:
             usedAsEndpoints = set()
             for m in c.methods:
