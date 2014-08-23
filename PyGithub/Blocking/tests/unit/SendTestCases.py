@@ -49,6 +49,14 @@ class NormalizationTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             snd.normalizeLabelName(PyGithub.Blocking.Reset)
 
+    def testNormalizeHookDescriptionName(self):
+        self.assertEqual(snd.normalizeHookDescriptionName("foo"), "foo")
+        self.assertEqual(snd.normalizeHookDescriptionName(PyGithub.Blocking.Github.Github.HookDescription(None, dict(url="url", name="foo"))), "foo")
+        with self.assertRaises(TypeError):
+            snd.normalizeHookDescriptionName(42)
+        with self.assertRaises(TypeError):
+            snd.normalizeHookDescriptionName(PyGithub.Blocking.Reset)
+
     def testNormalizeUserLogin(self):
         self.assertEqual(snd.normalizeUserLogin("foo"), "foo")
         self.assertEqual(snd.normalizeUserLogin(PyGithub.Blocking.User.User(None, dict(url="url", login="foo"), None)), "foo")

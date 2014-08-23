@@ -90,6 +90,17 @@ class Attribute(object):
         return self.__value is Absent and self.__exception is None
 
 
+class _AnyConverter(object):
+    def __call__(self, previousValue, value):
+        return value
+
+    @property
+    def desc(self):
+        return "any"
+
+AnyConverter = _AnyConverter()
+
+
 class _BuiltinConverter(object):
     def __init__(self, type):
         self.__type = type

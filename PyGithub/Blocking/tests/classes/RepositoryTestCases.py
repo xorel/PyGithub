@@ -564,6 +564,49 @@ class RepositoryGitStuff(TestCase):
             r.create_git_tag(tag="bad_tag", message="This is a tag to a commit, pretending to be a blob", object="f739e7ae2fd0e7b2bce99c073bcc7b57d713877e", type="blob")
 
 
+class RepositoryHooks(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-hooks")
+        h = repo.create_hook("twitter", dict(token="foobar", secret="barbaz", digest=False, short_format=True))
+        repo.create_hook("versioneye", dict(api_key="foobar", project_id="barbaz"))
+        return Data(id=h.id)
+
+    def testGetHook(self):
+        r = self.electra.get_repo(("electra", "repository-hooks"))
+        h = r.get_hook(self.data.id)
+        self.assertEqual(h.name, "twitter")
+
+    def testGetHooks(self):
+        r = self.electra.get_repo(("electra", "repository-hooks"))
+        hooks = r.get_hooks()
+        self.assertEqual([h.name for h in hooks], ["twitter", "versioneye"])
+
+    def testGetHooks_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-hooks"))
+        hooks = r.get_hooks(per_page=1)
+        self.assertEqual([h.name for h in hooks], ["twitter", "versioneye"])
+
+    def testCreateHook(self):
+        r = self.electra.get_repo(("electra", "repository-hooks"))
+        h = r.create_hook("loggly", dict(input_token="foobar"))
+        self.pause()
+        self.assertEqual(h.name, "loggly")
+        self.assertEqual(h.config, {"input_token": "foobar"})
+        self.assertEqual(h.events, ["push"])
+        self.assertEqual(h.active, True)
+        h.delete()
+
+    def testCreateHook_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-hooks"))
+        h = r.create_hook("loggly", dict(input_token="foobar"), events=["push", "commit_comment"], active=False)
+        self.pause()
+        self.assertEqual(h.name, "loggly")
+        self.assertEqual(h.config, {"input_token": "foobar"})
+        self.assertEqual(h.events, ["push", "commit_comment"])
+        self.assertEqual(h.active, True)  # WTF
+        h.delete()
+
+
 class RepositoryIssues(TestCase):
     def testCreateIssue(self):
         r = self.electra.get_repo(("electra", "mutable"))

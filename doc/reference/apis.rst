@@ -6,7 +6,7 @@ From Github API v3 to PyGithub
 ==============================
 
 Here are the 286 end points I'm aware of, and if/where they are implemented in PyGithub.
-68 end points are not yet implemented, and I don't plan to implement 12 end points for reasons described below.
+60 end points are not yet implemented, and I don't plan to implement 13 end points for reasons described below.
 If something is not listed here, please `open an issue <http://github.com/jacquev6/PyGithub/issues>`__ with a link to the corresponding documentation of Github API v3.
 
 GET /api/last-message.json
@@ -324,7 +324,7 @@ POST /hub
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#pubsubhubbub>`__)
 
-Not yet implemented in PyGithub.
+Not implemented in PyGithub: this is another way to create and delete repository hooks.
 
 GET /issues
 -----------
@@ -969,49 +969,56 @@ GET /repos/:owner/:repo/hooks
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#list-hooks>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_hooks`
 
 POST /repos/:owner/:repo/hooks
 ------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#create-a-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.create_hook`
 
 DELETE /repos/:owner/:repo/hooks/:id
 ------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#delete-a-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Hook.delete`
 
 GET /repos/:owner/:repo/hooks/:id
 ---------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#get-single-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_hook`
 
 PATCH /repos/:owner/:repo/hooks/:id
 -----------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#edit-a-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Hook.edit`
 
 POST /repos/:owner/:repo/hooks/:id/pings
 ----------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#ping-a-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Hook.ping`
 
 POST /repos/:owner/:repo/hooks/:id/tests
 ----------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/hooks#test-a-push-hook>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Hook.test`
 
 GET /repos/:owner/:repo/issues
 ------------------------------

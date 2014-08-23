@@ -63,6 +63,16 @@ def normalizeLabelName(label):
         raise TypeError()
 
 
+def normalizeHookDescriptionName(desc):
+    import PyGithub.Blocking.Github
+    if isinstance(desc, PyGithub.Blocking.Github.Github.HookDescription):
+        return desc.name
+    elif isinstance(desc, basestring):
+        return desc
+    else:
+        raise TypeError()
+
+
 def normalizeMilestoneNumber(milestone):
     import PyGithub.Blocking.Milestone
     if isinstance(milestone, PyGithub.Blocking.Milestone.Milestone):

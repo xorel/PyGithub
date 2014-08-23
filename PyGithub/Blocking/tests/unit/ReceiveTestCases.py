@@ -115,6 +115,15 @@ class AttributeTestCase(unittest.TestCase):
         self.assertTrue(self.a.needsLazyCompletion)
 
 
+class AnyConverterTestCase(unittest.TestCase):
+    def testDescription(self):
+        self.assertEqual(rcv.AnyConverter.desc, "any")
+
+    def testConversion(self):
+        o = object()
+        self.assertIs(rcv.AnyConverter("", o), o)
+
+
 class BuiltinConverterTestCase(unittest.TestCase):
     def testIntegerConverterDescription(self):
         self.assertEqual(rcv.IntConverter.desc, "Integral")

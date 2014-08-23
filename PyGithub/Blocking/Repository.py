@@ -1379,6 +1379,32 @@ class Repository(_bgo.UpdatableGithubObject):
         r = self.Session._request("POST", url, postArguments=postArguments)
         return PyGithub.Blocking.GitTree.GitTree(self.Session, r.json(), r.headers.get("ETag"))
 
+    def create_hook(self, name, config, events=None, active=None):
+        """
+        Calls the `POST /repos/:owner/:repo/hooks <http://developer.github.com/v3/repos/hooks#create-a-hook>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param name: mandatory :class:`.Github.HookDescription` or :class:`string` (its :attr:`.Github.HookDescription.name`)
+        :param config: mandatory :class:`dict`
+        :param events: optional :class:`list` of :class:`string`
+        :param active: optional :class:`bool`
+        :rtype: :class:`~.Hook.Hook`
+        """
+        import PyGithub.Blocking.Hook
+
+        name = _snd.normalizeHookDescriptionName(name)
+        config = _snd.normalizeDict(config)
+        if events is not None:
+            events = _snd.normalizeList(_snd.normalizeString, events)
+        if active is not None:
+            active = _snd.normalizeBool(active)
+
+        url = uritemplate.expand(self.hooks_url)
+        postArguments = _snd.dictionary(active=active, config=config, events=events, name=name)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.Hook.Hook(self.Session, r.json(), r.headers.get("ETag"))
+
     def create_issue(self, title, body=None, assignee=None, milestone=None, labels=None):
         """
         Calls the `POST /repos/:owner/:repo/issues <http://developer.github.com/v3/issues#create-an-issue>`__ end point.
@@ -1956,6 +1982,44 @@ class Repository(_bgo.UpdatableGithubObject):
         url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/git/trees/{sha}", owner=self.owner.login, repo=self.name, sha=sha)
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.GitTree.GitTree(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_hook(self, id):
+        """
+        Calls the `GET /repos/:owner/:repo/hooks/:id <http://developer.github.com/v3/repos/hooks#get-single-hook>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`int`
+        :rtype: :class:`~.Hook.Hook`
+        """
+        import PyGithub.Blocking.Hook
+
+        id = _snd.normalizeInt(id)
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/hooks/{id}", id=str(id), owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.Hook.Hook(self.Session, r.json(), r.headers.get("ETag"))
+
+    def get_hooks(self, per_page=None):
+        """
+        Calls the `GET /repos/:owner/:repo/hooks <http://developer.github.com/v3/repos/hooks#list-hooks>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param per_page: optional :class:`int`
+        :rtype: :class:`.PaginatedList` of :class:`~.Hook.Hook`
+        """
+        import PyGithub.Blocking.Hook
+
+        if per_page is None:
+            per_page = self.Session.PerPage
+        else:
+            per_page = _snd.normalizeInt(per_page)
+
+        url = uritemplate.expand(self.hooks_url)
+        urlArguments = _snd.dictionary(per_page=per_page)
+        r = self.Session._request("GET", url, urlArguments=urlArguments)
+        return _rcv.PaginatedList(PyGithub.Blocking.Hook.Hook, self.Session, r)
 
     def get_issue(self, number):
         """
