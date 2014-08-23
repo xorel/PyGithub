@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issues",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "e9b6331c-b0bc-445a-b90d-118ffb08b8aa",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issues/issues/3",
@@ -243,6 +246,7 @@
                 "x-github-request-id": "3b1869d8-97c2-4ffc-8e04-1ca7aa3ee925",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -258,6 +262,7 @@
                 "Content-Length": "27",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issues/issues/3",
@@ -357,6 +362,7 @@
                 "x-github-request-id": "e085790c-5c69-4261-a622-374ab737b1fb",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -372,6 +378,7 @@
                 "Content-Length": "26",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issues/issues/3",
@@ -471,6 +478,7 @@
                 "x-github-request-id": "d53126ff-78ae-4a1c-a1cf-698f7bb215b8",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

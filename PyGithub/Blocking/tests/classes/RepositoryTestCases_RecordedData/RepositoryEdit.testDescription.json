@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/edit",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "44c10633-739a-47cd-b1ae-c89f08cf687a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -147,6 +149,7 @@
                 "Content-Length": "53",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/edit",
@@ -269,6 +272,7 @@
                 "x-github-request-id": "7fb31c57-b34f-457f-aac4-7a9c5e56e87d",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -285,6 +289,7 @@
                 "Content-Length": "37",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/edit",
@@ -407,6 +412,7 @@
                 "x-github-request-id": "72e06868-9088-4970-8fc3-7964daba6d6d",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

@@ -8,6 +8,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/olympus/immutable",
@@ -322,6 +323,7 @@
                 "x-github-request-id": "c175bc3c-809e-426c-90a1-92ed8395de10",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -334,6 +336,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/olympus/immutable/teams",
@@ -383,6 +386,7 @@
                 "x-github-request-id": "4cfd71bb-8f02-48aa-b701-9fe2cb447237",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

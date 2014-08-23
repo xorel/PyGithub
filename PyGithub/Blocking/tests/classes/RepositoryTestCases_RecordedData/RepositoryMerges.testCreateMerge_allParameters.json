@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/repository-merges",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "062080fb-c0df-419f-b88c-30a6e38e57b5",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/repository-merges/git/refs/heads/master",
@@ -183,6 +186,7 @@
                 "x-poll-interval": "300",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -199,6 +203,7 @@
                 "Content-Length": "82",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/repository-merges/git/refs",
@@ -238,6 +243,7 @@
                 "x-github-request-id": "2e325877-316d-4747-8f48-0c72cee343fd",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -255,6 +261,7 @@
                 "Content-Length": "79",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/repository-merges/merges",
@@ -360,6 +367,7 @@
                 "x-github-request-id": "055f40fd-6395-4b60-ab07-a388ac48742b",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -373,6 +381,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/repository-merges/git/refs/heads/ephemeral",
@@ -398,6 +407,7 @@
                 "x-github-request-id": "c931c4be-1518-4fc1-8c34-29a615a7c3d2",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

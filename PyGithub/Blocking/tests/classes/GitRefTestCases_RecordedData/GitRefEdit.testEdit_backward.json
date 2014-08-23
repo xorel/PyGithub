@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "fe65f916-77e8-469d-a54a-427af0b5978a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -147,6 +149,7 @@
                 "Content-Length": "82",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/refs",
@@ -186,6 +189,7 @@
                 "x-github-request-id": "8be937e0-3f6d-4bbb-a356-e9231e317a3c",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -201,6 +205,7 @@
                 "Content-Length": "51",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/refs/heads/ephemeral",
@@ -231,6 +236,7 @@
                 "x-github-request-id": "4ae99503-d7d2-4eb1-bbb1-af88a338953f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 422
         }
     },
@@ -244,6 +250,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/refs/heads/ephemeral",
@@ -269,6 +276,7 @@
                 "x-github-request-id": "5367cdac-4dda-4500-9ec6-6bb5b4d305e2",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

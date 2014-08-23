@@ -8,6 +8,7 @@
                 "Authorization": "Basic cGVuZWxvcGU6cGFzc3dvcmQxLXBlbmVsb3Bl",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/user",
@@ -76,6 +77,7 @@
                 "x-github-request-id": "9ef17025-c08d-4a7b-9ac8-d48787ebb06f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -88,6 +90,7 @@
                 "Authorization": "Basic cGVuZWxvcGU6cGFzc3dvcmQxLXBlbmVsb3Bl",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/authorizations/12",
@@ -133,6 +136,7 @@
                 "x-github-request-id": "3fdc2446-245a-465d-b309-60d99962f4a3",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -148,6 +152,7 @@
                 "Content-Length": "30",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/authorizations/12",
@@ -192,6 +197,7 @@
                 "x-github-request-id": "5c23b82a-81ca-4e2c-9dfd-06896b8d7752",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -207,6 +213,7 @@
                 "Content-Length": "18",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/authorizations/12",
@@ -251,6 +258,7 @@
                 "x-github-request-id": "3034496e-2247-4da3-af40-9009f2e333de",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

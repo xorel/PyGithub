@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-delete",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "0629854c-202f-40b2-abc2-25bff6b2628e",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-delete/releases/40",
@@ -212,6 +215,7 @@
                 "x-github-request-id": "982013a8-99d6-4dae-99bf-6d8f81124876",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -284,6 +288,7 @@
                 "x-github-media-type": "github.v3; param=full; format=json",
                 "x-github-request-id": "dc47b99e-2a66-11e4-8f1f-a8f3f3b1e693"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -297,6 +302,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-delete/releases/assets/22",
@@ -322,6 +328,7 @@
                 "x-github-request-id": "35a793f3-14a7-4d9a-b597-c1bb7f637dca",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

@@ -8,6 +8,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus",
@@ -72,6 +73,7 @@
                 "x-github-request-id": "7621338e-0f41-4c47-8455-941b16ecb1dd",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -84,6 +86,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/teams",
@@ -142,6 +145,7 @@
                 "x-github-request-id": "d6cbdc50-f458-422e-93ab-29256274859a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

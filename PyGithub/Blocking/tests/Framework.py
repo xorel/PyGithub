@@ -99,17 +99,15 @@ class _RecordModeHelper(object):
                         'headers': dict(request.headers),
                         'verb': request.method,
                         'url': _RecordModeHelper.parseUrl(request.url),
+                        'is_json': requestIsJson,
                     },
                     "response": {
                         'body': responseBody,
                         'headers': dict(response.headers),
                         'status': response.status_code,
+                        'is_json': responseIsJson,
                     },
                 })
-                if not requestIsJson and requestBody is not None:
-                    interractions[-1]["request"]["is_json"] = False
-                if not responseIsJson and len(responseBody) != 0:
-                    interractions[-1]["response"]["is_json"] = False
             if not os.path.exists(os.path.dirname(self.__fileName)):
                 os.makedirs(os.path.dirname(self.__fileName))
             with open(self.__fileName, "w") as f:
@@ -117,7 +115,7 @@ class _RecordModeHelper(object):
 
     class ReplayMode(object):
         class RequestMatcher(object):
-            def __init__(self, verb, url, headers, body, is_json=True):
+            def __init__(self, verb, url, headers, body, is_json):
                 self.__verb = verb
                 self.__url = url
                 self.__headers = headers
@@ -134,7 +132,7 @@ class _RecordModeHelper(object):
                     return False
 
             def check(self, request):
-                if self.__isJson and request.body is not None:
+                if self.__isJson:
                     requestBody = json.loads(request.body)
                 else:
                     requestBody = request.body
@@ -158,24 +156,20 @@ class _RecordModeHelper(object):
                     self.__rebuildResponse(**record["response"])
                 )
 
-        def __rebuildResponse(self, status, headers, body, is_json=True):
+        def __rebuildResponse(self, status, headers, body, is_json):
             response = requests.Response()
             response.status_code = status
             response.headers = requests.structures.CaseInsensitiveDict(headers)
-            # print(body, body.__class__)
-            if body == u"":
-                body = ""
-            else:
-                if is_json:
-                    body = json.dumps(body)
-                else:
-                    body = body.encode("utf8")
-                if sys.hexversion >= 0x03000000:
-                    body = bytes(body, encoding="utf8")
-                if "content-encoding" in headers:
-                    assert headers["content-encoding"] == "gzip"
-                    c = zlib.compressobj(6, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
-                    body = c.compress(body) + c.flush()
+
+            if is_json:
+                body = json.dumps(body)
+            body = body.encode("utf8")
+
+            if "content-encoding" in headers:
+                assert headers["content-encoding"] == "gzip"
+                c = zlib.compressobj(6, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
+                body = c.compress(body) + c.flush()
+
             response.raw = requests.packages.urllib3.HTTPResponse(
                 io.BytesIO(body),
                 status=status,

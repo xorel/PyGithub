@@ -16,6 +16,7 @@
                 "Content-Length": "99",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists",
@@ -87,6 +88,7 @@
                 "x-github-request-id": "8c4a886b-34b4-463e-998a-15771328709a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -100,6 +102,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/09bed01c3ebdca9ca6ea",
@@ -130,6 +133,7 @@
                 "x-github-request-id": "56126301-dfe8-4675-a521-d8baa8d5131e",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     }

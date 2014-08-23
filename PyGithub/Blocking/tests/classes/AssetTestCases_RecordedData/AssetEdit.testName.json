@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-edit",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "1d4f949e-c1ce-49cf-b92c-cd028f0266c6",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-edit/releases/assets/13",
@@ -204,6 +207,7 @@
                 "x-github-request-id": "42b18cf5-638a-4b82-9e8a-ff7ee99d8f45",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -219,6 +223,7 @@
                 "Content-Length": "25",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-edit/releases/assets/13",
@@ -280,6 +285,7 @@
                 "x-github-request-id": "5a7e159b-8b45-4c06-9aa8-5a2b3f58bee5",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -295,6 +301,7 @@
                 "Content-Length": "22",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/asset-edit/releases/assets/13",
@@ -356,6 +363,7 @@
                 "x-github-request-id": "be9112e8-f6c6-4424-8445-72c3de152b9e",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

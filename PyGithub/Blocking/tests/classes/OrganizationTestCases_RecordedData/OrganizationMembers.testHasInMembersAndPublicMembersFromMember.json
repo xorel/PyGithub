@@ -8,6 +8,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus",
@@ -72,6 +73,7 @@
                 "x-github-request-id": "e2801479-2f31-4c34-a158-3c851d07fe43",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -84,6 +86,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/penelope",
@@ -114,6 +117,7 @@
                 "x-github-request-id": "0ac07211-b688-4b73-b32f-06ec397275c7",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     },
@@ -126,6 +130,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/penelope",
@@ -156,6 +161,7 @@
                 "x-github-request-id": "32a6fe8d-bfc1-4848-80c8-01a7318d9b91",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     },
@@ -168,6 +174,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -198,6 +205,7 @@
                 "x-github-request-id": "aa6414f9-aa54-4f9f-8341-93358963d5b1",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     },
@@ -210,6 +218,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/electra",
@@ -235,6 +244,7 @@
                 "x-github-request-id": "dbc4b952-9b90-4dcf-8180-5f95c1339aa9",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -247,6 +257,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/antigone",
@@ -272,6 +283,7 @@
                 "x-github-request-id": "bfff0d62-5ba6-475b-92a4-2f8e1867a51b",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -284,6 +296,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/antigone",
@@ -309,6 +322,7 @@
                 "x-github-request-id": "eb826d02-0084-4678-bd22-2fd061488fef",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

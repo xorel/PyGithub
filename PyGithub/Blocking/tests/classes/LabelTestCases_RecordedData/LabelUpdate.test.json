@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "be837c52-90dd-41f2-ad09-97823a191089",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -178,6 +181,7 @@
                 "x-github-request-id": "480be307-9907-4e25-bb59-8876d3b070de",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -190,6 +194,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -225,6 +230,7 @@
                 "x-github-request-id": "8aa7f378-4fb1-4315-ade8-d9ee1ac2d6b7",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -240,6 +246,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -274,6 +281,7 @@
                 "x-github-request-id": "8dd214c0-8f24-4a7c-9612-d3d62a64ddbf",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -287,6 +295,7 @@
                 "If-None-Match": "\"f230eda561781a1cbc3c6910e51d5640\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -322,6 +331,7 @@
                 "x-github-request-id": "0c88120a-e5ff-4fb7-8a56-7c38c33c5e78",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -335,6 +345,7 @@
                 "If-None-Match": "\"e0d09bd5b627981587d56621da2ab907\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -362,6 +373,7 @@
                 "x-github-request-id": "75195850-31e1-4c82-a84c-bdae5856ef37",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -377,6 +389,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/label-update/labels/bug",
@@ -411,6 +424,7 @@
                 "x-github-request-id": "5f957d87-5c66-4564-ac29-dd669646ce06",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

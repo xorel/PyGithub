@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "12eb3833-0fa1-4c85-8316-a7a6f656903e",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -147,6 +149,7 @@
                 "Content-Length": "55",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/blobs",
@@ -181,6 +184,7 @@
                 "x-github-request-id": "3c3a402b-1a0e-48af-9ec3-4b61ceae9a75",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -194,6 +198,7 @@
                 "If-None-Match": "\"9d6e04038a785da5aa5e27a87b9ea4e7\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/blobs/3daf0da6bca38181ab52610dd6af6e92f1a5469d",
@@ -230,6 +235,7 @@
                 "x-github-request-id": "c72e8f4b-5435-48d8-968b-af1a53f5183a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -243,6 +249,7 @@
                 "If-None-Match": "\"232a973a5f70e916fb4a220d2b764b8a\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/git-objects/git/blobs/3daf0da6bca38181ab52610dd6af6e92f1a5469d",
@@ -269,6 +276,7 @@
                 "x-github-request-id": "716563b9-4f3e-4da8-8551-d09b0d9c15d0",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     }

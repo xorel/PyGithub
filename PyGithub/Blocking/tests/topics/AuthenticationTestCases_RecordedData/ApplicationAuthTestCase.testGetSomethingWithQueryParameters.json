@@ -7,6 +7,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/users/electra",
@@ -73,6 +74,7 @@
                 "x-github-request-id": "b57dcd08-0ec8-4ac1-8d57-b70fd4f7d215",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -84,6 +86,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/users/electra/repos",
@@ -292,6 +295,7 @@
                 "x-github-request-id": "f7982036-f8e7-4ac4-8cc1-ce891b8e39f3",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

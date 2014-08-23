@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comments",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "fccfef3a-3ef6-43bd-8904-6bded88f5c73",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comments/commits/22ff1a1adf4f031440b0555c51385fa9d9eab376",
@@ -256,6 +259,7 @@
                 "x-github-request-id": "43d34e53-7379-422b-b5f6-1ab52401e8bc",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -268,6 +272,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comments/commits/22ff1a1adf4f031440b0555c51385fa9d9eab376/comments",
@@ -335,6 +340,7 @@
                 "x-github-request-id": "0525518c-3630-47d6-b93c-9c97a77e8998",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -347,6 +353,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repositories/167/commits/22ff1a1adf4f031440b0555c51385fa9d9eab376/comments",
@@ -415,6 +422,7 @@
                 "x-github-request-id": "07d0f210-166c-453a-ac7d-31f59cccb9df",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

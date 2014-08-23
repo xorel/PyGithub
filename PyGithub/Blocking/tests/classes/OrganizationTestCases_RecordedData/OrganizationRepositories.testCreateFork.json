@@ -8,6 +8,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus",
@@ -72,6 +73,7 @@
                 "x-github-request-id": "1fc9798c-1e7f-4100-b3d1-37299ea12a37",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -87,6 +89,7 @@
                 "Content-Length": "27",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/mutable/forks",
@@ -397,6 +400,7 @@
                 "x-github-request-id": "abc6626f-623f-41e2-88ac-7a15672c0753",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 202
         }
     },
@@ -410,6 +414,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/olympus/mutable",
@@ -435,6 +440,7 @@
                 "x-github-request-id": "0ad08c44-615f-4b30-bc57-e190a0ce7022",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

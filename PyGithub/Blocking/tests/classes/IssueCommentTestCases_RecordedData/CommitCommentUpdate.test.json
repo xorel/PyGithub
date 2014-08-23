@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "eff09a70-10de-4ad2-a705-66bf642a4b85",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -203,6 +206,7 @@
                 "x-github-request-id": "2f98e8bd-67ed-46ee-93c3-b920e86ad0ac",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -215,6 +219,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -275,6 +280,7 @@
                 "x-github-request-id": "53e87d3a-fb40-434a-9f83-51ccf91d9942",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -290,6 +296,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -349,6 +356,7 @@
                 "x-github-request-id": "f7e2485a-a5c7-4930-9a9e-01a3d2c325ff",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -362,6 +370,7 @@
                 "If-None-Match": "\"fc9b388690aaa479f5ed6c31ae7215dd\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -422,6 +431,7 @@
                 "x-github-request-id": "dc6eddfe-ceb1-4fca-9e63-fbb89d5fcbef",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -435,6 +445,7 @@
                 "If-None-Match": "\"4f034b51fe5467e336302d90533bda8f\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -462,6 +473,7 @@
                 "x-github-request-id": "c8dbcd96-b72c-4cc5-a22f-a9dba520d9fe",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -477,6 +489,7 @@
                 "Content-Length": "18",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/issue-comment-update/issues/comments/21",
@@ -536,6 +549,7 @@
                 "x-github-request-id": "a5f7781a-d98c-4229-8fd7-cba0ad7e6114",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

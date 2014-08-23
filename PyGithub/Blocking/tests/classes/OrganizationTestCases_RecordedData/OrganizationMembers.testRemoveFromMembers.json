@@ -8,6 +8,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus",
@@ -72,6 +73,7 @@
                 "x-github-request-id": "98da7224-f95e-4c6d-b0b6-c4f0ea720fec",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -84,6 +86,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/penelope",
@@ -114,6 +117,7 @@
                 "x-github-request-id": "7724324c-118b-4d0d-b1b7-780bb0ae6a4c",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     },
@@ -126,6 +130,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/teams",
@@ -184,6 +189,7 @@
                 "x-github-request-id": "e749ad4d-533e-4ac5-a135-d4cf2408356c",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -197,6 +203,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/teams/6/members/penelope",
@@ -222,6 +229,7 @@
                 "x-github-request-id": "15ddb5d8-c546-471f-acb1-39e27a49c155",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -234,6 +242,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/penelope",
@@ -259,6 +268,7 @@
                 "x-github-request-id": "78c87b1d-b3bc-4f6e-9332-d297056cf928",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -272,6 +282,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/penelope",
@@ -297,6 +308,7 @@
                 "x-github-request-id": "56210ee6-bdb6-4ca5-b0d3-d81ed6ddea39",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -309,6 +321,7 @@
                 "Authorization": "Basic emV1czpwYXNzd29yZDEtemV1cw==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/members/penelope",
@@ -339,6 +352,7 @@
                 "x-github-request-id": "ed8f6369-fe3c-4220-9a7d-fcaf6aebf6ac",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     }

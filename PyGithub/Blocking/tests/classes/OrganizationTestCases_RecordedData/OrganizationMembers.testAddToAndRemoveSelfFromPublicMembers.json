@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus",
@@ -72,6 +73,7 @@
                 "x-github-request-id": "cbecbe3f-375b-4db9-bf96-f3596de9f89a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -84,6 +86,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -114,6 +117,7 @@
                 "x-github-request-id": "7e17dc8c-6dfa-4e81-a50c-e89402b2a389",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     },
@@ -127,6 +131,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -152,6 +157,7 @@
                 "x-github-request-id": "b0efb366-3ada-4a8f-85f2-3d1c5b54df24",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -164,6 +170,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -189,6 +196,7 @@
                 "x-github-request-id": "c3bcef2a-6f65-4584-a8fc-15ddc0b23dea",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -202,6 +210,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -227,6 +236,7 @@
                 "x-github-request-id": "a09e1689-628c-4e8d-ac4d-35236f2965f2",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     },
@@ -239,6 +249,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/orgs/olympus/public_members/electra",
@@ -269,6 +280,7 @@
                 "x-github-request-id": "f2ba9013-a801-4869-bde8-d1b79bdb153b",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 404
         }
     }

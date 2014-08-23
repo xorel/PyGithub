@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/hook-edit",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "4905059b-4ecd-4fe1-82c7-a66746d6bb00",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/hook-edit/hooks/19",
@@ -196,6 +199,7 @@
                 "x-github-request-id": "e53ce52e-d550-44c1-b4f7-209d8321e441",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -216,6 +220,7 @@
                 "Content-Length": "84",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/hook-edit/hooks/19",
@@ -268,6 +273,7 @@
                 "x-github-request-id": "3b34fcc9-5ea4-4cd9-bfec-97df691a9cb2",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -288,6 +294,7 @@
                 "Content-Length": "90",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/hook-edit/hooks/19",
@@ -340,6 +347,7 @@
                 "x-github-request-id": "72d941a0-da98-41d9-b5fb-7e1047c82e3b",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

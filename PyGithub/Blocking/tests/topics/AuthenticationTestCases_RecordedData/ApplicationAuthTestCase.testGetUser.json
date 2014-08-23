@@ -7,6 +7,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/users/electra",
@@ -73,6 +74,7 @@
                 "x-github-request-id": "1f1c3b10-9071-40c5-87e9-41adeb1fcacf",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

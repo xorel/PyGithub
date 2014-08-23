@@ -8,6 +8,7 @@
                 "Authorization": "Basic removed=",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/search/issues",
@@ -303,6 +304,7 @@
                 "x-served-by": "a8d8e492d6966f0c23dee2eed64c678a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -315,6 +317,7 @@
                 "Authorization": "Basic removed=",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/search/issues",
@@ -581,6 +584,7 @@
                 "x-served-by": "3061975e1f37121b3751604ad153c687",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

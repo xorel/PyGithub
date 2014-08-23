@@ -8,6 +8,7 @@
                 "Authorization": "Basic YW50aWdvbmU6cGFzc3dvcmQxLWFudGlnb25l",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/user",
@@ -76,6 +77,7 @@
                 "x-github-request-id": "94ed3101-b121-421b-a202-c64ab73e6cf9",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

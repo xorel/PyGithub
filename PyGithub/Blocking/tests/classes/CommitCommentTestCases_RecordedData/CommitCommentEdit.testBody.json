@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-edit",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "c2137a22-800f-48fc-acb5-1154ec9021a4",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-edit/comments/13",
@@ -206,6 +209,7 @@
                 "x-github-request-id": "a197f804-c49a-44aa-a866-f31feb98213a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -221,6 +225,7 @@
                 "Content-Length": "17",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-edit/comments/13",
@@ -283,6 +288,7 @@
                 "x-github-request-id": "ccd3b4d0-d77e-464f-a6a6-4794052782c8",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -298,6 +304,7 @@
                 "Content-Length": "16",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-edit/comments/13",
@@ -360,6 +367,7 @@
                 "x-github-request-id": "2b946db0-a392-4e22-8f54-9e72833f3f92",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

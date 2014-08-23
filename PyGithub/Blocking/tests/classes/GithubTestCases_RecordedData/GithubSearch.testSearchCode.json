@@ -8,6 +8,7 @@
                 "Authorization": "Basic removed=",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/search/code",
@@ -487,6 +488,7 @@
                 "x-served-by": "d818ddef80f4c7d10683dd483558952a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "9ae3971c-7e3f-4745-b9c3-1b0ff3a6f6bb",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -212,6 +215,7 @@
                 "x-github-request-id": "f85ad886-79de-4ee9-a1b0-020f10939222",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -224,6 +228,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -293,6 +298,7 @@
                 "x-github-request-id": "39e896de-fe69-4bd9-ac3f-7cce8022ebe9",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -308,6 +314,7 @@
                 "Content-Length": "23",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -376,6 +383,7 @@
                 "x-github-request-id": "0b5dd618-5462-457f-8019-b284e74eb28a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -389,6 +397,7 @@
                 "If-None-Match": "\"763c4e2226a43a7dd9ebf1db72c11f86\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -458,6 +467,7 @@
                 "x-github-request-id": "c4730fb1-3ca7-4597-8a72-c92ebfa0bef3",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -471,6 +481,7 @@
                 "If-None-Match": "\"9d3dba4b8cf9a76c9c41f6ea40e5e9d5\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -498,6 +509,7 @@
                 "x-github-request-id": "69a7240f-e521-463a-b830-078231cfcb69",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -513,6 +525,7 @@
                 "Content-Length": "22",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-update/releases/43",
@@ -581,6 +594,7 @@
                 "x-github-request-id": "2f20e8c2-c2b2-4788-a3e0-861c98afe65c",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

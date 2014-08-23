@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -116,6 +117,7 @@
                 "x-github-request-id": "44f204d9-d854-4fa1-85b6-1cbf7d6cb312",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -128,6 +130,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -236,6 +239,7 @@
                 "x-github-request-id": "baca07b9-24c0-496a-a079-396236bd80b5",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -251,6 +255,7 @@
                 "Content-Length": "31",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -358,6 +363,7 @@
                 "x-github-request-id": "1c8596cf-f4a4-41c5-93e0-08195b570fea",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -371,6 +377,7 @@
                 "If-None-Match": "\"574b7e551cc23f6b62fa40f0fc58b0b4\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -479,6 +486,7 @@
                 "x-github-request-id": "a15b9b3e-475c-40b8-b86c-ee8c29fed9bc",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -492,6 +500,7 @@
                 "If-None-Match": "\"7aa7174bfc28b3b1f00b9f41239dd8aa\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -519,6 +528,7 @@
                 "x-github-request-id": "aed7c029-c9eb-4aab-9e48-ae0e6a5697ec",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -534,6 +544,7 @@
                 "Content-Length": "30",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/8e0aacf932cf65f56ef0",
@@ -641,6 +652,7 @@
                 "x-github-request-id": "2b683f79-0432-4b54-b88c-19a91d724650",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

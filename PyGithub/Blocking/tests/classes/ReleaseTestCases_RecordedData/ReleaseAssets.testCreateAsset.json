@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-assets",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "a08963b5-8d01-45fe-87e1-9d32da20d241",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-assets/releases/33",
@@ -275,6 +278,7 @@
                 "x-github-request-id": "d062c8c5-4604-46cc-b8bf-f0d616f90134",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -347,6 +351,7 @@
                 "x-github-media-type": "github.v3; param=full; format=json",
                 "x-github-request-id": "c82900f0-2a66-11e4-88ed-c02b4a69ec5f"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -360,6 +365,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/release-assets/releases/assets/21",
@@ -385,6 +391,7 @@
                 "x-github-request-id": "d599a741-6fd3-431d-919b-67aec140706f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

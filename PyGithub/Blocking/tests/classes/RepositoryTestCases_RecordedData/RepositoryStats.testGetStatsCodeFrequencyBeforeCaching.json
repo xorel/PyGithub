@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/user",
@@ -76,6 +77,7 @@
                 "x-github-request-id": "08447615-1ce8-4fd6-ab09-c2145f29c8f9",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -92,6 +94,7 @@
                 "Content-Length": "40",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/user/repos",
@@ -215,6 +218,7 @@
                 "x-github-request-id": "6c28b82e-610b-423d-89d9-2c05f457dd30",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 201
         }
     },
@@ -227,6 +231,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/ephemeral/stats/code_frequency",
@@ -254,6 +259,7 @@
                 "x-github-request-id": "b19c8a40-ca6d-48bc-9f8c-935a06655849",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 202
         }
     },
@@ -267,6 +273,7 @@
                 "Content-Length": "0",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/ephemeral",
@@ -292,6 +299,7 @@
                 "x-github-request-id": "a77b4b93-1d47-4941-a717-5ee929aa59d9",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 204
         }
     }

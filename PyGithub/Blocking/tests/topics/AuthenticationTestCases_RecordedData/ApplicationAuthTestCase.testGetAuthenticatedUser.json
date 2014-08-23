@@ -7,6 +7,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/user",
@@ -40,6 +41,7 @@
                 "x-github-request-id": "7f694f5b-6ea9-479f-aacf-b9ac316c44dc",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 401
         }
     }

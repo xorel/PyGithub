@@ -8,6 +8,7 @@
                 "Authorization": "Basic removed=",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/user",
@@ -26,6 +27,7 @@
                 "date": "Sun, 22 Dec 2013 22:50:19 GMT",
                 "server": "GitHub.com"
             },
+            "is_json": true,
             "status": 502
         }
     }

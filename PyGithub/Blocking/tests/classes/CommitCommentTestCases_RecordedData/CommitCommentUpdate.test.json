@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "5f33328d-5829-4db3-8514-0abd0c2079c4",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -206,6 +209,7 @@
                 "x-github-request-id": "c26a1f31-0d4a-45ca-8611-78bc86d309c6",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -218,6 +222,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -281,6 +286,7 @@
                 "x-github-request-id": "b2416d62-9ea7-4332-a90e-fdafbe290e1b",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -296,6 +302,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -358,6 +365,7 @@
                 "x-github-request-id": "c9763f1e-51c3-4049-b353-f2bdb4f9815f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -371,6 +379,7 @@
                 "If-None-Match": "\"b42eb92ab53db0117488aafd29f27e39\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -434,6 +443,7 @@
                 "x-github-request-id": "a2d29e67-fcab-4223-856b-209f47aae88d",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -447,6 +457,7 @@
                 "If-None-Match": "\"a6abc2b000b41a178ddab4acebc8dadd\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -474,6 +485,7 @@
                 "x-github-request-id": "0212acb8-b9b2-4ae2-815c-988b96cb26cd",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -489,6 +501,7 @@
                 "Content-Length": "18",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/commit-comment-update/comments/14",
@@ -551,6 +564,7 @@
                 "x-github-request-id": "9ca10256-fb9b-4961-a08b-bea846dbadab",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

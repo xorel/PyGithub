@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "7aabc6e1-bd18-466f-977e-9de9593231dd",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -206,6 +209,7 @@
                 "x-github-request-id": "1b807907-08ee-405f-b1fe-a149aec921ae",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -218,6 +222,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -281,6 +286,7 @@
                 "x-github-request-id": "32a1c811-7dba-4533-90cf-726fa04f0451",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -296,6 +302,7 @@
                 "Content-Length": "20",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -358,6 +365,7 @@
                 "x-github-request-id": "7710409a-48de-4d98-b53f-b3e1360a86db",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -371,6 +379,7 @@
                 "If-None-Match": "\"eca63632cf8e77359e65348c373b5333\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -434,6 +443,7 @@
                 "x-github-request-id": "504e795c-b0b8-43d4-a9ba-34aa922543ef",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -447,6 +457,7 @@
                 "If-None-Match": "\"7121ceb19e60b93a20ff0ecb2b2b1b9c\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -474,6 +485,7 @@
                 "x-github-request-id": "b705e365-0739-475e-a83d-c5f02fb8652d",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -489,6 +501,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/milestone-update/milestones/1",
@@ -551,6 +564,7 @@
                 "x-github-request-id": "2b8974b7-e88a-4a9e-89e6-4c6de6ad3a3f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

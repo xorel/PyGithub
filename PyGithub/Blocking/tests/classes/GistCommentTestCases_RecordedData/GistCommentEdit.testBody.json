@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/d1838ad35f9b392d8aa7",
@@ -116,6 +117,7 @@
                 "x-github-request-id": "13357346-4c3e-42b9-89d8-fa5f9aaad147",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -128,6 +130,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/d1838ad35f9b392d8aa7/comments/10",
@@ -186,6 +189,7 @@
                 "x-github-request-id": "997d6b6e-74a2-45b8-a449-024aeb9fec8a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -201,6 +205,7 @@
                 "Content-Length": "17",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/d1838ad35f9b392d8aa7/comments/10",
@@ -258,6 +263,7 @@
                 "x-github-request-id": "d4e0f8d9-3bd7-4222-a156-a59ac495cb62",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -273,6 +279,7 @@
                 "Content-Length": "16",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/gists/d1838ad35f9b392d8aa7/comments/10",
@@ -330,6 +337,7 @@
                 "x-github-request-id": "2f4f7318-045b-40ed-bb08-d12d551ef08a",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }

@@ -7,6 +7,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -69,6 +70,7 @@
                 "x-ratelimit-remaining": "18",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -80,6 +82,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -142,6 +145,7 @@
                 "x-ratelimit-remaining": "17",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -153,6 +157,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -215,6 +220,7 @@
                 "x-ratelimit-remaining": "16",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -226,6 +232,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -288,6 +295,7 @@
                 "x-ratelimit-remaining": "15",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -299,6 +307,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -361,6 +370,7 @@
                 "x-ratelimit-remaining": "14",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -372,6 +382,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -434,6 +445,7 @@
                 "x-ratelimit-remaining": "13",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -445,6 +457,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -507,6 +520,7 @@
                 "x-ratelimit-remaining": "12",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -518,6 +532,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -580,6 +595,7 @@
                 "x-ratelimit-remaining": "11",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -591,6 +607,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -653,6 +670,7 @@
                 "x-ratelimit-remaining": "10",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -664,6 +682,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -726,6 +745,7 @@
                 "x-ratelimit-remaining": "9",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -737,6 +757,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -799,6 +820,7 @@
                 "x-ratelimit-remaining": "8",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -810,6 +832,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -872,6 +895,7 @@
                 "x-ratelimit-remaining": "7",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -883,6 +907,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -945,6 +970,7 @@
                 "x-ratelimit-remaining": "6",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -956,6 +982,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1018,6 +1045,7 @@
                 "x-ratelimit-remaining": "5",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1029,6 +1057,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1091,6 +1120,7 @@
                 "x-ratelimit-remaining": "4",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1102,6 +1132,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1164,6 +1195,7 @@
                 "x-ratelimit-remaining": "3",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1175,6 +1207,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1237,6 +1270,7 @@
                 "x-ratelimit-remaining": "2",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1248,6 +1282,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1310,6 +1345,7 @@
                 "x-ratelimit-remaining": "1",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1321,6 +1357,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1383,6 +1420,7 @@
                 "x-ratelimit-remaining": "0",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -1394,6 +1432,7 @@
                 "Accept-Encoding": "gzip, deflate, compress",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "api.github.com",
                 "path": "/users/nvie",
@@ -1424,6 +1463,7 @@
                 "x-ratelimit-remaining": "0",
                 "x-ratelimit-reset": "1387745126"
             },
+            "is_json": true,
             "status": 403
         }
     }

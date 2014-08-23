@@ -8,6 +8,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update",
@@ -131,6 +132,7 @@
                 "x-github-request-id": "6a3c57db-8e8a-4c7e-b228-ae1d9e1d0e70",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -143,6 +145,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -220,6 +223,7 @@
                 "x-github-request-id": "f51c23ae-55b1-4dd6-91c1-52beb6a63622",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -232,6 +236,7 @@
                 "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -309,6 +314,7 @@
                 "x-github-request-id": "3679bc6f-f17b-48ed-8cd7-0050f52256ae",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -324,6 +330,7 @@
                 "Content-Length": "19",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -400,6 +407,7 @@
                 "x-github-request-id": "d848fb2a-2169-4441-a97a-65ff1e9f84ec",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -413,6 +421,7 @@
                 "If-None-Match": "\"381ceb10389c1f2cb84f2e7c8b292037\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -490,6 +499,7 @@
                 "x-github-request-id": "033dec65-3355-408f-bc62-138c386c2167",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     },
@@ -503,6 +513,7 @@
                 "If-None-Match": "\"2eea7e5d60aca9b7c946ca938439c85b\"",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -530,6 +541,7 @@
                 "x-github-request-id": "21b352e9-3afc-41f9-8724-bafa80e36310",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": false,
             "status": 304
         }
     },
@@ -545,6 +557,7 @@
                 "Content-Length": "18",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": true,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/v3/repos/electra/pull-comment-update/pulls/comments/11",
@@ -621,6 +634,7 @@
                 "x-github-request-id": "2cef71b4-7339-4467-83bc-45d4729bce7f",
                 "x-xss-protection": "1; mode=block"
             },
+            "is_json": true,
             "status": 200
         }
     }
