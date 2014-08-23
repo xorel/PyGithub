@@ -111,6 +111,50 @@ structures:
         type: bool
       - name: push
         type: bool
+  - name: StatsCommitActivity
+    updatable: false
+    attributes:
+      - name: days
+        type:
+          container: list
+          content: int
+      - name: total
+        type: int
+      - name: week
+        type: datetime
+  - name: StatsContributor
+    updatable: false
+    attributes:
+      - name: author
+        type: User
+      - name: total
+        type: int
+      - name: weeks
+        type:
+          container: list
+          content: Repository.StatsContributorWeek
+  - name: StatsContributorWeek
+    updatable: false
+    attributes:
+      - name: a
+        type: int
+      - name: c
+        type: int
+      - name: d
+        type: int
+      - name: w
+        type: datetime
+  - name: StatsParticipation
+    updatable: false
+    attributes:
+      - name: all
+        type:
+          container: list
+          content: int
+      - name: owner
+        type:
+          container: list
+          content: int
   - name: Tag
     updatable: false
     attributes:
@@ -1342,6 +1386,76 @@ methods:
     return_type:
       container: PaginatedList
       content: User
+  - name: get_stats_code_frequency
+    end_point: GET /repos/:owner/:repo/stats/code_frequency
+    doc: "This method returns None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content:
+            container: list
+            content: int
+  - name: get_stats_commit_activity
+    end_point: GET /repos/:owner/:repo/stats/commit_activity
+    doc: "This method returns None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content: Repository.StatsCommitActivity
+  - name: get_stats_contributors
+    end_point: GET /repos/:owner/:repo/stats/contributors
+    doc: "This method returns None on empty repositories, and an empty list when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content: Repository.StatsContributor
+  - name: get_stats_participation
+    end_point: GET /repos/:owner/:repo/stats/participation
+    doc: "Attributes of returned object are empty lists for empty repositories, and None when stats have not been computed yet."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type: Repository.StatsParticipation
+  - name: get_stats_punch_card
+    end_point: GET /repos/:owner/:repo/stats/punch_card
+    doc: "This method returns None on empty repositories."
+    url_template: end_point
+    url_template_arguments:
+      - name: owner
+        value: attribute owner.login
+      - name: repo
+        value: attribute name
+    return_type:
+      union:
+        - none
+        - container: list
+          content:
+            container: list
+            content: int
   - name: get_subscribers
     end_point: GET /repos/:owner/:repo/subscribers
     url_template: attribute subscribers_url

@@ -1,0 +1,856 @@
+[
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/repository-stats-complete",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": {
+                "archive_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/{archive_format}{/ref}",
+                "assignees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/assignees{/user}",
+                "blobs_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/git/blobs{/sha}",
+                "branches_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/branches{/branch}",
+                "clone_url": "http://github.home.jacquev6.net/electra/repository-stats-complete.git",
+                "collaborators_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/collaborators{/collaborator}",
+                "comments_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/comments{/number}",
+                "commits_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/commits{/sha}",
+                "compare_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/compare/{base}...{head}",
+                "contents_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/contents/{+path}",
+                "contributors_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/contributors",
+                "created_at": "2014-08-23T07:27:29Z",
+                "default_branch": "master",
+                "description": null,
+                "downloads_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/downloads",
+                "events_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/events",
+                "fork": false,
+                "forks": 0,
+                "forks_count": 0,
+                "forks_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/forks",
+                "full_name": "electra/repository-stats-complete",
+                "git_commits_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/git/commits{/sha}",
+                "git_refs_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/git/refs{/sha}",
+                "git_tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/git/tags{/sha}",
+                "git_url": "git://github.home.jacquev6.net/electra/repository-stats-complete.git",
+                "has_downloads": true,
+                "has_issues": true,
+                "has_wiki": true,
+                "homepage": null,
+                "hooks_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/hooks",
+                "html_url": "http://github.home.jacquev6.net/electra/repository-stats-complete",
+                "id": 217,
+                "issue_comment_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/issues/comments/{number}",
+                "issue_events_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/issues/events{/number}",
+                "issues_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/issues{/number}",
+                "keys_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/keys{/key_id}",
+                "labels_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/labels{/name}",
+                "language": null,
+                "languages_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/languages",
+                "merges_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/merges",
+                "milestones_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/milestones{/number}",
+                "mirror_url": null,
+                "name": "repository-stats-complete",
+                "network_count": 0,
+                "notifications_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/notifications{?since,all,participating}",
+                "open_issues": 0,
+                "open_issues_count": 0,
+                "owner": {
+                    "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
+                    "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
+                    "followers_url": "http://github.home.jacquev6.net/api/v3/users/electra/followers",
+                    "following_url": "http://github.home.jacquev6.net/api/v3/users/electra/following{/other_user}",
+                    "gists_url": "http://github.home.jacquev6.net/api/v3/users/electra/gists{/gist_id}",
+                    "gravatar_id": "4ce12671faa7556e4a9b415362e9da0f",
+                    "html_url": "http://github.home.jacquev6.net/electra",
+                    "id": 16,
+                    "login": "electra",
+                    "organizations_url": "http://github.home.jacquev6.net/api/v3/users/electra/orgs",
+                    "received_events_url": "http://github.home.jacquev6.net/api/v3/users/electra/received_events",
+                    "repos_url": "http://github.home.jacquev6.net/api/v3/users/electra/repos",
+                    "site_admin": false,
+                    "starred_url": "http://github.home.jacquev6.net/api/v3/users/electra/starred{/owner}{/repo}",
+                    "subscriptions_url": "http://github.home.jacquev6.net/api/v3/users/electra/subscriptions",
+                    "type": "User",
+                    "url": "http://github.home.jacquev6.net/api/v3/users/electra"
+                },
+                "permissions": {
+                    "admin": true,
+                    "pull": true,
+                    "push": true
+                },
+                "private": false,
+                "pulls_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/pulls{/number}",
+                "pushed_at": "2014-08-23T07:27:32Z",
+                "releases_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/releases{/id}",
+                "size": 0,
+                "ssh_url": "git@github.home.jacquev6.net:electra/repository-stats-complete.git",
+                "stargazers_count": 0,
+                "stargazers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/stargazers",
+                "statuses_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/statuses/{sha}",
+                "subscribers_count": 1,
+                "subscribers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/subscribers",
+                "subscription_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/subscription",
+                "svn_url": "http://github.home.jacquev6.net/electra/repository-stats-complete",
+                "tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/tags",
+                "teams_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/teams",
+                "trees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete/git/trees{/sha}",
+                "updated_at": "2014-08-23T07:27:32Z",
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/repository-stats-complete",
+                "watchers": 0,
+                "watchers_count": 0
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "6088",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 23 Aug 2014 07:27:42 GMT",
+                "etag": "\"cfc36693ae9f890d37a0c0a08ffe470f\"",
+                "last-modified": "Sat, 23 Aug 2014 07:27:32 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "045d3c34-8a01-4218-b449-4e0cf208b806",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    },
+    {
+        "request": {
+            "body": null,
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/repos/electra/repository-stats-complete/stats/commit_activity",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "GET"
+        },
+        "response": {
+            "body": [
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1439623662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1440228462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1440833262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1441438062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1442042862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1442647662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1443252462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1443857262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1444462062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1445066862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1445671662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1446276462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1446881262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1447486062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1448090862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1448695662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1449300462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1449905262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1450510062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1451114862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1451719662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1452324462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1452929262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1453534062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1454138862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1454743662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1455348462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1455953262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1456558062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1457162862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1457767662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1458372462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1458977262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1459582062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1460186862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1460791662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1461396462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1462001262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1462606062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1463210862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1463815662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1464420462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1465025262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1465630062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1466234862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1466839662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1467444462
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1468049262
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1468654062
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1469258862
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "total": 0,
+                    "week": 1469863662
+                },
+                {
+                    "days": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "total": 1,
+                    "week": 1408233600
+                }
+            ],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "cache-control": "private, max-age=60, s-maxage=60",
+                "connection": "keep-alive",
+                "content-length": "2757",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 23 Aug 2014 07:27:42 GMT",
+                "etag": "\"3b8c07246f6a0dcd0ec53c5572830741\"",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-media-type": "github.v3; param=full; format=json",
+                "x-github-request-id": "d3244fdc-185b-43f8-929c-fbbfc2fcc694",
+                "x-xss-protection": "1; mode=block"
+            },
+            "status": 200
+        }
+    }
+]

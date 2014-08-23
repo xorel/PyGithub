@@ -327,9 +327,10 @@ class Structure(AttributedType):
 
 
 class Method:
-    def __init__(self, containerClass, simpleName, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType):
+    def __init__(self, containerClass, simpleName, doc, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType):
         self.__containerClass = containerClass
         self.__simpleName = simpleName
+        self.__doc = doc
         self.__qualifiedName = containerClass.qualifiedName + "." + simpleName
         self.__parameters = [Parameter(*p) for p in parameters]
         self.__unimplementedParameters = [p.name for p in unimplementedParameters]
@@ -379,6 +380,10 @@ class Method:
     @property
     def simpleName(self):
         return self.__simpleName
+
+    @property
+    def doc(self):
+        return self.__doc
 
     @property
     def qualifiedName(self):

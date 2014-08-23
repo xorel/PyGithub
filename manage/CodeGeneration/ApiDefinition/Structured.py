@@ -26,7 +26,7 @@ Definition = collections.namedtuple("Definition", "endPoints, classes, unimpleme
 Class = collections.namedtuple("Class", "name, base, structures, attributes, methods, deprecatedAttributes")
 Structure = collections.namedtuple("Structure", "name, updatable, attributes, deprecatedAttributes")
 Attribute = collections.namedtuple("Attribute", "name, type")
-Method = collections.namedtuple("Method", "name, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType")
+Method = collections.namedtuple("Method", "name, doc, endPoints, parameters, unimplementedParameters, urlTemplate, urlTemplateArguments, urlArguments, postArguments, headers, effects, returnFrom, returnType")
 EndPoint = collections.namedtuple("EndPoint", "verb, url, parameters, doc")
 Parameter = collections.namedtuple("Parameter", "name, type, optional, variable")
 Argument = collections.namedtuple("Argument", "name, value")
@@ -181,12 +181,13 @@ class _DefinitionLoader:
             reason=reason,
         )
 
-    def buildMethod(self, name, url_template, effect=None, effects=None, return_from=None, return_type=None, end_point=None, end_points=None, url_template_arguments=[], url_arguments=[], post_arguments=[], headers=[], parameters=[], optional_parameters=[], variable_parameter=None, unimplemented_parameters=[]):
+    def buildMethod(self, name, url_template, doc=None, effect=None, effects=None, return_from=None, return_type=None, end_point=None, end_points=None, url_template_arguments=[], url_arguments=[], post_arguments=[], headers=[], parameters=[], optional_parameters=[], variable_parameter=None, unimplemented_parameters=[]):
         assert isinstance(name, str), name
         # no assert on url_template
         effects = self.makeList(effect, effects)
         assert all(isinstance(e, str) for e in effects)
         assert isinstance(return_from, (type(None), str)), return_from
+        assert isinstance(doc, (type(None), str)), doc
         # no assert on return_type
         end_points = self.makeList(end_point, end_points)
         assert all(isinstance(ep, str) for ep in end_points)
@@ -200,6 +201,7 @@ class _DefinitionLoader:
         assert all(isinstance(p, dict) for p in unimplemented_parameters)
         return Method(
             name=name,
+            doc=doc,
             endPoints=tuple(sorted(end_points)),
             parameters=tuple(itertools.chain(
                 (self.buildParameter(optional=False, variable=False, **p) for p in parameters),  # Do not sort
@@ -372,6 +374,8 @@ class _DefinitionDumper:
             data["end_point"] = method.endPoints[0]
         else:
             data["end_points"] = list(method.endPoints)
+        if method.doc is not None:
+            data["doc"] = '"{}"'.format(method.doc)
         if not all(p.optional or p.variable for p in method.parameters):
             data["parameters"] = []
         if any(p.optional and p.name != "per_page" for p in method.parameters):

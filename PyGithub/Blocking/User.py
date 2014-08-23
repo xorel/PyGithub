@@ -50,6 +50,7 @@ class User(_bgo.UpdatableGithubObject):
       * :attr:`.PullRequest.merged_by`
       * :attr:`.PullRequest.user`
       * :attr:`.Release.author`
+      * :attr:`.Repository.StatsContributor.author`
       * :meth:`.Repository.get_assignees`
       * :meth:`.Repository.get_collaborators`
       * :meth:`.Repository.get_stargazers`

@@ -163,16 +163,19 @@ class _RecordModeHelper(object):
             response.status_code = status
             response.headers = requests.structures.CaseInsensitiveDict(headers)
             # print(body, body.__class__)
-            if is_json:
-                body = json.dumps(body)
+            if body == u"":
+                body = ""
             else:
-                body = body.encode("utf8")
-            if sys.hexversion >= 0x03000000:
-                body = bytes(body, encoding="utf8")
-            if "content-encoding" in headers:
-                assert headers["content-encoding"] == "gzip"
-                c = zlib.compressobj(6, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
-                body = c.compress(body) + c.flush()
+                if is_json:
+                    body = json.dumps(body)
+                else:
+                    body = body.encode("utf8")
+                if sys.hexversion >= 0x03000000:
+                    body = bytes(body, encoding="utf8")
+                if "content-encoding" in headers:
+                    assert headers["content-encoding"] == "gzip"
+                    c = zlib.compressobj(6, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
+                    body = c.compress(body) + c.flush()
             response.raw = requests.packages.urllib3.HTTPResponse(
                 io.BytesIO(body),
                 status=status,
@@ -222,14 +225,16 @@ class TestCase(unittest.TestCase):
         else:
             time.sleep(duration)
 
-    def setUpTestRepo(self, owner, name):
+    def setUpTestRepo(self, owner, name, **kwds):
         g = getattr(self, owner)
         try:
             g.get_repo((owner, name)).delete()
             self.pause()
         except PyGithub.Blocking.ObjectNotFoundException:
             pass
-        repo = g.get_authenticated_user().create_repo(name, auto_init=True)
+        if "auto_init" not in kwds:
+            kwds["auto_init"] = True
+        repo = g.get_authenticated_user().create_repo(name, **kwds)
         self.pause()
         return repo
 

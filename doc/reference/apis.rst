@@ -6,7 +6,7 @@ From Github API v3 to PyGithub
 ==============================
 
 Here are the 286 end points I'm aware of, and if/where they are implemented in PyGithub.
-60 end points are not yet implemented, and I don't plan to implement 13 end points for reasons described below.
+55 end points are not yet implemented, and I don't plan to implement 13 end points for reasons described below.
 If something is not listed here, please `open an issue <http://github.com/jacquev6/PyGithub/issues>`__ with a link to the corresponding documentation of Github API v3.
 
 GET /api/last-message.json
@@ -1550,35 +1550,40 @@ GET /repos/:owner/:repo/stats/code_frequency
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statistics#code-frequency>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_stats_code_frequency`
 
 GET /repos/:owner/:repo/stats/commit_activity
 ---------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statistics#commit-activity>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_stats_commit_activity`
 
 GET /repos/:owner/:repo/stats/contributors
 ------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statistics#contributors>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_stats_contributors`
 
 GET /repos/:owner/:repo/stats/participation
 -------------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statistics#participation>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_stats_participation`
 
 GET /repos/:owner/:repo/stats/punch_card
 ----------------------------------------
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/statistics#punch-card>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.get_stats_punch_card`
 
 POST /repos/:owner/:repo/statuses/:sha
 --------------------------------------

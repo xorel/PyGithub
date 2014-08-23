@@ -482,6 +482,147 @@ class Repository(_bgo.UpdatableGithubObject):
             """
             return self.__push.value
 
+    class StatsCommitActivity(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_stats_commit_activity`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, days=None, total=None, week=None, **kwds):
+            super(Repository.StatsCommitActivity, self)._initAttributes(**kwds)
+            self.__days = _rcv.Attribute("Repository.StatsCommitActivity.days", _rcv.ListConverter(_rcv.IntConverter), days)
+            self.__total = _rcv.Attribute("Repository.StatsCommitActivity.total", _rcv.IntConverter, total)
+            self.__week = _rcv.Attribute("Repository.StatsCommitActivity.week", _rcv.DatetimeConverter, week)
+
+        @property
+        def days(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__days.value
+
+        @property
+        def total(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__total.value
+
+        @property
+        def week(self):
+            """
+            :type: :class:`datetime`
+            """
+            return self.__week.value
+
+    class StatsContributor(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_stats_contributors`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, author=None, total=None, weeks=None, **kwds):
+            import PyGithub.Blocking.User
+            super(Repository.StatsContributor, self)._initAttributes(**kwds)
+            self.__author = _rcv.Attribute("Repository.StatsContributor.author", _rcv.ClassConverter(self.Session, PyGithub.Blocking.User.User), author)
+            self.__total = _rcv.Attribute("Repository.StatsContributor.total", _rcv.IntConverter, total)
+            self.__weeks = _rcv.Attribute("Repository.StatsContributor.weeks", _rcv.ListConverter(_rcv.StructureConverter(self.Session, Repository.StatsContributorWeek)), weeks)
+
+        @property
+        def author(self):
+            """
+            :type: :class:`~.User.User`
+            """
+            return self.__author.value
+
+        @property
+        def total(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__total.value
+
+        @property
+        def weeks(self):
+            """
+            :type: :class:`list` of :class:`.Repository.StatsContributorWeek`
+            """
+            return self.__weeks.value
+
+    class StatsContributorWeek(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :attr:`.Repository.StatsContributor.weeks`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, a=None, c=None, d=None, w=None, **kwds):
+            super(Repository.StatsContributorWeek, self)._initAttributes(**kwds)
+            self.__a = _rcv.Attribute("Repository.StatsContributorWeek.a", _rcv.IntConverter, a)
+            self.__c = _rcv.Attribute("Repository.StatsContributorWeek.c", _rcv.IntConverter, c)
+            self.__d = _rcv.Attribute("Repository.StatsContributorWeek.d", _rcv.IntConverter, d)
+            self.__w = _rcv.Attribute("Repository.StatsContributorWeek.w", _rcv.DatetimeConverter, w)
+
+        @property
+        def a(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__a.value
+
+        @property
+        def c(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__c.value
+
+        @property
+        def d(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__d.value
+
+        @property
+        def w(self):
+            """
+            :type: :class:`datetime`
+            """
+            return self.__w.value
+
+    class StatsParticipation(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_stats_participation`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, all=None, owner=None, **kwds):
+            super(Repository.StatsParticipation, self)._initAttributes(**kwds)
+            self.__all = _rcv.Attribute("Repository.StatsParticipation.all", _rcv.ListConverter(_rcv.IntConverter), all)
+            self.__owner = _rcv.Attribute("Repository.StatsParticipation.owner", _rcv.ListConverter(_rcv.IntConverter), owner)
+
+        @property
+        def all(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__all.value
+
+        @property
+        def owner(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__owner.value
+
     class Tag(_bgo.SessionedGithubObject):
         """
         Methods and attributes returning instances of this class:
@@ -2499,6 +2640,99 @@ class Repository(_bgo.UpdatableGithubObject):
         urlArguments = _snd.dictionary(per_page=per_page)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.User.User, self.Session, r)
+
+    def get_stats_code_frequency(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/code_frequency <http://developer.github.com/v3/repos/statistics#code-frequency>`__ end point.
+
+        This is the only method calling this end point.
+
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
+
+        :rtype: None or :class:`list` of :class:`list` of :class:`int`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/code_frequency", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 202:
+            return []
+        elif r.status_code == 204:
+            return None
+        else:
+            return r.json()
+
+    def get_stats_commit_activity(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/commit_activity <http://developer.github.com/v3/repos/statistics#commit-activity>`__ end point.
+
+        This is the only method calling this end point.
+
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
+
+        :rtype: None or :class:`list` of :class:`.Repository.StatsCommitActivity`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/commit_activity", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 202:
+            return []
+        elif r.status_code == 204:
+            return None
+        else:
+            return [Repository.StatsCommitActivity(self.Session, x) for x in r.json()]
+
+    def get_stats_contributors(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/contributors <http://developer.github.com/v3/repos/statistics#contributors>`__ end point.
+
+        This is the only method calling this end point.
+
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
+
+        :rtype: None or :class:`list` of :class:`.Repository.StatsContributor`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/contributors", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 202:
+            return []
+        elif r.status_code == 204:
+            return None
+        else:
+            return [Repository.StatsContributor(self.Session, x) for x in r.json()]
+
+    def get_stats_participation(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/participation <http://developer.github.com/v3/repos/statistics#participation>`__ end point.
+
+        This is the only method calling this end point.
+
+        Attributes of returned object are empty lists for empty repositories, and None when stats have not been computed yet.
+
+        :rtype: :class:`.Repository.StatsParticipation`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/participation", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return Repository.StatsParticipation(self.Session, r.json())
+
+    def get_stats_punch_card(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/punch_card <http://developer.github.com/v3/repos/statistics#punch-card>`__ end point.
+
+        This is the only method calling this end point.
+
+        This method returns None on empty repositories.
+
+        :rtype: None or :class:`list` of :class:`list` of :class:`int`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/punch_card", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        if r.status_code == 204:
+            return None
+        else:
+            return r.json()
 
     def get_subscribers(self, per_page=None):
         """
