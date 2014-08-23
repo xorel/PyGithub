@@ -9,7 +9,7 @@ assert sys.hexversion >= 0x03040000
 
 
 class RstGenerator:
-    def generateApis(self, endPoints):
+    def generateApis(self, endPoints, unimplementedEndPoints):
         yield "From Github API v3 to PyGithub"
         yield "=============================="
         yield ""
@@ -27,6 +27,8 @@ class RstGenerator:
                 yield "Implemented in PyGithub by:"
                 for method in endPoint.methods:
                     yield "  * :meth:`.{}`".format(method.qualifiedName)
+            elif unimplementedEndPoints[title] is not None:
+                yield "Not implemented in PyGithub: " + unimplementedEndPoints[title]
             else:
                 yield "Not yet implemented in PyGithub."
             yield ""

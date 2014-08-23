@@ -333,6 +333,34 @@ GET /issues
 Implemented in PyGithub by:
   * :meth:`.AuthenticatedUser.get_issues`
 
+GET /legacy/issues/search/:owner/:repository/:state/:keyword
+------------------------------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/search/legacy#search-issues>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
+GET /legacy/repos/search/:keyword
+---------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/search/legacy#search-repositories>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
+GET /legacy/user/email/:email
+-----------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/search/legacy#email-search>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
+GET /legacy/user/search/:keyword
+--------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/search/legacy#search-users>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
 POST /markdown
 --------------
 
@@ -340,6 +368,13 @@ POST /markdown
 
 Implemented in PyGithub by:
   * :meth:`.Github.render_markdown`
+
+POST /markdown/raw
+------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/markdown#render-a-markdown-document-in-raw-mode>`__)
+
+Not implemented in PyGithub: job is done by POST /markdown.
 
 GET /meta
 ---------
@@ -564,7 +599,7 @@ GET /repos/:owner/:repo/:archive_format/:ref
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/contents#get-archive-link>`__)
 
-Not yet implemented in PyGithub.
+Not implemented in PyGithub: this is not a json API.
 
 GET /repos/:owner/:repo/assignees
 ---------------------------------
@@ -777,6 +812,27 @@ POST /repos/:owner/:repo/deployments/:id/statuses
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/deployments#create-a-deployment-status>`__)
 
 Not yet implemented in PyGithub.
+
+GET /repos/:owner/:repo/downloads
+---------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#list-downloads-for-a-repository>`__)
+
+Not implemented in PyGithub: this is a deprecated API.
+
+DELETE /repos/:owner/:repo/downloads/:id
+----------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#delete-a-download>`__)
+
+Not implemented in PyGithub: this is a deprecated API.
+
+GET /repos/:owner/:repo/downloads/:id
+-------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/downloads#get-a-single-download>`__)
+
+Not implemented in PyGithub: this is a deprecated API.
 
 GET /repos/:owner/:repo/events
 ------------------------------
@@ -2017,6 +2073,27 @@ GET /user/subscriptions
 
 Implemented in PyGithub by:
   * :meth:`.AuthenticatedUser.get_subscriptions`
+
+DELETE /user/subscriptions/:owner/:repo
+---------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/activity/watching#stop-watching-a-repository-legacy>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
+GET /user/subscriptions/:owner/:repo
+------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/activity/watching#check-if-you-are-watching-a-repository-legacy>`__)
+
+Not implemented in PyGithub: this is a legacy API.
+
+PUT /user/subscriptions/:owner/:repo
+------------------------------------
+
+(`Reference documentation of Github API v3 <http://developer.github.com/v3/activity/watching#watch-a-repository-legacy>`__)
+
+Not implemented in PyGithub: this is a legacy API.
 
 GET /user/teams
 ---------------

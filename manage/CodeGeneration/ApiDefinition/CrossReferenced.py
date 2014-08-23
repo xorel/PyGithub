@@ -539,10 +539,9 @@ class Definition:
 
         unimplementedEndPoints = []
         for family, endPoints in definition.unimplementedEndPoints:
-            for url, verbs in endPoints:
-                for verb in verbs:
-                    unimplementedEndPoints.append(endPointsRepo[verb + " " + url])
-        self.__unimplementedEndPoints = sorted(unimplementedEndPoints, key=lambda ep: (ep.url, ep.verb))
+            for e in endPoints:
+                unimplementedEndPoints.append((endPointsRepo[e.name], e.reason))
+        self.__unimplementedEndPoints = sorted(unimplementedEndPoints, key=lambda ep: (ep[0].url, ep[0].verb))
 
         self.__classes = sorted((Class(*c) for c in definition.classes), key=lambda c: c.qualifiedName)
 

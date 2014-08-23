@@ -62,7 +62,6 @@ class ReferenceDocumentation:
         "/gitignore/templates/C": "/gitignore/templates/:name",
     }
     uninterestingUrls = [
-        "/markdown/raw",  # Job is done by /markdown => useless in PyGithub
         "/repos/octocat/Hello-World/git/refs/heads/feature-a",  # Example of DELETE /repos/:owner/:repo/git/refs/:ref
         "/repos/octocat/Hello-World/git/refs/tags/v1.0",  # Example of DELETE /repos/:owner/:repo/git/refs/:ref
         "/repos/:owner/:repo/git/trees/:sha?recursive=1",  # Example of GET /repos/:owner/:repo/git/trees/:sha
@@ -70,13 +69,6 @@ class ReferenceDocumentation:
         "/repos/:owner/:repo/git/refs/tags",  # Example of GET /repos/:owner/:repo/git/refs
         "/repos/octokit/octokit.rb",  # Example
         "/orgs/octokit/repos",  # Example
-        "/user/subscriptions/:owner/:repo",  # Legacy
-        "/legacy/issues/search/:owner/:repository/:state/:keyword",  # Legacy
-        "/legacy/repos/search/:keyword",  # Legacy
-        "/legacy/user/email/:email",  # Legacy
-        "/legacy/user/search/:keyword",  # Legacy
-        "/repos/:owner/:repo/downloads",  # Deprecated http://developer.github.com/v3/repos/downloads
-        "/repos/:owner/:repo/downloads/:id",  # Deprecated http://developer.github.com/v3/repos/downloads
         "/repos/:owner/:repo/compare/user1:branchname...user2:branchname",  # Like /repos/:owner/:repo/compare/base...head
     ]
 

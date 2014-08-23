@@ -303,7 +303,15 @@ class _DefinitionLoader:
         unimplemented = dict()
         for fileName in glob.glob(os.path.join(self.dirName, "unimplemented.*.yml")):
             family = os.path.basename(fileName)[14:-4]
-            unimplemented[family] = tuple((k, tuple(sorted(v))) for k, v in sorted(_loadYml(fileName).items()))
+            members = []
+            for url, verbs in _loadYml(fileName).items():
+                for verb in verbs:
+                    if isinstance(verb, dict):
+                        ((verb, reason),) = verb.items()
+                    else:
+                        reason = None
+                    members.append((url, verb, reason))
+            unimplemented[family] = tuple(UnimplementedStuff("{} {}".format(verb, url), reason) for url, verb, reason in sorted(members))
         return tuple(sorted(unimplemented.items()))
 
 
@@ -491,7 +499,16 @@ class _DefinitionDumper:
         return {"enum": tuple(type.values)}
 
     def createDataForUnimplementedEndPoints(self, endPoints):
-        return {k: list(v) for (k, v) in endPoints}
+        data = dict()
+        for e in endPoints:
+            verb, url = e.name.split(" ")
+            if url not in data:
+                data[url] = list()
+            if e.reason is None:
+                data[url].append(verb)
+            else:
+                data[url].append({verb: e.reason})
+        return data
 
     def getMethod(self, scheme, *names):
         name = scheme.format(*("".join(part[0].capitalize() + part[1:] for part in name.strip("_").split("_")) for name in names))

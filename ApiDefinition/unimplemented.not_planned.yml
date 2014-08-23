@@ -1,0 +1,21 @@
+/legacy/issues/search/:owner/:repository/:state/:keyword:
+  - GET: this is a legacy API.
+/legacy/repos/search/:keyword:
+  - GET: this is a legacy API.
+/legacy/user/email/:email:
+  - GET: this is a legacy API.
+/legacy/user/search/:keyword:
+  - GET: this is a legacy API.
+/markdown/raw:
+  - POST: job is done by POST /markdown.
+/repos/:owner/:repo/:archive_format/:ref:
+  - GET: this is not a json API.
+/repos/:owner/:repo/downloads:
+  - GET: this is a deprecated API.
+/repos/:owner/:repo/downloads/:id:
+  - DELETE: this is a deprecated API.
+  - GET: this is a deprecated API.
+/user/subscriptions/:owner/:repo:
+  - DELETE: this is a legacy API.
+  - GET: this is a legacy API.
+  - PUT: this is a legacy API.

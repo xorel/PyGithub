@@ -52,7 +52,7 @@ class Checker(object):
                                 yield c2, s, a
 
     def unimplementedEndPointsNotDeclared(self):
-        unimplemented = set(self.definition.endPoints) - set(self.definition.unimplementedEndPoints)
+        unimplemented = set(self.definition.endPoints) - set(ep for ep, reason in self.definition.unimplementedEndPoints)
         for c in self.definition.classes:
             for m in c.methods:
                 for ep in m.endPoints:
@@ -60,7 +60,7 @@ class Checker(object):
         return unimplemented
 
     def implementedEndPointsDeclaredUnimplemented(self):
-        unimplemented = set(self.definition.unimplementedEndPoints)
+        unimplemented = set(ep for ep, reason in self.definition.unimplementedEndPoints)
         for c in self.definition.classes:
             for m in c.methods:
                 for ep in m.endPoints:
@@ -206,7 +206,7 @@ class CheckerTestCase(unittest.TestCase):
                 Structured.EndPoint("GET", "/bar", (), ""),
             ),
             (),
-            (("family", (("/bar", ("GET",)),)),)
+            (("family", (Structured.UnimplementedStuff("GET /bar", None),)),)
         )
         self.expect(d)
 
@@ -230,7 +230,7 @@ class CheckerTestCase(unittest.TestCase):
             (
                 Structured.Class("Bar", None, (), (Structured.Attribute("url", Structured.ScalarType("string")),), (Structured.Method("get_foo", ("GET /foo",), (), (), Structured.EndPointValue(), (), (), (), (), (), None, Structured.NoneType),), ()),
             ),
-            (("family", (("/foo", ("GET",)),)),)
+            (("family", (Structured.UnimplementedStuff("GET /foo", None),)),)
         )
         self.expect(d, "End-point 'GET /foo' is declared as not implemented but is implemented by 'Bar.get_foo'")
 

@@ -23,7 +23,7 @@ class Generator(object):
         self.rstGenerator = CodeGeneration.RstGenerator.RstGenerator()
 
     def generate(self):
-        self.__writeFileEvenIfExists(self.rstGenerator.generateApis(self.__definition.endPoints), os.path.join("doc", "reference", "apis.rst"))
+        self.__writeFileEvenIfExists(self.rstGenerator.generateApis(self.__definition.endPoints, {e.verb + " " + e.url: reason for (e, reason) in self.__definition.unimplementedEndPoints}), os.path.join("doc", "reference", "apis.rst"))
         self.__writeFileEvenIfExists(self.testGenerator.generateAll(self.__definition.classes), os.path.join("PyGithub", "Blocking", "tests", "classes", "all.py"))
         self.__writeFileEvenIfExists(self.testGenerator.generateAllImports(self.__definition.classes), os.path.join("PyGithub", "Blocking", "tests", "classes", "imports.py"))
 
