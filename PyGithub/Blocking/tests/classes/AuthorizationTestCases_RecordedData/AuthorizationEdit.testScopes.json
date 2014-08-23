@@ -64,7 +64,7 @@
                 "content-length": "1449",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 19:00:29 GMT",
+                "date": "Sat, 23 Aug 2014 06:13:08 GMT",
                 "etag": "\"65c37a665668d334b57d4219cb221475\"",
                 "last-modified": "Thu, 07 Aug 2014 01:43:28 GMT",
                 "server": "GitHub.com",
@@ -73,7 +73,7 @@
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "e1f892bc-ec7c-4a8d-97a3-3eb8dd5a55bb",
+                "x-github-request-id": "72a4004f-590d-4a77-a661-350516053d56",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -107,12 +107,9 @@
                 "id": 12,
                 "note": "edit",
                 "note_url": null,
-                "scopes": [
-                    "user",
-                    "repo"
-                ],
+                "scopes": [],
                 "token": "6dc7fb765648fe044c812f7adf17e2383af97165",
-                "updated_at": "2014-08-16T18:55:23Z",
+                "updated_at": "2014-08-16T19:00:29Z",
                 "url": "http://github.home.jacquev6.net/api/v3/authorizations/12"
             },
             "headers": {
@@ -121,19 +118,19 @@
                 "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
                 "cache-control": "private, max-age=60, s-maxage=60",
                 "connection": "keep-alive",
-                "content-length": "377",
+                "content-length": "364",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 19:00:29 GMT",
-                "etag": "\"d61b7675c3d7e171409d32e19f0c15f8\"",
-                "last-modified": "Sat, 16 Aug 2014 18:55:23 GMT",
+                "date": "Sat, 23 Aug 2014 06:13:08 GMT",
+                "etag": "\"98480d94d31a49f1ae83fcb6000793f1\"",
+                "last-modified": "Sat, 16 Aug 2014 19:00:29 GMT",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "d3b69282-5ef5-4297-8cb3-507006d9a5f4",
+                "x-github-request-id": "64b07f89-eef2-46e7-b99a-b59cc5ce97b7",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -178,7 +175,7 @@
                     "repo"
                 ],
                 "token": "6dc7fb765648fe044c812f7adf17e2383af97165",
-                "updated_at": "2014-08-16T18:55:23Z",
+                "updated_at": "2014-08-23T06:13:09Z",
                 "url": "http://github.home.jacquev6.net/api/v3/authorizations/12"
             },
             "headers": {
@@ -190,15 +187,15 @@
                 "content-length": "377",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 19:00:29 GMT",
-                "etag": "\"b116b8c53e1e475a3ee8a3fff0220f16\"",
+                "date": "Sat, 23 Aug 2014 06:13:09 GMT",
+                "etag": "\"b6baecfaec43eb4e638def50295d9636\"",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "714a089e-cf34-4908-9c73-f4d76b8a6ca8",
+                "x-github-request-id": "8bf457e8-d61d-461d-a221-443d89657b9d",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -245,7 +242,7 @@
                     "delete_repo"
                 ],
                 "token": "6dc7fb765648fe044c812f7adf17e2383af97165",
-                "updated_at": "2014-08-16T19:00:29Z",
+                "updated_at": "2014-08-23T06:13:09Z",
                 "url": "http://github.home.jacquev6.net/api/v3/authorizations/12"
             },
             "headers": {
@@ -257,15 +254,15 @@
                 "content-length": "398",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 19:00:29 GMT",
-                "etag": "\"ca900d668bef7b37225fe7514f2c3670\"",
+                "date": "Sat, 23 Aug 2014 06:13:09 GMT",
+                "etag": "\"cd927ccab65c1876a77e2ff4d55cdccc\"",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "e33a85cd-21f6-4279-af11-a7b6d1fbb3c5",
+                "x-github-request-id": "30fd9234-2183-47d7-b152-a33feccfa06c",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -309,7 +306,7 @@
                 "note_url": null,
                 "scopes": [],
                 "token": "6dc7fb765648fe044c812f7adf17e2383af97165",
-                "updated_at": "2014-08-16T19:00:29Z",
+                "updated_at": "2014-08-23T06:13:10Z",
                 "url": "http://github.home.jacquev6.net/api/v3/authorizations/12"
             },
             "headers": {
@@ -321,15 +318,15 @@
                 "content-length": "364",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 19:00:29 GMT",
-                "etag": "\"a57ee7f26fbd7aa76671f55dde8a7607\"",
+                "date": "Sat, 23 Aug 2014 06:13:10 GMT",
+                "etag": "\"fe714b8b8bd9c0d747328aceb889e03e\"",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "75f349ad-92ef-40bd-8adb-71fa0c4e68c6",
+                "x-github-request-id": "7454b4de-7d60-4419-a41a-b55da3ce3273",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200

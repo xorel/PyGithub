@@ -62,7 +62,7 @@ class AuthorizationEdit(TestCase):
 
     def testScopes(self):
         a = self.penelope.get_authenticated_user().get_authorization(self.data.id)
-        # self.assertEqual(a.scopes, [])
+        self.assertEqual(a.scopes, [])
         a.edit(scopes=["user", "repo"])
         self.assertEqual(a.scopes, ["user", "repo"])
         a.edit(add_scopes=["gist", "delete_repo"])
