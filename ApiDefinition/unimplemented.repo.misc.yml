@@ -2,5 +2,3 @@
   - GET
 /repos/:owner/:repo/commits/:ref/status:
   - GET
-/repos/:owner/:repo/compare/:base...:head:
-  - GET

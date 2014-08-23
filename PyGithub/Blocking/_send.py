@@ -30,6 +30,19 @@ def normalizeCommitSha(commit):
         raise TypeError()  # @todoAlpha Raise something more explicit than a plain TypeError
 
 
+def normalizeBranchNameCommitSha(x):
+    import PyGithub.Blocking.Commit
+    import PyGithub.Blocking.Repository
+    if isinstance(x, PyGithub.Blocking.Commit.Commit):
+        return x.sha
+    elif isinstance(x, PyGithub.Blocking.Repository.Repository.Branch):
+        return x.name
+    elif isinstance(x, basestring):
+        return x
+    else:
+        raise TypeError()  # @todoAlpha Raise something more explicit than a plain TypeError
+
+
 def normalizeGistId(gist):
     import PyGithub.Blocking.Gist
     if isinstance(gist, PyGithub.Blocking.Gist.Gist):

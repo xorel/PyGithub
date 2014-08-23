@@ -105,6 +105,7 @@ class Repository(_bgo.UpdatableGithubObject):
         Methods accepting instances of this class as parameter:
           * :meth:`.File.delete`
           * :meth:`.File.edit`
+          * :meth:`.Repository.compare`
           * :meth:`.Repository.create_merge`
           * :meth:`.Repository.edit`
         """
@@ -128,6 +129,213 @@ class Repository(_bgo.UpdatableGithubObject):
             :type: :class:`string`
             """
             return self.__name.value
+
+    class ComparisonResult(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.compare`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, ahead_by=None, base_commit=None, behind_by=None, commits=None, diff_url=None, files=None, html_url=None, merge_base_commit=None, patch_url=None, permalink_url=None, status=None, total_commits=None, url=None, **kwds):
+            import PyGithub.Blocking.Commit
+            super(Repository.ComparisonResult, self)._initAttributes(**kwds)
+            self.__ahead_by = _rcv.Attribute("Repository.ComparisonResult.ahead_by", _rcv.IntConverter, ahead_by)
+            self.__base_commit = _rcv.Attribute("Repository.ComparisonResult.base_commit", _rcv.ClassConverter(self.Session, PyGithub.Blocking.Commit.Commit), base_commit)
+            self.__behind_by = _rcv.Attribute("Repository.ComparisonResult.behind_by", _rcv.IntConverter, behind_by)
+            self.__commits = _rcv.Attribute("Repository.ComparisonResult.commits", _rcv.ListConverter(_rcv.ClassConverter(self.Session, PyGithub.Blocking.Commit.Commit)), commits)
+            self.__diff_url = _rcv.Attribute("Repository.ComparisonResult.diff_url", _rcv.StringConverter, diff_url)
+            self.__files = _rcv.Attribute("Repository.ComparisonResult.files", _rcv.ListConverter(_rcv.StructureConverter(self.Session, Repository.ComparisonResultFile)), files)
+            self.__html_url = _rcv.Attribute("Repository.ComparisonResult.html_url", _rcv.StringConverter, html_url)
+            self.__merge_base_commit = _rcv.Attribute("Repository.ComparisonResult.merge_base_commit", _rcv.ClassConverter(self.Session, PyGithub.Blocking.Commit.Commit), merge_base_commit)
+            self.__patch_url = _rcv.Attribute("Repository.ComparisonResult.patch_url", _rcv.StringConverter, patch_url)
+            self.__permalink_url = _rcv.Attribute("Repository.ComparisonResult.permalink_url", _rcv.StringConverter, permalink_url)
+            self.__status = _rcv.Attribute("Repository.ComparisonResult.status", _rcv.StringConverter, status)
+            self.__total_commits = _rcv.Attribute("Repository.ComparisonResult.total_commits", _rcv.IntConverter, total_commits)
+            self.__url = _rcv.Attribute("Repository.ComparisonResult.url", _rcv.StringConverter, url)
+
+        @property
+        def ahead_by(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__ahead_by.value
+
+        @property
+        def base_commit(self):
+            """
+            :type: :class:`~.Commit.Commit`
+            """
+            return self.__base_commit.value
+
+        @property
+        def behind_by(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__behind_by.value
+
+        @property
+        def commits(self):
+            """
+            :type: :class:`list` of :class:`~.Commit.Commit`
+            """
+            return self.__commits.value
+
+        @property
+        def diff_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__diff_url.value
+
+        @property
+        def files(self):
+            """
+            :type: :class:`list` of :class:`.Repository.ComparisonResultFile`
+            """
+            return self.__files.value
+
+        @property
+        def html_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__html_url.value
+
+        @property
+        def merge_base_commit(self):
+            """
+            :type: :class:`~.Commit.Commit`
+            """
+            return self.__merge_base_commit.value
+
+        @property
+        def patch_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__patch_url.value
+
+        @property
+        def permalink_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__permalink_url.value
+
+        @property
+        def status(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__status.value
+
+        @property
+        def total_commits(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__total_commits.value
+
+        @property
+        def url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__url.value
+
+    class ComparisonResultFile(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :attr:`.Repository.ComparisonResult.files`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, additions=None, blob_url=None, changes=None, contents_url=None, deletions=None, filename=None, patch=None, raw_url=None, sha=None, status=None, **kwds):
+            super(Repository.ComparisonResultFile, self)._initAttributes(**kwds)
+            self.__additions = _rcv.Attribute("Repository.ComparisonResultFile.additions", _rcv.IntConverter, additions)
+            self.__blob_url = _rcv.Attribute("Repository.ComparisonResultFile.blob_url", _rcv.StringConverter, blob_url)
+            self.__changes = _rcv.Attribute("Repository.ComparisonResultFile.changes", _rcv.IntConverter, changes)
+            self.__contents_url = _rcv.Attribute("Repository.ComparisonResultFile.contents_url", _rcv.StringConverter, contents_url)
+            self.__deletions = _rcv.Attribute("Repository.ComparisonResultFile.deletions", _rcv.IntConverter, deletions)
+            self.__filename = _rcv.Attribute("Repository.ComparisonResultFile.filename", _rcv.StringConverter, filename)
+            self.__patch = _rcv.Attribute("Repository.ComparisonResultFile.patch", _rcv.StringConverter, patch)
+            self.__raw_url = _rcv.Attribute("Repository.ComparisonResultFile.raw_url", _rcv.StringConverter, raw_url)
+            self.__sha = _rcv.Attribute("Repository.ComparisonResultFile.sha", _rcv.StringConverter, sha)
+            self.__status = _rcv.Attribute("Repository.ComparisonResultFile.status", _rcv.StringConverter, status)
+
+        @property
+        def additions(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__additions.value
+
+        @property
+        def blob_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__blob_url.value
+
+        @property
+        def changes(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__changes.value
+
+        @property
+        def contents_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__contents_url.value
+
+        @property
+        def deletions(self):
+            """
+            :type: :class:`int`
+            """
+            return self.__deletions.value
+
+        @property
+        def filename(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__filename.value
+
+        @property
+        def patch(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__patch.value
+
+        @property
+        def raw_url(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__raw_url.value
+
+        @property
+        def sha(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__sha.value
+
+        @property
+        def status(self):
+            """
+            :type: :class:`string`
+            """
+            return self.__status.value
 
     class ContentCommit(_bgo.SessionedGithubObject):
         """
@@ -1007,6 +1215,24 @@ class Repository(_bgo.UpdatableGithubObject):
 
         url = uritemplate.expand(self.collaborators_url, collaborator=username)
         r = self.Session._request("PUT", url)
+
+    def compare(self, base, head):
+        """
+        Calls the `GET /repos/:owner/:repo/compare/:base...:head <http://developer.github.com/v3/repos/commits#compare-two-commits>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param base: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :rtype: :class:`.Repository.ComparisonResult`
+        """
+
+        base = _snd.normalizeBranchNameCommitSha(base)
+        head = _snd.normalizeBranchNameCommitSha(head)
+
+        url = uritemplate.expand(self.compare_url, base=base, head=head)
+        r = self.Session._request("GET", url)
+        return Repository.ComparisonResult(self.Session, r.json())
 
     def create_file(self, path, message, content, branch=None, author=None, committer=None):
         """

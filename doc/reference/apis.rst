@@ -714,7 +714,8 @@ GET /repos/:owner/:repo/compare/:base...:head
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/commits#compare-two-commits>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.compare`
 
 DELETE /repos/:owner/:repo/contents/:path
 -----------------------------------------

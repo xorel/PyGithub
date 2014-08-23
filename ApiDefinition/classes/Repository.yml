@@ -18,6 +18,62 @@ structures:
     deprecated_attributes:
       - name: _links
         reason: todoAlpha What should we do with _links?
+  - name: ComparisonResult
+    updatable: false
+    attributes:
+      - name: ahead_by
+        type: int
+      - name: base_commit
+        type: Commit
+      - name: behind_by
+        type: int
+      - name: commits
+        type:
+          container: list
+          content: Commit
+      - name: diff_url
+        type: string
+      - name: files
+        type:
+          container: list
+          content: Repository.ComparisonResultFile
+      - name: html_url
+        type: string
+      - name: merge_base_commit
+        type: Commit
+      - name: patch_url
+        type: string
+      - name: permalink_url
+        type: string
+      - name: status
+        type: string
+      - name: total_commits
+        type: int
+      - name: url
+        type: string
+  - name: ComparisonResultFile
+    updatable: false
+    attributes:
+      - name: additions
+        type: int
+      - name: blob_url
+        type: string
+      - name: changes
+        type: int
+      - name: contents_url
+        type: string
+      - name: deletions
+        type: int
+      - name: filename
+        type: string
+      - name: patch
+        type: string
+      - name: raw_url
+        type: string
+      - name: sha
+        type: string
+      - name: status
+        type: string
   - name: ContentCommit
     updatable: false
     attributes:
@@ -228,6 +284,30 @@ methods:
       - name: collaborator
         value: parameter username
     return_type: none
+  - name: compare
+    end_point: GET /repos/:owner/:repo/compare/:base...:head
+    parameters:
+      - name: base
+        type:
+          union:
+            - class: Repository.Branch
+              attribute: name
+            - class: Commit
+              attribute: sha
+      - name: head
+        type:
+          union:
+            - class: Repository.Branch
+              attribute: name
+            - class: Commit
+              attribute: sha
+    url_template: attribute compare_url
+    url_template_arguments:
+      - name: base
+        value: parameter base
+      - name: head
+        value: parameter head
+    return_type: Repository.ComparisonResult
   - name: create_file
     end_point: PUT /repos/:owner/:repo/contents/:path
     parameters:

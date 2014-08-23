@@ -166,6 +166,42 @@ class RepositoryComments(TestCase):
         self.assertEqual([c.body for c in comments], ["a", "b"])
 
 
+class RepositoryCompare(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-compare")
+        repo.create_git_ref("refs/heads/develop", repo.get_git_ref("heads/master").object.sha)
+        repo.create_file("hello.cpp", "Add hello.cpp", "I2luY2x1ZGUgPGlvc3RyZWFtPg0KDQp2b2lkIG1haW4oKSB7DQogIHN0ZDo6Y291dCA8PCAiSGVsbG8sIFdvcmxkISIgPDwgc3RkOjplbmRsOw0KfQ0K", branch="develop")
+        return Data()
+
+    def testCompare(self):
+        r = self.electra.get_repo(("electra", "repository-compare"))
+        c = r.compare("master", "develop")
+        self.assertEqual(c.ahead_by, 1)
+        self.assertEqual(c.base_commit.commit.message, "Initial commit")
+        self.assertEqual(c.behind_by, 0)
+        self.assertEqual(len(c.commits), 1)
+        self.assertEqual(c.commits[0].commit.message, "Add hello.cpp")
+        self.assertEqual(c.diff_url, "http://github.home.jacquev6.net/electra/repository-compare/compare/master...develop.diff")
+        self.assertEqual(len(c.files), 1)
+        self.assertEqual(c.files[0].additions, 5)
+        self.assertEqual(c.files[0].blob_url, "http://github.home.jacquev6.net/electra/repository-compare/blob/7cd79697c2481c99f8b5e70807681da042a6e68a/hello.cpp")
+        self.assertEqual(c.files[0].changes, 5)
+        self.assertEqual(c.files[0].contents_url, "http://github.home.jacquev6.net/api/v3/repos/electra/repository-compare/contents/hello.cpp?ref=7cd79697c2481c99f8b5e70807681da042a6e68a")
+        self.assertEqual(c.files[0].deletions, 0)
+        self.assertEqual(c.files[0].filename, "hello.cpp")
+        self.assertEqual(c.files[0].patch, '@@ -0,0 +1,5 @@\n+#include <iostream>\r\n+\r\n+void main() {\r\n+  std::cout << "Hello, World!" << std::endl;\r\n+}\r')
+        self.assertEqual(c.files[0].raw_url, "http://github.home.jacquev6.net/electra/repository-compare/raw/7cd79697c2481c99f8b5e70807681da042a6e68a/hello.cpp")
+        self.assertEqual(c.files[0].sha, "b3abd00c0ed7f3c15582ebb80c1ab8483ef656ba")
+        self.assertEqual(c.files[0].status, "added")
+        self.assertEqual(c.html_url, "http://github.home.jacquev6.net/electra/repository-compare/compare/master...develop")
+        self.assertEqual(c.merge_base_commit.commit.message, "Initial commit")
+        self.assertEqual(c.patch_url, "http://github.home.jacquev6.net/electra/repository-compare/compare/master...develop.patch")
+        self.assertEqual(c.permalink_url, "http://github.home.jacquev6.net/electra/repository-compare/compare/electra:e7fac33...electra:7cd7969")
+        self.assertEqual(c.status, "ahead")
+        self.assertEqual(c.total_commits, 1)
+        self.assertEqual(c.url, "http://github.home.jacquev6.net/api/v3/repos/electra/repository-compare/compare/master...develop")
+
+
 class RepositoryContents(TestCase):
     # @todoAlpha Allow methods in inner structs: Repository.Dir needs get_contents
     #   methods:

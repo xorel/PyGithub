@@ -23,6 +23,9 @@ class Commit(_bgo.UpdatableGithubObject):
       * :attr:`.Commit.parents`
       * :meth:`.PullRequest.get_commits`
       * :attr:`.Repository.Branch.commit`
+      * :attr:`.Repository.ComparisonResult.base_commit`
+      * :attr:`.Repository.ComparisonResult.commits`
+      * :attr:`.Repository.ComparisonResult.merge_base_commit`
       * :attr:`.Repository.Tag.commit`
       * :meth:`.Repository.create_merge`
       * :meth:`.Repository.get_commit`
@@ -30,6 +33,7 @@ class Commit(_bgo.UpdatableGithubObject):
 
     Methods accepting instances of this class as parameter:
       * :meth:`.PullRequest.create_pull_comment`
+      * :meth:`.Repository.compare`
     """
 
     class File(_bgo.SessionedGithubObject):
