@@ -140,7 +140,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 
@@ -155,7 +155,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param repo: mandatory :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :rtype: None
         """
 
@@ -245,7 +245,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 
@@ -261,7 +261,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param repo: mandatory :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :rtype: :class:`bool`
         """
 
@@ -277,7 +277,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 
@@ -292,7 +292,7 @@ class Team(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param repo: mandatory :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :rtype: None
         """
 

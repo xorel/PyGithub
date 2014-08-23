@@ -300,7 +300,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 
@@ -316,7 +316,7 @@ class Organization(_bgo.UpdatableGithubObject):
         The following methods also call this end point:
           * :meth:`.AuthenticatedUser.create_fork`
 
-        :param repo: mandatory :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param repo: mandatory :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
@@ -340,9 +340,9 @@ class Organization(_bgo.UpdatableGithubObject):
         :param private: optional :class:`bool`
         :param has_issues: optional :class:`bool`
         :param has_wiki: optional :class:`bool`
-        :param team_id: optional :class:`.Team` or :class:`int` (its :attr:`.Team.id`)
+        :param team_id: optional :class:`~.PyGithub.Blocking.Team.Team` or :class:`int` (its :attr:`~.PyGithub.Blocking.Team.Team.id`)
         :param auto_init: optional :class:`bool`
-        :param gitignore_template: optional :class:`.Github.GitIgnoreTemplate` or :class:`string` (its :attr:`.Github.GitIgnoreTemplate.name`)
+        :param gitignore_template: optional :class:`~.PyGithub.Blocking.Github.Github.GitIgnoreTemplate` or :class:`string` (its :attr:`~.PyGithub.Blocking.Github.Github.GitIgnoreTemplate.name`)
         :param license_template: optional :class:`string`
         :rtype: :class:`~.Repository.Repository`
         """
@@ -380,7 +380,7 @@ class Organization(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param name: mandatory :class:`string`
-        :param repo_names: optional :class:`list` of :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param repo_names: optional :class:`list` of :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :param permission: optional "admin" or "pull" or "push"
         :rtype: :class:`~.Team.Team`
         """
@@ -438,7 +438,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         :param filter: optional "all" or "assigned" or "created" or "mentioned" or "subscribed"
         :param state: optional "all" or "closed" or "open"
-        :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param labels: optional :class:`list` of :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :param sort: optional "comments" or "created" or "updated"
         :param direction: optional "asc" or "desc"
         :param since: optional :class:`datetime`
@@ -585,7 +585,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 
@@ -601,7 +601,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 
@@ -617,7 +617,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 
@@ -632,7 +632,7 @@ class Organization(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 

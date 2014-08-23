@@ -46,7 +46,7 @@ class Builder(object):
 
     def Login(self, login, password):
         """
-        Use `basic authentication via username and password <http://developer.github.com/v3/auth/#via-username-and-password>`_.
+        Use `basic authentication via username and password <http://developer.github.com/v3/auth/#via-username-and-password>`__.
         """
         self.__authenticator = _ses._LoginAuthenticator(login, password)
         return self
@@ -60,7 +60,7 @@ class Builder(object):
 
     def Application(self, client_id, client_secret):
         """
-        Use `OAuth2 Key/Secret authentication https://developer.github.com/v3/#oauth2-keysecret>`_.
+        Use `OAuth2 Key/Secret authentication <https://developer.github.com/v3/#oauth2-keysecret>`__.
         """
         self.__authenticator = _ses._ApplicationAuthenticator(client_id, client_secret)
         return self
@@ -74,7 +74,7 @@ class Builder(object):
 
     def PerPage(self, per_page):
         """
-        Set the default `per_page` url argument for `paginated requests <http://developer.github.com/v3/#pagination>`_.
+        Set the default `per_page` url argument for `paginated requests <http://developer.github.com/v3/#pagination>`__.
         """
         self.__perPage = per_page
         return self

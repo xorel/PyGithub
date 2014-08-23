@@ -601,7 +601,7 @@ class PullRequest(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param body: mandatory :class:`string`
-        :param commit_id: mandatory :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :param commit_id: mandatory :class:`~.PyGithub.Blocking.Commit.Commit` or :class:`string` (its :attr:`~.PyGithub.Blocking.Commit.Commit.sha`)
         :param path: mandatory :class:`string`
         :param position: mandatory :class:`int`
         :rtype: :class:`~.PullComment.PullComment`

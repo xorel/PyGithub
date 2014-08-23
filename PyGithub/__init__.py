@@ -10,4 +10,4 @@ Version = "2.0.0-alpha.4"
 
 import PyGithub.Blocking._builder
 BlockingBuilder = PyGithub.Blocking._builder.Builder
-"An alias of :class:`.Builder` to make it easy to instanciate."
+"An alias of :class:`.Builder` to make it easy to instantiate."

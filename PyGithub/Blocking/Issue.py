@@ -286,7 +286,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param label: mandatory :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param label: mandatory :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :rtype: None
         """
 
@@ -343,10 +343,10 @@ class Issue(_bgo.UpdatableGithubObject):
 
         :param title: optional :class:`string`
         :param body: optional :class:`string` or :class:`Reset`
-        :param assignee: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`) or :class:`Reset`
+        :param assignee: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`) or :class:`Reset`
         :param state: optional "closed" or "open"
-        :param milestone: optional :class:`.Milestone` or :class:`int` (its :attr:`.Milestone.number`) or :class:`Reset`
-        :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param milestone: optional :class:`~.PyGithub.Blocking.Milestone.Milestone` or :class:`int` (its :attr:`~.PyGithub.Blocking.Milestone.Milestone.number`) or :class:`Reset`
+        :param labels: optional :class:`list` of :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :rtype: None
         """
 
@@ -421,7 +421,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param label: mandatory :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param label: mandatory :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :rtype: None
         """
 
@@ -436,7 +436,7 @@ class Issue(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param label: mandatory :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param label: mandatory :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :rtype: None
         """
 

@@ -450,7 +450,7 @@ class Github(_bgo.SessionedGithubObject):
 
         This is the only method calling this end point.
 
-        :param since: optional :class:`.Repository` or :class:`int` (its :attr:`.Repository.id`)
+        :param since: optional :class:`~.PyGithub.Blocking.Repository.Repository` or :class:`int` (its :attr:`~.PyGithub.Blocking.Repository.Repository.id`)
         :rtype: :class:`.PaginatedList` of :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
@@ -503,7 +503,7 @@ class Github(_bgo.SessionedGithubObject):
 
         This is the only method calling this end point.
 
-        :param since: optional :class:`.User` or :class:`int` (its :attr:`.User.id`)
+        :param since: optional :class:`~.PyGithub.Blocking.User.User` or :class:`int` (its :attr:`~.PyGithub.Blocking.User.User.id`)
         :rtype: :class:`.PaginatedList` of :class:`~.User.User` or :class:`~.Organization.Organization`
         """
         import PyGithub.Blocking.Organization
@@ -525,7 +525,7 @@ class Github(_bgo.SessionedGithubObject):
 
         :param text: mandatory :class:`string`
         :param mode: optional "gfm" or "markdown"
-        :param context: optional :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :param context: optional :class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)
         :rtype: :class:`string`
         """
 

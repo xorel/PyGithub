@@ -13,7 +13,7 @@ information, like your `rate limit <http://developer.github.com/v3/#rate-limitin
 Conditional requests
 --------------------
 
-Many objects returned by PyGithub have a :meth:`.update` method.
+Many objects returned by PyGithub have a :meth:`~User.update` method.
 You can use it to make a `conditional request <http://developer.github.com/v3/#conditional-requests>`_.
 The object's attributes will be updated, and your rate limit consumed, only if the object has changed since it
 was created or last updated.
@@ -58,12 +58,6 @@ class SessionedGithubObject(object):
 
 
 class UpdatableGithubObject(SessionedGithubObject):
-    """
-    You should not manipulate this class directly. It is public only to document its :meth:`.update`
-    method, but this is an implementation detail. The :meth:`.update` method may be moved to another class
-    or duplicated in concrete subclasses.
-    """
-
     def __init__(self, session, attributes, eTag=None):
         self.__eTag = eTag
         super(UpdatableGithubObject, self).__init__(session, attributes)
@@ -86,11 +80,6 @@ class UpdatableGithubObject(SessionedGithubObject):
             self._update()
 
     def _update(self):
-        """
-        Makes a `conditional request <http://developer.github.com/v3/#conditional-requests>`_ and updates the object.
-
-        Returns True if the update was needed.
-        """
         if self._url is None:
             raise _exn.BadAttributeException("UpdatableGithubObject.url", basestring.__name__, None)
         r = self.Session._request("GET", self._url, headers={"If-None-Match": self.__eTag})
@@ -102,7 +91,4 @@ class UpdatableGithubObject(SessionedGithubObject):
 
     @property
     def _url(self):
-        """
-        :type: :class:`string`
-        """
         return self.__url.value

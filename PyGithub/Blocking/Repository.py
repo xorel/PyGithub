@@ -1348,7 +1348,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`)
         :rtype: None
         """
 
@@ -1363,8 +1363,8 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param base: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
-        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :param base: mandatory :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`) or :class:`~.PyGithub.Blocking.Commit.Commit` or :class:`string` (its :attr:`~.PyGithub.Blocking.Commit.Commit.sha`)
+        :param head: mandatory :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`) or :class:`~.PyGithub.Blocking.Commit.Commit` or :class:`string` (its :attr:`~.PyGithub.Blocking.Commit.Commit.sha`)
         :rtype: :class:`.Repository.ComparisonResult`
         """
 
@@ -1433,8 +1433,8 @@ class Repository(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param message: mandatory :class:`string`
-        :param tree: mandatory :class:`.GitTree` or :class:`string` (its :attr:`.GitTree.sha`)
-        :param parents: mandatory :class:`list` of :class:`.GitCommit` or :class:`string` (its :attr:`.GitCommit.sha`)
+        :param tree: mandatory :class:`~.PyGithub.Blocking.GitTree.GitTree` or :class:`string` (its :attr:`~.PyGithub.Blocking.GitTree.GitTree.sha`)
+        :param parents: mandatory :class:`list` of :class:`~.PyGithub.Blocking.GitCommit.GitCommit` or :class:`string` (its :attr:`~.PyGithub.Blocking.GitCommit.GitCommit.sha`)
         :param committer: optional :class:`GitAuthor`
         :param author: optional :class:`GitAuthor`
         :rtype: :class:`~.GitCommit.GitCommit`
@@ -1526,7 +1526,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param name: mandatory :class:`.Github.HookDescription` or :class:`string` (its :attr:`.Github.HookDescription.name`)
+        :param name: mandatory :class:`~.PyGithub.Blocking.Github.Github.HookDescription` or :class:`string` (its :attr:`~.PyGithub.Blocking.Github.Github.HookDescription.name`)
         :param config: mandatory :class:`dict`
         :param events: optional :class:`list` of :class:`string`
         :param active: optional :class:`bool`
@@ -1554,9 +1554,9 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param title: mandatory :class:`string`
         :param body: optional :class:`string`
-        :param assignee: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
-        :param milestone: optional :class:`.Milestone` or :class:`int` (its :attr:`.Milestone.number`)
-        :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param assignee: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
+        :param milestone: optional :class:`~.PyGithub.Blocking.Milestone.Milestone` or :class:`int` (its :attr:`~.PyGithub.Blocking.Milestone.Milestone.number`)
+        :param labels: optional :class:`list` of :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :rtype: :class:`~.Issue.Issue`
         """
         import PyGithub.Blocking.Issue
@@ -1622,8 +1622,8 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param base: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
-        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`) or :class:`.Commit` or :class:`string` (its :attr:`.Commit.sha`)
+        :param base: mandatory :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`)
+        :param head: mandatory :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`) or :class:`~.PyGithub.Blocking.Commit.Commit` or :class:`string` (its :attr:`~.PyGithub.Blocking.Commit.Commit.sha`)
         :param commit_message: optional :class:`string`
         :rtype: :class:`~.Commit.Commit`
         """
@@ -1749,7 +1749,7 @@ class Repository(_bgo.UpdatableGithubObject):
         :param private: optional :class:`bool`
         :param has_issues: optional :class:`bool`
         :param has_wiki: optional :class:`bool`
-        :param default_branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param default_branch: optional :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`)
         :rtype: None
         """
 
@@ -1917,7 +1917,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         :param sha: optional :class:`string`
         :param path: optional :class:`string`
-        :param author: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param author: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :param since: optional :class:`datetime`
         :param until: optional :class:`datetime`
         :param per_page: optional :class:`int`
@@ -2233,12 +2233,12 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param milestone: optional :class:`.Milestone` or :class:`int` (its :attr:`.Milestone.number`)
+        :param milestone: optional :class:`~.PyGithub.Blocking.Milestone.Milestone` or :class:`int` (its :attr:`~.PyGithub.Blocking.Milestone.Milestone.number`)
         :param state: optional "all" or "closed" or "open"
-        :param assignee: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
-        :param creator: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
-        :param mentioned: optional :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
-        :param labels: optional :class:`list` of :class:`.Label` or :class:`string` (its :attr:`.Label.name`)
+        :param assignee: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
+        :param creator: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
+        :param mentioned: optional :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
+        :param labels: optional :class:`list` of :class:`~.PyGithub.Blocking.Label.Label` or :class:`string` (its :attr:`~.PyGithub.Blocking.Label.Label.name`)
         :param sort: optional "comments" or "created" or "updated"
         :param direction: optional "asc" or "desc"
         :param since: optional :class:`datetime`
@@ -2802,7 +2802,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param assignee: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param assignee: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 
@@ -2818,7 +2818,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 
@@ -2834,7 +2834,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param username: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param username: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: None
         """
 

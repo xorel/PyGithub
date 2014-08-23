@@ -727,7 +727,7 @@ class User(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        :param target_user: mandatory :class:`.User` or :class:`string` (its :attr:`.User.login`) or :class:`.AuthenticatedUser` or :class:`string` (its :attr:`.AuthenticatedUser.login`)
+        :param target_user: mandatory :class:`~.PyGithub.Blocking.User.User` or :class:`string` (its :attr:`~.PyGithub.Blocking.User.User.login`) or :class:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser` or :class:`string` (its :attr:`~.PyGithub.Blocking.AuthenticatedUser.AuthenticatedUser.login`)
         :rtype: :class:`bool`
         """
 

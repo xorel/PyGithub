@@ -521,9 +521,9 @@ class CodeGenerator:
 
     def generateDocForAttributeType(self, type):
         if type.attribute.qualifiedName == "Repository.full_name":
-            return ":class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)"
+            return ":class:`~PyGithub.Blocking.Repository.Repository` or :class:`string` (its :attr:`~PyGithub.Blocking.Repository.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`~PyGithub.Blocking.Repository.Repository.name`)"
         else:
-            return ":class:`.{}` or :class:`{}` (its :attr:`.{}`)".format(type.type.qualifiedName, type.attribute.type.qualifiedName, type.attribute.qualifiedName)
+            return ":class:`~.{}` or :class:`{}` (its :attr:`~.{}`)".format(self.computeFullyQualifiedName(type.type), type.attribute.type.qualifiedName, self.computeFullyQualifiedName(type.attribute))
 
     def generateDocForEnumeratedType(self, type):
         return " or ".join('"' + v + '"' for v in type.values)
@@ -595,6 +595,9 @@ class CodeGenerator:
 
     def computeModuleNameForStructure(self, t):
         return self.computeModuleNameFor(t.containerClass)
+
+    def computeModuleNameForAttribute(self, a):
+        return self.computeModuleNameFor(a.containerClass)
 
     def computeFullyQualifiedName(self, t):
         return "{}.{}".format(self.computeModuleNameFor(t), t.qualifiedName)

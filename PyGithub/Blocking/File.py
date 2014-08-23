@@ -149,7 +149,7 @@ class File(_bgo.UpdatableGithubObject):
         This is the only method calling this end point.
 
         :param message: mandatory :class:`string`
-        :param branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param branch: optional :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`)
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
         :rtype: :class:`~.GitCommit.GitCommit`
@@ -178,7 +178,7 @@ class File(_bgo.UpdatableGithubObject):
 
         :param message: mandatory :class:`string`
         :param content: mandatory :class:`string`
-        :param branch: optional :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param branch: optional :class:`~.PyGithub.Blocking.Repository.Repository.Branch` or :class:`string` (its :attr:`~.PyGithub.Blocking.Repository.Repository.Branch.name`)
         :param author: optional :class:`GitAuthor`
         :param committer: optional :class:`GitAuthor`
         :rtype: :class:`~.GitCommit.GitCommit`
