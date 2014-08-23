@@ -113,6 +113,18 @@ def normalizeRepositoryFullName(repo):
         return normalizeTwoStringsString(repo)
 
 
+def normalizeRepositoryFullNameBis(repo):
+    import PyGithub.Blocking.Repository
+    if isinstance(repo, PyGithub.Blocking.Repository.Repository):
+        return repo.full_name
+    elif isinstance(repo, basestring):
+        return repo
+    elif isinstance(repo, tuple) and len(repo) == 2 and isinstance(repo[0], basestring) and isinstance(repo[0], basestring) and "/" not in repo[0] and "/" not in repo[1]:
+        return "/".join(repo)
+    else:
+        raise TypeError()
+
+
 def normalizeUserId(user):
     import PyGithub.Blocking.User
     if isinstance(user, PyGithub.Blocking.User.User):

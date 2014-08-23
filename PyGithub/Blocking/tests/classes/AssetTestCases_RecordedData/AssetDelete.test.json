@@ -91,9 +91,9 @@
                 },
                 "private": false,
                 "pulls_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/pulls{/number}",
-                "pushed_at": "2014-08-16T22:42:52Z",
+                "pushed_at": "2014-08-16T22:42:57Z",
                 "releases_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/releases{/id}",
-                "size": 0,
+                "size": 116,
                 "ssh_url": "git@github.home.jacquev6.net:electra/asset-delete.git",
                 "stargazers_count": 0,
                 "stargazers_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/stargazers",
@@ -105,7 +105,7 @@
                 "tags_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/tags",
                 "teams_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/teams",
                 "trees_url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/git/trees{/sha}",
-                "updated_at": "2014-08-16T22:42:52Z",
+                "updated_at": "2014-08-16T22:42:57Z",
                 "url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete",
                 "watchers": 0,
                 "watchers_count": 0
@@ -116,19 +116,19 @@
                 "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
                 "cache-control": "private, max-age=60, s-maxage=60",
                 "connection": "keep-alive",
-                "content-length": "5529",
+                "content-length": "5531",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 22:42:55 GMT",
-                "etag": "\"e83ff87bb6da91f3ea60f0c330e616ad\"",
-                "last-modified": "Sat, 16 Aug 2014 22:42:52 GMT",
+                "date": "Sat, 23 Aug 2014 01:43:19 GMT",
+                "etag": "\"d7bd1a41c2adaa325727ab7395043ada\"",
+                "last-modified": "Sat, 16 Aug 2014 22:42:57 GMT",
                 "server": "GitHub.com",
                 "status": "200 OK",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "3f1c26b5-a260-440a-9a05-82e62812dca4",
+                "x-github-request-id": "0629854c-202f-40b2-abc2-25bff6b2628e",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -200,7 +200,7 @@
                 "content-length": "1910",
                 "content-security-policy": "default-src 'none'",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 22:42:55 GMT",
+                "date": "Sat, 23 Aug 2014 01:43:19 GMT",
                 "etag": "\"29037feef5ef4b40a73b1d113fa691cf\"",
                 "last-modified": "Sat, 16 Aug 2014 22:42:54 GMT",
                 "server": "GitHub.com",
@@ -209,7 +209,7 @@
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "fd8deb8e-2726-4ba9-b2fd-b736df554917",
+                "x-github-request-id": "982013a8-99d6-4dae-99bf-6d8f81124876",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 200
@@ -226,6 +226,7 @@
                 "Content-Type": "text/plain",
                 "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
             },
+            "is_json": false,
             "url": {
                 "netloc": "github.home.jacquev6.net",
                 "path": "/api/uploads/repos/electra/asset-delete/releases/40/assets",
@@ -239,14 +240,14 @@
         "response": {
             "body": {
                 "content_type": "text/plain",
-                "created_at": "2014-08-16T22:42:55Z",
+                "created_at": "2014-08-23T01:43:19Z",
                 "download_count": 0,
-                "id": 15,
+                "id": 22,
                 "label": null,
                 "name": "readme.txt",
                 "size": 18,
                 "state": "uploaded",
-                "updated_at": "2014-08-16T22:42:55Z",
+                "updated_at": "2014-08-23T01:43:19Z",
                 "uploader": {
                     "avatar_url": "http://github.home.jacquev6.net/identicons/c74d97b01eae257e44aa9d5bade97baf.png",
                     "events_url": "http://github.home.jacquev6.net/api/v3/users/electra/events{/privacy}",
@@ -266,22 +267,22 @@
                     "type": "User",
                     "url": "http://github.home.jacquev6.net/api/v3/users/electra"
                 },
-                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/releases/assets/15"
+                "url": "http://github.home.jacquev6.net/api/v3/repos/electra/asset-delete/releases/assets/22"
             },
             "headers": {
                 "cache-control": "no-cache",
                 "connection": "keep-alive",
                 "content-length": "1383",
                 "content-type": "application/json; charset=utf-8",
-                "date": "Sat, 16 Aug 2014 22:42:55 GMT",
-                "etag": "\"e53b429e078060c4c9029725d8ad92f9\"",
-                "last-modified": "Sat, 16 Aug 2014 22:42:55 GMT",
+                "date": "Sat, 23 Aug 2014 01:43:19 GMT",
+                "etag": "\"1d85fbcb9fa45ef3c98faa26758a0baf\"",
+                "last-modified": "Sat, 23 Aug 2014 01:43:19 GMT",
                 "server": "GitHub.com",
                 "strict-transport-security": "max-age=2592000",
                 "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
                 "x-content-type-options": "nosniff",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "a9c34539-2596-11e4-8731-c3b9280a88e7"
+                "x-github-request-id": "dc47b99e-2a66-11e4-8f1f-a8f3f3b1e693"
             },
             "status": 201
         }
@@ -298,7 +299,7 @@
             },
             "url": {
                 "netloc": "github.home.jacquev6.net",
-                "path": "/api/v3/repos/electra/asset-delete/releases/assets/15",
+                "path": "/api/v3/repos/electra/asset-delete/releases/assets/22",
                 "query": {},
                 "scheme": "http"
             },
@@ -312,13 +313,13 @@
                 "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
                 "connection": "keep-alive",
                 "content-security-policy": "default-src 'none'",
-                "date": "Sat, 16 Aug 2014 22:42:57 GMT",
+                "date": "Sat, 23 Aug 2014 01:43:25 GMT",
                 "server": "GitHub.com",
                 "status": "204 No Content",
                 "x-content-type-options": "nosniff",
                 "x-frame-options": "deny",
                 "x-github-media-type": "github.v3; param=full; format=json",
-                "x-github-request-id": "72cd4ab2-09c3-4dbf-a7c4-83abd473c2c3",
+                "x-github-request-id": "35a793f3-14a7-4d9a-b597-c1bb7f637dca",
                 "x-xss-protection": "1; mode=block"
             },
             "status": 204

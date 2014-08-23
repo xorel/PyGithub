@@ -51,6 +51,7 @@ class Repository(_bgo.UpdatableGithubObject):
       * :meth:`.AuthenticatedUser.has_in_starred`
       * :meth:`.AuthenticatedUser.remove_from_starred`
       * :meth:`.Github.get_repos`
+      * :meth:`.Github.render_markdown`
       * :meth:`.Organization.create_fork`
       * :meth:`.Organization.create_team`
       * :meth:`.Team.add_to_repos`

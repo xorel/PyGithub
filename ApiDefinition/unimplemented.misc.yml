@@ -12,8 +12,6 @@
   - POST
 /hub:
   - POST
-/markdown:
-  - POST
 /teams/:id/memberships/:username:
   - DELETE
   - GET

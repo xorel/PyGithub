@@ -338,7 +338,8 @@ POST /markdown
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/markdown#render-an-arbitrary-markdown-document>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Github.render_markdown`
 
 GET /meta
 ---------

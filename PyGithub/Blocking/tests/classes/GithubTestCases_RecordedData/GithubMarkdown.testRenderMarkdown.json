@@ -1,0 +1,45 @@
+[
+    {
+        "request": {
+            "body": {
+                "text": "This **is** cool!"
+            },
+            "headers": {
+                "Accept": "application/vnd.github.v3.full+json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "Authorization": "Basic ZWxlY3RyYTpwYXNzd29yZDEtZWxlY3RyYQ==",
+                "Content-Length": "29",
+                "User-Agent": "jacquev6/PyGithub/2; UnitTests recorder"
+            },
+            "url": {
+                "netloc": "github.home.jacquev6.net",
+                "path": "/api/v3/markdown",
+                "query": {},
+                "scheme": "http"
+            },
+            "verb": "POST"
+        },
+        "response": {
+            "body": "<p>This <strong>is</strong> cool!</p>",
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+                "connection": "keep-alive",
+                "content-encoding": "gzip",
+                "content-security-policy": "default-src 'none'",
+                "content-type": "text/html;charset=utf-8",
+                "date": "Sat, 23 Aug 2014 01:30:48 GMT",
+                "server": "GitHub.com",
+                "status": "200 OK",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "deny",
+                "x-github-request-id": "8da02f7e-41cf-42e4-900c-bac1754d298f",
+                "x-xss-protection": "1; mode=block"
+            },
+            "is_json": false,
+            "status": 200
+        }
+    }
+]

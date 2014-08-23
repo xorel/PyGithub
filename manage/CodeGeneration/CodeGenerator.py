@@ -393,9 +393,14 @@ class CodeGenerator:
         return []
 
     def generateCodeForReturnBuiltinType(self, method):
-        assert method.returnFrom == "status"
-        assert method.returnType.simpleName == "bool"
-        yield "return r.status_code == 204"
+        if method.returnFrom == "status":
+            assert method.returnType.simpleName == "bool"
+            yield "return r.status_code == 204"
+        elif method.returnFrom == "text":
+            assert method.returnType.simpleName == "string"
+            yield "return r.text"
+        else:
+            assert False, method.returnFrom  # pragma no cover
 
     def generateCodeForReturnMappingCollection(self, method):
         assert method.returnFrom is None

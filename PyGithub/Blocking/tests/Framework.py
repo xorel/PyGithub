@@ -83,12 +83,16 @@ class _RecordModeHelper(object):
                 _RecordModeHelper.sanitize(request)
                 try:
                     requestBody = json.loads(request.body)
+                    requestIsJson = True
                 except:
                     requestBody = request.body
+                    requestIsJson = False
                 try:
                     responseBody = json.loads(response.content)
+                    responseIsJson = True
                 except:
                     responseBody = response.content
+                    responseIsJson = False
                 interractions.append({
                     "request": {
                         'body': requestBody,
@@ -102,6 +106,10 @@ class _RecordModeHelper(object):
                         'status': response.status_code,
                     },
                 })
+                if not requestIsJson and requestBody is not None:
+                    interractions[-1]["request"]["is_json"] = False
+                if not responseIsJson and len(responseBody) != 0:
+                    interractions[-1]["response"]["is_json"] = False
             if not os.path.exists(os.path.dirname(self.__fileName)):
                 os.makedirs(os.path.dirname(self.__fileName))
             with open(self.__fileName, "w") as f:
@@ -109,11 +117,12 @@ class _RecordModeHelper(object):
 
     class ReplayMode(object):
         class RequestMatcher(object):
-            def __init__(self, verb, url, headers, body):
+            def __init__(self, verb, url, headers, body, is_json=True):
                 self.__verb = verb
                 self.__url = url
                 self.__headers = headers
                 self.__body = body
+                self.__isJson = is_json
 
             def __call__(self, args, kwds):
                 request = args[0]
@@ -125,9 +134,9 @@ class _RecordModeHelper(object):
                     return False
 
             def check(self, request):
-                try:
+                if self.__isJson and request.body is not None:
                     requestBody = json.loads(request.body)
-                except:
+                else:
                     requestBody = request.body
                 return (
                     request.method == self.__verb
@@ -149,12 +158,15 @@ class _RecordModeHelper(object):
                     self.__rebuildResponse(**record["response"])
                 )
 
-        def __rebuildResponse(self, status, headers, body):
+        def __rebuildResponse(self, status, headers, body, is_json=True):
             response = requests.Response()
             response.status_code = status
             response.headers = requests.structures.CaseInsensitiveDict(headers)
-            if not isinstance(body, str):
-                body = json.dumps(body, sort_keys=True)
+            # print(body, body.__class__)
+            if is_json:
+                body = json.dumps(body)
+            else:
+                body = body.encode("utf8")
             if sys.hexversion >= 0x03000000:
                 body = bytes(body, encoding="utf8")
             if "content-encoding" in headers:

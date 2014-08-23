@@ -69,6 +69,21 @@ class GithubGists(TestCase):
         self.assertEqual([g.description for g in gists], ["Created by PyGithub", "Mutable gist 2", "Mutable gist 1", "Immutable gist"])
 
 
+class GithubMarkdown(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "github-markdown")
+        repo.create_issue("markdown")
+        return Data()
+
+    def testRenderMarkdown(self):
+        t = self.electra.render_markdown("This **is** cool!")
+        self.assertEqual(t, "<p>This <strong>is</strong> cool!</p>")
+
+    def testRenderMarkdown_allParameters(self):
+        t = self.electra.render_markdown("#1 **is** cool!", mode="gfm", context="electra/github-markdown")
+        self.assertEqual(t, '<p><a href="http://github.home.jacquev6.net/electra/github-markdown/issues/1" class="issue-link" title="markdown">#1</a> <strong>is</strong> cool!</p>')
+
+
 class GithubMisc(TestCase):
     def testGetHooks(self):
         hooks = self.electra.get_hooks()

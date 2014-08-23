@@ -515,3 +515,26 @@ class Github(_bgo.SessionedGithubObject):
         urlArguments = _snd.dictionary(since=since)
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(_rcv.KeyedUnion("type", dict(Organization=PyGithub.Blocking.Organization.Organization, User=PyGithub.Blocking.User.User)), self.Session, r)
+
+    def render_markdown(self, text, mode=None, context=None):
+        """
+        Calls the `POST /markdown <http://developer.github.com/v3/markdown#render-an-arbitrary-markdown-document>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param text: mandatory :class:`string`
+        :param mode: optional "gfm" or "markdown"
+        :param context: optional :class:`.Repository` or :class:`string` (its :attr:`.Repository.full_name`) or :class:`(string, string)` (its owner's :attr:`.User.login` or :attr:`.Organization.login` and its :attr:`.Repository.name`)
+        :rtype: :class:`string`
+        """
+
+        text = _snd.normalizeString(text)
+        if mode is not None:
+            mode = _snd.normalizeEnum(mode, "gfm", "markdown")
+        if context is not None:
+            context = _snd.normalizeRepositoryFullNameBis(context)
+
+        url = "https://api.github.com/markdown"
+        postArguments = _snd.dictionary(context=context, mode=mode, text=text)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return r.text

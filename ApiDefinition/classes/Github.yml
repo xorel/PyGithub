@@ -230,3 +230,26 @@ methods:
         union: [User, Organization]
         key: type
         keys: [User, Organization]
+  - name: render_markdown
+    end_point: POST /markdown
+    parameters:
+      - name: text
+        type: string
+    optional_parameters:
+      - name: mode
+        type:
+          enum: [gfm, markdown]
+      - name: context
+        type:
+          class: Repository
+          attribute: full_name
+    url_template: end_point
+    post_arguments:
+      - name: context
+        value: parameter context
+      - name: mode
+        value: parameter mode
+      - name: text
+        value: parameter text
+    return_from: text
+    return_type: string

@@ -118,6 +118,27 @@ class NormalizationTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             snd.normalizeRepositoryFullName(PyGithub.Blocking.Reset)
 
+    def testNormalizeRepositoryFullNameBis(self):
+        self.assertEqual(snd.normalizeRepositoryFullNameBis(("foo", "bar")), "foo/bar")
+        self.assertEqual(snd.normalizeRepositoryFullNameBis("foo/bar"), "foo/bar")
+        self.assertEqual(snd.normalizeRepositoryFullNameBis(PyGithub.Blocking.Repository.Repository(None, dict(url="url", full_name="foo/bar"), None)), "foo/bar")
+        # with self.assertRaises(TypeError):
+        #     snd.normalizeRepositoryFullNameBis("foo")
+        # with self.assertRaises(TypeError):
+        #     snd.normalizeRepositoryFullNameBis("foo/bar/baz")
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(("foo", "bar", "baz"))
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(("foo", 42))
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(("foo", "bar/baz"))
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(("foo/baz", "bar"))
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(42)
+        with self.assertRaises(TypeError):
+            snd.normalizeRepositoryFullNameBis(PyGithub.Blocking.Reset)
+
     def testNormalizeTwoStringsString(self):
         self.assertEqual(snd.normalizeTwoStringsString(("foo", "bar")), ("foo", "bar"))
         self.assertEqual(snd.normalizeTwoStringsString("foo/bar"), ("foo", "bar"))
