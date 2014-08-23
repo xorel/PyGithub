@@ -1,4 +1,2 @@
-/repos/:owner/:repo/stats/participation:
-  - GET
 /repos/:owner/:repo/stats/punch_card:
   - GET

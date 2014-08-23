@@ -596,6 +596,33 @@ class Repository(_bgo.UpdatableGithubObject):
             """
             return self.__w.value
 
+    class StatsParticipation(_bgo.SessionedGithubObject):
+        """
+        Methods and attributes returning instances of this class:
+          * :meth:`.Repository.get_stats_participation`
+
+        Methods accepting instances of this class as parameter: none.
+        """
+
+        def _initAttributes(self, all=None, owner=None, **kwds):
+            super(Repository.StatsParticipation, self)._initAttributes(**kwds)
+            self.__all = _rcv.Attribute("Repository.StatsParticipation.all", _rcv.ListConverter(_rcv.IntConverter), all)
+            self.__owner = _rcv.Attribute("Repository.StatsParticipation.owner", _rcv.ListConverter(_rcv.IntConverter), owner)
+
+        @property
+        def all(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__all.value
+
+        @property
+        def owner(self):
+            """
+            :type: :class:`list` of :class:`int`
+            """
+            return self.__owner.value
+
     class Tag(_bgo.SessionedGithubObject):
         """
         Methods and attributes returning instances of this class:
@@ -2620,7 +2647,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        This function will return None on empty repositories, and an empty list when stats have not been computed yet.
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
 
         :rtype: None or :class:`list` of :class:`list` of :class:`int`
         """
@@ -2640,7 +2667,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        This function will return None on empty repositories, and an empty list when stats have not been computed yet.
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
 
         :rtype: None or :class:`list` of :class:`.Repository.StatsCommitActivity`
         """
@@ -2660,7 +2687,7 @@ class Repository(_bgo.UpdatableGithubObject):
 
         This is the only method calling this end point.
 
-        This function will return None on empty repositories, and an empty list when stats have not been computed yet.
+        This method returns None on empty repositories, and an empty list when stats have not been computed yet.
 
         :rtype: None or :class:`list` of :class:`.Repository.StatsContributor`
         """
@@ -2673,6 +2700,21 @@ class Repository(_bgo.UpdatableGithubObject):
             return None
         else:
             return [Repository.StatsContributor(self.Session, x) for x in r.json()]
+
+    def get_stats_participation(self):
+        """
+        Calls the `GET /repos/:owner/:repo/stats/participation <http://developer.github.com/v3/repos/statistics#participation>`__ end point.
+
+        This is the only method calling this end point.
+
+        Attributes of returned object are empty lists for empty repositories, and None when stats have not been computed yet.
+
+        :rtype: :class:`.Repository.StatsParticipation`
+        """
+
+        url = uritemplate.expand("https://api.github.com/repos/{owner}/{repo}/stats/participation", owner=self.owner.login, repo=self.name)
+        r = self.Session._request("GET", url)
+        return Repository.StatsParticipation(self.Session, r.json())
 
     def get_subscribers(self, per_page=None):
         """

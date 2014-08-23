@@ -974,6 +974,7 @@ class RepositoryStats(TestCase):
         r.get_stats_commit_activity()
         r.get_stats_contributors()
         r.get_stats_code_frequency()
+        r.get_stats_participation()
         self.pause()
         return Data()
 
@@ -1036,6 +1037,26 @@ class RepositoryStats(TestCase):
         self.pause()
         s = r.get_stats_code_frequency()
         self.assertEqual(s, [])
+        r.delete()
+
+    def testGetStatsParticipation(self):
+        r = self.electra.get_repo(("electra", "repository-stats-complete"))
+        s = r.get_stats_participation()
+        self.assertEqual(s.all, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.assertEqual(s.owner, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+    def testGetStatsParticipationOnEmptyRepo(self):
+        r = self.electra.get_repo(("electra", "repository-stats-empty"))
+        s = r.get_stats_participation()
+        self.assertEqual(s.all, [])
+        self.assertEqual(s.owner, [])
+
+    def testGetStatsParticipationBeforeCaching(self):
+        r = self.electra.get_authenticated_user().create_repo("ephemeral", auto_init=True)
+        self.pause()
+        s = r.get_stats_participation()
+        self.assertEqual(s.all, None)
+        self.assertEqual(s.owner, None)
         r.delete()
 
 

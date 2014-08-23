@@ -403,16 +403,27 @@ class CodeGenerator:
         return []
 
     def generateCodeForReturnUnionType(self, method):
-        yield "if r.status_code == 202:"
-        yield "    return []"
-        yield "elif r.status_code == 204:"
-        yield "    return None"
-        yield "else:"
         if method.qualifiedName in ["Repository.get_stats_commit_activity", "Repository.get_stats_contributors"]:
-            yield "    return [{}(self.Session, x) for x in r.json()]".format(method.returnType.types[1].content.qualifiedName)
-        else:
-            assert method.qualifiedName == "Repository.get_stats_code_frequency"
+            yield "if r.status_code == 202:"
+            yield "    return []"
+            yield "elif r.status_code == 204:"
+            yield "    return None"
+            yield "else:"
+            yield "    return [{}(self.Session, x) for x in r.json()]".format(self.computeContextualName(method.returnType.types[1].content, method))
+        elif method.qualifiedName == "Repository.get_stats_code_frequency":
+            yield "if r.status_code == 202:"
+            yield "    return []"
+            yield "elif r.status_code == 204:"
+            yield "    return None"
+            yield "else:"
             yield "    return r.json()"
+        elif method.qualifiedName == "Repository.get_stats_participation":
+            yield "if r.status_code == 204:"
+            yield "    return None"
+            yield "else:"
+            yield "    return {}(self.Session, r.json())".format(self.computeContextualName(method.returnType.types[1], method))
+        else:
+            assert False, method.qualifiedName
 
     def generateCodeForReturnBuiltinType(self, method):
         if method.returnFrom == "status":
