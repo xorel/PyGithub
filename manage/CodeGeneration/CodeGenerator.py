@@ -271,6 +271,9 @@ class CodeGenerator:
             for p in method.parameters:
                 if p.name == "files":  # @todoAlpha Remove this special case for AuthenticatedUser.create_gist when input type has been decided
                     pass
+                elif p.name == "context":
+                    yield "if context is not None:"
+                    yield "    context = _snd.normalizeRepositoryFullNameBis(context)"
                 elif p.name == "per_page":
                     yield "if per_page is None:"
                     yield "    per_page = self.Session.PerPage"
