@@ -5,7 +5,8 @@
 From Github API v3 to PyGithub
 ==============================
 
-Here are all the end points I'm aware of, and if/where they are implemented in PyGithub.
+Here are the 286 end points I'm aware of, and if/where they are implemented in PyGithub.
+68 end points are not yet implemented, and I don't plan to implement 12 end points for reasons described below.
 If something is not listed here, please `open an issue <http://github.com/jacquev6/PyGithub/issues>`__ with a link to the corresponding documentation of Github API v3.
 
 GET /api/last-message.json

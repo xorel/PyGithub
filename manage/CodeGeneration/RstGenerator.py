@@ -13,7 +13,8 @@ class RstGenerator:
         yield "From Github API v3 to PyGithub"
         yield "=============================="
         yield ""
-        yield "Here are all the end points I'm aware of, and if/where they are implemented in PyGithub."
+        yield "Here are the {} end points I'm aware of, and if/where they are implemented in PyGithub.".format(len(endPoints))
+        yield "{} end points are not yet implemented, and I don't plan to implement {} end points for reasons described below.".format(len(list(e for e, reason in unimplementedEndPoints.items() if reason is None)), len(list(e for e, reason in unimplementedEndPoints.items() if reason is not None)))
         yield "If something is not listed here, please `open an issue <http://github.com/jacquev6/PyGithub/issues>`__ with a link to the corresponding documentation of Github API v3."
         yield ""
         for endPoint in endPoints:
