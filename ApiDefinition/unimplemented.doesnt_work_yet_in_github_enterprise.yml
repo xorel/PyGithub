@@ -1,0 +1,6 @@
+/repos/:owner/:repo/commits/:ref/status:
+  - GET
+/teams/:id/memberships/:username:
+  - DELETE
+  - GET
+  - PUT

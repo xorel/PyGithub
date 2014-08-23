@@ -1,0 +1,6 @@
+/applications/:client_id/tokens:
+  - DELETE
+/applications/:client_id/tokens/:access_token:
+  - DELETE
+  - GET
+  - POST

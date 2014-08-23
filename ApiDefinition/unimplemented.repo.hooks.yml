@@ -1,3 +1,5 @@
+/hub:
+  - POST
 /repos/:owner/:repo/hooks:
   - GET
   - POST

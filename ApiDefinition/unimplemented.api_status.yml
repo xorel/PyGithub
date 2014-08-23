@@ -1,0 +1,6 @@
+/api/last-message.json:
+  - GET
+/api/messages.json:
+  - GET
+/api/status.json:
+  - GET
