@@ -222,7 +222,7 @@ class Hook(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = "https://api.github.com/repos/{owner}/{repo}/hooks/{id}/pings"
+        url = self._url + "/pings"
         r = self.Session._request("POST", url)
 
     def test(self):
@@ -234,7 +234,7 @@ class Hook(_bgo.UpdatableGithubObject):
         :rtype: None
         """
 
-        url = "https://api.github.com/repos/{owner}/{repo}/hooks/{id}/tests"
+        url = self._url + "/tests"
         r = self.Session._request("POST", url)
 
     def update(self):

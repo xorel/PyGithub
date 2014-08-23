@@ -307,6 +307,10 @@ class CodeGenerator:
             yield 'url = "/".join(self._url.split("/")[:-2]) + "/pulls"'
         elif method.qualifiedName == "Commit.create_status":
             yield 'url = "/".join(self._url.split("/")[:-2]) + "/statuses/" + self.sha'
+        elif method.qualifiedName == "Hook.test":
+            yield 'url = self._url + "/tests"'
+        elif method.qualifiedName == "Hook.ping":
+            yield 'url = self._url + "/pings"'
         elif method.qualifiedName == "Commit.get_statuses":
             yield 'url = self._url + "/statuses"'
         # elif method.qualifiedName == "Commit.get_status":
