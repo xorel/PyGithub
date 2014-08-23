@@ -704,6 +704,29 @@ class RepositoryLanguages(TestCase):
         self.assertEqual(languages, {"C++": 87, "Python": 46})
 
 
+class RepositoryMerges(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "repository-merges")
+        repo.create_git_ref("refs/heads/develop", repo.get_git_ref("heads/master").object.sha)
+        repo.create_file("hello.cpp", "Add hello.cpp", "I2luY2x1ZGUgPGlvc3RyZWFtPg0KDQp2b2lkIG1haW4oKSB7DQogIHN0ZDo6Y291dCA8PCAiSGVsbG8sIFdvcmxkISIgPDwgc3RkOjplbmRsOw0KfQ0K", branch="develop")
+        self.pause()
+        return Data()
+
+    def testCreateMerge(self):
+        r = self.electra.get_repo(("electra", "repository-merges"))
+        ref = r.create_git_ref("refs/heads/ephemeral", r.get_git_ref("heads/master").object.sha)
+        c = r.create_merge("ephemeral", "develop")
+        self.assertEqual(c.commit.message, "Merge develop into ephemeral")
+        ref.delete()
+
+    def testCreateMerge_allParameters(self):
+        r = self.electra.get_repo(("electra", "repository-merges"))
+        ref = r.create_git_ref("refs/heads/ephemeral", r.get_git_ref("heads/master").object.sha)
+        c = r.create_merge("ephemeral", "develop", "Let's merge this!")
+        self.assertEqual(c.commit.message, "Let's merge this!")
+        ref.delete()
+
+
 class RepositoryPages(TestCase):
     def setUpEnterprise(self):  # pragma no cover
         repo = self.setUpTestRepo("electra", "repository-pages")

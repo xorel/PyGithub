@@ -105,6 +105,7 @@ class Repository(_bgo.UpdatableGithubObject):
         Methods accepting instances of this class as parameter:
           * :meth:`.File.delete`
           * :meth:`.File.edit`
+          * :meth:`.Repository.create_merge`
           * :meth:`.Repository.edit`
         """
 
@@ -1221,6 +1222,29 @@ class Repository(_bgo.UpdatableGithubObject):
         postArguments = _snd.dictionary(color=color, name=name)
         r = self.Session._request("POST", url, postArguments=postArguments)
         return PyGithub.Blocking.Label.Label(self.Session, r.json(), r.headers.get("ETag"))
+
+    def create_merge(self, base, head, commit_message=None):
+        """
+        Calls the `POST /repos/:owner/:repo/merges <http://developer.github.com/v3/repos/merging#perform-a-merge>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param base: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param head: mandatory :class:`.Repository.Branch` or :class:`string` (its :attr:`.Repository.Branch.name`)
+        :param commit_message: optional :class:`string`
+        :rtype: :class:`~.Commit.Commit`
+        """
+        import PyGithub.Blocking.Commit
+
+        base = _snd.normalizeBranchName(base)
+        head = _snd.normalizeBranchName(head)
+        if commit_message is not None:
+            commit_message = _snd.normalizeString(commit_message)
+
+        url = uritemplate.expand(self.merges_url)
+        postArguments = _snd.dictionary(base=base, commit_message=commit_message, head=head)
+        r = self.Session._request("POST", url, postArguments=postArguments)
+        return PyGithub.Blocking.Commit.Commit(self.Session, r.json(), r.headers.get("ETag"))
 
     def create_milestone(self, title, state=None, description=None, due_on=None):
         """

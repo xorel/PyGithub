@@ -1182,7 +1182,8 @@ POST /repos/:owner/:repo/merges
 
 (`Reference documentation of Github API v3 <http://developer.github.com/v3/repos/merging#perform-a-merge>`__)
 
-Not yet implemented in PyGithub.
+Implemented in PyGithub by:
+  * :meth:`.Repository.create_merge`
 
 GET /repos/:owner/:repo/milestones
 ----------------------------------

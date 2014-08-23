@@ -489,6 +489,29 @@ methods:
       - name: name
         value: parameter name
     return_type: Label
+  - name: create_merge
+    end_point: POST /repos/:owner/:repo/merges
+    parameters:
+      - name: base
+        type:
+          class: Repository.Branch
+          attribute: name
+      - name: head
+        type:
+          class: Repository.Branch
+          attribute: name
+    optional_parameters:
+      - name: commit_message
+        type: string
+    url_template: attribute merges_url
+    post_arguments:
+      - name: base
+        value: parameter base
+      - name: commit_message
+        value: parameter commit_message
+      - name: head
+        value: parameter head
+    return_type: Commit
   - name: create_milestone
     end_point: POST /repos/:owner/:repo/milestones
     parameters:

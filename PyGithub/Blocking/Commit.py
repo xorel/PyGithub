@@ -24,6 +24,7 @@ class Commit(_bgo.UpdatableGithubObject):
       * :meth:`.PullRequest.get_commits`
       * :attr:`.Repository.Branch.commit`
       * :attr:`.Repository.Tag.commit`
+      * :meth:`.Repository.create_merge`
       * :meth:`.Repository.get_commit`
       * :meth:`.Repository.get_commits`
 
