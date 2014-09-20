@@ -52,6 +52,12 @@ class UnauthorizedException(ClientErrorException):
     """
 
 
+class OtpRequiredException(UnauthorizedException):
+    """
+    Raised by PyGithub when GitHub API v3 returns a 401 HTTP status code and x-github-otp header.
+    """
+
+
 class ForbiddenException(ClientErrorException):
     """
     Base class for exceptions raised by PyGithub when GitHub API v3 returns a 403 HTTP status code.

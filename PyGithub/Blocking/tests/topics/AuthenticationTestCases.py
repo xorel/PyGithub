@@ -4,8 +4,6 @@
 
 from PyGithub.Blocking.tests.Framework import *
 
-# @todoAlpha What about 2 factors authentication?
-
 
 class UnauthenticatedTestCase(TestCase):
     def testGetAuthenticatedUser(self):
@@ -59,6 +57,15 @@ class OAuthTestCase(TestCase):
 
         with self.assertRaises(PyGithub.Blocking.ObjectNotFoundException):
             u.edit(location="The Moon")
+
+
+class OtpTestCase(TestCase):
+    def testGetAuthenticatedUser(self):
+        g = self.getBuilder().Login(DotComLogin, DotComPassword).Build()
+        with self.assertRaises(PyGithub.Blocking.OtpRequiredException):
+            g.get_authenticated_user()
+        g = self.getBuilder().Otp(DotComLogin, DotComPassword, "348483").Build()
+        self.assertEqual(g.get_authenticated_user().name, "Vincent Jacques")
 
 
 class ApplicationAuthTestCase(TestCase):

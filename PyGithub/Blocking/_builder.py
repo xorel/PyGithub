@@ -51,6 +51,13 @@ class Builder(object):
         self.__authenticator = _ses._LoginAuthenticator(login, password)
         return self
 
+    def Otp(self, login, password, otp):
+        """
+        Use `two-factor authentication <https://developer.github.com/v3/auth/#working-with-two-factor-authentication>`__.
+        """
+        self.__authenticator = _ses._OtpAuthenticator(login, password, otp)
+        return self
+
     def OAuth(self, token):
         """
         Use `OAuth authentication <http://developer.github.com/v3/oauth/>`_.

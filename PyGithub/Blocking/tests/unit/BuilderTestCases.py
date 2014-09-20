@@ -95,6 +95,12 @@ class BuilderTestCase(unittest.TestCase):
         response = s._request("GET", "http://foo.com")
         self.assertEqual(response.status_code, 200)
 
+    def testOtp(self):
+        s = self.makeSession(bld.Builder().Otp("login", "password", "otp"))
+        self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/", {"Authorization": "Basic bG9naW46cGFzc3dvcmQ=", "X-GitHub-OTP": "otp", "Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": bld.Builder.defaultUserAgent}, None)).andReturn(rebuildResponse(200, dict(), ""))
+        response = s._request("GET", "http://foo.com")
+        self.assertEqual(response.status_code, 200)
+
     def testOAuth(self):
         s = self.makeSession(bld.Builder().OAuth("token"))
         self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/", {"Authorization": "token token", "Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": bld.Builder.defaultUserAgent}, None)).andReturn(rebuildResponse(200, dict(), ""))

@@ -29,6 +29,17 @@ class _LoginAuthenticator(object):
         session.auth = (self.__login, self.__password)
 
 
+class _OtpAuthenticator(object):
+    def __init__(self, login, password, otp):
+        self.__login = login
+        self.__password = password
+        self.__otp = otp
+
+    def prepareSession(self, session):
+        session.auth = (self.__login, self.__password)
+        session.headers["X-GitHub-OTP"] = self.__otp
+
+
 class _OauthAuthenticator(object):
     def __init__(self, token):
         self.__token = token
@@ -162,6 +173,8 @@ class Session(object):
             exceptionClass = exn.ClientErrorException
             if status == 401:
                 exceptionClass = exn.UnauthorizedException
+                if "x-github-otp" in response.headers:
+                    exceptionClass = exn.OtpRequiredException
             if status == 403:
                 exceptionClass = exn.ForbiddenException
                 if self.RateLimit.remaining == 0:  # @todoBeta Check rate_limiting for search queries

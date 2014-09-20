@@ -185,6 +185,11 @@ class ExceptionsTestCase(SessionTestCase):
         with self.assertRaises(PyGithub.Blocking.UnauthorizedException):
             self.session._request("GET", "http://foo.com")
 
+    def test401WithOtp(self):
+        self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": "user-agent"}, None)).andReturn(rebuildResponse(401, {"X-GitHub-OTP": "required; app"}, "{}"))
+        with self.assertRaises(PyGithub.Blocking.OtpRequiredException):
+            self.session._request("GET", "http://foo.com")
+
     def test403WithRateLimitRemaining(self):
         self.adapter.expect.send.withArguments(RequestMatcher("GET", "http://foo.com/", {"Accept-Encoding": "gzip, deflate, compress", "Accept": "application/vnd.github.v3.full+json", "User-Agent": "user-agent"}, None)).andReturn(rebuildResponse(403, {"x-ratelimit-limit": "42", "x-ratelimit-remaining": "1", "x-ratelimit-reset": "1408161103"}, "{}"))
         with self.assertRaises(PyGithub.Blocking.ForbiddenException):
