@@ -70,6 +70,8 @@ class ReferenceDocumentation:
         "/repos/octokit/octokit.rb",  # Example
         "/orgs/octokit/repos",  # Example
         "/repos/:owner/:repo/compare/user1:branchname...user2:branchname",  # Like /repos/:owner/:repo/compare/base...head
+        "/user/memberships/orgs?state=active",  # Should be documented as a parameter
+        "/user/memberships/orgs?state=pending",  # Should be documented as a parameter
     ]
 
     def __init__(self, rootDirectory):
@@ -192,7 +194,9 @@ class ReferenceDocumentation:
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/git/commits.md -> Commits -> Create a Commit -> Example Input",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/git/tags.md -> Tags -> Create a Tag Object -> Example Input",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/orgs.md -> Organizations -> Edit an Organization -> Example",
+            "WARNING: don't know what to do with section ../developer.github.com/content/v3/orgs/members.md -> Members -> Edit your organization membership -> Example",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/pulls.md -> Pull Requests -> Get a single pull request -> Mergability",
+            "WARNING: don't know what to do with section ../developer.github.com/content/v3/pulls.md -> Pull Requests -> Merge a pull request (Merge Button) -> Labels, assignees, and milestones",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/repos.md -> Repositories -> Create -> OAuth scope requirements",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/repos/commits.md -> Commits -> Compare two commits -> Working with large comparisons",
             "WARNING: don't know what to do with section ../developer.github.com/content/v3/repos/contents.md -> Contents -> Create a file -> Example Input",
@@ -221,6 +225,8 @@ def main():
         if endPoint.url not in endPoints:
             endPoints[endPoint.url] = {}
         endPoints[endPoint.url][endPoint.verb] = ([p.name for p in endPoint.params], endPoint.doc)
+
+    endPoints["/user/memberships/orgs"]["GET"][0].append("state")
 
     with open(os.path.join("ApiDefinition", "end_points.yml"), "w") as f:
         for url, ops in sorted(endPoints.iteritems()):

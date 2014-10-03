@@ -628,6 +628,9 @@
   - verb: GET
     parameters: [since]
     doc: http://developer.github.com/v3/repos#list-all-public-repositories
+/repositories/:id:
+  - verb: GET
+    doc: http://developer.github.com/v3/repos#get
 /search/code:
   - verb: GET
     parameters: [q, sort, order]
@@ -770,6 +773,16 @@
     doc: http://developer.github.com/v3/users/keys#delete-a-public-key
   - verb: GET
     doc: http://developer.github.com/v3/users/keys#get-a-single-public-key
+/user/memberships/orgs:
+  - verb: GET
+    parameters: [state]
+    doc: http://developer.github.com/v3/orgs/members#list-your-organization-memberships
+/user/memberships/orgs/:org:
+  - verb: GET
+    doc: http://developer.github.com/v3/orgs/members#get-your-organization-membership
+  - verb: PATCH
+    parameters: [state]
+    doc: http://developer.github.com/v3/orgs/members#edit-your-organization-membership
 /user/orgs:
   - verb: GET
     doc: http://developer.github.com/v3/orgs#list-user-organizations
