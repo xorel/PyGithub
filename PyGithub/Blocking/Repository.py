@@ -29,6 +29,7 @@ class Repository(_bgo.UpdatableGithubObject):
       * :attr:`.File.repository`
       * :meth:`.Github.get_repo`
       * :meth:`.Github.get_repos`
+      * :meth:`.Github.get_repository`
       * :meth:`.Github.search_repositories`
       * :attr:`.Issue.repository`
       * :meth:`.Organization.create_fork`

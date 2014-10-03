@@ -193,6 +193,16 @@ methods:
     return_type:
       container: PaginatedListWithoutPerPage
       content: Repository
+  - name: get_repository
+    end_point: GET /repositories/:id
+    parameters:
+      - name: id
+        type: string
+    url_template: end_point
+    url_template_arguments:
+      - name: id
+        value: parameter id
+    return_type: Repository
   - name: get_team
     end_point: GET /teams/:id
     parameters:

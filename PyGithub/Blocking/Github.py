@@ -463,6 +463,23 @@ class Github(_bgo.SessionedGithubObject):
         r = self.Session._request("GET", url, urlArguments=urlArguments)
         return _rcv.PaginatedList(PyGithub.Blocking.Repository.Repository, self.Session, r)
 
+    def get_repository(self, id):
+        """
+        Calls the `GET /repositories/:id <http://developer.github.com/v3/repos#get>`__ end point.
+
+        This is the only method calling this end point.
+
+        :param id: mandatory :class:`string`
+        :rtype: :class:`~.Repository.Repository`
+        """
+        import PyGithub.Blocking.Repository
+
+        id = _snd.normalizeString(id)
+
+        url = uritemplate.expand("https://api.github.com/repositories/{id}", id=id)
+        r = self.Session._request("GET", url)
+        return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
+
     def get_team(self, id):
         """
         Calls the `GET /teams/:id <http://developer.github.com/v3/orgs/teams#get-team>`__ end point.

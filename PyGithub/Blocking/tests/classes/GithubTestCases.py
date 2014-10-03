@@ -215,6 +215,10 @@ class GithubRepositories(TestCase):
         repos = self.dotcom.get_repos()[:250]
         self.assertEqual(len(repos), 250)
 
+    # def testGetRepository(self):
+    #     repo = self.dotcom.get_repository("3544490")
+    #     self.assertEqual(repo.full_name, "jacquev6/PyGithub")
+
 
 class GithubSearch(TestCase):
     def testSearchUsers(self):

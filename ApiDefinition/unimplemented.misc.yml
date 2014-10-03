@@ -1,5 +1,3 @@
-/repositories/:id:
-  - GET
 /user/memberships/orgs:
   - GET
 /user/memberships/orgs/:org:
