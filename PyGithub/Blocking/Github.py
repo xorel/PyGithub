@@ -444,7 +444,7 @@ class Github(_bgo.SessionedGithubObject):
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
-    def get_repos(self, since=None):
+    def get_repositories(self, since=None):
         """
         Calls the `GET /repositories <http://developer.github.com/v3/repos#list-all-public-repositories>`__ end point.
 

@@ -28,7 +28,7 @@ class Repository(_bgo.UpdatableGithubObject):
       * :meth:`.AuthenticatedUser.get_subscriptions`
       * :attr:`.File.repository`
       * :meth:`.Github.get_repo`
-      * :meth:`.Github.get_repos`
+      * :meth:`.Github.get_repositories`
       * :meth:`.Github.get_repository`
       * :meth:`.Github.search_repositories`
       * :attr:`.Issue.repository`
@@ -53,7 +53,7 @@ class Repository(_bgo.UpdatableGithubObject):
       * :meth:`.AuthenticatedUser.get_subscription`
       * :meth:`.AuthenticatedUser.has_in_starred`
       * :meth:`.AuthenticatedUser.remove_from_starred`
-      * :meth:`.Github.get_repos`
+      * :meth:`.Github.get_repositories`
       * :meth:`.Github.render_markdown`
       * :meth:`.Organization.create_fork`
       * :meth:`.Organization.create_team`

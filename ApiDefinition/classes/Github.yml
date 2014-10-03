@@ -179,7 +179,7 @@ methods:
       - name: repo
         value: nameFromRepo repo
     return_type: Repository
-  - name: get_repos
+  - name: get_repositories
     end_point: GET /repositories
     optional_parameters:
       - name: since

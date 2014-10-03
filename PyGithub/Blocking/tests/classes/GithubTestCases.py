@@ -203,16 +203,16 @@ class GithubRepositories(TestCase):
         r = self.electra.get_repo(("electra", "immutable"))
         self.assertEqual(r.full_name, "electra/immutable")
 
-    def testGetRepos(self):
-        repos = self.electra.get_repos()
+    def testGetRepositories(self):
+        repos = self.electra.get_repositories()
         self.assertEqual([r.full_name for r in repos], ["/repo-user-1-1", "/repo-user-1-1", "/repo-org-1-1", "/repo-user-1-ephemeral", "/repo-user-1-1", "olympus/trojan-war", "olympus/trojan-war", "olympus/trojan-war", "olympus/trojan-war", "electra/issues", "electra/pulls", "penelope/pulls", "electra/immutable", "olympus/immutable", "penelope/immutable", "electra/contributors", "electra/mutable", "electra/issues", "penelope/mutable", "electra/ephemeral", "olympus/org-repo", "electra/git-objects", "zeus/immutable"])
 
-    def testGetRepos_allParameters(self):
-        repos = self.electra.get_repos(since=68)
+    def testGetRepositories_allParameters(self):
+        repos = self.electra.get_repositories(since=68)
         self.assertEqual([r.full_name for r in repos], ["electra/ephemeral", "olympus/org-repo", "electra/git-objects", "zeus/immutable"])
 
-    def testGetRepos_pagination(self):
-        repos = self.dotcom.get_repos()[:250]
+    def testGetRepositories_pagination(self):
+        repos = self.dotcom.get_repositories()[:250]
         self.assertEqual(len(repos), 250)
 
     # def testGetRepository(self):
