@@ -10,6 +10,9 @@ import glob
 
 
 def main():
+    os.environ["LC_ALL"] = "en_US.UTF-8"
+    os.environ["LANG"] = "en_US.UTF-8"
+
     if os.path.exists("gh-pages"):
         shutil.rmtree("gh-pages")
     if os.path.exists("doc/doctrees"):
