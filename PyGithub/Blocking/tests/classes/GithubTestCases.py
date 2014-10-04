@@ -199,6 +199,10 @@ class GithubMisc(TestCase):
 
 
 class GithubRepositories(TestCase):
+    def setUpEnterprise(self):  # pragma no cover
+        repo = self.setUpTestRepo("electra", "immutable")
+        return Data(id=repo.id)
+
     def testGetRepo(self):
         r = self.electra.get_repo(("electra", "immutable"))
         self.assertEqual(r.full_name, "electra/immutable")
@@ -215,9 +219,9 @@ class GithubRepositories(TestCase):
         repos = self.dotcom.get_repositories()[:250]
         self.assertEqual(len(repos), 250)
 
-    # def testGetRepository(self):
-    #     repo = self.dotcom.get_repository("3544490")
-    #     self.assertEqual(repo.full_name, "jacquev6/PyGithub")
+    def testGetRepository(self):
+        repo = self.electra.get_repository(self.data.id)
+        self.assertEqual(repo.full_name, "electra/immutable")
 
 
 class GithubSearch(TestCase):

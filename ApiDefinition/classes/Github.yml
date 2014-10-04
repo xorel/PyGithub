@@ -197,7 +197,7 @@ methods:
     end_point: GET /repositories/:id
     parameters:
       - name: id
-        type: string
+        type: int
     url_template: end_point
     url_template_arguments:
       - name: id

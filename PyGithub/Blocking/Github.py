@@ -469,14 +469,14 @@ class Github(_bgo.SessionedGithubObject):
 
         This is the only method calling this end point.
 
-        :param id: mandatory :class:`string`
+        :param id: mandatory :class:`int`
         :rtype: :class:`~.Repository.Repository`
         """
         import PyGithub.Blocking.Repository
 
-        id = _snd.normalizeString(id)
+        id = _snd.normalizeInt(id)
 
-        url = uritemplate.expand("https://api.github.com/repositories/{id}", id=id)
+        url = uritemplate.expand("https://api.github.com/repositories/{id}", id=str(id))
         r = self.Session._request("GET", url)
         return PyGithub.Blocking.Repository.Repository(self.Session, r.json(), r.headers.get("ETag"))
 
